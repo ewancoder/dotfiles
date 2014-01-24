@@ -1,0 +1,7 @@
+[user]
+	name = ewancoder
+	email = ewancoder@gmail.com
+[merge]
+	tool = vimdiff
+[core]
+	editor = vim
