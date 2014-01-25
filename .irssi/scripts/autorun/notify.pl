@@ -23,24 +23,24 @@ $VERSION = "0.5";
 Irssi::settings_add_str('notify', 'notify_remote', '');
 
 sub sanitize {
-  my ($text) = @_;
-  encode_entities($text,'\'<>&');
-  my $apos = "&#39;";
-  my $aposenc = "\&apos;";
-  $text =~ s/$apos/$aposenc/g;
-  $text =~ s/"/\\"/g;
-  return $text;
+    my ($text) = @_;
+    encode_entities($text,'\'<>&');
+    my $apos = "&#39;";
+    my $aposenc = "\&apos;";
+    $text =~ s/$apos/$aposenc/g;
+    $text =~ s/"/\\"/g;
+    return $text;
 }
 
 sub notify {
-    my ($server, $summary, $message) = @_;
+    my ($server, $summary, $message, $level) = @_;
 
     # Make the message entity-safe
     $summary = sanitize($summary);
     $message = sanitize($message);
 
     my $cmd = "EXEC - " .
-	"notify-send -a irssi '" . $summary . "' '". $message . "'";
+	"notify-send -u " . $level . " -a irssi '" . $summary . "' '". $message . "'";
     $server->command($cmd);
 
     my $remote = Irssi::settings_get_str('notify_remote');
@@ -60,14 +60,14 @@ sub print_text_notify {
     my $sender = $stripped;
     $sender =~ s/^\<?(.+?)\>? .*/\1/ ;
     $stripped =~ s/^.+? +(.*)/\1/ ;
-    notify($server, $sender, $stripped);
+    notify($server, 'From '.$sender, $stripped);
 }
 
 sub message_private_notify {
     my ($server, $msg, $nick, $address) = @_;
 
     return if (!$server);
-    notify($server, "PM from ".$nick, $msg);
+    notify($server, "PM from ".$nick, $msg, "critical");
 }
 
 sub dcc_request_notify {
@@ -75,10 +75,17 @@ sub dcc_request_notify {
     my $server = $dcc->{server};
 
     return if (!$dcc);
-    notify($server, "DCC ".$dcc->{type}." request", $dcc->{nick});
+    notify($server, "DCC ".$dcc->{type}." request", $dcc->{nick}, "low");
 }
 
-Irssi::signal_add('print text', 'print_text_notify');
+sub message_public_notify {
+    my ($server, $msg, $nick, $address, $target) = @_;
+
+    return if (!$server);
+    notify($server, "Public ".$nick." > ".$target, $msg, "normal");
+}
+
+Irssi::signal_add('message public', 'message_public_notify');
+#Irssi::signal_add('print text', 'print_text_notify');
 Irssi::signal_add('message private', 'message_private_notify');
 Irssi::signal_add('dcc request', 'dcc_request_notify');
-
