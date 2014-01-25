@@ -12,6 +12,8 @@ ZSH_THEME="gnzh"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias sc="screen -rd"
+alias reboot="systemctl reboot"
+alias halt="systemctl poweroff"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
