@@ -1,4 +1,5 @@
 xrdb -merge ~/.Xresources
-start-pulseaudio-x11
 URxvt*scrollBar:false
+start-pulseaudio-x11
+/usr/bin/screen -dmS ircscr irssi
 exec wmii

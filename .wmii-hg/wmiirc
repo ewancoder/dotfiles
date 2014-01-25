@@ -19,25 +19,11 @@ noticebar=/rbar/!notice
 export WMII_NORMCOLORS='#000000 #c1c48b #81654f'
 export WMII_FOCUSCOLORS='#000000 #81654f #000000'
 
-export WMII_BACKGROUND='#333333'
+export WMII_BACKGROUND='#000000'
 export WMII_FONT='-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*'
 
 set -- $(echo $WMII_NORMCOLORS $WMII_FOCUSCOLORS)
 export WMII_TERM="urxvt"
-
-# Ask about MODKEY on first run
-    if ! test -d "${WMII_CONFPATH%%:*}"; then
-        mkdir "${WMII_CONFPATH%%:*}"
-        res=$(wihack -type DIALOG xmessage -nearmouse -buttons Windows,Alt -print -fn $WMII_FONT \
-              "Welcome to wmii,$wi_newline$wi_newline" \
-              "Most of wmii's default key bindings make use of the$wi_newline" \
-              "Windows key, or equivalent. For keyboards lacking such$wi_newline" \
-              "a key, many users change this to the Alt key.$wi_newline$wi_newline" \
-              "Which would you prefer?")
-        [ "$res" = "Alt" ] && MODKEY=Mod1
-        echo "MODKEY=$MODKEY" >"${WMII_CONFPATH%%:*}/wmiirc_local"
-        chmod +x "${WMII_CONFPATH%%:*}/wmiirc_local"
-    fi
 
 # Menu history
 hist="${WMII_CONFPATH%%:*}/history"
@@ -51,6 +37,8 @@ wmiir write /colrules <<!
 
 # Tagging Rules
 wmiir write /rules <<!
+/Skype/ force-tags=0
+/Deluge/ force-tags=0
     # Apps with system tray icons like to their main windows
     # Give them permission.
     /^Pidgin:/ allow=+activate
@@ -65,11 +53,17 @@ wmiir write /rules <<!
 
 # Status Bar Info
 status() {
-	echo -n label 'CPUTemp:' $(sensors | grep temp1 | awk '{print $2}' | cut c2-3) '|' 'GPUTemp:' $(nvidia-settings -q=GPUCoreTemp | grep ewanhost | awk '{print $4}' | cut -c1-2) '|' 'CPUMHz:' $(cat /proc/cpuinfo | grep MHz | awk '{printf "%.0f\n", $4}') '|' '/home:' $(df -h | grep home | awk '{print $3}') '/' $(df -h | grep home | awk '{print $4}') '|' '/:' $(df -h | grep sda10 | awk '{print $3}') '/' $(df -h | grep sda10 | awk '{print $4}') '|' 'RAM:' $(free -m | grep -i /cache | awk '{print $3}') $(free -m | grep Mem | awk '{print $3}') $(free -m | grep Mem | awk '{print $4}') '|' $(uptime | sed 's/.*://; s/, / /g') '|' $(date)
+#	echo -n label 'CPUTemp:' $(sensors | grep temp1 | awk '{print $2}' | cut c2-3) '|' 'GPUTemp:' $(nvidia-settings -q=GPUCoreTemp | grep ewanhost | awk '{print $4}' | cut -c1-2) '|' 'CPUMHz:' $(cat /proc/cpuinfo | grep MHz | awk '{printf "%.0f\n", $4}') '|' '/home:' $(df -h | grep home | awk '{print $3}') '/' $(df -h | grep home | awk '{print $4}') '|' '/:' $(df -h | grep sda10 | awk '{print $3}') '/' $(df -h | grep sda10 | awk '{print $4}') '|' 'RAM:' $(free -m | grep -i /cache | awk '{print $3}') $(free -m | grep Mem | awk '{print $3}') $(free -m | grep Mem | awk '{print $4}') '|' $(uptime | sed 's/.*://; s/, / /g') '|' $(date)
+	echo -n label $(uptime | sed 's/.*://; s/, / /g') '|' $(date)
 }
 
 # Generic overridable startup details
-startup() { witray & }
+startup() {
+    witray &
+    feh --bg-scale --random /mnt/data/Dropbox/Background &
+    /usr/bin/dropboxd &
+    /usr/bin/chromium --no-startup-window &
+}
 
 wi_runconf -s wmiirc_local
 startup
@@ -287,14 +281,6 @@ do
 		echo label $tag
 	fi | wmiir create "/lbar/$tag"
 done
-
-#AUTOSTART
-feh --bg-scale --random /mnt/data/Dropbox/Background $
-/usr/bin/dropboxd &
-/usr/bin/chromium --no-startup-window &
-#pulseaudio --start &
-
-
 
 wi_eventloop
 
