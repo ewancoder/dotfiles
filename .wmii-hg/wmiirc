@@ -115,7 +115,7 @@ Event Notice
 	xpid = $!
 
 # Menus
-Menu Client-3-Delete
+Menu Client-3-Close
 	wmiir xwrite /client/$1/ctl kill
 Menu Client-3-Kill
 	wmiir xwrite /client/$1/ctl slay

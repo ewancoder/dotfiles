@@ -11,6 +11,8 @@ ZSH_THEME="gnzh"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias sc="screen -rd"
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
