@@ -82,7 +82,15 @@ sub message_public_notify {
     my ($server, $msg, $nick, $address, $target) = @_;
 
     return if (!$server);
-    notify($server, "Public ".$nick." > ".$target, $msg, "normal");
+    
+    my $mynick = $server->{nick};
+    chomp $mynick;
+    if ($msg =~ m/.*$mynick.*/ )
+    {
+        notify($server, "Highlight ".$nick." > ".$target, $msg, "critical");
+    }else{
+        notify($server, "Public ".$nick." > ".$target, $msg, "normal");
+    }
 }
 
 Irssi::signal_add('message public', 'message_public_notify');
