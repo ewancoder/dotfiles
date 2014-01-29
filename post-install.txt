@@ -71,7 +71,7 @@ Meanings:
         #/etc/mkinitcpio.conf <- make sure you run next command (if changed)
             (#mkinitcpio -p linux)
         #/etc/default/grub
-        #/etc/default/background.jpg
+        #~/Dotfiles/grub.jpg <- This is it. There's no symlinks. Just this file, just this dir.
             #grub-mkconfig -o /boot/grub/grub.cfg <- NEED to run for background.jpg
                 #vim /boot/grub/grub.cfg <- for just 2 items in menu
         #/etc/netctl/ethernet-static
