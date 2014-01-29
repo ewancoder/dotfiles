@@ -1,0 +1,75 @@
+Arch linux installation guide by Ewancoder
+Version: 0.9
+
+Current PT:
+/dev/sda7 - boot [200M]
+/dev/sda8 - usr [10G]
+/dev/sda9 - var [10G]
+/dev/sda10 - / [20G]
+/dev/sda11 - home [70G]
+
+Meanings:
+    * - by the way
+    () - optional
+    -> - key (and other) meaning
+    <- - meaning of the command
+    <> - what i need to do
+    [] - what to put down into file
+
+0:  Internet check + download manual :)
+        ping
+        (dhcpcd) <- if needed
+        curl -O https://raw.github.com/ewancoder/dotfiles/master/install.txt -O https://raw.github.com/ewancoder/dotfiles/master/post-install.txt
+
+1:  Partitioning, formatting, mounting, copy manual :)
+        cfdisk
+        mkfs.ext4
+        mount
+        cp *.txt /mnt/home <- copy install.txt and post-install.txt to home
+
+2:  Forming mirrorlist
+        vi /etc/pacman.d/mirrorlist
+            *HTTP is faster than FTP
+        pacman -Syy
+
+3:  Installing base-system
+        pacstrap -i /mnt base (base-devel)
+            i -> avoid auto-confirmation of package selections
+
+4:  Generate fstab
+        genfstab    -U -p /mnt >> /mnt/etc/fstab
+                    -L
+            -p -> avoid printing pseudofs mounts
+        vi /mnt/etc/fstab <- check
+
+5:  Going into new chroot environment
+        arch-chroot /mnt /bin/bash
+
+8:  Set timezone
+        ln -s /usr/share/zoneinfo/Europe/Minsk /etc/localtime
+
+9:  Set hostname
+        echo ewanhost > /etc/hostname
+
+10: Setup mkinitcpio HOOKS for separate /usr partition
+        vi /etc/mkinitcpio.conf
+            [HOOKS=shutdown,fsck,usr]
+        mkinitcpio -p linux
+            -p -> uses preset of rules (need this key)
+
+11: Setup user password
+        passwd
+
+12: Install grub2
+        pacman -S grub
+        grub-install --target=i386-pc --recheck /dev/sda
+            --target=i386-pc - install for BIOS-systems only
+                *need only for ensurance, goes for default
+        pacman -S os-prober
+        grub-mkconfig -o /boot/grub/grub.cfg
+            -o -> output file
+
+13: Reboot onto fresh system
+        exit
+        umount -R /mnt
+        reboot

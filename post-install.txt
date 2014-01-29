@@ -1,0 +1,197 @@
+Arch linux post-installation guide by Ewancoder
+Version: 0.9
+
+Meanings:
+    ~~~ - the same
+    () - optional
+    <- - meaning of the command OR depencencies
+    <> - what i need to do
+    [] - what to put down into file
+    [[[GIT]]] - get this file from git and dont fuck around
+
+0:  Internet check
+        ping google.com
+        (dhcpcd) <- if needed
+            *Below goes netctl configuration, so wait
+
+1:  Add new user
+        groupadd fuse
+        useradd -m -g users -G fuse -s /bin/bash lanceulot
+            -m - create home directory
+
+2:  Install sudo
+        pacman -S sudo
+        visudo
+        passwd lanceulot
+        exit
+        <login as user>
+
+3:  Configure network <- if needed
+        ls -la /sys/class/net
+        #cp /etc/netctl/examples/ethernet-static /etc/netctl/ethernet-static
+        #vi /etc/netctl/ethernet-static
+        [   Interface=enp2s0
+            Address='192.168.100.22/24'
+            Gateway='192.168.100.1' ]
+        #netctl enable ethernet-static
+        #netctl start ethernet-static
+
+4:  Configure time
+        #timedatectl set-local-rtc true
+        reboot
+        <set time in bios>
+
+5:  Install yaourt
+        curl -O https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz <- depencency of yaourt
+        tar xvf package-query.tar.gz
+        cd package-query
+        makepgk
+        #pacman -U package-query.xz
+        curl -O https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz
+        tar xvf yaourt.tar.gz
+        cd yaourt
+        makepkg
+        #pacman -U package-query.xz
+        cd ../.. && rm -r package-query
+
+6:  Install git and download repos
+        yaourt -S git
+        git config --global user.name   ewancoder
+                            user.email  ewancoder@gmail.com
+                            merge.tool  vimdiff
+                            core.editor vim
+        #git config --global ~~~
+        git clone https://github.com/ewancoder/dotfiles.git
+        #git clone https://github.com/ewancoder/etc.git /etc/Dotfiles
+
+7:  Merge ALL GIT files
+        #/etc/fstab  <- disable /boot, enable ntfs
+        #/etc/pacman.d/mirrorlist
+        #/etc/hostname
+        #/etc/mkinitcpio.conf <- make sure you run next command (if changed)
+            (#mkinitcpio -p linux)
+        #/etc/default/grub
+        #/etc/default/grub/background.jpg
+            #grub-mkconfig -o /boot/grub/grub.cfg <- NEED to run for background.jpg
+                #vim /boot/grub/grub.cfg <- for just 2 items in menu
+        #/etc/netctl/ethernet-static
+        .gitconfig
+        .irssi folder
+        .config/dunst/dunstrc <- notification messages
+
+8:  Enable ntfs+fuse (for /etc/fstab working)
+        yaourt  fuse
+                ntfs-3g
+                encfs
+        modprobe fuse
+
+9:  Make autologin
+        #/etc/systemd/system/getty@tty1.service.d/autologin.conf [[[GIT]]]
+
+10: Configure pacman
+        #/etc/pacman.conf [[[GIT]]] <- multilib support
+        yaourt -Syu
+
+11: Add locales
+        #/etc/locale.gen [[[GIT]]] <- uncomment needed locales
+        #locale-gen
+        #/etc/locale.conf [[[GIT]]] <- default locale
+        (export LANG=en_US.UTF-8) <- set default locale immediately
+
+12: Add keyboard layouts
+        loadkeys ru
+        setfont cyr-sun16
+        #/etc/vconsole.conf [[[GIT]]] <- set russian keymap settings
+
+13: Configure keyboard layout for X
+        #/etc/X11/xorg.conf.d/20-keyboard-layout.conf [[[GIT]]]
+
+14: Configure audio
+        yaourt -S   alsa-utils
+                    alsa-plugins
+                    pulseaudio
+                    pulseaudio-alsa
+                    (lib32-libpulse lib32-alsa-plugins) <- needed by skype
+        .asoundrc [[[GIT]]] <- for pulseaudio enabling
+        pulseaudio --start
+        pactl list
+        pacmd set-default-sink '1'
+
+15: Install zsh, lm-sensors, urxvt (for wmii working)
+        yaourt -S zsh lm-sensors rxvt-unicode dunst
+        chsh /bin/zsh
+        #sensors-detect
+        .zshrc [[[GIT]]] <- turning on oh-my-zsh
+        .Xresources [[[GIT]]] <- black background & no scrollbar
+
+16: Installing xserver&drivers + gvim + chromium
+        yaourt  xorg-xserver
+                xorg-xserver-utils
+                xorg-xinit
+                mesa
+                xterm
+                wmii-hg <- needs libixp-hg
+                gvim <- nvidia-libgl + nvidia + nvidia-utils
+                nvidia
+                chromium
+                    ttf-dejavu
+        .xinitrc [[[GIT]]] <- for pulseaudio, wmii autostart (AND ALL OTHER)
+        .wmiirc [[[GIT]]] <- for zsh as default shell and other settings
+        startx
+
+17: GTK2 icon theme + thunar
+        yaourt -S   faience-icon-theme <- plus faenza-icon-theme
+                    thunar
+        vim .gtkrc-2.0 [[[GIT]]] <- theme and fonts
+            .gtk-bookmarks [[[GIT]]]
+        yaourt thunar
+
+18: Add ms fonts
+        mount windows
+        copy windows/msfonts /usr/share/fonts/WindowsFonts
+        fc-cache -fv
+            -fv - force, verbose
+
+19: Flash&java&pdf
+        yaourt -S chromium-pepper-flash
+        yaourt -S chromium-libpdf
+        yaourt -S icedtea-web-java7 <- jre7-openjdk7v51
+
+20: Speedup tweaks
+        yaourt -S preload
+        systemctl enable preload
+
+21: Important SOFTWARE
+        dropbox <- configure folder
+        dunst <- notification daemon [[[GIT]]]
+        feh
+        irssi <- configuration folder in [[[GIT]]]
+        screen
+        scrot
+
+22: SOFTWARE
+        yaourt -S   anki
+                    deluge
+                    geeqie
+                    gimp
+                    gource
+                    (inkscape)
+                    libreoffice <- setup memory load & turn off java
+                        calc
+                        common
+                        impress
+                        math
+                        writer
+                        hyphen
+                            hyphen-ru
+                            hyphen-en
+                        hunspell
+                            hunspell-ru
+                            hynspell-en
+                        libreoffice-en-US
+                        (libreoffice-ru)
+                    python-scipy, python-numpy, python-matplotlib
+                    skype <- lib32-nvidia-libgl
+                        lib32-alsa-plugins
+                        lib32-libpulse
+        gem install sass <- correct PATH already set in .zshrc
