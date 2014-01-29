@@ -1,5 +1,5 @@
 Arch linux post-installation guide by Ewancoder
-Version: 0.9
+Version: 0.91
 
 Meanings:
     ~~~ - the same
@@ -78,6 +78,10 @@ Meanings:
         .gitconfig
         .irssi folder
         .config/dunst/dunstrc <- notification messages
+        .zprofile <- very important, need for autostartx
+        /etc/sudoers <- just not mentioned nowhere else
+        .vim folder and .vimrc separate link from that folder - important thing for vim
+            git submodule update --init --recursive <- do it for all folder, and then for vim
 
 8:  Enable ntfs+fuse (for /etc/fstab working)
         yaourt  fuse
