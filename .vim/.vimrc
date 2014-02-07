@@ -8,6 +8,14 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'lilydjwg/colorizer'
 Bundle 'tpope/vim-fugitive'
+"Snipmate depencencies
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+"Snipmate itself
+Bundle 'garbas/vim-snipmate'
+"SnipmateS itself :)
+Bundle 'honza/vim-snippets'
+Bundle 'Raimondi/delimitMate'
 
 filetype plugin indent on
 
@@ -98,8 +106,8 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 let g:colorizer_startup = 0
 
 "DelimitMate
-""let delimitMate_expand_space=1
-""let delimitMate_expand_cr=1
+let delimitMate_expand_space=1
+let delimitMate_expand_cr=1
 
 "Snipmate Tab remap
 "map <C-j> <Plug>snipMateNextOrTrigger

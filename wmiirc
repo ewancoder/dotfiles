@@ -64,7 +64,7 @@ status() {
 # Generic overridable startup details
 startup() {
     witray &
-    feh --bg-scale --random ~/Dropbox/Background &
+    feh --bg-scale random ~/Dropbox/Background/grid1.jpg &
     /usr/bin/dropboxd &
     /usr/bin/chromium --no-startup-window &
 }
