@@ -164,11 +164,15 @@ Meanings:
         dunst <- notification daemon [[[GIT]]]
         feh
         irssi <- configuration folder in [[[GIT]]]
+        kalu <- update notifications
+        perl-html-parser <- for irssi perl scripts to work
         screen
         scrot
 
 21: SOFTWARE
         yaourt -S   anki
+                    canto <- rss reader
+                    gdb <- debugger (for qt creator)
                     deluge
                     geeqie
                     gimp
@@ -189,6 +193,7 @@ Meanings:
                         libreoffice-en-US
                         (libreoffice-ru)
                     python-scipy, python-numpy, python-matplotlib
+                    qtcreator
                     skype <- lib32-nvidia-libgl
                         lib32-alsa-plugins
                         lib32-libpulse
