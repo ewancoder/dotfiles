@@ -65,6 +65,9 @@ set smartindent
 "TABS for html
 autocmd FileType html :setlocal sw=2 ts=2 sts=2
 set number
+"Highlight OVER 80
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
 
 "---------- Mapping ----------
 "Timeout ,g vs ,gv (default=1000)
