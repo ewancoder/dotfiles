@@ -199,4 +199,7 @@ Meanings:
                         lib32-libpulse
         gem install sass <- correct PATH already set in .zshrc
 
-22: remove post-install.txt
+22: FIX
+        Change 'dead actute' -> 'dead acute' for qtcreator in /usr/share/X11/locale/en_US.UTF-8/Compose
+
+23: remove post-install.txt
