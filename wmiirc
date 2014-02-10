@@ -65,6 +65,7 @@ status() {
 startup() {
     feh --bg-scale random ~/Dropbox/Background/grid1.jpg &
     witray &
+    /usr/bin/simple-gmail-notifier &
     /usr/bin/kalu &
     /usr/bin/dropboxd &
     /usr/bin/chromium --no-startup-window &

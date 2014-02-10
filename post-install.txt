@@ -165,6 +165,7 @@ Meanings:
         feh
         irssi <- configuration folder in [[[GIT]]]
         kalu <- update notifications
+        p7zip <- 7za, 7z e
         perl-html-parser <- for irssi perl scripts to work
         screen
         scrot
@@ -197,6 +198,9 @@ Meanings:
                     skype <- lib32-nvidia-libgl
                         lib32-alsa-plugins
                         lib32-libpulse
+                    xfe <- 2pane file manager
+                        xferc <- !!! copy, links will not work (although, may link)
+                    xarchiver <- gui archiver tool that works with p7zip (7z, 7za)
         gem install sass <- correct PATH already set in .zshrc
 
 22: FIX

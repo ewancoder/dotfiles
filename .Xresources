@@ -3,3 +3,8 @@ URxvt*background: #000000
 URxvt*foreground: #b2b2b2
 URxvt*.transparent: true
 URxvt*.shading: 20
+
+URxvt.perl-ext-common: font-size
+
+URxvt.keysym.C-k:   perl:font-size:increase
+URxvt.keysym.C-j:   perl:font-suze:decrease
