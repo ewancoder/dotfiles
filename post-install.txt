@@ -169,6 +169,7 @@ Meanings:
         perl-html-parser <- for irssi perl scripts to work
         screen
         scrot
+        terminus-font <- for urxvt bigger fonts for canto better view
 
 21: SOFTWARE
         yaourt -S   anki

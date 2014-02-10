@@ -4,18 +4,14 @@
 from canto.extra import *
 
 link_handler("chromium \"%u\"")
+link_handler("vlc \"%u\"", ext="mp3")
 image_handler("feh \"%u\"", fetch=True)
 
-add("http://habrahabr.ru/rss")
-
-add("http://tech.onliner.by/feed")
-add("http://auto.onliner.by/feed")
-add("http://people.onliner.by/feed")
-add("http://realt.onliner.by/feed")
+add("http://habrahabr.ru/rss", rate=5, keep=300)
+add("http://onliner.by/feed", rate=5, keep=300)
 
 colors[1] = 110
 
-# filters=[show_unread]
 keys['s'] = save
 
 never_discard("unread")
