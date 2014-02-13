@@ -7,8 +7,12 @@ link_handler("chromium \"%u\"")
 link_handler("vlc \"%u\"", ext="mp3")
 image_handler("feh \"%u\"", fetch=True)
 
-add("http://habrahabr.ru/rss", rate=5, keep=300)
-add("http://onliner.by/feed", rate=5, keep=300)
+add("http://habrahabr.ru/rss", rate=20, keep=300)
+add("http://onliner.by/feed", rate=20, keep=300)
+add("http://www.ixbt.com/export/articles.rss", rate=20, keep=300)
+add("http://www.ixbt.com/export/hardnews.rss", rate=20, keep=300)
+add("http://www.ixbt.com/export/softnews.rss", rate=20, keep=300)
+add("http://www.opennet.ru/opennews/opennews_all_noadv.rss", rate=20, keep=300)
 
 colors[1] = 110
 
