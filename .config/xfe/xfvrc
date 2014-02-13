@@ -1,0 +1,17 @@
+[OPTIONS]
+width=1358
+textfont=DejaVu Sans [unknown],80,normal,regular
+showtoolbar=1
+ypos=30
+showstatusbar=1
+xpos=0
+height=707
+
+[SETTINGS]
+tippause=500
+basecolor=#eeeee6
+tiptime=10000
+
+[Recent Files]
+FILE1=/home/lanceulot/Dropbox/links.txt
+

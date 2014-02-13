@@ -8,7 +8,7 @@ use_startup_notification=1
 preserve_date_warn=1
 confirm_delete=1
 use_sudo=1
-ypos=0
+ypos=30
 use_trash_can=1
 auto_save_layout=1
 use_trash_bypass=0
@@ -30,7 +30,7 @@ status=1
 treetwopanels_tree_pct=0.2002945508100147
 generaltoolbar=1
 xpos=0
-height=737
+height=707
 
 [HISTORY]
 open=gvim:
@@ -113,22 +113,22 @@ empty_trash_can=Ctrl-Del
 rotate_left=
 
 [RIGHT PANEL]
-type_size=100
+type_size=161
 deldate_size=200
 origpath_size=200
 liststyle=0
-attr_size=100
-size_size=60
-user_size=50
+attr_size=161
+size_size=97
+user_size=81
 dirs_first=1
-ext_size=100
-grou_size=50
-modd_size=150
+ext_size=161
+grou_size=81
+modd_size=242
 ignore_case=1
 sort_func=ascendingCase
-showthumbnails=1
-name_size=200
-hiddenfiles=1
+showthumbnails=0
+name_size=352
+hiddenfiles=0
 
 [SEARCH PANEL]
 type_size=100
@@ -156,22 +156,22 @@ hidden_dir=0
 sort_func=ascendingCase
 
 [LEFT PANEL]
-type_size=100
+type_size=161
 deldate_size=200
 origpath_size=200
 liststyle=0
-attr_size=100
-size_size=60
-user_size=50
+attr_size=161
+size_size=97
+user_size=81
 dirs_first=1
-ext_size=100
-grou_size=50
-modd_size=150
+ext_size=161
+grou_size=81
+modd_size=242
 ignore_case=1
 sort_func=ascendingCase
 showthumbnails=0
-name_size=200
-hiddenfiles=1
+name_size=323
+hiddenfiles=0
 
 [PROGS]
 txtviewer=gvim
