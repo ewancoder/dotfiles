@@ -66,8 +66,8 @@ set smartindent
 autocmd FileType html :setlocal sw=2 ts=2 sts=2
 set number
 "Highlight OVER 80
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+""highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+""match OverLength /\%81v.\+/
 
 "---------- Mapping ----------
 "Timeout ,g vs ,gv (default=1000)
@@ -101,6 +101,9 @@ map <leader>tq :tabclose<cr>
 map <leader>t<leader> :tabnext<cr>
 "New tab with current buffer path (do i need it?)
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+"Just for wrapping text browsing
+map j gj
+map k gk
 
 "---------- Plugins ----------
 

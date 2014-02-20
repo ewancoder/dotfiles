@@ -3,5 +3,5 @@ URxvt*background: #000000
 URxvt*foreground: #b2b2b2
 URxvt*.transparent: true
 URxvt*.shading: 20
-
-urxvt*font:     -*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*
+URxvt*font:     -*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*
+URxvt*scrollBar: false

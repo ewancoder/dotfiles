@@ -63,12 +63,12 @@ status() {
 
 # Generic overridable startup details
 startup() {
-    feh --bg-scale random ~/Dropbox/Background/grid1.jpg &
     witray &
-    /usr/bin/simple-gmail-notifier &
     /usr/bin/kalu &
+    /usr/bin/simple-gmail-notifier &
     /usr/bin/dropboxd &
     /usr/bin/chromium --no-startup-window &
+    feh --bg-scale random ~/Dropbox/Background/grid1.jpg &
 }
 
 wi_runconf -s wmiirc_local
@@ -206,6 +206,10 @@ Key $MODKEY-z
 	amixer -q sset Master 500-
 Key $MODKEY-g
 	gvim &
+
+
+Key $MODKEY-v
+    dbss &
 
 
 KeyGroup Changing column modes
