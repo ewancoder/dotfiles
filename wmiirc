@@ -208,6 +208,10 @@ Key $MODKEY-g
 	gvim &
 
 
+Key $MODKEY-o
+    transset-df 0.85
+
+
 Key $MODKEY-v
     dbss &
 

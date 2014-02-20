@@ -89,7 +89,9 @@ sub message_public_notify {
     {
         notify($server, "Highlight ".$nick." > ".$target, $msg, "critical");
     }else{
-        notify($server, "Public ".$nick." > ".$target, $msg, "normal");
+        if ($target =~ "#ewancoder") {
+            notify($server, "Public ".$nick." > ".$target, $msg, "normal");
+        }
     }
 }
 

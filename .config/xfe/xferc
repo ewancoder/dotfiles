@@ -1,9 +1,9 @@
 [OPTIONS]
-height=737
 toolstoolbar=1
 folder_warn=1
 panel_view=2
 width=1358
+confirm_drag_and_drop=1
 use_startup_notification=1
 preserve_date_warn=1
 confirm_delete=1
@@ -14,37 +14,28 @@ auto_save_layout=1
 use_trash_bypass=0
 mount_warn=1
 treepanel_tree_pct=0.2002945508100147
+treetwopanels_lpanel_pct=0.3998527245949927
 confirm_overwrite=1
 paneltoolbar=1
 confirm_delete_emptydir=1
 root_mode=1
 ask_before_copy=1
 mount_messages=1
-confirm_execute=1
 locationbar=1
 twopanels_lpanel_pct=0.5
 root_warn=0
 confirm_trash=1
-treetwopanels_lpanel_pct=0.3998527245949927
+confirm_execute=1
 status=1
 treetwopanels_tree_pct=0.2002945508100147
 generaltoolbar=1
 xpos=0
-confirm_drag_and_drop=1
+height=737
 
 [HISTORY]
 open=gvim:
 run=gvim:
 filter=*:
-
-[PROGS]
-txtviewer=gvim
-txteditor=gvim
-xterm=urxvt
-pdfviewer=chromium
-imgviewer=geeqie
-videoviewer=vlc
-audioviewer=vlc
 
 [KEYBINDINGS]
 search_prev=
@@ -127,17 +118,17 @@ deldate_size=200
 origpath_size=200
 liststyle=0
 attr_size=161
+size_size=97
 user_size=81
-hiddenfiles=0
 dirs_first=1
 ext_size=161
 grou_size=81
 modd_size=242
 ignore_case=1
-sort_func=ascendingCase
+sort_func=descendingCase
 showthumbnails=0
 name_size=352
-size_size=97
+hiddenfiles=0
 
 [SEARCH PANEL]
 type_size=100
@@ -148,14 +139,14 @@ attr_size=100
 user_size=50
 search_height=722
 find_hidden=0
+moreoptions=0
 ext_size=100
-sort_func=ascendingCase
 grou_size=50
 find_ignorecase=0
 search_width=1358
 modd_size=150
 grep_ignorecase=0
-moreoptions=0
+sort_func=ascendingCase
 showthumbnails=0
 name_size=200
 size_size=60
@@ -170,8 +161,8 @@ deldate_size=200
 origpath_size=200
 liststyle=0
 attr_size=161
+size_size=97
 user_size=81
-hiddenfiles=0
 dirs_first=1
 ext_size=161
 grou_size=81
@@ -180,7 +171,16 @@ ignore_case=1
 sort_func=ascendingCase
 showthumbnails=0
 name_size=323
-size_size=97
+hiddenfiles=0
+
+[PROGS]
+txtviewer=gvim
+xterm=urxvt
+imgviewer=geeqie
+pdfviewer=chromium
+txteditor=gvim
+videoviewer=vlc
+audioviewer=vlc
 
 [SETTINGS]
 listforecolor=Black
@@ -194,12 +194,12 @@ relative_resize=1
 font=DejaVu Sans [unknown],80,normal,regular
 listbackcolor=Gray100
 shadowcolor=#9d9d97
-file_tooltips=1
 tippause=500
 scrollbarcolor=#eeeee6
 forecolor=Black
 basecolor=#eeeee6
 time_format=%x %X
+show_pathlinker=1
 selbackcolor=#ffde76
 wheellines=5
 smooth_scroll=0
@@ -210,7 +210,7 @@ tiptime=10000
 selforecolor=Black
 pbarcolor=#ffde76
 save_win_pos=1
-show_pathlinker=1
+file_tooltips=1
 
 [FILETYPES]
 ogm=vlc,vlc,vlc;OggMedia Video;video_32x32.png;video_16x16.png;;
