@@ -1,7 +1,12 @@
 URxvt*scrollBar: false
 URxvt*background: #000000
 URxvt*foreground: #b2b2b2
-URxvt*.transparent: true
 URxvt*.shading: 20
 URxvt*font:     -*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*
-URxvt*scrollBar: false
+
+URxvt.perl-ext: default,url-select
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/chromium
+URxvt.url-select.underline: true
+
+URxvt.colorUL: #4682B4
