@@ -32,19 +32,14 @@ generaltoolbar=1
 xpos=0
 confirm_drag_and_drop=1
 
+[DIR PANEL]
+hidden_dir=0
+sort_func=ascendingCase
+
 [HISTORY]
 open=gvim:
 run=gvim:
 filter=*:
-
-[PROGS]
-txtviewer=gvim
-txteditor=gvim
-xterm=urxvt
-pdfviewer=chromium
-imgviewer=geeqie
-videoviewer=vlc
-audioviewer=vlc
 
 [KEYBINDINGS]
 search_prev=
@@ -134,7 +129,7 @@ ext_size=161
 grou_size=81
 modd_size=242
 ignore_case=1
-sort_func=descendingCase
+sort_func=ascendingCase
 showthumbnails=0
 name_size=352
 size_size=97
@@ -160,9 +155,14 @@ showthumbnails=0
 name_size=200
 size_size=60
 
-[DIR PANEL]
-hidden_dir=0
-sort_func=ascendingCase
+[PROGS]
+txtviewer=gvim
+txteditor=gvim
+xterm=urxvt
+pdfviewer=chromium
+imgviewer=geeqie
+videoviewer=vlc
+audioviewer=vlc
 
 [LEFT PANEL]
 type_size=161
@@ -171,7 +171,7 @@ origpath_size=200
 liststyle=0
 attr_size=161
 user_size=81
-hiddenfiles=0
+hiddenfiles=1
 dirs_first=1
 ext_size=161
 grou_size=81

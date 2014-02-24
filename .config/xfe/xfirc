@@ -1,4 +1,5 @@
 [OPTIONS]
+size_size=60
 fileheight_pct=0.2506925207756233
 thumbnails=0
 width=1358
@@ -8,7 +9,6 @@ showtoolbar=1
 filesshown=1
 grou_size=50
 ypos=15
-filterimgs=0
 type_size=100
 user_size=50
 attr_size=100
@@ -17,7 +17,7 @@ liststyle=8388608
 fitwin=0
 ext_size=100
 sort_func=ascendingCase
-size_size=60
+filterimgs=0
 xpos=0
 name_size=200
 height=722
