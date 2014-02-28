@@ -1,31 +1,34 @@
 [OPTIONS]
 textforeground=Black
+hidestatus=0
 textnumberforeground=Black
 width=1358
 textfont=Helvetica,100,normal,regular
 textselbackground=#ffde76
 texthiliteforeground=Black
-stripreturn=0
-hidestatus=0
+textnumberbackground=Gray100
+ypos=30
 textcursor=Black
 linesnum=0
 wordwrap=0
-wrapcols=80
 tabcols=8
 texthilitebackground=#ff8080
-textnumberbackground=Gray100
+wrapcols=80
 searchpath=
 hidetoolbar=0
+stripreturn=0
 hilitematchtime=3000
+xpos=0
 textselforeground=Black
 textbackground=Gray100
-height=722
-
-[Recent Files]
-FILE1=/home/lanceulot/Dotfiles/post-install.txt
+height=707
 
 [SETTINGS]
 tippause=500
 basecolor=#eeeee6
 tiptime=10000
+
+[Recent Files]
+FILE2=/home/lanceulot/Dotfiles/post-install.txt
+FILE1=/home/ewancoder/install.txt
 

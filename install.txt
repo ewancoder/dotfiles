@@ -1,33 +1,21 @@
 Arch linux installation guide by Ewancoder
-Version: 0.99
+Version: 1.0, 2014
 
 Current PT:
-/dev/sda5 - boot [179M]
-/dev/sda6 - / [28G]
-/dev/sda7 - var [19G]
-/dev/sda8 - home [138G]
+/dev/sda1 - windows system  [48G]
+/dev/sda2 - extended        [64G]
+    /dev/sda5 - /boot       [128M]
+    /dev/sda6 - /           [16G]
+    /dev/sda7 - /home       [32G]
 
-Meanings:
-    * - by the way
-    () - optional
-    -> - key (and other) meaning
-    <- - meaning of the command
-    <> - what i need to do
-    [] - what to put down into file
-
-0:  Internet setup + download manual :)
-        ping
-        (dhcpcd) <- if needed
-        curl -O https://raw.github.com/ewancoder/dotfiles/master/install.txt -O https://raw.github.com/ewancoder/dotfiles/master/post-install.txt
-
-1:  Partitioning, formatting, mounting, copy manual :)
-        cfdisk
+1:  Partitioning, formatting, mounting, copy post-manual
+        fdisk
         mkfs.ext4
         mount
+        cp post* /mnt/home
 
 2:  Forming mirrorlist
         vi /etc/pacman.d/mirrorlist
-            *HTTP is faster than FTP
         pacman -Syy
 
 3:  Installing base-system
@@ -38,28 +26,23 @@ Meanings:
         genfstab    -U -p /mnt >> /mnt/etc/fstab
                     -L
             -p -> avoid printing pseudofs mounts
-        vi /mnt/etc/fstab <- check
+        vi /mnt/etc/fstab
+            add "discard" option for ssd
+            comment /boot
 
 5:  Going into new chroot environment
-        cp *.txt /etc <- copy install.txt and post-install.txt to /etc
         arch-chroot /mnt /bin/bash
 
-8:  Set timezone
+6:  Set timezone
         ln -s /usr/share/zoneinfo/Europe/Minsk /etc/localtime
 
-9:  Set hostname
+7:  Set hostname
         echo ewanhost > /etc/hostname
 
-10: Setup mkinitcpio HOOKS for separate /usr partition
-        vi /etc/mkinitcpio.conf
-            [HOOKS=shutdown,fsck,usr]
-        mkinitcpio -p linux
-            -p -> uses preset of rules (need this key)
-
-11: Setup user password
+8: Setup user password
         passwd
 
-12: Install grub2
+9: Install grub2
         pacman -S grub
         grub-install --target=i386-pc --recheck /dev/sda
             --target=i386-pc - install for BIOS-systems only
@@ -71,4 +54,5 @@ Meanings:
 13: Reboot onto fresh system
         exit
         umount -R /mnt
+        rm inst*
         reboot

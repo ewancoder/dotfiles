@@ -1,58 +1,43 @@
 Arch linux post-installation guide by Ewancoder
-Version: 0.99
+Version: 1.0, 2014
 
-Meanings:
-    ~~~ - the same
-    () - optional
-    <- - meaning of the command OR depencencies
-    <> - what i need to do
-    [] - what to put down into file
-    [[[GIT]]] - get this file from git and dont fuck around
-
-0:  Configure network
+1:  Configure network
         ping google.com
         ls -la /sys/class/net
-        #cp /etc/netctl/examples/ethernet-static /etc/netctl/ethernet-static
-        #vi /etc/netctl/ethernet-static
+        cp /etc/netctl/examples/ethernet-static /etc/netctl/
+        vi /etc/netctl/ethernet-static
         [   Interface=enp2s0
             Address='192.168.100.22/24'
             Gateway='192.168.100.1'
             DNS='192.168.100.1' ]
-        #netctl enable ethernet-static
-        #netctl start ethernet-static
+        netctl enable ethernet-static
+        netctl start ethernet-static
 
-1:  Add new user
+2:  Add new user
         groupadd fuse
         useradd -m -g users -G fuse -s /bin/bash lanceulot
             -m - create home directory
 
-2:  Install sudo
+3:  Install sudo
         pacman -S sudo
         visudo
-        passwd lanceulot
+        passwd ewancoder
         exit
         <login as user>
-        mv /etc/*.txt ~/*.txt
-        rm install.txt
-
-3:  Configure time
-        #timedatectl set-local-rtc true
-        reboot
-        <set time in bios>
 
 4:  Install yaourt
-        pacman -S build-devel <- if not installed earlier
         curl -O https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz <- depencency of yaourt
         tar xvf package-query.tar.gz
         cd package-query
-        makepgk
+        makepgk -s
+            -s -> install all needed dependencies
         #pacman -U package-query.xz
         curl -O https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz
         tar xvf yaourt.tar.gz
         cd yaourt
         makepkg
-        #pacman -U package-query.xz
-        cd ../.. && rm -r package-query
+        #pacman -U yaourt.xz
+        cd && rm -r package-query*
 
 5:  Install git and download repos
         yaourt -S git
@@ -61,126 +46,98 @@ Meanings:
                             merge.tool  vimdiff
                             core.editor vim
         #git config --global ~~~
-        git clone https://github.com/ewancoder/dotfiles.git
-        #git clone https://github.com/ewancoder/etc.git /etc/Dotfiles
-        git submodule update --recursive (--init)
+        git clone https://github.com/ewancoder/dotfiles.git .dotfiles
+        #git clone https://github.com/ewancoder/etc.git /etc/.dotfiles
+        cd .dotfiles && git submodule update --init --recursive .oh-my-zsh .vim/bundle/vundle
+        mkdir .vim/{swap,backup}
 
-6:  Merge ALL GIT files
-        #/etc/fstab  <- disable /boot, (enable ntfs)
-        #/etc/mkinitcpio.conf <- make sure you run next command (if changed)
-            (#mkinitcpio -p linux)
-        #~/Dotfiles/grub.jpg <- This is it. There's no symlinks. Just this file, just this dir.
-            #grub-mkconfig -o /boot/grub/grub.cfg <- NEED to run for background.jpg
-                #vim /boot/grub/grub.cfg <- for just 2 items in menu
-        .config/dunst/dunstrc <- notification messages
-        .zprofile <- very important, need for autostartx
-        .vim folder and .vimrc separate link from that folder - important thing for vim
-            git submodule update --init --recursive <- do it for all folder, and then for vim
-        mkdir .vim/swap .vim/backup
+6:  Merge ALL GIT files (~/.dotfiles & /etc/.dotfiles)
+        .config, .wmii-hg are not links, these contains links
+        X11/xorg.conf.d, default, pulse, systemd/system are not links, these contains links
+        grub.jpg, .git*, *install.txt are not links, these just files
+        #grub-mkconfig -o /boot/grub/grub.cfg <- update background
+        #vi /boot/grub/grub.cfg <- comment no-used lines
+        yaourt -Syy <- multilib update
+        #locale-gen <- generate locales
+        setfont cyr-sun16 <- set russian font
 
-7:  Enable ntfs+fuse (for /etc/fstab working)
+7:  Install zsh + vim
+        yaourt zsh gvim <- nvidia-libgl
+        chsh <- /bin/zsh
+        vim <- :BundleInstall
+
+8:  Enable ntfs+fuse (for /etc/fstab working)
         yaourt  fuse
                 ntfs-3g
                 encfs
         modprobe fuse
 
-8:  Make autologin
-        #/etc/systemd/system/getty@tty1.service.d/autologin.conf [[[GIT]]]
-
-9:  Configure pacman
-        #/etc/pacman.conf [[[GIT]]] <- multilib support
-        yaourt -Syu
-
-10: Add locales
-        #/etc/locale.gen [[[GIT]]] <- uncomment needed locales
-        #locale-gen
-        #/etc/locale.conf [[[GIT]]] <- default locale
-        (export LANG=en_US.UTF-8) <- set default locale immediately
-
-11: Add keyboard layouts
-        loadkeys ru
-        setfont cyr-sun16
-        #/etc/vconsole.conf [[[GIT]]] <- set russian keymap settings
-
-12: Configure keyboard layout for X
-        #/etc/X11/xorg.conf.d/20-keyboard-layout.conf [[[GIT]]]
-
-13: Configure audio
+9: Configure audio
         yaourt -S   alsa-utils
                     alsa-plugins
                     pulseaudio
                     pulseaudio-alsa
                     (lib32-libpulse lib32-alsa-plugins) <- needed by skype
-        .asoundrc [[[GIT]]] <- for pulseaudio enabling
         pulseaudio --start
-        pactl list
-        pacmd set-default-sink '1'
+            pactl list | less
+            pacmd set-default-sink 1
+            pacmd set-default-source 4
 
-14: Installing xserver&drivers + gvim + chromium
-        yaourt  xorg-xserver
-                xorg-xserver-utils
+10: Installing xserver&drivers + dunst + urxvt + chromium
+        yaourt  xorg-server
+                xorg-server-utils
                 xorg-xinit
+                dunst
                 mesa
-                xterm
-                wmii-hg <- needs libixp-hg
-                gvim <- nvidia-libgl + nvidia + nvidia-utils
+                rxvt-unicode
+                wmii-hg
                 nvidia
                 chromium
                     ttf-dejavu
-        .xinitrc [[[GIT]]] <- for pulseaudio, wmii autostart (AND ALL OTHER)
-        .wmiirc [[[GIT]]] <- for zsh as default shell and other settings
-        startx
 
-15: Install zsh, lm_sensors, urxvt (for wmii working)
-        yaourt -S zsh lm_sensors rxvt-unicode dunst
-        chsh /bin/zsh
-        #sensors-detect
-        .zshrc [[[GIT]]] <- turning on oh-my-zsh
-        .Xresources [[[GIT]]] <- black background & no scrollbar
+11: GTK2 icon theme (for thunar)
+        yaourt -S   faience-icon-theme
 
-16: GTK2 icon theme + thunar
-        yaourt -S   faience-icon-theme <- plus faenza-icon-theme
-                    thunar
-        vim .gtkrc-2.0 [[[GIT]]] <- theme and fonts
-            .gtk-bookmarks [[[GIT]]]
-
-17: Add ms fonts
+12: Add ms fonts
         mount windows
-        copy windows/msfonts /usr/share/fonts/WindowsFonts
+        copy windows/msfonts /usr/share/fonts/winfonts
         fc-cache -fv
             -fv - force, verbose
 
-18: Flash&java&pdf
+13: Flash&java&pdf&djvu
         yaourt -S chromium-pepper-flash
         yaourt -S chromium-libpdf
-        yaourt -S icedtea-web-java7 <- jre7-openjdk7v51
+        yaourt -S icedtea-web-java7
+        yaourt -S djview4
 
-19: Speedup tweaks
+14: Speedup tweaks
         yaourt -S preload
         systemctl enable preload
 
 20: Important SOFTWARE
         dropbox <- configure folder
-        dunst <- notification daemon [[[GIT]]]
         feh
-        irssi <- configuration folder in [[[GIT]]]
+        irssi
         kalu <- update notifications
         p7zip <- 7za, 7z e
         perl-html-parser <- for irssi perl scripts to work
         screen
         scrot
         terminus-font <- for urxvt bigger fonts for canto better view
+        thunar <- file manager at least
+        xcompmgr
 
 21: SOFTWARE
         yaourt -S   anki
                     canto <- rss reader
-                    gdb <- debugger (for qt creator)
+                    (opt)gdb <- debugger (for qt creator)
                     deluge
                     geeqie
                     gimp
                     gource
                     (inkscape)
                     libreoffice <- setup memory load & turn off java
+                    2,3,6,8,12
                         calc
                         common
                         impress
@@ -195,16 +152,16 @@ Meanings:
                         libreoffice-en-US
                         (libreoffice-ru)
                     python-scipy, python-numpy, python-matplotlib
-                    qtcreator
+                    (opt)qtcreator
                     skype <- lib32-nvidia-libgl
-                        lib32-alsa-plugins
-                        lib32-libpulse
+                    tig
                     xfe <- 2pane file manager
-                        xferc <- !!! copy, links will not work (although, may link)
                     xarchiver <- gui archiver tool that works with p7zip (7z, 7za)
-        gem install sass <- correct PATH already set in .zshrc
+        (opt)gem install sass <- correct PATH already set in .zshrc
 
 22: FIX
         Change 'dead actute' -> 'dead acute' for qtcreator in /usr/share/X11/locale/en_US.UTF-8/Compose
 
-23: remove post-install.txt
+23: rm post-install.txt
+
+24: PROFIT >> Enjoy!
