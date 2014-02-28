@@ -60,6 +60,10 @@ Version: 1.0, 2014
         yaourt -Syy <- multilib update
         #locale-gen <- generate locales
         setfont cyr-sun16 <- set russian font
+        Setup gvim for root
+            #ln -s ~/.vim /root/.vim
+            #ln -s ~/.vimrc /root/.vimrc
+        #chmod -x /etc/grub.d/10_linux
 
 7:  Install zsh + vim
         yaourt zsh gvim <- nvidia-libgl
