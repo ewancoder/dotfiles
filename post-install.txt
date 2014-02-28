@@ -53,7 +53,7 @@ Version: 1.0, 2014
 
 6:  Merge ALL GIT files (~/.dotfiles & /etc/.dotfiles)
         .config, .wmii-hg are not links, these contains links
-        X11/xorg.conf.d, default, pulse, systemd/system are not links, these contains links
+        X11/xorg.conf.d, default, pulse, systemd/system, bitlbee are not links, these contains links
         grub.jpg, .git*, *install.txt are not links, these just files
         #grub-mkconfig -o /boot/grub/grub.cfg <- update background
         #vi /boot/grub/grub.cfg <- comment no-used lines
@@ -65,107 +65,103 @@ Version: 1.0, 2014
             #ln -s ~/.vimrc /root/.vimrc
         #chmod -x /etc/grub.d/10_linux
 
-7:  Install zsh + vim
-        yaourt zsh gvim <- nvidia-libgl
-        chsh <- /bin/zsh
-        vim <- :BundleInstall
-
-8:  Enable ntfs+fuse (for /etc/fstab working)
-        yaourt  fuse
-                ntfs-3g
-                encfs
-        modprobe fuse
-
-9: Configure audio
-        yaourt -S   alsa-utils
-                    alsa-plugins
-                    pulseaudio
-                    pulseaudio-alsa
-                    (lib32-libpulse lib32-alsa-plugins) <- needed by skype
+7:  Configure audio
+        yaourt
+            alsa-plugins
+            alsa-utils
+            pulseaudio
+            pulseaudio-alsa
+                (lib32-libpulse lib32-alsa-plugins) <- needed by skype
         pulseaudio --start
             pactl list | less
             pacmd set-default-sink 1
             pacmd set-default-source 4
 
-10: Installing xserver&drivers + dunst + urxvt + chromium
-        yaourt  xorg-server
-                xorg-server-utils
-                xorg-xinit
-                dunst
-                mesa
-                rxvt-unicode
-                wmii-hg
-                nvidia
-                chromium
-                    ttf-dejavu
-
-11: GTK2 icon theme (for thunar)
-        yaourt -S   faience-icon-theme
-
-12: Add ms fonts
+8:  Add ms fonts
         mount windows
         copy windows/msfonts /usr/share/fonts/winfonts
         fc-cache -fv
             -fv - force, verbose
 
-13: Flash&java&pdf&djvu
-        yaourt -S chromium-pepper-flash
-        yaourt -S chromium-libpdf
-        yaourt -S icedtea-web-java7
-        yaourt -S djview4
+9:  System fixes
+        Change 'dead actute' -> 'dead acute' in /usr/share/X11/locale/en_US.UTF-8/Compose
 
-14: Speedup tweaks
-        yaourt -S preload
+10: Install CORE software
+        yaourt
+            anki
+            canto
+            chromium
+                chromium-libpdf
+                chromium-pepper-flash
+                icedtea-web-java7
+                djview4
+            deluge
+            dropbox
+            dunst
+            faience-icon-theme
+            feh
+            fuse
+                ntfs-3g
+                encfs
+            geeqie
+            gource
+            gvim <- nvidia-libgl
+            irssi
+            kalu <- updating arch
+            libreoffice (2, 3, 6, 8, 12)
+                calc, common, impress, math, writer
+                hyphen
+                    hyphen-ru
+                    hyphen-en
+                hunspell
+                    hunspell-ru
+                    hunspell-en
+            mesa
+            nvidia
+            p7zip
+            perl-html-parser <- for irssi perl scripts to work
+            preload
+            python-matplotlib
+            python-numpy
+            python-scipy
+            rxvt-unicode
+            screen
+            scrot
+            skype
+            terminus-font
+            thunar
+            tig
+            ttf-dejavu
+            xorg-server
+            xorg-server-utils
+            xorg-xinit
+            wmii-hg
+            xarchiver
+            xcompmgr
+            xfe
+            zsh
+        chsh <- /bin/zsh
+        vim <- :BundleInstall
+        modprobe fuse
         systemctl enable preload
+        #chown -R bitlbee:bitlbee /var/lib/bitlbee
+            register <passwd>
+            account add twitter ewancoder
+            account on
+            <go to token link to accept>
 
-20: Important SOFTWARE
-        dropbox <- configure folder
-        feh
-        irssi
-        kalu <- update notifications
-        p7zip <- 7za, 7z e
-        perl-html-parser <- for irssi perl scripts to work
-        screen
-        scrot
-        terminus-font <- for urxvt bigger fonts for canto better view
-        thunar <- file manager at least
-        xcompmgr
+11: Install optional software
+        yaourt
+            (gdb) <- gnu debugger
+            gimp
+            (inkscape)
+            (qtcreator)
+            xfe
+        gem
+            sass
+        pip
+            sphinx
 
-21: SOFTWARE
-        yaourt -S   anki
-                    canto <- rss reader
-                    (opt)gdb <- debugger (for qt creator)
-                    deluge
-                    geeqie
-                    gimp
-                    gource
-                    (inkscape)
-                    libreoffice <- setup memory load & turn off java
-                    2,3,6,8,12
-                        calc
-                        common
-                        impress
-                        math
-                        writer
-                        hyphen
-                            hyphen-ru
-                            hyphen-en
-                        hunspell
-                            hunspell-ru
-                            hynspell-en
-                        libreoffice-en-US
-                        (libreoffice-ru)
-                    python-scipy, python-numpy, python-matplotlib
-                    (opt)qtcreator
-                    skype <- lib32-nvidia-libgl
-                    tig
-                    xfe <- 2pane file manager
-                    xarchiver <- gui archiver tool that works with p7zip (7z, 7za)
-        (opt)gem install sass <- correct PATH already set in .zshrc
-
-22: FIX
-        Change 'dead actute' -> 'dead acute' for qtcreator in /usr/share/X11/locale/en_US.UTF-8/Compose
-
-23: rm post-install.txt
-
-24: PROFIT >> Enjoy!
+11: PROFIT -> Enjoy!
+        rm post-install.txt
+        reboot

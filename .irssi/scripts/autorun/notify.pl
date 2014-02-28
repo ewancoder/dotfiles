@@ -87,7 +87,9 @@ sub message_public_notify {
     chomp $mynick;
     if ($msg =~ m/.*$mynick.*/ )
     {
-        notify($server, "Highlight ".$nick." > ".$target, $msg, "critical");
+        if ($target != "#twitter_ewancoder") {
+            notify($server, "Highlight ".$nick." > ".$target, $msg, "critical");
+        }
     }else{
         if ($target =~ "#ewancoder") {
             notify($server, "Public ".$nick." > ".$target, $msg, "normal");
