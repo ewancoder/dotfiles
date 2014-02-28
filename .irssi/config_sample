@@ -258,7 +258,7 @@ logs = {
     level = "ALL";
     items = ( { type = "target"; name = "##programming"; } );
   };
-  "~/tmp/IrcLogs%Y/%B/%d.ewancoder" = {
+  "/tmp/IrcLogs%Y/%B/%d.ewancoder" = {
     auto_open = "yes";
     level = "ALL";
     items = ( { type = "target"; name = "#ewancoder"; } );

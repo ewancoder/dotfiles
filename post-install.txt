@@ -64,6 +64,8 @@ Version: 1.0, 2014
             #ln -s ~/.vim /root/.vim
             #ln -s ~/.vimrc /root/.vimrc
         #chmod -x /etc/grub.d/10_linux
+        irssi make config with password from config_sample
+        link all from 'scripts' folder to '/usr/bin' :)
 
 7:  Configure audio
         yaourt
@@ -121,6 +123,7 @@ Version: 1.0, 2014
             p7zip
             perl-html-parser <- for irssi perl scripts to work
             preload
+            profile-sync-daemon
             python-matplotlib
             python-numpy
             python-scipy
@@ -132,18 +135,23 @@ Version: 1.0, 2014
             thunar
             tig
             ttf-dejavu
+            vlc
             xorg-server
             xorg-server-utils
             xorg-xinit
             wmii-hg
             xarchiver
+            xclip <- for dbss
             xcompmgr
             xfe
             zsh
         chsh <- /bin/zsh
         vim <- :BundleInstall
         modprobe fuse
-        systemctl enable preload
+        systemctl enable
+            preload
+            psd
+            psd-resync
         #chown -R bitlbee:bitlbee /var/lib/bitlbee
             register <passwd>
             account add twitter ewancoder
@@ -154,14 +162,32 @@ Version: 1.0, 2014
         yaourt
             (gdb) <- gnu debugger
             gimp
+                (krita)
+                (mypaint)
             (inkscape)
             (qtcreator)
             xfe
         gem
-            sass
+            (sass)
         pip
-            sphinx
+            (sphinx)
 
-11: PROFIT -> Enjoy!
+12: List of testing-hardware software
+        yaourt
+            dmidecode <- check bios firmware version
+            hdparm <- testing hdd/ssd speed
+            gnome-disk-utility <- graphical testing hdd/ssd speed
+
+13: List of best linux games of all times
+        yaourt
+            armagetronad
+            chromium-bsu
+            extremetuxracer
+            pingus
+            supertux
+            warmux
+            wesnoth
+
+14: PROFIT -> Enjoy!
         rm post-install.txt
         reboot
