@@ -52,7 +52,7 @@ Version: 1.0, 2014
         mkdir .vim/{swap,backup}
 
 6:  Merge ALL GIT files (~/.dotfiles & /etc/.dotfiles) [PREFERABLY DO THIS AFTER INSTALLING ALL SOFTWARE]
-        .config, .wmii-hg are not links, these contains links
+        .config, .canto, .wmii-hg are not links, these contains links
         X11/xorg.conf.d, default, pulse, systemd/system, bitlbee are not links, these contains links
         grub.jpg, .git*, *install.txt are not links, these just files
         #grub-mkconfig -o /boot/grub/grub.cfg <- update background
@@ -177,6 +177,7 @@ Version: 1.0, 2014
             dmidecode <- check bios firmware version
             hdparm <- testing hdd/ssd speed
             gnome-disk-utility <- graphical testing hdd/ssd speed
+            [gparted]
 
 13: List of best linux games of all times
         yaourt

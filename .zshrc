@@ -12,6 +12,10 @@ ZSH_THEME="gnzh"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias sc="screen -rd"
+alias gstat="git status"
+alias gall="git add -A"
+alias gcomm="git commit"
+alias gpush="git push --all"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
