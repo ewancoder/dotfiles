@@ -51,7 +51,7 @@ Version: 1.0, 2014
         cd .dotfiles && git submodule update --init --recursive .oh-my-zsh .vim/bundle/vundle
         mkdir .vim/{swap,backup}
 
-6:  Merge ALL GIT files (~/.dotfiles & /etc/.dotfiles)
+6:  Merge ALL GIT files (~/.dotfiles & /etc/.dotfiles) [PREFERABLY DO THIS AFTER INSTALLING ALL SOFTWARE]
         .config, .wmii-hg are not links, these contains links
         X11/xorg.conf.d, default, pulse, systemd/system, bitlbee are not links, these contains links
         grub.jpg, .git*, *install.txt are not links, these just files
