@@ -160,6 +160,7 @@ Version: 1.0, 2014
                 (krita)
                 (mypaint)
             (inkscape)
+            openssh
             python-sphinx
             (qtcreator)
             xfe
