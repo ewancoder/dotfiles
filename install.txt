@@ -39,10 +39,10 @@ Current PT:
 7:  Set hostname
         echo ewanhost > /etc/hostname
 
-8: Setup user password
+8:  Setup user password
         passwd
 
-9: Install grub2
+9:  Install grub2
         pacman -S grub
         grub-install --target=i386-pc --recheck /dev/sda
             --target=i386-pc - install for BIOS-systems only
@@ -51,7 +51,7 @@ Current PT:
         grub-mkconfig -o /boot/grub/grub.cfg
             -o -> output file
 
-13: Reboot onto fresh system
+10: Reboot onto fresh system
         exit
         umount -R /mnt
         rm inst*
