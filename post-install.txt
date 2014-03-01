@@ -45,7 +45,7 @@ Version: 1.0, 2014
                             user.email  ewancoder@gmail.com
                             merge.tool  vimdiff
                             core.editor vim
-        #git config --global ~~~
+        #ln -s ~/.gitconfig /root/
         git clone https://github.com/ewancoder/dotfiles.git .dotfiles
         #git clone https://github.com/ewancoder/etc.git /etc/.dotfiles
         cd .dotfiles && git submodule update --init --recursive .oh-my-zsh .vim/bundle/vundle
