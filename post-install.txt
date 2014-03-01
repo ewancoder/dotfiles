@@ -52,20 +52,19 @@ Version: 1.0, 2014
         mkdir .vim/{swap,backup}
 
 6:  Merge ALL GIT files (~/.dotfiles & /etc/.dotfiles) [PREFERABLY DO THIS AFTER INSTALLING ALL SOFTWARE]
-        .config, .canto, .wmii-hg are not links, these contains links
-        X11/xorg.conf.d, default, pulse, systemd/system, bitlbee are not links, these contains links
-        grub.jpg, .git*, *install.txt are not links, these just files
+        [ .canto, .config, .wmii-hg ] are not links
+        [ bitlbee, default, grub.d, pulse, systemd/system, X11/xorg.conf.d ] are not links
+        [ .git*, grub.jpg, *install.txt, scripts ] are just files/folders
+        #chmod -x /etc/grub.d/10_linux
         #grub-mkconfig -o /boot/grub/grub.cfg <- update background
-        #vi /boot/grub/grub.cfg <- comment no-used lines
-        yaourt -Syy <- multilib update
         #locale-gen <- generate locales
-        setfont cyr-sun16 <- set russian font
         Setup gvim for root
             #ln -s ~/.vim /root/.vim
             #ln -s ~/.vimrc /root/.vimrc
-        #chmod -x /etc/grub.d/10_linux
         irssi make config with password from config_sample
         link all from 'scripts' folder to '/usr/bin' :)
+        setfont cyr-sun16 <- set russian font
+        yaourt -Syy <- multilib update
 
 7:  Configure audio
         yaourt
@@ -145,18 +144,14 @@ Version: 1.0, 2014
             xcompmgr
             xfe
             zsh
+        #chown -R bitlbee:bitlbee /var/lib/bitlbee
         chsh <- /bin/zsh
-        vim <- :BundleInstall
         modprobe fuse
         systemctl enable
             preload
             psd
             psd-resync
-        #chown -R bitlbee:bitlbee /var/lib/bitlbee
-            register <passwd>
-            account add twitter ewancoder
-            account on
-            <go to token link to accept>
+                vim <- :BundleInstall
 
 11: Install optional software
         yaourt
@@ -165,12 +160,10 @@ Version: 1.0, 2014
                 (krita)
                 (mypaint)
             (inkscape)
+            python-sphinx
             (qtcreator)
             xfe
-        gem
-            (sass)
-        pip
-            (sphinx)
+        gem (sass)
 
 12: List of testing-hardware software
         yaourt
@@ -192,3 +185,10 @@ Version: 1.0, 2014
 14: PROFIT -> Enjoy!
         rm post-install.txt
         reboot
+
+15: After X
+        irssi <- here execute all commands below
+            register <passwd>
+            account add twitter ewancoder
+            account on
+            <go to token link to accept>
