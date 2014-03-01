@@ -119,6 +119,7 @@ Version: 1.0, 2014
                     hunspell-en
             mesa
             nvidia
+            openssh
             p7zip
             perl-html-parser <- for irssi perl scripts to work
             preload
@@ -147,11 +148,11 @@ Version: 1.0, 2014
         #chown -R bitlbee:bitlbee /var/lib/bitlbee
         chsh <- /bin/zsh
         modprobe fuse
+        ssh-keygen -t rsa -C "ewancoder@gmail.com"
+            #ln -s ~/.ssh /root/.ssh
         systemctl enable
             preload
-            psd
-            psd-resync
-                vim <- :BundleInstall
+        vim <- :BundleInstall
 
 11: Install optional software
         yaourt
@@ -160,7 +161,6 @@ Version: 1.0, 2014
                 (krita)
                 (mypaint)
             (inkscape)
-            openssh
             python-sphinx
             (qtcreator)
             xfe
