@@ -54,7 +54,7 @@ Version: 1.0, 2014
 6:  Merge ALL GIT files (~/.dotfiles & /etc/.dotfiles) [PREFERABLY DO THIS AFTER INSTALLING ALL SOFTWARE]
         [ .canto, .config, .wmii-hg ] are not links
         [ bitlbee, default, grub.d, pulse, systemd/system, X11/xorg.conf.d ] are not links
-        [ .git*, grub.jpg, *install.txt, scripts ] are just files/folders
+        [ .git*, grub.jpg, .install, scripts ] are just files/folders
         #chmod -x /etc/grub.d/10_linux
         #grub-mkconfig -o /boot/grub/grub.cfg <- update background
         #locale-gen <- generate locales
