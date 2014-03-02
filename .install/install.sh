@@ -13,6 +13,10 @@ curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/postinstall.sh
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/postinstall2.sh
 echo
 
+read -p "-> Make all scripts executable: chmod +x *.sh"
+chmod +x *.sh
+echo
+
 grep -B 0 -C 6 "Current PT:" install.txt
 grep -B 0 -C 5 "1:" install.txt
 
