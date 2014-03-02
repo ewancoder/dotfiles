@@ -21,7 +21,7 @@ read -p "-> Press [Enter] when all done..."
 echo
 
 read -p "-> cp post* /mnt/ && cp install* /mnt/"
-cp post* /mnt/home && cp install2.sh /mnt/
+cp post* /mnt/ && cp install2.sh /mnt/
 echo
 
 grep -B 0 -C 3 "2:" install.txt
