@@ -4,7 +4,7 @@ echo Arch linux post-installation 2nd script by Ewancoder
 echo Version: 1.0, 2014
 echo
 
-grep -B 0 -C 13 "4:" /home/postinstall.txt
+grep -B 0 -C 13 "4:  Install yaourt" postinstall.txt
 
 read -p "Download package-query.tar.gz file"
 curl -O https://aur.archlinux.org/packages/pa/package-query/package-query.tar.gz
@@ -50,7 +50,7 @@ read -p "cd && rm -r package-query*"
 cd && rm -r package-query*
 echo
 
-grep -B 0 -C 11 "5:" /home/postinstall.txt
+grep -B 0 -C 11 "5:  Install git and download repos" postinstall.txt
 
 read -p "-> yaourt -S git"
 yaourt -S git
@@ -92,12 +92,12 @@ read -p "-> mkdir .vim/{swap,backup}"
 mkdir .vim/{swap,backup}
 echo
 
-grep -B 0 -C 14 "6:" /home/postinstall.txt
+grep -B 0 -C 14 "6:" postinstall.txt
 
 read -p "-> Make ALL ~ & /etc links [MANUAL]. Done?..."
 echo
 
-grep -B 0 -C 12 "7:" /home/postinstall.txt
+grep -B 0 -C 12 "7:" postinstall.txt
 
 read -p "-> yaourt -S alsa-plugins alsa-utils pulseaudio pulseaudio-alsa lib32-libpulse lib32-alsa-plugins"
 yaourt -S alsa-plugins alsa-utils pulseaudio pulseaudio-alsa lib32-libpulse lib32-alsa-plugins
@@ -141,7 +141,7 @@ do
 done
 echo
 
-grep -B 0 -C 5 "8:" /home/postinstall.txt
+grep -B 0 -C 5 "8:" postinstall.txt
 
 echo "-> Mound windows partition to /mnt/windows [MANUAL]"
 read -p "-> Press [ENTER] when done..."
@@ -155,7 +155,7 @@ read -p "-> fc-cache -fv"
 fc-cache -fv
 echo
 
-grep -B 0 -C 2 "9:" /home/postinstall.txt
+grep -B 0 -C 2 "9:" postinstall.txt
 
 read -p "-> #sed -i 's/dead\sactute/dead\sacute/g' /usr/share/X11/locale/en_US.UTF-8/Compose"
 sudo sed -i 's/dead\sactute/dead\sacute/g' /usr/share/X11/locale/en_US.UTF-8/Compose
@@ -164,14 +164,14 @@ echo
 read -p "Now you gotta install All CORE software. It's big list, and you're going to see it through 'less' right now"
 echo
 
-grep -B 0 -C 66 "10:" /home/postinstall.txt | less
+grep -B 0 -C 66 "10:" postinstall.txt | less
 
 read -p "-> yaourt -S anki canto chromium chromium-libpdf chromium-pepper-flash icedtea-web-java7 djview4 deluge dropbox dunst faience-icon-theme feh fuse ntfs-3g encfs geeqie gimp gource gvim irssi kalu libreoffice hyphen hyphen-ru hyphen-en hunspell hunspell-ru hunspell-en mesa nvidia openssh p7zip perl-html-parser preload profile-sync-daemon python-matplotlib python-numpy python-scipy python-sphinx rxvt-unicode screen scrot skype terminus-font thunar tig ttf-dejavu vlc xorg-server xorg-server-utils xorg-xinit wmii-hg xarchiver xclip xcompmgr xfe zsh"
 yaourt -S anki canto chromium chromium-libpdf chromium-pepper-flash icedtea-web-java7 djview4 deluge dropbox dunst faience-icon-theme feh fuse ntfs-3g encfs geeqie gimp gource gvim irssi kalu libreoffice hyphen hyphen-ru hyphen-en hunspell hunspell-ru hunspell-en mesa nvidia openssh p7zip perl-html-parser preload profile-sync-daemon python-matplotlib python-numpy python-scipy python-sphinx rxvt-unicode screen scrot skype terminus-font thunar tig ttf-dejavu vlc xorg-server xorg-server-utils xorg-xinit wmii-hg xarchiver xclip xcompmgr xfe zsh
 echo
 
-read -p "-> #rm /home/*inst*"
-sudo rm /home/*inst*
+read -p "-> #rm post*"
+sudo rm post*
 echo
 
 echo "Exec some commands for X after logging in X (see postinstall.txt)"

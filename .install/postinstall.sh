@@ -4,7 +4,7 @@ echo Arch linux post-installation script by Ewancoder
 echo Version: 1.0, 2014
 echo
 
-grep -B 0 -C 11 "1:" postinstall.txt
+grep -B 0 -C 11 "1:  Configure network" postinstall.txt
 
 read -p "-> ls -la /sys/class/net"
 ls -la /sys/class/net
@@ -26,7 +26,7 @@ read -p "-> netctl start ethernet-static"
 netctl start ethernet-static
 echo
 
-grep -B 0 -C 4 "2:" postinstall.txt
+grep -B 0 -C 4 "2:  Add new user" postinstall.txt
 
 read -p "-> groupadd fuse"
 groupadd fuse
@@ -35,7 +35,7 @@ echo
 read -p "-> useradd -m -g users -G fuse -s /bin/bash ewancoder"
 useradd -m -g users -G fuse -s /bin/bash ewancoder
 
-grep -B 0 -C 6 "3:" postinstall.txt
+grep -B 0 -C 6 "3:  Install sudo" postinstall.txt
 
 read -p "-> pacman -S sudo"
 pacman -S sudo
