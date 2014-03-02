@@ -1,4 +1,5 @@
 #!/bin/bash
+echo
 echo Arch linux CHROOT installation script by Ewancoder
 echo Version: 1.0, 2014
 echo Run this script after you chroot in /mnt
@@ -52,6 +53,6 @@ read -p "-> rm /home/install.txt"
 rm /home/install.txt
 echo
 
-echo "After exitting, reboot onto fresh system and run postinstall.sh from /home directory"
+echo "After exitting, reboot onto fresh system and run postinstall.sh from /home directory. You should exit manually from chroot!"
 read -p "-> exit"
-echo
+exit

@@ -1,4 +1,5 @@
 #!/bin/bash
+echo
 echo Arch linux installation script by Ewancoder
 echo Version: 1.0, 2014
 echo
@@ -14,12 +15,12 @@ echo "-> Use fdisk, mkfs.ext4 and mount to /mnt [MANUAL]"
 read -p "-> Press [Enter] when all done..."
 echo
 
-read -p "-> Download post-install.txt file"
+read -p "-> Download postinstall.txt file"
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/postinstall.txt
 echo
 
-read -p "-> mv post-install.txt /mnt/home"
-mv post-install.txt /mnt/home
+read -p "-> mv postinstall.txt /mnt/home"
+mv postinstall.txt /mnt/home
 echo
 
 grep -B 0 -C 3 "2:" install.txt
@@ -50,7 +51,6 @@ echo
 
 grep -B 0 -C 2 "5:" install.txt
 
-echo "After chroot this script will be shut down, you now gotta run install2.sh from chroot environment"
 read -p "-> Download install2.sh & postinstall.sh files"
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/{install2,postinstall}.sh
 echo
@@ -59,13 +59,14 @@ read -p "-> mv *install* /mnt/home"
 mv *install* /mnt/home
 echo
 
+echo "After chroot this script will be shut down, you now gotta run install2.sh from chroot environment"
 read -p "-> arch-chroot /mnt /bin/bash"
 arch-chroot /mnt /bin/bash
 echo
 echo "You've completed the installation. After reboot you need to run postinstall.sh for quick all system autoconfiguration."
 
 read -p "-> umount -R /mnt"
-umount -T /mnt
+umount -R /mnt
 echo
 
 read -p "reboot"
