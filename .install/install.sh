@@ -5,7 +5,12 @@ echo Version: 1.0, 2014
 echo
 
 read -p "-> Download ALL files: install.txt, postinstall.txt, install.sh, install2.sh, postinstall.sh, postinstall2.sh"
-curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/{install,postinstall}.txt https://raw.github.com/ewancoder/dotfiles/master/.install/{install,install2,postinstall,postinstall2}.sh
+curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/install.txt
+curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/postinstall.txt
+curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/install.sh
+curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/install2.sh
+curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/postinstall.sh
+curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/postinstall2.sh
 echo
 
 grep -B 0 -C 6 "Current PT:" install.txt
