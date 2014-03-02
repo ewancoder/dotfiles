@@ -4,8 +4,8 @@ echo Arch linux installation script by Ewancoder
 echo Version: 1.0, 2014
 echo
 
-read -p "-> Download install.txt file"
-curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/install.txt
+read -p "-> Download ALL files: install.txt, postinstall.txt, install.sh, install2.sh, postinstall.sh, postinstall2.sh"
+curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/{install,postinstall}.txt https://raw.github.com/ewancoder/dotfiles/master/.install/{install,install2,postinstall,postinstall2}.sh
 echo
 
 grep -B 0 -C 6 "Current PT:" install.txt
@@ -15,12 +15,8 @@ echo "-> Use fdisk, mkfs.ext4 and mount to /mnt [MANUAL]"
 read -p "-> Press [Enter] when all done..."
 echo
 
-read -p "-> Download postinstall.txt file"
-curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/postinstall.txt
-echo
-
-read -p "-> mv postinstall.txt /mnt/home"
-mv postinstall.txt /mnt/home
+read -p "-> mv post* /mnt/home && mv install2.sh /mnt/"
+mv post* /mnt/home && mv install2.sh /mnt/
 echo
 
 grep -B 0 -C 3 "2:" install.txt
@@ -50,14 +46,6 @@ vi /mnt/etc/fstab
 echo
 
 grep -B 0 -C 2 "5:" install.txt
-
-read -p "-> Download install2.sh & postinstall.sh & postinstall2.sh files"
-curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/{install2,postinstall,postinstall2}.sh
-echo
-
-read -p "-> mv *install* /mnt/home"
-mv *install* /mnt/home
-echo
 
 echo "After chroot this script will be shut down, you now gotta run install2.sh from chroot environment"
 read -p "-> arch-chroot /mnt /bin/bash"
