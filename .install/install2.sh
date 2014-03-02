@@ -5,25 +5,25 @@ echo Version: 1.0, 2014
 echo Run this script after you chroot in /mnt
 echo
 
-grep -B 0 -C 2 "6:" /home/install.txt
+grep -B 0 -C 2 "6:" install.txt
 
 read -p "-> ln -s /usr/share/zoneinfo/Europe/Minsk /etc/localtime"
 ln -s /usr/share/zoneinfo/Europe/Minsk /etc/localtime
 echo
 
-grep -B 0 -C 2 "7:" /home/install.txt
+grep -B 0 -C 2 "7:" install.txt
 
 read -p "-> echo ewanhost > /etc/hostname"
 echo ewanhost > /etc/hostname
 echo
 
-grep -B 0 -C 2 "8:" /home/install.txt
+grep -B 0 -C 2 "8:" install.txt
 
 read -p "-> passwd (setup your password) [MANUAL]"
 passwd
 echo
 
-grep -B 0 -C 7 "9:" /home/install.txt
+grep -B 0 -C 7 "9:" install.txt
 
 read -p "-> pacman -S grub"
 pacman -S grub
@@ -47,12 +47,12 @@ read -p "-> grub-mkconfig -o /boot/grub/grub.cfg"
 grub-mkconfig -o /boot/grub/grub.cfg
 echo
 
-grep -B 0 -C 3 "10:" /home/install.txt
+grep -B 0 -C 3 "10:" install.txt
 
-read -p "-> rm /home/install.txt"
-rm /home/install.txt
+read -p "-> rm install* && mv post* /home/ewancoder/"
+rm install* && mv post* /home/ewancoder/
 echo
 
-echo "After exitting, reboot onto fresh system and run postinstall.sh from /home directory. You should exit manually from chroot!"
+echo "After exitting, reboot onto fresh system and run postinstall.sh. You should exit manually from chroot!"
 read -p "-> exit"
 exit

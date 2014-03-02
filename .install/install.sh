@@ -15,8 +15,8 @@ echo "-> Use fdisk, mkfs.ext4 and mount to /mnt [MANUAL]"
 read -p "-> Press [Enter] when all done..."
 echo
 
-read -p "-> mv post* /mnt/home && mv install2.sh /mnt/"
-mv post* /mnt/home && mv install2.sh /mnt/
+read -p "-> cp post* /mnt/ && cp install* /mnt/"
+cp post* /mnt/home && cp install2.sh /mnt/
 echo
 
 grep -B 0 -C 3 "2:" install.txt
