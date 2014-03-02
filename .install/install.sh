@@ -51,8 +51,8 @@ echo
 
 grep -B 0 -C 2 "5:" install.txt
 
-read -p "-> Download install2.sh & postinstall.sh files"
-curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/{install2,postinstall}.sh
+read -p "-> Download install2.sh & postinstall.sh & postinstall2.sh files"
+curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/{install2,postinstall,postinstall2}.sh
 echo
 
 read -p "-> mv *install* /mnt/home"

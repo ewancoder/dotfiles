@@ -15,7 +15,7 @@ Version: 1.0, 2014
 
 2:  Add new user
         groupadd fuse
-        useradd -m -g users -G fuse -s /bin/bash lanceulot
+        useradd -m -g users -G fuse -s /bin/bash ewancoder
             -m - create home directory
 
 3:  Install sudo
@@ -105,6 +105,7 @@ Version: 1.0, 2014
                 ntfs-3g
                 encfs
             geeqie
+            gimp
             gource
             gvim <- nvidia-libgl
             irssi
@@ -127,6 +128,7 @@ Version: 1.0, 2014
             python-matplotlib
             python-numpy
             python-scipy
+            python-sphinx
             rxvt-unicode
             screen
             scrot
@@ -154,26 +156,23 @@ Version: 1.0, 2014
             preload
         vim <- :BundleInstall
 
-11: Install optional software
+11: Optional software
         yaourt
             (gdb) <- gnu debugger
-            gimp
-                (krita)
-                (mypaint)
+            (krita) <- painting
+            (mypaint) <- painting
             (inkscape)
-            python-sphinx
             (qtcreator)
-            xfe
-        gem (sass)
+        <gem> (sass)
 
-12: List of testing-hardware software
+12: Testing-hardware software
         yaourt
-            dmidecode <- check bios firmware version
-            hdparm <- testing hdd/ssd speed
-            gnome-disk-utility <- graphical testing hdd/ssd speed
-            [gparted]
+            (dmidecode) <- check bios firmware version
+            (hdparm) <- testing hdd/ssd speed
+            (gnome-disk-utility) <- graphical testing hdd/ssd speed
+            gparted
 
-13: List of best linux games of all times
+13: Best linux games
         yaourt
             armagetronad
             chromium-bsu
