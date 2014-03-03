@@ -62,7 +62,8 @@ echo "-> Setup your user ($username) password"
 passwd $username
 echo
 
-su $username -c /home/$username/postinstall2.sh
+cd /home/$username/
+su $username -c ./postinstall2.sh
 read -p "Script ended. [REBOOT]"
 reboot
 

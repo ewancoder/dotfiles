@@ -5,7 +5,7 @@ echo Version: 1.0, 2014
 echo
 
 #Constants
-pasetup=no
+pasetup=no  #If 'yes', setup pulseaudio standart sink & source
 
 grep -B 0 -C 13 "4:  Install yaourt" postinstall.txt
 
