@@ -8,6 +8,7 @@ echo
 #Constants
 hostname=ewanhost
 device=/dev/sda
+clearfstab=no
 
 grep -B 0 -C 2 "6:" install.txt
 echo "-> Make link to local timezone (Minsk)"
@@ -45,11 +46,10 @@ echo "-> passwd (setup ROOT password) [MANUAL]"
 passwd
 echo
 
-read -p "-> Edit fstab - add 'discard' (ssd), comment /boot [MANUAL]"
-vi /mnt/etc/fstab
-echo
-
-read -p "After reboot run ./postinstall to continue [reboot]"
-
-echo "-> reboot"
+if [ clearfstab != yes ]
+then
+    read -p "-> Edit fstab - add 'discard' (ssd), comment /boot [MANUAL]"
+    vi /etc/fstab
+    echo
+fi
 exit
