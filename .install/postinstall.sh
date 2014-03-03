@@ -5,8 +5,8 @@ echo Version: 1.0, 2014
 echo
 
 #Constants
-netctl=no
-username=ewancoder
+netctl=no           #if 'yes', setup netctl ethernet-static; otherwise - just run dhcpcd
+username=ewancoder  #your username login
 
 grep -B 0 -C 11 "1:  Configure network" postinstall.txt
 
@@ -62,5 +62,9 @@ echo "-> Setup your user ($username) password"
 passwd $username
 echo
 
-echo "-> Please, run postinstall2.sh script as user $username to continue"
-exit
+su $username -c /home/$username/postinstall2.sh
+read -p "Script ended. [REBOOT]"
+reboot
+
+#echo "-> Please, run postinstall2.sh script as user $username to continue"
+#exit

@@ -25,6 +25,8 @@ grep -B 0 -C 1 United /etc/pacman.d/mirrorlist >> mirrorlist
 grep -B 0 -C 1 Denmark /etc/pacman.d/mirrorlist >> mirrorlist
 grep -B 0 -C 1 France /etc/pacman.d/mirrorlist >> mirrorlist
 grep -B 0 -C 1 Russia /etc/pacman.d/mirrorlist >> mirrorlist
+sed '/--/d' mirrorlist > templist
+mv templist mirrorlist
 mv mirrorlist /etc/pacman.d/mirrorlist
 echo
 

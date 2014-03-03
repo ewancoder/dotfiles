@@ -6,13 +6,14 @@ echo Run this script after you chroot in /mnt
 echo
 
 #Constants
-hostname=ewanhost
-device=/dev/sda
-clearfstab=yes
+timezone=Europe/Minsk   #Your local timezone
+hostname=ewanhost       #Your hosname of the machine
+device=/dev/sda         #Device to install grub mbr
+clearfstab=yes          #If 'yes', you will not be prompted to edit fstab
 
 grep -B 0 -C 2 "6:" install.txt
 echo "-> Make link to local timezone (Minsk)"
-ln -s /usr/share/zoneinfo/Europe/Minsk /etc/localtime
+ln -s /usr/share/zoneinfo/$timezone /etc/localtime
 echo
 
 grep -B 0 -C 2 "7:" install.txt
