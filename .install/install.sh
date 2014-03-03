@@ -4,9 +4,6 @@ echo Arch linux installation script by Ewancoder
 echo Version: 1.0, 2014
 echo
 
-read -p "Installation will be performed in automatic mode. Would you like to continue? [Enter=Yes / Ctrl+C=No]"
-echo
-
 echo "-> Download ALL files: install.txt, postinstall.txt, install.sh, install2.sh, postinstall.sh, postinstall2.sh, mergeinstall.sh"
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/install.txt
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/postinstall.txt
@@ -44,8 +41,8 @@ echo
 
 grep -B 0 -C 3 "3:" install.txt
 
-echo "-> pacstrap -i /mnt base base-devel"
-pacstrap -i /mnt base base-devel
+echo "-> pacstrap /mnt base base-devel"
+pacstrap /mnt base base-devel
 echo
 
 grep -B 0 -C 7 "4:" install.txt
@@ -64,8 +61,6 @@ read -p "After chroot this script will be shut down, you now gotta run install2.
 echo "-> arch-chroot /mnt /bin/bash"
 arch-chroot /mnt /bin/bash
 echo
-
-read -p "You've completed the installation. After reboot you need to run postinstall.sh for quick all system autoconfiguration."
 
 echo "-> umount -R /mnt"
 umount -R /mnt

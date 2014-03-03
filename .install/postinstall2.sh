@@ -23,7 +23,7 @@ makepkg -s
 echo
 
 echo "#pacman -U *.xz"
-sudo pacman -U *.xz
+sudo pacman -U --noconfirm *.xz
 echo
 
 echo "Download yaourt.tar.gz file"
@@ -43,7 +43,7 @@ makepkg
 echo
 
 echo "#pacman -U *.xz"
-sudo pacman -U *.xz
+sudo pacman -U --noconfirm *.xz
 echo
 
 echo "cd && rm -r package-query*"
@@ -53,7 +53,7 @@ echo
 grep -B 0 -C 11 "5:  Install git and download repos" postinstall.txt
 
 echo "-> yaourt -S git"
-yaourt -S git
+yaourt -S --noconfirm git
 echo
 
 echo "-> git config --global user.name ewancoder"
@@ -129,7 +129,7 @@ echo
 grep -B 0 -C 12 "7:" postinstall.txt
 
 echo "-> yaourt -S alsa-plugins alsa-utils pulseaudio pulseaudio-alsa lib32-libpulse lib32-alsa-plugins"
-yaourt -S alsa-plugins alsa-utils pulseaudio pulseaudio-alsa lib32-libpulse lib32-alsa-plugins
+yaourt -S --noconfirm alsa-plugins alsa-utils pulseaudio pulseaudio-alsa lib32-libpulse lib32-alsa-plugins
 echo
 
 echo "-> pulseaudio --start"
@@ -191,7 +191,7 @@ sudo sed -i 's/dead\sactute/dead\sacute/g' /usr/share/X11/locale/en_US.UTF-8/Com
 echo
 
 echo "Installing core software..."
-yaourt -S anki canto chromium chromium-libpdf chromium-pepper-flash icedtea-web-java7 djview4 deluge dropbox dunst faience-icon-theme feh fuse ntfs-3g encfs geeqie gimp gource gvim irssi kalu libreoffice hyphen hyphen-ru hyphen-en hunspell hunspell-ru hunspell-en mesa nvidia openssh p7zip perl-html-parser preload profile-sync-daemon python-matplotlib python-numpy python-scipy python-sphinx rxvt-unicode screen scrot skype terminus-font thunar tig ttf-dejavu vlc xorg-server xorg-server-utils xorg-xinit wmii-hg xarchiver xclip xcompmgr xfe zsh
+yaourt -S --noconfirm anki canto chromium chromium-libpdf chromium-pepper-flash icedtea-web-java7 djview4 deluge dropbox dunst faience-icon-theme feh fuse ntfs-3g encfs geeqie gimp gource gvim irssi kalu libreoffice hyphen hyphen-ru hyphen-en hunspell hunspell-ru hunspell-en mesa nvidia openssh p7zip perl-html-parser preload profile-sync-daemon python-matplotlib python-numpy python-scipy python-sphinx rxvt-unicode screen scrot skype terminus-font thunar tig ttf-dejavu vlc xorg-server xorg-server-utils xorg-xinit wmii-hg xarchiver xclip xcompmgr xfe zsh
 echo
 
 echo "-> #rm *install*"

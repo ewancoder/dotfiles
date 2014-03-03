@@ -38,7 +38,7 @@ useradd -m -g users -G fuse -s /bin/bash ewancoder
 grep -B 0 -C 6 "3:  Install sudo" postinstall.txt
 
 echo "-> pacman -S sudo"
-pacman -S sudo
+pacman -S --noconfirm sudo
 echo
 
 read -p "-> visudo [MANUAL]"

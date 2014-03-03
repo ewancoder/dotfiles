@@ -26,7 +26,7 @@ echo
 grep -B 0 -C 7 "9:" install.txt
 
 echo "-> pacman -S grub"
-pacman -S grub
+pacman -S --noconfirm grub
 echo
 
 echo "-> grub-install --target=i386-pc --recheck /dev/sd? (choose disk)"
@@ -40,7 +40,7 @@ select abcd in "/dev/sda" "/dev/sdb" "/dev/sdc" "/dev/sdb"; do
 done
 
 echo "-> pacman -S os-prober"
-pacman -S os-prober
+pacman -S --noconfirm os-prober
 echo
 
 echo "-> grub-mkconfig -o /boot/grub/grub.cfg"
