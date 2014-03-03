@@ -6,6 +6,7 @@ echo
 
 #Constants
 pasetup=no  #If 'yes', setup pulseaudio standart sink & source
+winfonts=no #If 'yes', copy windows fonts from mounted /mnt/windows partition
 
 grep -B 0 -C 13 "4:  Install yaourt" postinstall.txt
 
@@ -21,7 +22,7 @@ echo "cd package-query"
 cd package-query
 echo
 
-read -p "makepkg -s"
+echo "makepkg -s"
 makepkg -s --noconfirm
 echo
 
@@ -33,7 +34,7 @@ echo "Download yaourt.tar.gz file"
 curl -O https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz
 echo
 
-read -p "tar xvf yaourt.tar.gz"
+echo "tar xvf yaourt.tar.gz"
 tar xvf yaourt.tar.gz
 echo
 
@@ -49,7 +50,7 @@ echo "#pacman -U *.xz"
 sudo pacman -U --noconfirm *.xz
 echo
 
-read -p "cd && rm -r package-query*"
+echo "cd && rm -r package-query*"
 cd && rm -r package-query*
 echo
 
@@ -182,9 +183,12 @@ echo "-> Mound windows partition to /mnt/windows [MANUAL]"
 read -p "-> Press [ENTER] when done..."
 echo
 
-echo "-> cp -r /mnt/windows/Windows/Fonts /usr/share/fonts/winfonts"
-cp -r /mnt/windows/Windows/Fonts /usr/share/fonts/winfonts
-echo
+if [ $winfonts = yes ]
+then
+    echo "-> cp -r /mnt/windows/Windows/Fonts /usr/share/fonts/winfonts"
+    cp -r /mnt/windows/Windows/Fonts /usr/share/fonts/winfonts
+    echo
+fi
 
 echo "-> sudo fc-cache -fv"
 fc-cache -fv
@@ -197,8 +201,8 @@ sudo sed -i 's/dead\sactute/dead\sacute/g' /usr/share/X11/locale/en_US.UTF-8/Com
 echo
 
 echo "Installing core software..."
-yaourt -S libreoffice nvidia-libgl
-yaourt -S --noconfirm anki canto chromium chromium-libpdf chromium-pepper-flash icedtea-web-java7 djview4 deluge dropbox dunst faience-icon-theme feh fuse ntfs-3g encfs geeqie gimp gource gvim irssi kalu hyphen hyphen-ru hyphen-en hunspell hunspell-ru hunspell-en mesa nvidia openssh p7zip perl-html-parser preload profile-sync-daemon python-matplotlib python-numpy python-scipy python-sphinx rxvt-unicode screen scrot skype terminus-font thunar tig ttf-dejavu vlc xorg-server xorg-server-utils xorg-xinit wmii-hg xarchiver xclip xcompmgr xfe zsh
+#yaourt -S libreoffice nvidia-libgl
+yaourt -S anki canto chromium chromium-libpdf chromium-pepper-flash icedtea-web-java7 djview4 deluge dropbox dunst faience-icon-theme feh fuse ntfs-3g encfs geeqie gimp gource gvim irssi kalu hyphen hyphen-ru hyphen-en hunspell hunspell-ru hunspell-en mesa nvidia openssh p7zip perl-html-parser preload profile-sync-daemon python-matplotlib python-numpy python-scipy python-sphinx rxvt-unicode screen scrot skype terminus-font thunar tig ttf-dejavu vlc xorg-server xorg-server-utils xorg-xinit wmii-hg xarchiver xclip xcompmgr xfe zsh
 echo
 
 echo "-> #rm *install*"
