@@ -178,14 +178,14 @@ then
     echo
 fi
 
-grep -B 0 -C 5 "8:" postinstall.txt
-
-echo "-> Mound windows partition to /mnt/windows [MANUAL]"
-read -p "-> Press [ENTER] when done..."
-echo
-
 if [ $winfonts = yes ]
 then
+    grep -B 0 -C 5 "8:" postinstall.txt
+
+    echo "-> Mount windows partitions to /mnt/windows [MANUAL]"
+    read -p "-> Press [ENTER] when done..."
+    echo
+
     echo "-> cp -r /mnt/windows/Windows/Fonts /usr/share/fonts/winfonts"
     cp -r /mnt/windows/Windows/Fonts /usr/share/fonts/winfonts
     echo
