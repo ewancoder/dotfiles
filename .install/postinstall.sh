@@ -64,7 +64,7 @@ echo
 
 echo "-> CD into /home/$user/ folder & run ./postinstall2.sh script as user"
 cd /home/$username/
-su $username -c ./postinstall2.sh
+su - $username -c ./postinstall2.sh
 
 read -p "Look into postinstall.txt file after loggin into X, you gotta do smth. on your own in X session! [REBOOT]"
 reboot
