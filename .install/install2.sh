@@ -9,7 +9,7 @@ echo
 timezone=Europe/Minsk   #Your local timezone
 hostname=ewanhost       #Your hosname of the machine
 device=/dev/sda         #Device to install grub mbr
-clearfstab=yes          #If 'yes', you will not be prompted to edit fstab
+clearfstab=yes          #If 'no', you will be prompted to edit fstab
 
 grep -B 0 -C 2 "6:" install.txt
 echo "-> Make link to local timezone (Minsk)"
@@ -47,7 +47,7 @@ echo "-> passwd (setup ROOT password) [MANUAL]"
 passwd
 echo
 
-if [ $clearfstab!=yes ]
+if [ $clearfstab -eq no ]
 then
     echo $clearfstab
     read -p "-> Edit fstab - add 'discard' (ssd), comment /boot [MANUAL]"
