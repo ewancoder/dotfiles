@@ -4,7 +4,10 @@ echo Arch linux installation script by Ewancoder
 echo Version: 1.0, 2014
 echo
 
-read -p "-> Download ALL files: install.txt, postinstall.txt, install.sh, install2.sh, postinstall.sh, postinstall2.sh"
+read -p "Installation will be performed in automatic mode. Would you like to continue? [Enter=Yes / Ctrl+C=No]"
+echo
+
+echo "-> Download ALL files: install.txt, postinstall.txt, install.sh, install2.sh, postinstall.sh, postinstall2.sh, mergeinstall.sh"
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/install.txt
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/postinstall.txt
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/install.sh
@@ -14,7 +17,7 @@ curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/postinstall2.s
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/mergeinstall.sh
 echo
 
-read -p "-> Make all scripts executable: chmod +x *.sh"
+echo "-> Make all scripts executable: chmod +x *.sh"
 chmod +x *.sh
 echo
 
@@ -25,7 +28,7 @@ echo "-> Use fdisk, mkfs.ext4 and mount to /mnt [MANUAL]"
 read -p "-> Press [Enter] when all done..."
 echo
 
-read -p "-> cp *install* /mnt/"
+echo "-> cp *install* /mnt/"
 cp *install* /mnt/
 echo
 
@@ -35,19 +38,19 @@ read -p "-> vi /etc/pacman.d/mirrorlist (move belarus on the first place) [MANUA
 vi /etc/pacman.d/mirrorlist
 echo
 
-read -p "-> pacman -Syy"
+echo "-> pacman -Syy"
 pacman -Syy
 echo
 
 grep -B 0 -C 3 "3:" install.txt
 
-read -p "-> pacstrap -i /mnt base base-devel"
+echo "-> pacstrap -i /mnt base base-devel"
 pacstrap -i /mnt base base-devel
 echo
 
 grep -B 0 -C 7 "4:" install.txt
 
-read -p "-> genfstab -U -p /mnt >> /mnt/etc/fstab"
+echo "-> genfstab -U -p /mnt >> /mnt/etc/fstab"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 echo
 
@@ -57,15 +60,16 @@ echo
 
 grep -B 0 -C 2 "5:" install.txt
 
-echo "After chroot this script will be shut down, you now gotta run install2.sh from chroot environment"
-read -p "-> arch-chroot /mnt /bin/bash"
+read -p "After chroot this script will be shut down, you now gotta run install2.sh from chroot environment"
+echo "-> arch-chroot /mnt /bin/bash"
 arch-chroot /mnt /bin/bash
 echo
-echo "You've completed the installation. After reboot you need to run postinstall.sh for quick all system autoconfiguration."
 
-read -p "-> umount -R /mnt"
+read -p "You've completed the installation. After reboot you need to run postinstall.sh for quick all system autoconfiguration."
+
+echo "-> umount -R /mnt"
 umount -R /mnt
 echo
 
-read -p "reboot"
+echo "reboot"
 reboot

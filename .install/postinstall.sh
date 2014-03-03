@@ -6,53 +6,53 @@ echo
 
 grep -B 0 -C 11 "1:  Configure network" postinstall.txt
 
-read -p "-> ls -la /sys/class/net"
+echo "-> ls -la /sys/class/net"
 ls -la /sys/class/net
 echo
 
-read -p "-> cp /etc/netctl/examples/ethernet-static /etc/netctl/"
+echo "-> cp /etc/netctl/examples/ethernet-static /etc/netctl/"
 cp /etc/netctl/examples/ethernet-static /etc/netctl/
 echo
 
-read -p "-> vi /etc/netctl/ethernet-static"
+read -p "-> Configure network: vi /etc/netctl/ethernet-static [MANUAL]"
 vi /etc/netctl/ethernet-static
 echo
 
-read -p "-> netctl enable ethernet-static"
+echo "-> netctl enable ethernet-static"
 netctl enable ethernet-static
 echo
 
-read -p "-> netctl start ethernet-static"
+echo "-> netctl start ethernet-static"
 netctl start ethernet-static
 echo
 
 grep -B 0 -C 4 "2:  Add new user" postinstall.txt
 
-read -p "-> groupadd fuse"
+echo "-> groupadd fuse"
 groupadd fuse
 echo
 
-read -p "-> useradd -m -g users -G fuse -s /bin/bash ewancoder"
+echo "-> useradd -m -g users -G fuse -s /bin/bash ewancoder"
 useradd -m -g users -G fuse -s /bin/bash ewancoder
 
 grep -B 0 -C 6 "3:  Install sudo" postinstall.txt
 
-read -p "-> pacman -S sudo"
+echo "-> pacman -S sudo"
 pacman -S sudo
 echo
 
-read -p "-> visudo"
+read -p "-> visudo [MANUAL]"
 visudo
 echo
 
-read -p "-> passwd ewancoder"
+echo "-> passwd ewancoder [Setup your password]"
 passwd ewancoder
 echo
 
-read -p "-> mv postinstall2.sh postinstall.txt /home/ewancoder/ && rm post*"
+echo "-> mv postinstall2.sh postinstall.txt /home/ewancoder/ && rm post*"
 mv postinstall2.sh postinstall.txt mergeinstall.sh /home/ewancoder/ && rm post*
 echo
 
-echo "After exitting, login as user and run postinstall2.sh to continue. Exit manually!"
-read -p "-> exit"
+read -p "After exitting, login as user and run postinstall2.sh to continue. Exit manually!"
+echo "-> exit"
 exit
