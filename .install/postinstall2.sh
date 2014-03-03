@@ -21,7 +21,7 @@ echo "cd package-query"
 cd package-query
 echo
 
-echo "makepkg -s"
+read -p "makepkg -s"
 makepkg -s
 echo
 
@@ -33,7 +33,7 @@ echo "Download yaourt.tar.gz file"
 curl -O https://aur.archlinux.org/packages/ya/yaourt/yaourt.tar.gz
 echo
 
-echo "tar xvf yaourt.tar.gz"
+read -p "tar xvf yaourt.tar.gz"
 tar xvf yaourt.tar.gz
 echo
 
@@ -49,7 +49,7 @@ echo "#pacman -U *.xz"
 sudo pacman -U --noconfirm *.xz
 echo
 
-echo "cd && rm -r package-query*"
+read -p "cd && rm -r package-query*"
 cd && rm -r package-query*
 echo
 
