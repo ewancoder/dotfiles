@@ -22,7 +22,7 @@ cd package-query
 echo
 
 read -p "makepkg -s"
-makepkg -s
+makepkg -s --noconfirm
 echo
 
 echo "#pacman -U *.xz"
@@ -42,7 +42,7 @@ cd yaourt
 echo
 
 echo "makepkg"
-makepkg
+makepkg --noconfirm
 echo
 
 echo "#pacman -U *.xz"
