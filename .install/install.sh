@@ -60,7 +60,7 @@ grep -B 0 -C 2 "5:" install.txt
 read -p "After chroot this script will be shut down, you now gotta run install2.sh from chroot environment"
 echo "-> arch-chroot /mnt /bin/bash"
 
-arch-chroot /mnt /mnt/install2.sh
+arch-chroot /mnt /install2.sh
 #arch-chroot /mnt /bin/bash
 #echo
 #
