@@ -50,7 +50,7 @@ passwd ewancoder
 echo
 
 read -p "-> mv postinstall2.sh postinstall.txt /home/ewancoder/ && rm post*"
-mv postinstall2.sh postinstall.txt /home/ewancoder/ && rm post*
+mv postinstall2.sh postinstall.txt mergeinstall.sh /home/ewancoder/ && rm post*
 echo
 
 echo "After exitting, login as user and run postinstall2.sh to continue. Exit manually!"

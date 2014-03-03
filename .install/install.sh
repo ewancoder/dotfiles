@@ -11,6 +11,7 @@ curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/install.sh
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/install2.sh
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/postinstall.sh
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/postinstall2.sh
+curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/mergeinstall.sh
 echo
 
 read -p "-> Make all scripts executable: chmod +x *.sh"

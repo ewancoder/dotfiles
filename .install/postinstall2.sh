@@ -88,13 +88,16 @@ read -p "-> cd .dotfiles && git submodule update --init --recursive .oh-my-zsh .
 cd .dotfiles && git submodule update --init --recursive .oh-my-zsh .vim/bundle/vundle
 echo
 
-read -p "-> mkdir .vim/{swap,backup}"
+read -p "-> mkdir .vim/{swap,backup} && cd"
 mkdir .vim/{swap,backup}
+cd
 echo
 
 grep -B 0 -C 14 "6:" postinstall.txt
 
-read -p "-> Make ALL ~ & /etc links [MANUAL]. Done?..."
+read -p "-> MERGE ALL GIT LINKS: Now will be executed script that will merge all git links from ~/.dotfiles & from /etc/.dotfiles"
+./mergeinstall.sh
+read -p "-> All links have been merged successfully? [RETURN]"
 echo
 
 grep -B 0 -C 12 "7:" postinstall.txt

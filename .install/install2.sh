@@ -50,7 +50,7 @@ echo
 grep -B 0 -C 3 "10:" install.txt
 
 read -p "-> rm install* && mv post* /root/"
-rm install* && mv post* /root/
+rm install* && mv {post,merge}* /root/
 echo
 
 echo "After exitting, reboot onto fresh system and run postinstall.sh. You should exit manually from chroot!"
