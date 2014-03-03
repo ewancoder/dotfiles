@@ -8,7 +8,7 @@ echo
 #Constants
 hostname=ewanhost
 device=/dev/sda
-clearfstab=no
+clearfstab=yes
 
 grep -B 0 -C 2 "6:" install.txt
 echo "-> Make link to local timezone (Minsk)"

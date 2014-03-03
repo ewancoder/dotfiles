@@ -5,7 +5,7 @@ echo Version: 1.0, 2014
 echo
 
 #Constants
-netctl=yes
+netctl=no
 username=ewancoder
 
 grep -B 0 -C 11 "1:  Configure network" postinstall.txt
@@ -62,5 +62,5 @@ echo "-> Setup your user ($username) password"
 passwd $username
 echo
 
-echo "-> Run postinstall2.sh script as user $username"
-sudo -u $username postinstall2.sh
+echo "-> Please, run postinstall2.sh script as user $username to continue"
+exit

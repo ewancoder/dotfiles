@@ -4,6 +4,9 @@ echo Arch linux post-installation 2nd script by Ewancoder
 echo Version: 1.0, 2014
 echo
 
+#Constants
+pasetup=no
+
 grep -B 0 -C 13 "4:  Install yaourt" postinstall.txt
 
 echo "Download package-query.tar.gz file"
@@ -132,43 +135,46 @@ echo "-> yaourt -S alsa-plugins alsa-utils pulseaudio pulseaudio-alsa lib32-libp
 yaourt -S --noconfirm alsa-plugins alsa-utils pulseaudio pulseaudio-alsa lib32-libpulse lib32-alsa-plugins
 echo
 
-echo "-> pulseaudio --start"
-pulseaudio --start
-echo
+if [ $pasetup==yes ]
+then
+    echo "-> pulseaudio --start"
+    pulseaudio --start
+    echo
 
-read -p "-> Setup standart devices: pactl list | less"
-pactl list | less
-echo
+    read -p "-> Setup standart devices: pactl list | less"
+    pactl list | less
+    echo
 
-read -p "-> pacmd set-default-sink 1"
-select num in "1" "2" "3" "4" "5" "6";
-do
-    case $num in
-        1 ) pacmd set-default-sink 1; break;;
-        2 ) pacmd set-default-sink 2; break;;
-        3 ) pacmd set-default-sink 3; break;;
-        4 ) pacmd set-default-sink 4; break;;
-        5 ) pacmd set-default-sink 5; break;;
-        6 ) pacmd set-default-sink 6; break;;
-        7 ) pacmd set-default-sink 7; break;;
-    esac
-done
-echo
+    read -p "-> pacmd set-default-sink 1"
+    select num in "1" "2" "3" "4" "5" "6";
+    do
+        case $num in
+            1 ) pacmd set-default-sink 1; break;;
+            2 ) pacmd set-default-sink 2; break;;
+            3 ) pacmd set-default-sink 3; break;;
+            4 ) pacmd set-default-sink 4; break;;
+            5 ) pacmd set-default-sink 5; break;;
+            6 ) pacmd set-default-sink 6; break;;
+            7 ) pacmd set-default-sink 7; break;;
+        esac
+    done
+    echo
 
-read -p "-> pacmd set-default-source 1"
-select num in "1" "2" "3" "4" "5" "6";
-do
-    case $num in
-        1 ) pacmd set-default-source 1; break;;
-        2 ) pacmd set-default-source 2; break;;
-        3 ) pacmd set-default-source 3; break;;
-        4 ) pacmd set-default-source 4; break;;
-        5 ) pacmd set-default-source 5; break;;
-        6 ) pacmd set-default-source 6; break;;
-        7 ) pacmd set-default-source 7; break;;
-    esac
-done
-echo
+    read -p "-> pacmd set-default-source 1"
+    select num in "1" "2" "3" "4" "5" "6";
+    do
+        case $num in
+            1 ) pacmd set-default-source 1; break;;
+            2 ) pacmd set-default-source 2; break;;
+            3 ) pacmd set-default-source 3; break;;
+            4 ) pacmd set-default-source 4; break;;
+            5 ) pacmd set-default-source 5; break;;
+            6 ) pacmd set-default-source 6; break;;
+            7 ) pacmd set-default-source 7; break;;
+        esac
+    done
+    echo
+fi
 
 grep -B 0 -C 5 "8:" postinstall.txt
 
@@ -191,7 +197,8 @@ sudo sed -i 's/dead\sactute/dead\sacute/g' /usr/share/X11/locale/en_US.UTF-8/Com
 echo
 
 echo "Installing core software..."
-yaourt -S anki canto chromium chromium-libpdf chromium-pepper-flash icedtea-web-java7 djview4 deluge dropbox dunst faience-icon-theme feh fuse ntfs-3g encfs geeqie gimp gource gvim irssi kalu libreoffice hyphen hyphen-ru hyphen-en hunspell hunspell-ru hunspell-en mesa nvidia openssh p7zip perl-html-parser preload profile-sync-daemon python-matplotlib python-numpy python-scipy python-sphinx rxvt-unicode screen scrot skype terminus-font thunar tig ttf-dejavu vlc xorg-server xorg-server-utils xorg-xinit wmii-hg xarchiver xclip xcompmgr xfe zsh
+yaourt -S libreoffice nvidia-libgl
+yaourt -S --noconfirm anki canto chromium chromium-libpdf chromium-pepper-flash icedtea-web-java7 djview4 deluge dropbox dunst faience-icon-theme feh fuse ntfs-3g encfs geeqie gimp gource gvim irssi kalu hyphen hyphen-ru hyphen-en hunspell hunspell-ru hunspell-en mesa nvidia openssh p7zip perl-html-parser preload profile-sync-daemon python-matplotlib python-numpy python-scipy python-sphinx rxvt-unicode screen scrot skype terminus-font thunar tig ttf-dejavu vlc xorg-server xorg-server-utils xorg-xinit wmii-hg xarchiver xclip xcompmgr xfe zsh
 echo
 
 echo "-> #rm *install*"
