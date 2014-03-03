@@ -49,6 +49,7 @@ echo
 
 if [ $clearfstab!=yes ]
 then
+    echo $clearfstab
     read -p "-> Edit fstab - add 'discard' (ssd), comment /boot [MANUAL]"
     vi /etc/fstab
     echo
