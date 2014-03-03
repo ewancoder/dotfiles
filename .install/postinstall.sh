@@ -55,9 +55,9 @@ awk '/root ALL/{print;print "'$username' ALL=(ALL) ALL";next}1' /etc/sudoers > l
 mv lsudoers /etc/sudoers
 echo
 
-#echo "-> mv postinstall2.sh postinstall.txt /home/$username/ && rm post*"
-#mv postinstall2.sh postinstall.txt mergeinstall.sh /home/$username/ && rm post*
-#echo
+echo "-> mv postinstall2.sh postinstall.txt /home/$username/ && rm post*"
+mv postinstall2.sh postinstall.txt mergeinstall.sh /home/$username/ && rm post*
+echo
 
 echo "-> Setup your user ($username) password"
 passwd $username
