@@ -100,6 +100,32 @@ read -p "-> MERGE ALL GIT LINKS: Now will be executed script that will merge all
 read -p "-> All links have been merged successfully? [RETURN]"
 echo
 
+read -p "-> #grub-mkconfig -o /boot/grub/grub.cfg"
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+echo
+
+read -p "-> #locale-gen"
+sudo locale-gen
+echo
+
+read -p "-> Setup gvim for root (links for .vim & .vimrc)"
+sudo ln -s ~/.vim /root/.vim
+sudo ln -s ~/.vimrc /root/.vimrc
+echo
+
+read -p "-> change password in config file [MANUAL]"
+cp ~/.irssi/config_sample ~/.irssi/config
+vim ~/.irssi/config
+echo
+
+read -p "-> setfont cyr-sun16"
+setfont cyr-sun16
+echo
+
+read -p "-> yaourt -Syy"
+yaourt -Syy
+echo
+
 grep -B 0 -C 12 "7:" postinstall.txt
 
 read -p "-> yaourt -S alsa-plugins alsa-utils pulseaudio pulseaudio-alsa lib32-libpulse lib32-alsa-plugins"
