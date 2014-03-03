@@ -29,9 +29,8 @@ then
     netctl start ethernet-static
     echo
 else
-    echo "-> Enable and start DHCP service"
-    systemctl enable dhcpcd@interface.service
-    systemctl start dhcpcd@interface.service
+    echo "-> Temporary start DHCP service"
+    dhcpcd
     echo
 fi
 
