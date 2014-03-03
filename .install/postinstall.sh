@@ -10,7 +10,7 @@ username=ewancoder  #your username login
 
 grep -B 0 -C 11 "1:  Configure network" postinstall.txt
 
-if [ $netctl -eq yes ]
+if [ $netctl = yes ]
 then
     echo "-> See /sys/class/net interfaces"
     ls -la /sys/class/net
