@@ -12,11 +12,15 @@ ZSH_THEME="gnzh"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias sc="screen -rd"
+
 alias gis="git status"
 alias gia="git add -A"
 alias gic="git commit"
 alias gip="git push --all"
 alias gil="git log"
+
+alias ya="yaourt -S"
+alias yau="yaourt -Syu"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
