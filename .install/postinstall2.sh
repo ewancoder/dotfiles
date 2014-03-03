@@ -57,6 +57,7 @@ echo
 grep -B 0 -C 11 "5:  Install git and download repos" postinstall.txt
 
 echo "-> yaourt -S git"
+sudo rm /var/lib/pacman/db.lck
 yaourt -S --noconfirm git
 echo
 
