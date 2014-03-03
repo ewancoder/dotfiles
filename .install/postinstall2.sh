@@ -135,7 +135,7 @@ echo "-> yaourt -S alsa-plugins alsa-utils pulseaudio pulseaudio-alsa lib32-libp
 yaourt -S --noconfirm alsa-plugins alsa-utils pulseaudio pulseaudio-alsa lib32-libpulse lib32-alsa-plugins
 echo
 
-if [ $pasetup==yes ]
+if [ $pasetup = yes ]
 then
     echo "-> pulseaudio --start"
     pulseaudio --start
