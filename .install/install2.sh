@@ -47,7 +47,7 @@ echo "-> passwd (setup ROOT password) [MANUAL]"
 passwd
 echo
 
-if [ $clearfstab -eq no ]
+if [ $clearfstab = no ]
 then
     echo $clearfstab
     read -p "-> Edit fstab - add 'discard' (ssd), comment /boot [MANUAL]"
