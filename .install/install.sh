@@ -4,69 +4,52 @@ echo Arch linux installation script by Ewancoder
 echo Version: 1.0, 2014
 echo
 
-echo "-> Download ALL files: install.txt, postinstall.txt, install.sh, install2.sh, postinstall.sh, postinstall2.sh, mergeinstall.sh"
+echo "-> Download ALL files"
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/install.txt
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/postinstall.txt
-curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/install.sh
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/install2.sh
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/postinstall.sh
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/postinstall2.sh
 curl -O https://raw.github.com/ewancoder/dotfiles/master/.install/mergeinstall.sh
 echo
 
-echo "-> Make all scripts executable: chmod +x *.sh"
-chmod +x *.sh
-echo
-
 grep -B 0 -C 6 "Current PT:" install.txt
-grep -B 0 -C 5 "1:" install.txt
-
-echo "-> Use fdisk, mkfs.ext4 and mount to /mnt [MANUAL]"
-read -p "-> Press [Enter] when all done..."
-echo
-
-echo "-> cp *install* /mnt/"
-cp *install* /mnt/
+grep -B 0 -C 4 "1:" install.txt
+read -p "Before executing script, MAKE SURE that you've mounted your partitions to /mnt and formatted them as needed (fdisk + mkfs.ext4 + mount). Continue [ENTER]"
 echo
 
 grep -B 0 -C 3 "2:" install.txt
-
-read -p "-> vi /etc/pacman.d/mirrorlist (move belarus on the first place) [MANUAL]"
-vi /etc/pacman.d/mirrorlist
+echo "-> Move Belarus to the first place"
+grep -B 0 -C 1 Belarus /etc/pacman.d/mirrorlist > mirrorlist
+grep -B 0 -C 1 United /etc/pacman.d/mirrorlist >> mirrorlist
+grep -B 0 -C 1 Denmark /etc/pacman.d/mirrorlist >> mirrorlist
+grep -B 0 -C 1 France /etc/pacman.d/mirrorlist >> mirrorlist
+grep -B 0 -C 1 Russia /etc/pacman.d/mirrorlist >> mirrorlist
+mv mirrorlist /etc/pacman.d/mirrorlist
 echo
 
-echo "-> pacman -Syy"
+echo "-> Make scripts executable"
+chmod +x *.sh
+echo
+
+echo "-> Copy scripts&guides to /mnt"
+cp *install* /mnt/
+echo
+
+echo "-> Update pacman packages list"
 pacman -Syy
 echo
 
 grep -B 0 -C 3 "3:" install.txt
-
-echo "-> pacstrap /mnt base base-devel"
+echo "-> Install base-system"
 pacstrap /mnt base base-devel
 echo
 
 grep -B 0 -C 7 "4:" install.txt
-
-echo "-> genfstab -U -p /mnt >> /mnt/etc/fstab"
+echo "-> Generate fstab"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 echo
 
-read -p "-> vi /mnt/etc/fstab (add 'discard' option, comment /boot) [MANUAL]"
-vi /mnt/etc/fstab
-echo
-
 grep -B 0 -C 2 "5:" install.txt
-
-read -p "After chroot this script will be shut down, you now gotta run install2.sh from chroot environment"
-echo "-> arch-chroot /mnt /bin/bash"
-
+echo "-> Go to chroot"
 arch-chroot /mnt /install2.sh
-#arch-chroot /mnt /bin/bash
-#echo
-#
-#echo "-> umount -R /mnt"
-#umount -R /mnt
-#echo
-#
-#echo "reboot"
-#reboot

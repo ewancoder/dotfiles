@@ -5,54 +5,51 @@ echo Version: 1.0, 2014
 echo Run this script after you chroot in /mnt
 echo
 
-grep -B 0 -C 2 "6:" install.txt
+#Constants
+hostname=ewanhost
+device=/dev/sda
 
-echo "-> ln -s /usr/share/zoneinfo/Europe/Minsk /etc/localtime"
+grep -B 0 -C 2 "6:" install.txt
+echo "-> Make link to local timezone (Minsk)"
 ln -s /usr/share/zoneinfo/Europe/Minsk /etc/localtime
 echo
 
 grep -B 0 -C 2 "7:" install.txt
-
-echo "-> echo ewanhost > /etc/hostname"
-echo ewanhost > /etc/hostname
+echo "-> Set hostname"
+echo $hostname > /etc/hostname
 echo
 
-grep -B 0 -C 2 "8:" install.txt
+grep -B 0 -C 7 "9:" install.txt
+echo "-> Install grub"
+pacman -S --noconfirm grub
+echo
+
+echo "-> Install grub to mbr"
+grub-install --target=i386-pc --recheck $device
+echo
+
+echo "-> Install os-prober"
+pacman -S --noconfirm os-prober
+echo
+
+echo "-> Make grub config"
+grub-mkconfig -o /boot/grub/grub.cfg
+echo
+
+grep -B 0 -C 3 "10:" install.txt
+echo "-> Move scripts&guides to /root"
+rm install* && mv {post,merge}* /root/
+echo
 
 echo "-> passwd (setup ROOT password) [MANUAL]"
 passwd
 echo
 
-grep -B 0 -C 7 "9:" install.txt
-
-echo "-> pacman -S grub"
-pacman -S --noconfirm grub
+read -p "-> Edit fstab - add 'discard' (ssd), comment /boot [MANUAL]"
+vi /mnt/etc/fstab
 echo
 
-echo "-> grub-install --target=i386-pc --recheck /dev/sd? (choose disk)"
-select abcd in "/dev/sda" "/dev/sdb" "/dev/sdc" "/dev/sdb"; do
-    case $abcd in 
-        /dev/sda ) grub-install --target=i386-pc --recheck /dev/sda; break;;
-        /dev/sdb ) grub-install --target=i386-pc --recheck /dev/sdb; break;;
-        /dev/sdc ) grub-install --target=i386-pc --recheck /dev/sdc; break;;
-        /dev/sdd ) grub-install --target=i386-pc --recheck /dev/sdb; break;;
-    esac
-done
+read -p "After reboot run ./postinstall to continue [reboot]"
 
-echo "-> pacman -S os-prober"
-pacman -S --noconfirm os-prober
-echo
-
-echo "-> grub-mkconfig -o /boot/grub/grub.cfg"
-grub-mkconfig -o /boot/grub/grub.cfg
-echo
-
-grep -B 0 -C 3 "10:" install.txt
-
-echo "-> rm install* && mv post* /root/"
-rm install* && mv {post,merge}* /root/
-echo
-
-read -p "After exitting, reboot onto fresh system and run postinstall.sh. You should exit manually from chroot!"
-echo "-> exit"
-exit
+echo "-> reboot"
+reboot

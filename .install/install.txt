@@ -8,11 +8,10 @@ Current PT:
     /dev/sda6 - /           [16G]
     /dev/sda7 - /home       [44G]
 
-1:  Partitioning, formatting, mounting, copy post-manual
+1:  Partitioning, formatting, mounting
         fdisk
         mkfs.ext4
         mount
-        cp post* /mnt/home
 
 2:  Forming mirrorlist
         vi /etc/pacman.d/mirrorlist
