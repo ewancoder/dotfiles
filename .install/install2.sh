@@ -52,4 +52,4 @@ echo
 read -p "After reboot run ./postinstall to continue [reboot]"
 
 echo "-> reboot"
-reboot
+exit

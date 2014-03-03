@@ -53,3 +53,6 @@ echo
 grep -B 0 -C 2 "5:" install.txt
 echo "-> Go to chroot"
 arch-chroot /mnt /install2.sh
+
+echo "-> reboot"
+reboot

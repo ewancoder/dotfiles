@@ -201,4 +201,3 @@ echo
 read -p "Exec some commands for X after logging in X (see postinstall.txt)"
 echo "-> reboot"
 sudo reboot
-echo
