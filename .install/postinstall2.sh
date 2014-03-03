@@ -4,9 +4,8 @@ echo Arch linux post-installation 2nd script by Ewancoder
 echo Version: 1.0, 2014
 echo
 
-#Constants
-pasetup=no  #If 'yes', setup pulseaudio standart sink & source
-winfonts=no #If 'yes', copy windows fonts from mounted /mnt/windows partition
+username=$1
+winfonts=$2
 
 grep -B 0 -C 13 "4:  Install yaourt" postinstall.txt
 
@@ -197,19 +196,16 @@ echo
 
 grep -B 0 -C 2 "9:" postinstall.txt
 
-echo "-> #sed -i 's/dead\sactute/dead\sacute/g' /usr/share/X11/locale/en_US.UTF-8/Compose"
-sudo sed -i 's/dead\sactute/dead\sacute/g' /usr/share/X11/locale/en_US.UTF-8/Compose
+echo "-> Fix dead acute error in Compose-keys X11 file :)"
+sudo sed -i "s/dead actute/dead acute/g" /usr/share/X11/locale/en_US.UTF-8/Compose
 echo
 
 echo "Installing core software..."
-#yaourt -S libreoffice nvidia-libgl
-yaourt -S anki canto chromium chromium-libpdf chromium-pepper-flash icedtea-web-java7 djview4 deluge dropbox dunst faience-icon-theme feh fuse ntfs-3g encfs geeqie gimp gource gvim irssi kalu hyphen hyphen-ru hyphen-en hunspell hunspell-ru hunspell-en mesa nvidia openssh p7zip perl-html-parser preload profile-sync-daemon python-matplotlib python-numpy python-scipy python-sphinx rxvt-unicode screen scrot skype terminus-font thunar tig ttf-dejavu vlc xorg-server xorg-server-utils xorg-xinit wmii-hg xarchiver xclip xcompmgr xfe zsh
+yaourt -S libreoffice nvidia-libgl lib32-libgl
+yaourt -S --noconfirm anki canto chromium chromium-libpdf chromium-pepper-flash icedtea-web-java7 djview4 deluge dropbox dunst faience-icon-theme feh fuse ntfs-3g encfs geeqie gimp gource gvim irssi kalu hyphen hyphen-ru hyphen-en hunspell hunspell-ru hunspell-en mesa nvidia openssh p7zip perl-html-parser preload profile-sync-daemon python-matplotlib python-numpy python-scipy python-sphinx rxvt-unicode screen scrot skype terminus-font thunar tig ttf-dejavu vlc xorg-server xorg-server-utils xorg-xinit wmii-hg xarchiver xclip xcompmgr xfe zsh
 echo
 
 echo "-> #rm *install*"
 sudo rm *install*
 echo
-
-read -p "Exec some commands for X after logging in X (see postinstall.txt)"
-echo "-> reboot"
-sudo reboot
+exit

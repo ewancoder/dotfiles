@@ -2,14 +2,19 @@
 echo
 echo Arch linux CHROOT installation script by Ewancoder
 echo Version: 1.0, 2014
-echo Run this script after you chroot in /mnt
 echo
 
-#Constants
-timezone=Europe/Minsk   #Your local timezone
-hostname=ewanhost       #Your hosname of the machine
-device=/dev/sda         #Device to install grub mbr
-clearfstab=yes          #If 'no', you will be prompted to edit fstab
+#Local timezone
+timezone=Europe/Minsk
+
+#Your hostname
+hostname=ewanhost
+
+#Device to install grub mbr
+device=/dev/sdb
+
+#If 'no', you will be prompted to edit fstab
+clearfstab=no
 
 grep -B 0 -C 2 "6:" install.txt
 echo "-> Make link to local timezone (Minsk)"

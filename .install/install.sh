@@ -34,7 +34,7 @@ echo "-> Make scripts executable"
 chmod +x *.sh
 echo
 
-echo "-> Copy scripts&guides to /mnt"
+echo "-> Copy files to /mnt"
 cp *install* /mnt/
 echo
 

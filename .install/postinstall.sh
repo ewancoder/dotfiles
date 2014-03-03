@@ -4,9 +4,18 @@ echo Arch linux post-installation script by Ewancoder
 echo Version: 1.0, 2014
 echo
 
-#Constants
-netctl=no           #if 'yes', setup netctl ethernet-static; otherwise - just run dhcpcd
-username=ewancoder  #your username login
+#If 'yes', setup netctl ethernet-static; otherwise - just run dhcpcd
+netctl=yes
+
+#If 'yes', setup pulseaudio standart sink & source
+pasetup=no
+
+#your username login
+username=ewancoder
+
+#If 'yes', copy windows fonts from mounted /mnt/windows partition (ask for mount)
+winfonts=yes
+
 
 grep -B 0 -C 11 "1:  Configure network" postinstall.txt
 
@@ -65,7 +74,7 @@ echo
 echo "-> CD into /home/$user/ folder & run ./postinstall2.sh script as user"
 cd /home/$username/
 echo "ewancoder ALL = NOPASSWD: ALL" >> /etc/sudoers
-su - ewancoder -c ./postinstall2.sh
+su - ewancoder -c ./postinstall2.sh $username $winfonts
 sed '/ewancoder ALL = NOPASSWD: ALL/d' sudoers
 mv sudoers /etc/sudoers
 
