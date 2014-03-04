@@ -18,9 +18,10 @@ alias gia="git add -A"
 alias gic="git commit"
 alias gip="git push --all"
 alias gil="git log"
+alias gid="git diff"
 
 alias ya="yaourt -S"
-alias yau="yaourt -Syu"
+alias yau="yaourt -Syua --noconfirm"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
