@@ -8,14 +8,13 @@ echo
 netctl=yes
 
 #If 'yes', setup pulseaudio standart sink & source
-pasetup=no
+pasetup=yes
 
 #your username login
 username=ewancoder
 
 #If 'yes', copy windows fonts from mounted /mnt/windows partition (ask for mount)
 winfonts=yes
-
 
 grep -B 0 -C 11 "1:  Configure network" postinstall.txt
 
