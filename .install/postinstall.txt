@@ -194,3 +194,4 @@ Version: 1.0, 2014
             account on
             <go to token link to accept>
         INSTALL pavucontrol -> unlock rear mic buildin -> UNINSTALL pavucontrol
+        DOWNLOAD Canadian icon and pull it to /usr/share/gxkb/flags/ca(fr).png
