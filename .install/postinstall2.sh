@@ -4,7 +4,7 @@ echo Arch linux post-installation 2nd script by Ewancoder
 echo Version: 1.0, 2014
 echo
 
-username=$1
+pasetup=$1
 winfonts=$2
 
 grep -B 0 -C 13 "4:  Install yaourt" postinstall.txt
