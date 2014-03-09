@@ -108,6 +108,7 @@ Version: 1.0, 2014
             gimp
             gource
             gvim <- nvidia-libgl
+            gxkb
             irssi
             kalu <- updating arch
             libreoffice (2, 3, 6, 8, 12)
