@@ -69,6 +69,7 @@ startup() {
     /usr/bin/dropboxd &
     /usr/bin/chromium --no-startup-window &
     feh --bg-scale random ~/Dropbox/Background/grid1.jpg &
+    gxkb &
 }
 
 wi_runconf -s wmiirc_local
@@ -215,6 +216,12 @@ Key $MODKEY-o
 Key $MODKEY-v
     dbss &
 
+
+Key $MODKEY-Shift-i
+    sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
+
+Key $MODKEY-i
+    sed -i 's/ca(fr),ru/us,ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
 
 KeyGroup Changing column modes
 Key $MODKEY-d # Set column to default mode
