@@ -1,3 +1,5 @@
+source ceal.sh
+
 #Home folder (~)
 printf "Home folder (~) links\n\n"
 
