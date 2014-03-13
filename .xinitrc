@@ -5,4 +5,5 @@ pasystray &
 /usr/bin/screen -dmS ircscr irssi &
 xcompmgr &
 devilspie -a &
+xset -dpms s off
 exec wmii
