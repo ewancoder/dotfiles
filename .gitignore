@@ -1,5 +1,4 @@
 .vim/swap
 .vim/backup
 .irssi/config
-.config/kalu/news.conf
-.config/vlc/vlc-qt-interface.conf
+.config/*
