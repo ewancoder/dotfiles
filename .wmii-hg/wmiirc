@@ -42,7 +42,6 @@ wmiir write /colrules <<!
 # Tagging Rules
 wmiir write /rules <<!
 /Skype/ force-tags=0
-/Deluge/ force-tags=0
     # Apps with system tray icons like to their main windows
     # Give them permission.
     /^Pidgin:/ allow=+activate
