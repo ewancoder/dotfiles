@@ -1,4 +1,7 @@
+.canto/*
+.config/*
+.wmii-hg/*
+
+.irssi/config
 .vim/swap
 .vim/backup
-.irssi/config
-.config/*
