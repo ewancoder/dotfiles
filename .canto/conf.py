@@ -13,6 +13,7 @@ add("http://www.ixbt.com/export/articles.rss", rate=20, keep=300)
 add("http://www.ixbt.com/export/hardnews.rss", rate=20, keep=300)
 add("http://www.ixbt.com/export/softnews.rss", rate=20, keep=300)
 add("http://www.opennet.ru/opennews/opennews_all_noadv.rss", rate=20, keep=300)
+add("https://www.dropbox.com/70091792/114345480/QBSE6H5Lj2gutfp4ceybCyGMDeJWCGycIrU0b61R/events.xml", rate=20, keep=1000)
 
 colors[1] = 110
 

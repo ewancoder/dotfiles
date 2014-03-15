@@ -69,6 +69,7 @@ startup() {
     /usr/bin/chromium --no-startup-window &
     feh --bg-scale random ~/.dotfiles/background.jpg &
     gxkb &
+    guake &
 }
 
 wi_runconf -s wmiirc_local
