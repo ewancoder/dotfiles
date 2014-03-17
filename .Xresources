@@ -1,6 +1,6 @@
 URxvt*scrollBar: false
 URxvt*background: #000000
-URxvt*foreground: #b2b2b2
+URxvt*foreground: #c2e2a2
 URxvt*.shading: 20
 URxvt*font:     -*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*
 
