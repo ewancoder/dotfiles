@@ -67,8 +67,8 @@ startup() {
     /usr/bin/simple-gmail-notifier &
     /usr/bin/dropboxd &
     /usr/bin/chromium --no-startup-window &
-    feh --bg-scale random ~/.dotfiles/Pictures &
-    pic ~/.dotfiles/Pictures &
+    feh --bg-scale random ~/Dropbox/Pictures &
+    pic ~/Dropbox/Pictures &
     gxkb &
     guake &
 }
