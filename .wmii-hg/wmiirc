@@ -68,7 +68,7 @@ startup() {
     /usr/bin/dropboxd &
     /usr/bin/chromium --no-startup-window &
     feh --bg-scale random ~/.dotfiles/Pictures &
-    pic &
+    pic ~/.dotfiles/Pictures &
     gxkb &
     guake &
 }
