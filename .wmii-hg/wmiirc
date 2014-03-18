@@ -67,9 +67,11 @@ startup() {
     /usr/bin/simple-gmail-notifier &
     /usr/bin/dropboxd &
     /usr/bin/chromium --no-startup-window &
-    feh --bg-scale random ~/.dotfiles/background.jpg &
+    feh --bg-scale random ~/.dotfiles/Pictures &
+    pic &
     gxkb &
     guake &
+    pasystray &
 }
 
 wi_runconf -s wmiirc_local
