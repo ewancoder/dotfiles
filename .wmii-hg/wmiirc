@@ -71,7 +71,6 @@ startup() {
     pic &
     gxkb &
     guake &
-    pasystray &
 }
 
 wi_runconf -s wmiirc_local
