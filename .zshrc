@@ -24,6 +24,8 @@ alias y="yaourt"
 alias ya="yaourt -S"
 alias yau="yaourt -Syua --noconfirm"
 
+alias reboot="systemctl reboot -i"
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
