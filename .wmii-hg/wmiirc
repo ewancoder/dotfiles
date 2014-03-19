@@ -198,20 +198,35 @@ Key $MODKEY-c
 Key $MODKEY-q
 	deluge &
 Key $MODKEY-x
-	amixer -q sset Master 2500+
+	amixer -q sset Master 2500+ &
 Key $MODKEY-z
-	amixer -q sset Master 2500-
+	amixer -q sset Master 2500- &
 Key $MODKEY-g
 	gvim &
 
-
 Key $MODKEY-o
-    xboomx
+    xboomx &
 
+Key $MODKEY-w
+    urxvt -e alsamixer &
 
 Key $MODKEY-v
     dbss &
 
+Key $MODKEY-r
+    urxvt -e canto -u &
+
+Key $MODKEY-l
+    libreoffice &
+
+Key $MODKEY-e
+    anki &
+
+Key $MODKEY-k
+    okular &
+
+Key $MODKEY-h
+    thunar &
 
 Key $MODKEY-Shift-i
     sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
