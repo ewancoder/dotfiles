@@ -216,23 +216,20 @@ Key $MODKEY-v
 Key $MODKEY-r
     urxvt -e canto -u &
 
-Key $MODKEY-l
-    libreoffice &
-
 Key $MODKEY-e
     anki &
-
-Key $MODKEY-k
-    okular &
-
-Key $MODKEY-h
-    thunar &
 
 Key $MODKEY-Shift-i
     sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
 
 Key $MODKEY-i
     sed -i 's/ca(fr),ru/us,ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
+
+Key $MODKEY-y
+    okular &
+
+Key $MODKEY-u
+    libreoffice &
 
 KeyGroup Changing column modes
 Key $MODKEY-d # Set column to default mode
