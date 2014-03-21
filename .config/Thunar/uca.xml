@@ -2,12 +2,21 @@
 <actions>
 <action>
 	<icon>utilities-terminal</icon>
-	<name>Open Terminal Here</name>
-	<unique-id>1395372707151050-2</unique-id>
+	<name>Terminal</name>
+	<unique-id>1395372966159154-4</unique-id>
 	<command>urxvt</command>
-	<description>Example for a custom action</description>
+	<description>Open terminal here</description>
 	<patterns>*</patterns>
 	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>geeqie</icon>
+	<name>Geeqie</name>
+	<unique-id>1395372940119712-3</unique-id>
+	<command>geeqie</command>
+	<description>Open geeqie here</description>
+	<patterns>*</patterns>
 	<directories/>
 </action>
 </actions>
