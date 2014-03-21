@@ -59,13 +59,13 @@ startup() {
     /usr/bin/dropboxd &
     /usr/bin/chromium --no-startup-window &
     feh --bg-scale random ~/Dropbox/Pictures &
-    pic ~/Dropbox/Pictures &
+    pic ~/Dropbox/Pictures 300 &
     gxkb &
     guake &
 
-    skype &
+    #skype &
     deluge &
-    steam &
+    #steam &
 }
 
 wi_runconf -s wmiirc_local
@@ -204,9 +204,6 @@ Key $MODKEY-z
 Key $MODKEY-g
 	gvim &
 
-Key $MODKEY-o
-    xboomx &
-
 Key $MODKEY-w
     urxvt -e alsamixer &
 
@@ -216,20 +213,14 @@ Key $MODKEY-v
 Key $MODKEY-r
     urxvt -e canto -u &
 
-Key $MODKEY-e
-    anki &
-
 Key $MODKEY-Shift-i
     sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
 
 Key $MODKEY-i
     sed -i 's/ca(fr),ru/us,ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
 
-Key $MODKEY-y
-    okular &
-
-Key $MODKEY-u
-    libreoffice &
+Key $MODKEY-p
+    xboomx &
 
 KeyGroup Changing column modes
 Key $MODKEY-d # Set column to default mode
@@ -242,8 +233,9 @@ Key $MODKEY-m # Set column to max mode
 KeyGroup Running programs
 Key $MODKEY-a      # Open wmii actions menu
 	action $(wi_actions | wimenu -h "${hist}.actions" -n $histnum) &
-Key $MODKEY-p      # Open program menu
-	eval wmiir setsid "$(wimenu -h "${hist}.progs" -n $histnum <$progsfile)" &
+#Key $MODKEY-p      # Open program menu
+	#eval wmiir setsid "$(wimenu -h "${hist}.progs" -n $histnum <$progsfile)" &
+
 
 Key $MODKEY-Return # Launch a terminal
 	eval wmiir setsid $WMII_TERM &
