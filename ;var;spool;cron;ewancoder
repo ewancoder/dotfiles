@@ -1,0 +1,2 @@
+*/10 * * * * /usr/bin/baconf >> /tmp/baconf.log 2>&1
+@daily cd /mnt/backup && tar -cvpzf ~/Copy/arch.tgz Arch >> /tmp/upconf.log 2>&1
