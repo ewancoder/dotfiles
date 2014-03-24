@@ -1,0 +1,8 @@
+rsync -av --delete ~/.local/share/applications /mnt/backup/Arch/
+
+rsync -av --delete ~/.config/deluge /mnt/backup/Arch/
+rsync -av --delete ~/.config/libreoffice /mnt/backup/Arch/
+rsync -av --delete ~/.config/Thunar /mnt/backup/Arch/
+rsync -av --delete ~/.config/xfce4 /mnt/backup/Arch/
+
+rsync -av --delete ~/.xboomx /mnt/backup/Arch/
