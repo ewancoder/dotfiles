@@ -56,7 +56,7 @@ startup() {
     witray &
     /usr/bin/kalu &
     /usr/bin/simple-gmail-notifier &
-    #/usr/bin/dropboxd &
+    /usr/bin/dropboxd &
     /usr/bin/copy &
     /usr/bin/chromium --no-startup-window &
     feh --bg-scale random ~/Dropbox/Pictures &
