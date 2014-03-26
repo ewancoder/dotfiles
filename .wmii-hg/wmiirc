@@ -205,6 +205,12 @@ Key $MODKEY-z
 Key $MODKEY-g
 	gvim &
 
+Key $MODKEY-Shift-z
+    killall xcompmgr &
+
+Key $MODKEY-Shift-x
+    xcompmgr &
+
 Key $MODKEY-w
     urxvt -e alsamixer &
 
