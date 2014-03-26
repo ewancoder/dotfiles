@@ -6,3 +6,12 @@ rsync -av --delete ~/.config/Thunar /mnt/backup/Arch/
 rsync -av --delete ~/.config/xfce4 /mnt/backup/Arch/
 
 rsync -av --delete ~/.xboomx /mnt/backup/Arch/
+
+rsync -av --delete ~/.config/chromium /mnt/backup/Arch/
+rsync -av --delete ~/Anki /mnt/backup/Arch/
+
+
+
+
+
+rsync -av --delete /var/spool/cron /mnt/backup/Arch/
