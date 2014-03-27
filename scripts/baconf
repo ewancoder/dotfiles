@@ -15,3 +15,8 @@ rsync -av --delete ~/Anki /mnt/backup/Arch/
 
 
 rsync -av --delete /var/spool/cron /mnt/backup/Arch/
+
+
+
+rsync -av --delete /mnt/cloud/Dropbox /mnt/backup/Cloud/
+rsync -av --delete /mnt/cloud/Copy /mnt/backup/Cloud/
