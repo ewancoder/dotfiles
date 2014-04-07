@@ -32,6 +32,26 @@ sub sanitize {
     return $text;
 }
 
+sub notifyhigh {
+    my ($server, $summary, $message, $level) = @_;
+
+    # Make the message entity-safe
+    $summary = sanitize($summary);
+    $message = sanitize($message);
+
+    my $cmd = "EXEC - " .
+	"notify-send -u " . $level . " -a irssi '" . $summary . "' '". $message . "'";
+    $server->command($cmd);
+
+    my $remote = Irssi::settings_get_str('notify_remote');
+    if ($remote ne '') {
+	my $cmd = "EXEC - ssh -q " . $remote .
+	    "notify-send -t 0 -a irssi '" . $summary . "' '". $message . "'";
+	$server->command($cmd);
+    }
+
+}
+
 sub notify {
     my ($server, $summary, $message, $level) = @_;
 
@@ -75,7 +95,7 @@ sub dcc_request_notify {
     my $server = $dcc->{server};
 
     return if (!$dcc);
-    notify($server, "DCC ".$dcc->{type}." request", $dcc->{nick}, "low");
+    notify($server, "DCC ".$dcc->{type}." request", $dcc->{nick}, "critical");
 }
 
 sub message_public_notify {
@@ -88,11 +108,14 @@ sub message_public_notify {
     if ($msg =~ m/.*$mynick.*/ )
     {
         if ($target != "#twitter_ewancoder") {
-            notify($server, "Highlight ".$nick." > ".$target, $msg, "critical");
+            notifyhigh($server, "Highlight ".$nick." > ".$target, $msg, "normal");
         }
     }else{
         if ($target =~ "#ewancoder") {
-            notify($server, "Public ".$nick." > ".$target, $msg, "normal");
+            notifyhigh($server, "Public ".$nick." > ".$target, $msg, "normal");
+        }
+        if ($target =~ "#twitter") {
+            notify($server, "Twitter ".$nick." > ".$target, $msg, "low");
         }
     }
 }
