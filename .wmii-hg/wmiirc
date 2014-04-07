@@ -72,7 +72,6 @@ startup() {
 
 wi_runconf -s wmiirc_local
 startup
-
 echo colors $WMII_NORMCOLORS | wmiir create $noticebar
 
 # Event processing
