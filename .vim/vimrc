@@ -47,6 +47,8 @@ set incsearch
 set encoding=utf8
 "Backspace acts like normal (Do I need it?)
 "Set backspace=eol,start,indent
+"For autocd
+set autochdir
 
 "---------- Colors/interface ----------
 colorscheme desert
