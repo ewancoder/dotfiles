@@ -36,7 +36,7 @@ chatnets = {
 
 channels = (
   { name = "#ewancoder"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "##programming"; chatnet = "freenode"; autojoin = "yes"; }
+#  { name = "##programming"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -230,17 +230,17 @@ windows = {
       }
     );
   };
+#  4 = {
+#    items = (
+#      {
+#        type = "CHANNEL";
+#        chat_type = "IRC";
+#        name = "##programming";
+#        tag = "freenode";
+#      }
+#    );
+#  };
   3 = {
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "##programming";
-        tag = "freenode";
-      }
-    );
-  };
-  4 = {
     items = (
       {
         type = "CHANNEL";
@@ -253,11 +253,11 @@ windows = {
 };
 mainwindows = { 1 = { first_line = "1"; lines = "41"; }; };
 logs = {
-  "/tmp/IrcLogs%Y/%B/%d.programming" = {
-    auto_open = "yes";
-    level = "ALL";
-    items = ( { type = "target"; name = "##programming"; } );
-  };
+#  "/tmp/IrcLogs%Y/%B/%d.programming" = {
+#    auto_open = "yes";
+#    level = "ALL";
+#    items = ( { type = "target"; name = "##programming"; } );
+#  };
   "/tmp/IrcLogs%Y/%B/%d.ewancoder" = {
     auto_open = "yes";
     level = "ALL";

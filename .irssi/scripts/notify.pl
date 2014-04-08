@@ -1,1 +1,1 @@
-/home/lanceulot/.irssi/scripts/autorun/notify.pl
+/home/ewancoder/.irssi/scripts/autorun/notify.pl

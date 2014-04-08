@@ -1,1 +1,1 @@
-/home/lanceulot/.irssi/scripts/autorun/splitlong.pl
+/home/ewancoder/.irssi/scripts/autorun/splitlong.pl

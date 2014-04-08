@@ -5,7 +5,7 @@ URxvt*.shading: 20
 URxvt*font:     -*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*
 
 URxvt.perl-ext: default,url-select
-URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.keysym.M-l: perl:url-select:select_next
 URxvt.url-select.launcher: /usr/bin/chromium
 URxvt.url-select.underline: true
 

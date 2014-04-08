@@ -1,1 +1,1 @@
-/home/lanceulot/.irssi/scripts/autorun/xchatnickcolor.pl
+/home/ewancoder/.irssi/scripts/autorun/xchatnickcolor.pl

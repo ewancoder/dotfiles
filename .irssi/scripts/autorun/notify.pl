@@ -32,46 +32,26 @@ sub sanitize {
     return $text;
 }
 
-sub notifyhigh {
-    my ($server, $summary, $message, $level) = @_;
-
-    # Make the message entity-safe
-    $summary = sanitize($summary);
-    $message = sanitize($message);
-
-    my $cmd = "EXEC - " .
-	"notify-send -u " . $level . " -a irssi '" . $summary . "' '". $message . "'";
-    $server->command($cmd);
-
-    my $remote = Irssi::settings_get_str('notify_remote');
-    if ($remote ne '') {
-	my $cmd = "EXEC - ssh -q " . $remote .
-	    "notify-send -t 0 -a irssi '" . $summary . "' '". $message . "'";
-	$server->command($cmd);
-    }
-
-}
-
 sub notify {
-    my ($server, $summary, $message, $level) = @_;
+    my ($server, $summary, $message, $level, $time) = @_;
 
     # Make the message entity-safe
     $summary = sanitize($summary);
     $message = sanitize($message);
 
     my $cmd = "EXEC - " .
-	"notify-send -u " . $level . " -a irssi '" . $summary . "' '". $message . "'";
+	"notify-send -t $time -u " . $level . " -a irssi '" . $summary . "' '". $message . "'";
     $server->command($cmd);
 
     my $remote = Irssi::settings_get_str('notify_remote');
     if ($remote ne '') {
 	my $cmd = "EXEC - ssh -q " . $remote .
-	    "notify-send -a irssi '" . $summary . "' '". $message . "'";
+	    "notify-send -t $time -a irssi '" . $summary . "' '". $message . "'";
 	$server->command($cmd);
     }
 
 }
- 
+
 sub print_text_notify {
     my ($dest, $text, $stripped) = @_;
     my $server = $dest->{server};
@@ -87,7 +67,7 @@ sub message_private_notify {
     my ($server, $msg, $nick, $address) = @_;
 
     return if (!$server);
-    notify($server, "PM from ".$nick, $msg, "critical");
+    notify($server, "PM from ".$nick, $msg, "critical", 0);
 }
 
 sub dcc_request_notify {
@@ -95,7 +75,7 @@ sub dcc_request_notify {
     my $server = $dcc->{server};
 
     return if (!$dcc);
-    notify($server, "DCC ".$dcc->{type}." request", $dcc->{nick}, "critical");
+    notify($server, "DCC ".$dcc->{type}." request", $dcc->{nick}, "critical", 0);
 }
 
 sub message_public_notify {
@@ -105,22 +85,16 @@ sub message_public_notify {
     
     my $mynick = $server->{nick};
     chomp $mynick;
-    if ($msg =~ m/.*$mynick.*/ )
-    {
-        if ($target != "#twitter_ewancoder") {
-            notifyhigh($server, "Highlight ".$nick." > ".$target, $msg, "normal");
-        }
-    }else{
-        if ($target =~ "#ewancoder") {
-            notifyhigh($server, "Public ".$nick." > ".$target, $msg, "normal");
-        }
-        if ($target =~ "#twitter") {
-            notify($server, "Twitter ".$nick." > ".$target, $msg, "low");
+
+    if (($target =~ "#ewancoder") or ($target =~ "#twitter_ewancoder")) {
+        if ($msg =~ m/.*$mynick.*/ ) {
+            notify($server, "Highlight ".$nick." > ".$target, $msg, "critical", 0);
+        } else {
+            notify($server, "Public ".$nick." > ".$target, $msg, "normal", 0);
         }
     }
 }
 
 Irssi::signal_add('message public', 'message_public_notify');
-#Irssi::signal_add('print text', 'print_text_notify');
 Irssi::signal_add('message private', 'message_private_notify');
 Irssi::signal_add('dcc request', 'dcc_request_notify');

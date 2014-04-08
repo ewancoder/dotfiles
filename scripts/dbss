@@ -21,4 +21,4 @@ scrot -d $delay -q $quality $filename
  
 url="http://dl.dropbox.com/u/$user_id/$ssdir/$month/$filename"
 echo $url | xclip -sel clip
-notify-send "Screenshot added" "Link in clip: $filename ($month)"
+notify-send -t 3000 "Screenshot added" "Link in clip: http://dl.dropbox.com/u/70091792/Screenshots/$month/$filename ($month)"

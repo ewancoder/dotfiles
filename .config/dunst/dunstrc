@@ -68,7 +68,7 @@
     # Don't remove messages, if the user is idle (no mouse or keyboard input)
     # for longer than idle_threshold seconds.
     # Set to 0 to disable.
-    idle_threshold = 60
+    idle_threshold = 0
 
     # Which monitor should the notifications be displayed on.
     monitor = 0
@@ -156,7 +156,7 @@
 [urgency_normal]
     background = "#f5f778"
     foreground = "#080808"
-    timeout = 60
+    timeout = 30
 
 [urgency_critical]
     background = "#702020"

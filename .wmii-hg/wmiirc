@@ -3,7 +3,6 @@
 wmiiscript=wmiirc # For wmii.sh
 . wmii.sh
 
-
 # Configuration Variables
 MODKEY=Mod4
 UP=k
@@ -228,6 +227,11 @@ Key $MODKEY-i
 
 Key $MODKEY-p
     xboomx &
+
+
+Key XF86WakeUp
+    urxvt -e sudo yaourt -Syua --noconfirm &
+
 
 KeyGroup Changing column modes
 Key $MODKEY-d # Set column to default mode
