@@ -47,6 +47,8 @@ wmiir write /colrules <<!
 # Tagging Rules
 wmiir write /rules <<!
 /Steam/ force-tags=steam
+/Skype/ force-tags=0
+/Tilda/ force-tags=rss
     #/^Pidgin:/ allow=+activate
     #/MPlayer|VLC/ floating=on
     /^ROX-Filer:/ group=0
@@ -69,6 +71,7 @@ startup() {
     ~/.dotfiles/scripts/pic ~/Dropbox/Pictures 300 &
     gxkb &
     guake &
+    tilda &
 
     #skype &
     deluge &
