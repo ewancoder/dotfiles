@@ -24,6 +24,8 @@ Bundle "bling/vim-airline"
 Bundle "wincent/Command-T"
 "I NEED THIS
 ""Bundle "klen/python-mode"
+"I need this for habrahabr's article
+Bundle "Lokaltog/vim-easymotion"
 
 filetype plugin indent on
 
