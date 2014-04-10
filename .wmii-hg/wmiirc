@@ -124,10 +124,10 @@ Event Notice
 # Menus
 Menu Client-3-Close
 	wmiir xwrite /client/$1/ctl kill
+#Menu Client-3-Fullscreen
+#	wmiir xwrite /client/$1/ctl Fullscreen on
 Menu Client-3-Kill
 	wmiir xwrite /client/$1/ctl slay
-Menu Client-3-Fullscreen
-	wmiir xwrite /client/$1/ctl Fullscreen on
 Event ClientMouseDown
 	wi_fnmenu Client $2 $1 &
 
@@ -199,7 +199,7 @@ Key $MODKEY-Shift-space   # Toggle selected client between floating and managed 
 KeyGroup Client actions
 Key $MODKEY-f # Toggle selected client's fullsceen state
 	wmiir xwrite /client/sel/ctl Fullscreen toggle
-Key $MODKEY-Shift-c # Close client
+Key Control-q # Close client
 	wmiir xwrite /client/sel/ctl kill
 
 
@@ -223,7 +223,7 @@ Key $MODKEY-Shift-x
 Key $MODKEY-w
     urxvt -e alsamixer &
 
-Key $MODKEY-v
+Key XF86Sleep
     dbss &
 
 Key $MODKEY-r
