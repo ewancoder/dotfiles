@@ -15,18 +15,10 @@ noticetimeout=5
 noticebar=/rbar/!notice
 
 # Colors tuples: "<text> <background> <border>"
-#export WMII_NORMCOLORS='#000000 #c1c48b #81654f'
-#export WMII_FOCUSCOLORS='#000000 #81654f #000000'
-export WMII_NORMCOLORS='#000000 #848484 #000000'
-export WMII_FOCUSCOLORS='#000000 #cd6d37 #000000'
-#export WMII_NORMCOLORS='#a8a8a8 #000000 #A07040'
-#export WMII_FOCUSCOLORS='#54FF54 #000000 #73a5ff'
-#export WMII_NORMCOLORS='#000000 #a4f484 #000000'
-#export WMII_FOCUSCOLORS='#000000 #73a5ff #000000'
-#export WMII_NORMCOLORS='#000000 #849f84 #000000'
-#export WMII_FOCUSCOLORS='#000000 #a4e484 #000000'
-#export WMII_NORMCOLORS='#000000 #848484 #000000'
-#export WMII_FOCUSCOLORS='#000000 #6d37cd #000000'
+#export WMII_NORMCOLORS='#000 #888 #000'
+#export WMII_FOCUSCOLORS='#000 #c63 #000'
+export WMII_NORMCOLORS='#000 #999 #000'
+export WMII_FOCUSCOLORS='#000 #fc5 #000'
 
 export WMII_BACKGROUND='#000000'
 export WMII_FONT='-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*'
@@ -40,6 +32,7 @@ histnum=5000
 
 # Column Rules
 wmiir write /colrules <<!
+    /0/ -> 20+80 # For skype mini-window on the left side
     /2/ -> 50+50 # For two Thunars / 2 opera windows
     /.*/ -> 62+38 # Golden Ratio
 !
@@ -48,7 +41,7 @@ wmiir write /colrules <<!
 wmiir write /rules <<!
 /Steam/ force-tags=steam
 /Skype/ force-tags=0
-/Canto/ force-tags=rss
+/Canto/ force-tags=RSS
     #/^Pidgin:/ allow=+activate
     #/MPlayer|VLC/ floating=on
     /^ROX-Filer:/ group=0
@@ -61,7 +54,6 @@ status() {
 
 # Generic overridable startup details
 startup() {
-    witray &
     /usr/bin/kalu &
     /usr/bin/simple-gmail-notifier &
     /usr/bin/dropboxd &
@@ -248,11 +240,11 @@ Key XF86PowerOff
         cv="1"
     fi
     seltag=$(wmiir read /tag/sel/ctl | sed 1q)
-    if [ $seltag == "rss" ]; then
+    if [ $seltag == "RSS" ]; then
         wmiir xwrite /ctl view $cv
     else
         cv=$seltag
-        wmiir xwrite /ctl view rss
+        wmiir xwrite /ctl view RSS
     fi
 
 
@@ -325,7 +317,7 @@ seltag=$(wmiir read /tag/sel/ctl | sed 1q)
 unset IFS
 wi_tags | while read tag
 do
-    if [ "$tag" != "rss" ]; then
+#    if [ "$tag" != "rss" ]; then
     if [ "$tag" = "$seltag" ]; then
 		echo colors "$WMII_FOCUSCOLORS"
 		echo label $tag
@@ -333,8 +325,10 @@ do
 		echo colors "$WMII_NORMCOLORS"
 		echo label $tag
 	fi | wmiir create "/lbar/$tag"
-    fi
+#    fi
 done
+
+witray &
 
 wi_eventloop
 

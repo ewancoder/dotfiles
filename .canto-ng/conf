@@ -60,12 +60,13 @@
                 "npage": "page-down",
                 "p": "prev-marked",
                 "ppage": "page-up",
-                "q": "update",
+                "q": "item-state read",
                 "r": "tag-state read",
                 "space": "foritem & item-state read & reader",
                 "u": "tag-state -read",
                 "up": "rel-set-cursor -1"
-            }
+            },
+            "tags_enumerated": false
         },
         "tagorder": [
             "maintag:Habrahabr",
