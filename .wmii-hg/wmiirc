@@ -37,12 +37,9 @@ wmiir write /colrules <<!
 
 # Tagging Rules
 wmiir write /rules <<!
-/Steam/ force-tags=steam
-/Skype/ force-tags=0
 /Canto/ force-tags=RSS
-    #/^Pidgin:/ allow=+activate
-    #/MPlayer|VLC/ floating=on
-    /^ROX-Filer:/ group=0
+/Skype/ force-tags=0
+/Steam/ force-tags=steam
 !
 
 # Status Bar Info
@@ -52,20 +49,18 @@ status() {
 
 # Generic overridable startup details
 startup() {
-    /usr/bin/kalu &
-    /usr/bin/simple-gmail-notifier &
-    /usr/bin/dropboxd &
-    /usr/bin/copy &
-    /usr/bin/chromium --no-startup-window &
+    chromium --no-startup-window &
+    copy &
+    deluge &
+    dropboxd &
+    guake &
+    gxkb &
     feh --bg-scale random ~/Dropbox/Pictures &
     ~/.dotfiles/scripts/pic ~/Dropbox/Pictures 300 &
-    gxkb &
-    guake &
-
+    kalu &
     urxvt -name Canto -e canto-curses &
 
     #skype &
-    deluge &
     #steam &
 }
 
@@ -114,8 +109,6 @@ Event Notice
 # Menus
 Menu Client-3-Close
 	wmiir xwrite /client/$1/ctl kill
-#Menu Client-3-Fullscreen
-#	wmiir xwrite /client/$1/ctl Fullscreen on
 Menu Client-3-Kill
 	wmiir xwrite /client/$1/ctl slay
 Event ClientMouseDown
