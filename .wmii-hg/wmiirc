@@ -48,7 +48,7 @@ wmiir write /colrules <<!
 wmiir write /rules <<!
 /Steam/ force-tags=steam
 /Skype/ force-tags=0
-/Tilda/ force-tags=rss
+/Canto/ force-tags=rss
     #/^Pidgin:/ allow=+activate
     #/MPlayer|VLC/ floating=on
     /^ROX-Filer:/ group=0
@@ -71,7 +71,8 @@ startup() {
     ~/.dotfiles/scripts/pic ~/Dropbox/Pictures 300 &
     gxkb &
     guake &
-    tilda &
+
+    urxvt -name Canto -e canto-curses &
 
     #skype &
     deluge &
@@ -226,7 +227,7 @@ Key $MODKEY-v
     dbss &
 
 Key $MODKEY-r
-    urxvt -e canto -u &
+    urxvt -e canto &
 
 Key $MODKEY-Shift-i
     sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
@@ -242,6 +243,19 @@ Key XF86WakeUp
     urxvt -e sudo yaourt -Syua --noconfirm &
 
 
+Key XF86PowerOff
+    if [ $cv == "" ]; then
+        cv="1"
+    fi
+    seltag=$(wmiir read /tag/sel/ctl | sed 1q)
+    if [ $seltag == "rss" ]; then
+        wmiir xwrite /ctl view $cv
+    else
+        cv=$seltag
+        wmiir xwrite /ctl view rss
+    fi
+
+
 KeyGroup Changing column modes
 Key $MODKEY-d # Set column to default mode
 	wmiir xwrite /tag/sel/ctl colmode sel default-max
@@ -253,9 +267,6 @@ Key $MODKEY-m # Set column to max mode
 KeyGroup Running programs
 Key $MODKEY-a      # Open wmii actions menu
 	action $(wi_actions | wimenu -h "${hist}.actions" -n $histnum) &
-#Key $MODKEY-p      # Open program menu
-	#eval wmiir setsid "$(wimenu -h "${hist}.progs" -n $histnum <$progsfile)" &
-
 
 Key $MODKEY-Return # Launch a terminal
 	eval wmiir setsid $WMII_TERM &
@@ -314,13 +325,15 @@ seltag=$(wmiir read /tag/sel/ctl | sed 1q)
 unset IFS
 wi_tags | while read tag
 do
-	if [ "$tag" = "$seltag" ]; then
+    if [ "$tag" != "rss" ]; then
+    if [ "$tag" = "$seltag" ]; then
 		echo colors "$WMII_FOCUSCOLORS"
 		echo label $tag
 	else
 		echo colors "$WMII_NORMCOLORS"
 		echo label $tag
 	fi | wmiir create "/lbar/$tag"
+    fi
 done
 
 wi_eventloop

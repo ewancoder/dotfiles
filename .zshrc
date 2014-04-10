@@ -82,3 +82,5 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 PATH="/usr/local/heroku/bin:$PATH"
+
+export TERM=rxvt-unicode-256color

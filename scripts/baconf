@@ -11,7 +11,7 @@ rsync -av --delete ~/.config/chromium /mnt/backup/Arch/
 rsync -av --delete ~/Anki /mnt/backup/Arch/
 
 
-rsync -av --delete ~/.canto/feeds /mnt/backup/Arch/
+rsync -av --delete ~/.canto-ng/* /mnt/backup/Arch/.canto-ng/
 
 
 
