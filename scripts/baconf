@@ -1,23 +1,17 @@
-rsync -av --delete ~/.local/share/applications /mnt/backup/Arch/
+rsync -a --delete ~/.canto-ng/* /mnt/backup/$1/.canto-ng/
 
-rsync -av --delete ~/.config/deluge /mnt/backup/Arch/
-rsync -av --delete ~/.config/libreoffice /mnt/backup/Arch/
-rsync -av --delete ~/.config/Thunar /mnt/backup/Arch/
-rsync -av --delete ~/.config/xfce4 /mnt/backup/Arch/
+rsync -a --delete ~/.config/chromium /mnt/backup/$1/
+rsync -a --delete ~/.config/deluge /mnt/backup/$1/
+rsync -a --delete ~/.config/libreoffice /mnt/backup/$1/
+rsync -a --delete ~/.config/Thunar /mnt/backup/$1/
+rsync -a --delete ~/.config/xfce4 /mnt/backup/$1/
 
-rsync -av --delete ~/.xboomx /mnt/backup/Arch/
+rsync -a --delete ~/.local/share/applications /mnt/backup/$1/
 
-rsync -av --delete ~/.config/chromium /mnt/backup/Arch/
-rsync -av --delete ~/Anki /mnt/backup/Arch/
+rsync -a --delete ~/.xboomx /mnt/backup/$1/
 
-
-rsync -av --delete ~/.canto-ng/* /mnt/backup/Arch/.canto-ng/
-
-
-
-rsync -av --delete /var/spool/cron /mnt/backup/Arch/
+rsync -a --delete ~/Anki /mnt/backup/$1/
 
 
 
-rsync -av --delete /mnt/cloud/Dropbox /mnt/backup/Cloud/
-rsync -av --delete /mnt/cloud/Copy /mnt/backup/Cloud/
+rsync -a --delete /var/spool/cron /mnt/backup/$1/
