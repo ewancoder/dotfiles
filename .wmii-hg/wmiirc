@@ -49,6 +49,8 @@ status() {
 
 # Generic overridable startup details
 startup() {
+    ~/runonce.sh &
+
     chromium --no-startup-window &
     copy &
     deluge &
