@@ -55,7 +55,7 @@ startup() {
     dropboxd &
     feh --bg-scale random ~/Dropbox/Pictures &
     ~/.dotfiles/scripts/pic ~/Dropbox/Pictures 300 &
-    guake &
+    tilda &
     gxkb &
     kalu &
     urxvt -name Canto -e canto-curses &
@@ -183,7 +183,10 @@ KeyGroup Client actions
 Key $MODKEY-f # Toggle selected client's fullsceen state
 	wmiir xwrite /client/sel/ctl Fullscreen toggle
 Key Control-q # Close client
-	wmiir xwrite /client/sel/ctl kill
+    sc=$(wmiir read /client/sel/label)
+    if [ "$sc" != "tilda" ] && [ "$sc" != "canto-curses" ]; then
+        wmiir xwrite /client/sel/ctl kill
+    fi
 
 #My keys configuration
 Key $MODKEY-c
