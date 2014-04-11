@@ -53,10 +53,10 @@ startup() {
     copy &
     deluge &
     dropboxd &
-    guake &
-    gxkb &
     feh --bg-scale random ~/Dropbox/Pictures &
     ~/.dotfiles/scripts/pic ~/Dropbox/Pictures 300 &
+    guake &
+    gxkb &
     kalu &
     urxvt -name Canto -e canto-curses &
 
@@ -185,47 +185,36 @@ Key $MODKEY-f # Toggle selected client's fullsceen state
 Key Control-q # Close client
 	wmiir xwrite /client/sel/ctl kill
 
-
+#My keys configuration
 Key $MODKEY-c
 	chromium &
+Key $MODKEY-g
+	gvim &
+Key $MODKEY-p
+    xboomx &
 Key $MODKEY-q
 	deluge &
+Key $MODKEY-w
+    urxvt -e alsamixer &
 Key $MODKEY-x
 	amixer -q sset Master 2500+ &
 Key $MODKEY-z
 	amixer -q sset Master 2500- &
-Key $MODKEY-g
-	gvim &
-
-Key $MODKEY-Shift-z
-    killall xcompmgr &
-
-Key $MODKEY-Shift-x
-    xcompmgr &
-
-Key $MODKEY-w
-    urxvt -e alsamixer &
-
-Key XF86Sleep
-    dbss &
-
-Key $MODKEY-r
-    urxvt -e canto &
-
-Key $MODKEY-Shift-i
-    sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
 
 Key $MODKEY-i
     sed -i 's/ca(fr),ru/us,ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
+Key $MODKEY-Shift-i
+    sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
 
-Key $MODKEY-p
-    xboomx &
+Key $MODKEY-Shift-x
+    xcompmgr &
+Key $MODKEY-Shift-z
+    killall xcompmgr &
 
-
+Key XF86Sleep
+    dbss &
 Key XF86WakeUp
     urxvt -e sudo yaourt -Syua --noconfirm &
-
-
 Key XF86PowerOff
     if [ $cv == "" ]; then
         cv="1"
@@ -237,7 +226,6 @@ Key XF86PowerOff
         cv=$seltag
         wmiir xwrite /ctl view RSS
     fi
-
 
 KeyGroup Changing column modes
 Key $MODKEY-d # Set column to default mode
@@ -322,4 +310,3 @@ done
 witray &
 
 wi_eventloop
-
