@@ -86,12 +86,15 @@ sub message_public_notify {
     my $mynick = $server->{nick};
     chomp $mynick;
 
-#    if (($target =~ "#ewancoder") or ($target =~ "#twitter_ewancoder")) {
     if (($target =~ "#ewancoder") {
-        if ($msg =~ m/.*$mynick.*/ ) {
+        if ($msg =~ m/.*$mynick.*/) {
             notify($server, "Highlight ".$nick." > ".$target, $msg, "critical", 0);
         } else {
             notify($server, "Public ".$nick." > ".$target, $msg, "normal", 0);
+        }
+    } else {
+        if ($msg =~ m/.*$mynick.*/) {
+            notify($server, "Highlight ".$nick." > ".$target, $msg, "normal", 0);
         }
     }
 }
