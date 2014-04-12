@@ -44,7 +44,7 @@ wmiir write /rules <<!
 
 # Status Bar Info
 status() {
-    echo -n label $(free -mh | grep /cache | awk '{print $4}') 'M ' $(df -h / | grep / | awk '{print $5}' | cut -c 1-2) '/ ' $(df -h /home | grep home | awk '{print $5}' | cut -c 1-2) 'H ' $(df -h /mnt/cloud | grep cloud | awk '{print $5}' | cut -c 1-2) 'C |' $(sensors | grep -m 1 temp1 | awk '{print $2}' | cut -c 2-3)    $(cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf "%.0f\n", $4}')    $(nvidia-settings -q=GPUCoreTemp | grep -m 1 ewanhost | awk '{print $4}' | cut -c1-2) '|' $(uptime | sed 's/.*://; s/, / /g') '|' $(date +%a\ %b\ %d\ %T)
+    echo -n label $(free -mh | grep /cache | awk '{print $4}') 'M ' $(df -h / | grep / | awk '{print $5}' | cut -c 1-2) '/ ' $(df -h /home | grep home | awk '{print $5}' | cut -c 1-2) 'H ' $(df -h /mnt/cloud | grep cloud | awk '{print $5}' | cut -c 1-2) 'C ' $(df -h /mnt/backup | grep backup | awk '{print $5}' | cut -c 1-2) 'B |' $(sensors | grep -m 1 temp1 | awk '{print $2}' | cut -c 2-3)    $(cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf "%.0f\n", $4}')    $(nvidia-settings -q=GPUCoreTemp | grep -m 1 ewanhost | awk '{print $4}' | cut -c1-2) '|' $(uptime | sed 's/.*://; s/, / /g') '|' $(date +%a\ %b\ %d\ %T)
 }
 
 # Generic overridable startup details
