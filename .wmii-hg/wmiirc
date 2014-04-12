@@ -55,7 +55,7 @@ startup() {
     copy &
     deluge &
     dropboxd &
-    feh --bg-scale random ~/Dropbox/Pictures &
+    feh --bg-scale --randomize ~/Dropbox/Pictures &
     ~/.dotfiles/scripts/pic ~/Dropbox/Pictures 300 &
     tilda &
     gxkb &
