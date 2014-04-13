@@ -275,6 +275,11 @@ Action status
         status90 | wmiir write /rbar/status90
         status910 | wmiir write /rbar/status910
 
+        if [ -f /tmp/rssitems ]; then
+            wmiir xwrite /lbar/RSS colors "$GOODCOLORS"
+            rm /tmp/rssitems
+        fi
+
         sleep 1
     done
 
