@@ -18,6 +18,10 @@ noticebar=/rbar/!notice
 export WMII_NORMCOLORS='#000 #999 #000'
 export WMII_FOCUSCOLORS='#000 #fc5 #000'
 
+export GOODCOLORS='#000 #6c6 #000'
+export MIDCOLORS='#000 #cc6 #000'
+export BADCOLORS='#000 #c66 #000"'
+
 export WMII_BACKGROUND='#000000'
 export WMII_FONT='-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*'
 
@@ -43,8 +47,44 @@ wmiir write /rules <<!
 !
 
 # Status Bar Info
-status() {
-    echo -n label $(free -mh | grep /cache | awk '{print $4}') 'M ' $(df -h / | grep / | awk '{print $5}' | cut -c 1-2) '/ ' $(df -h /home | grep home | awk '{print $5}' | cut -c 1-2) 'H ' $(df -h /mnt/cloud | grep cloud | awk '{print $5}' | cut -c 1-2) 'C ' $(df -h /mnt/backup | grep backup | awk '{print $5}' | cut -c 1-2) 'B |' $(sensors | grep -m 1 temp1 | awk '{print $2}' | cut -c 2-3)    $(cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf "%.0f\n", $4}')    $(nvidia-settings -q=GPUCoreTemp | grep -m 1 ewanhost | awk '{print $4}' | cut -c1-2) '|' $(uptime | sed 's/.*://; s/, / /g') '|' $(date +%a\ %b\ %d\ %T)
+status10(){
+    echo -n label $(free -mh | grep /cache | awk '{print $4}') 'M'
+}
+
+status20(){
+    echo -n label $(df -h / | grep / | awk '{print $5}' | cut -c 1-2) '/'
+}
+
+status30(){
+    echo -n label $(df -h /home | grep home | awk '{print $5}' | cut -c 1-2) 'H'
+}
+
+status40(){
+    echo -n label $(df -h /mnt/cloud | grep cloud | awk '{print $5}' | cut -c 1-2) 'C'
+}
+
+status50(){
+    echo -n label $(df -h /mnt/backup | grep backup | awk '{print $5}' | cut -c 1-2) 'B'
+}
+
+status60(){
+    echo -n label $(sensors | grep -m 1 temp1 | awk '{print $2}' | cut -c 2-3)
+}
+
+status70(){
+    echo -n label $(cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf "%.0f\n", $4}')
+}
+
+status80(){
+    echo -n label $(nvidia-settings -q=GPUCoreTemp | grep -m 1 ewanhost | awk '{print $4}' | cut -c1-2)
+}
+
+status90(){
+    echo -n label $(uptime | sed 's/.*://; s/, / /g')
+}
+
+status910(){
+    echo -n label $(date +%a\ %b\ %d\ %T)
 }
 
 # Generic overridable startup details
@@ -140,13 +180,103 @@ Action rehash
 	wi_proglist $PATH >$progsfile
 Action status
 	set +xv
-	if wmiir remove /rbar/status 2>/dev/null; then
-		sleep 2
-	fi
-	echo colors "$WMII_NORMCOLORS" | wmiir create /rbar/status
-	while status | wmiir write /rbar/status; do
-		sleep 1
-	done
+#   if wmiir remove /rbar/status 2>/dev/null; then
+#	    sleep 2
+#	fi
+	echo colors "$GOODCOLORS" | wmiir create /rbar/status10
+	echo colors "$GOODCOLORS" | wmiir create /rbar/status20
+	echo colors "$GOODCOLORS" | wmiir create /rbar/status30
+	echo colors "$GOODCOLORS" | wmiir create /rbar/status40
+	echo colors "$GOODCOLORS" | wmiir create /rbar/status50
+	echo colors "$GOODCOLORS" | wmiir create /rbar/status60
+	echo colors "$GOODCOLORS" | wmiir create /rbar/status70
+	echo colors "$GOODCOLORS" | wmiir create /rbar/status80
+	echo colors "$WMII_FOCUSCOLORS" | wmiir create /rbar/status90
+	echo colors "$WMII_FOCUSCOLORS" | wmiir create /rbar/status910
+    while true; do
+        check10=$(free -m | grep /cache | awk '{print $4}')
+        check20=$(df -h / | grep / | awk '{print $5}' | cut -c 1-2)
+        check30=$(df -h /home | grep home | awk '{print $5}' | cut -c 1-2)
+        check40=$(df -h /mnt/cloud | grep cloud | awk '{print $5}' | cut -c 1-2)
+        check50=$(df -h /mnt/backup | grep backup | awk '{print $5}' | cut -c 1-2)
+        check60=$(sensors | grep -m 1 temp1 | awk '{print $2}' | cut -c 2-3)
+        check80=$(nvidia-settings -q=GPUCoreTemp | grep -m 1 ewanhost | awk '{print $4}' | cut -c1-2)
+
+        if [ $check10 -gt 3000 ]; then
+            nc10="$GOODCOLORS"
+        elif [ $check10 -gt 1000 ]; then
+            nc10="$MIDCOLORS"
+        else
+            nc10="$BADCOLORS"
+        fi
+
+        if [ $check20 -lt 45 ]; then
+            nc20="$GOODCOLORS"
+        elif [ $check20 -lt 75 ]; then
+            nc20="$MIDCOLORS"
+        else
+            nc20="$BADCOLORS"
+        fi
+
+        if [ $check30 -lt 45 ]; then
+            nc30="$GOODCOLORS"
+        elif [ $check30 -lt 75 ]; then
+            nc30="$MIDCOLORS"
+        else
+            nc30="$BADCOLORS"
+        fi
+
+        if [ $check40 -lt 45 ]; then
+            nc40="$GOODCOLORS"
+        elif [ $check40 -lt 75 ]; then
+            nc40="$MIDCOLORS"
+        else
+            nc40="$BADCOLORS"
+        fi
+
+        if [ $check50 -lt 45 ]; then
+            nc50="$GOODCOLORS"
+        elif [ $check50 -lt 75 ]; then
+            nc50="$MIDCOLORS"
+        else
+            nc50="$BADCOLORS"
+        fi
+
+        if [ $check60 -lt 40 ]; then
+            nc60="$GOODCOLORS"
+        elif [ $check60 -lt 50 ]; then
+            nc60="$MIDCOLORS"
+        else
+            nc60="$BADCOLORS"
+        fi
+
+        if [ $check80 -lt 40 ]; then
+            nc80="$GOODCOLORS"
+        elif [ $check80 -lt 52 ]; then
+            nc80="$MIDCOLORS"
+        else
+            nc80="$BADCOLORS"
+        fi
+        wmiir xwrite /rbar/status10 colors "$nc10"
+        wmiir xwrite /rbar/status20 colors "$nc20"
+        wmiir xwrite /rbar/status30 colors "$nc30"
+        wmiir xwrite /rbar/status40 colors "$nc40"
+        wmiir xwrite /rbar/status50 colors "$nc50"
+        wmiir xwrite /rbar/status60 colors "$nc60"
+        wmiir xwrite /rbar/status80 colors "$nc80"
+        status10 | wmiir write /rbar/status10
+        status20 | wmiir write /rbar/status20
+        status30 | wmiir write /rbar/status30
+        status40 | wmiir write /rbar/status40
+        status50 | wmiir write /rbar/status50
+        status60 | wmiir write /rbar/status60
+        status70 | wmiir write /rbar/status70
+        status80 | wmiir write /rbar/status80
+        status90 | wmiir write /rbar/status90
+        status910 | wmiir write /rbar/status910
+
+        sleep 1
+    done
 
 # Key Bindings
 KeyGroup Moving around
