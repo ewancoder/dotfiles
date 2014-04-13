@@ -20,7 +20,7 @@ export WMII_FOCUSCOLORS='#000 #fc5 #000'
 
 export GOODCOLORS='#000 #6c6 #000'
 export MIDCOLORS='#000 #cc6 #000'
-export BADCOLORS='#000 #c66 #000"'
+export BADCOLORS='#000 #c66 #000'
 
 export WMII_BACKGROUND='#000000'
 export WMII_FONT='-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*'
@@ -52,19 +52,19 @@ status10(){
 }
 
 status20(){
-    echo -n label $(df -h / | grep / | awk '{print $5}' | cut -c 1-2) '/'
+    echo -n label $(df -h / | grep / | awk '{print $5}' | sed 's/%//') '/'
 }
 
 status30(){
-    echo -n label $(df -h /home | grep home | awk '{print $5}' | cut -c 1-2) 'H'
+    echo -n label $(df -h /home | grep home | awk '{print $5}' | sed 's/%//') 'H'
 }
 
 status40(){
-    echo -n label $(df -h /mnt/cloud | grep cloud | awk '{print $5}' | cut -c 1-2) 'C'
+    echo -n label $(df -h /mnt/cloud | grep cloud | awk '{print $5}' | sed 's/%//') 'C'
 }
 
 status50(){
-    echo -n label $(df -h /mnt/backup | grep backup | awk '{print $5}' | cut -c 1-2) 'B'
+    echo -n label $(df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//') 'B'
 }
 
 status60(){
@@ -195,10 +195,10 @@ Action status
 	echo colors "$WMII_FOCUSCOLORS" | wmiir create /rbar/status910
     while true; do
         check10=$(free -m | grep /cache | awk '{print $4}')
-        check20=$(df -h / | grep / | awk '{print $5}' | cut -c 1-2)
-        check30=$(df -h /home | grep home | awk '{print $5}' | cut -c 1-2)
-        check40=$(df -h /mnt/cloud | grep cloud | awk '{print $5}' | cut -c 1-2)
-        check50=$(df -h /mnt/backup | grep backup | awk '{print $5}' | cut -c 1-2)
+        check20=$(df -h / | grep / | awk '{print $5}' | sed 's/%//')
+        check30=$(df -h /home | grep home | awk '{print $5}' | sed 's/%//')
+        check40=$(df -h /mnt/cloud | grep cloud | awk '{print $5}' | sed 's/%//')
+        check50=$(df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//')
         check60=$(sensors | grep -m 1 temp1 | awk '{print $2}' | cut -c 2-3)
         check80=$(nvidia-settings -q=GPUCoreTemp | grep -m 1 ewanhost | awk '{print $4}' | cut -c1-2)
 
