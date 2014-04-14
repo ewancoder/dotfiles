@@ -19,7 +19,7 @@ export WMII_NORMCOLORS='#000 #999 #000'
 export WMII_FOCUSCOLORS='#000 #fc5 #000'
 
 export GOODCOLORS='#000 #6c6 #000'
-export MIDCOLORS='#000 #6cc #000'
+export MIDCOLORS='#000 #7c8 #000'
 export BADCOLORS='#000 #c66 #000'
 
 export WMII_BACKGROUND='#000000'
