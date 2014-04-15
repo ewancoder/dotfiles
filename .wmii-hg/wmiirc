@@ -93,7 +93,11 @@ startup() {
 
     chromium --no-startup-window &
     copy &
-    deluge &
+
+    #deluge &
+    screen -dmS irssi irssi &
+    screen -dmS rtorrent rtorrent &
+
     dropboxd &
     feh --bg-scale --randomize ~/Dropbox/Pictures &
     ~/.dotfiles/scripts/pic ~/Dropbox/Pictures 300 &
@@ -348,7 +352,8 @@ Key $MODKEY-g
 Key $MODKEY-p
     xboomx &
 Key $MODKEY-q
-	deluge &
+    urxvt -e screen -r rtorrent
+    #deluge &
 Key $MODKEY-w
     urxvt -e alsamixer &
 Key $MODKEY-x
