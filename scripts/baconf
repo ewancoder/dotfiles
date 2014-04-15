@@ -11,6 +11,8 @@ rsync -a --delete ~/.local/share/applications /mnt/backup/$1/
 
 rsync -a --delete ~/.xboomx /mnt/backup/$1/
 
+rsync -a --delete ~/.zsh_history /mnt/backup/$1/
+
 rsync -a --delete ~/Anki /mnt/backup/$1/
 
 
