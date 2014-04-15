@@ -3,6 +3,7 @@ rsync -a --delete ~/.canto-ng/* /mnt/backup/$1/.canto-ng/
 rsync -a --delete ~/.config/chromium /mnt/backup/$1/
 rsync -a --delete ~/.config/deluge /mnt/backup/$1/
 rsync -a --delete ~/.config/libreoffice /mnt/backup/$1/
+rsync -a --delete ~/.config/mc/panels.ini /mnt/backup/$1/
 rsync -a --delete ~/.config/Thunar /mnt/backup/$1/
 rsync -a --delete ~/.config/xfce4 /mnt/backup/$1/
 rsync -a --delete ~/.config/kalu/news.conf /mnt/backup/$1/kalu-news.conf
