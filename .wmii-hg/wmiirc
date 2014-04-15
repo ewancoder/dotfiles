@@ -182,6 +182,14 @@ Action exec
 	wmiir xwrite /ctl exec "$@"
 Action rehash
 	wi_proglist $PATH >$progsfile
+Action rssitems
+    while true; do
+        if [ -f /tmp/rssitems ]; then
+            wmiir xwrite /lbar/RSS colors "$GOODCOLORS"
+            rm /tmp/rssitems
+        fi
+        sleep 5
+    done
 Action timedate
 	echo colors "$WMII_FOCUSCOLORS" | wmiir create /rbar/status910
     while true; do
@@ -293,11 +301,6 @@ Action status
         status70 | wmiir write /rbar/status70
         status80 | wmiir write /rbar/status80
         status90 | wmiir write /rbar/status90
-
-        if [ -f /tmp/rssitems ]; then
-            wmiir xwrite /lbar/RSS colors "$GOODCOLORS"
-            rm /tmp/rssitems
-        fi
 
         sleep 1
     done
@@ -448,6 +451,7 @@ xsetroot -solid "$WMII_BACKGROUND" &
 progsfile="$(wmiir namespace)/.proglist"
 action status &
 action timedate &
+action rssitems &
 wi_proglist $PATH >$progsfile &
 
 # Setup Tag Bar
