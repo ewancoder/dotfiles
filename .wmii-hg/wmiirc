@@ -198,9 +198,6 @@ Action timedate
     done
 Action status
 	set +xv
-#   if wmiir remove /rbar/status 2>/dev/null; then
-#	    sleep 2
-#	fi
 	echo colors "$GOODCOLORS" | wmiir create /rbar/status10
 	echo colors "$GOODCOLORS" | wmiir create /rbar/status20
 	echo colors "$GOODCOLORS" | wmiir create /rbar/status30
@@ -275,12 +272,6 @@ Action status
         else
             nc80="$BADCOLORS"
         fi
-
-#        if [ $check90 -lt 2 ]; then
-#            nc90="$WMII_FOCUSCOLORS"
-#        else
-#            nc90="$BADCOLORS"
-#        fi
 
         python ~/.wmii-hg/test.py
 
