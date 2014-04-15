@@ -186,8 +186,9 @@ Action rssitems
     while true; do
         if [ -f /tmp/rssitems ]; then
             wmiir xwrite /lbar/RSS colors "$GOODCOLORS"
-            rm /tmp/rssitems
+            sleep 60
         fi
+        rm /tmp/rssitems
         sleep 5
     done
 Action timedate
