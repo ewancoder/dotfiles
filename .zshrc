@@ -85,6 +85,8 @@ source $ZSH/oh-my-zsh.sh
 
 PATH="/usr/local/heroku/bin:$PATH"
 
+CDPATH=".:~:~/Dropbox"
+
 export TERM=rxvt-unicode-256color
 
-export EDITOR=vim
+export EDITOR=gvim
