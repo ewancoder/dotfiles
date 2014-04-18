@@ -103,7 +103,7 @@ startup() {
     copy &
 
     deluge &
-    screen -dmS irssi irssi &
+#    screen -dmS irssi irssi &
     #screen -dmS rtorrent rtorrent &
 
     dropboxd &
