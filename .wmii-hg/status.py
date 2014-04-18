@@ -36,6 +36,8 @@ def checkCondition(name, check, lower, bigger, mid, color, midColor, badColor):
                 setColor(name, midColor)
             else:
                 setColor(name, badColor)
+    else:
+        setColor(name, color)
 
 def checkLoop():
     for x in data.block:
@@ -49,7 +51,6 @@ def statusLoop():
 #Create block
 def createBlock(name, color):
     os.system('wmiir create /rbar/'+name+' &')
-    setColor(name, color)
 
 def startLoop():
     for x in data.block:
