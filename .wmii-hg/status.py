@@ -20,8 +20,8 @@ def checkCondition(name, check, lower, bigger, mid, color, midColor, badColor):
         midColor = data.MidColors
     if badColor == "":
         badColor = data.BadColors
-    checked = float(get(check))
     if check != "":
+        checked = float(get(check))
         if bigger != "":
             if checked > float(bigger):
                 setColor(name, color)
@@ -41,8 +41,7 @@ def checkCondition(name, check, lower, bigger, mid, color, midColor, badColor):
 
 def checkLoop():
     for x in data.block:
-        if x[3] != "":
-            checkCondition(x[0], x[3], x[4], x[5], x[6], x[2], x[7], x[8])
+        checkCondition(x[0], x[3], x[4], x[5], x[6], x[2], x[7], x[8])
 
 def statusLoop():
     for x in data.block:
