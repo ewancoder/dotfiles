@@ -21,6 +21,7 @@ export WMII_FOCUSCOLORS='#000 #fc5 #000'
 export GOODCOLORS='#000 #6c6 #000'
 export MIDCOLORS='#000 #7c8 #000'
 export BADCOLORS='#000 #c66 #000'
+export SOUNDCOLORS='#000 #6cc #000'
 
 export WMII_BACKGROUND='#000000'
 export WMII_FONT='-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*'
@@ -47,6 +48,11 @@ wmiir write /rules <<!
 !
 
 # Status Bar Info
+
+status82(){
+    echo -n label $(amixer | grep "Left: Playback" | awk {'print $5'} | cut -d "[" -f2 | cut -d "%" -f1)
+}
+
 status10(){
     echo -n label $(free -mh | grep /cache | awk '{print $4}') 'M'
 }
@@ -90,6 +96,8 @@ status910(){
 # Generic overridable startup details
 startup() {
     ~/runonce.sh &
+
+    pactl set-sink-port alsa_output.pci-0000_00_14.2.analog-stereo analog-output-headphones
 
     chromium --no-startup-window &
     copy &
@@ -196,8 +204,11 @@ Action timedate
         status910 | wmiir write /rbar/status910
         sleep 1
     done
+Action pystatus
+    ~/.wmii-hg/status.py
 Action status
 	set +xv
+    echo colors "$SOUNDCOLORS" | wmiir create /rbar/status82
 	echo colors "$GOODCOLORS" | wmiir create /rbar/status10
 	echo colors "$GOODCOLORS" | wmiir create /rbar/status20
 	echo colors "$GOODCOLORS" | wmiir create /rbar/status30
@@ -283,6 +294,7 @@ Action status
         wmiir xwrite /rbar/status60 colors "$nc60"
         wmiir xwrite /rbar/status80 colors "$nc80"
         wmiir xwrite /rbar/status90 colors "$NC90"
+        status82 | wmiir write /rbar/status82
         status10 | wmiir write /rbar/status10
         status20 | wmiir write /rbar/status20
         status30 | wmiir write /rbar/status30
@@ -352,8 +364,10 @@ Key $MODKEY-w
     urxvt -e alsamixer &
 Key $MODKEY-x
 	amixer -q sset Master 2500+ &
+    status82 | wmiir write /rbar/status82
 Key $MODKEY-z
 	amixer -q sset Master 2500- &
+    status82 | wmiir write /rbar/status82
 
 Key $MODKEY-i
     sed -i 's/ca(fr),ru/us,ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
@@ -440,7 +454,8 @@ xsetroot -solid "$WMII_BACKGROUND" &
 
 # Misc
 progsfile="$(wmiir namespace)/.proglist"
-action status &
+#action status &
+action pystatus &
 action timedate &
 action rssitems &
 wi_proglist $PATH >$progsfile &
