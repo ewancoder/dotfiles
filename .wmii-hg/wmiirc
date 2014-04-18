@@ -364,10 +364,10 @@ Key $MODKEY-w
     urxvt -e alsamixer &
 Key $MODKEY-x
 	amixer -q sset Master 2500+ &
-    status82 | wmiir write /rbar/status82
+    wmiir xwrite /rbar/Status_a8 label $(amixer | grep "Left: Playback" | awk {'print $5'} | cut -d "[" -f2 | cut -d "%" -f1)
 Key $MODKEY-z
 	amixer -q sset Master 2500- &
-    status82 | wmiir write /rbar/status82
+    wmiir xwrite /rbar/Status_a8 label $(amixer | grep "Left: Playback" | awk {'print $5'} | cut -d "[" -f2 | cut -d "%" -f1)
 
 Key $MODKEY-i
     sed -i 's/ca(fr),ru/us,ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
