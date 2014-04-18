@@ -30,18 +30,10 @@ hist="${WMII_CONFPATH%%:*}/history"
 histnum=5000
 
 # Column Rules
-wmiir write /colrules <<!
-/0/ -> 20+80 #For skype mini-window on the left side
-/2/ -> 50+50 #For two Thunars / 2 opera windows
-/.*/ -> 62+38 #Golden Ratio
-!
+cat ~/.wmii-hg/colrules | wmiir write /colrules
 
 # Tagging Rules
-wmiir write /rules <<!
-/Canto/ force-tags=RSS
-/Skype/ force-tags=0
-/Steam/ force-tags=Steam
-!
+cat ~/.wmii-hg/tagrules | wmiir write /rules
 
 timestatus(){
     echo -n label $(date +%a\ %b\ %d\ %T)
