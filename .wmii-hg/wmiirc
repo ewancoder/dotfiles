@@ -17,11 +17,7 @@ noticebar=/rbar/!notice
 # Colors tuples: "<text> <background> <border>"
 export WMII_NORMCOLORS='#000 #999 #000'
 export WMII_FOCUSCOLORS='#000 #fc5 #000'
-
 export GOODCOLORS='#000 #6c6 #000'
-export MIDCOLORS='#000 #7c8 #000'
-export BADCOLORS='#000 #c66 #000'
-export SOUNDCOLORS='#000 #6cc #000'
 
 export WMII_BACKGROUND='#000000'
 export WMII_FONT='-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*'
@@ -35,77 +31,29 @@ histnum=5000
 
 # Column Rules
 wmiir write /colrules <<!
-    /0/ -> 20+80 # For skype mini-window on the left side
-    /2/ -> 50+50 # For two Thunars / 2 opera windows
-    /.*/ -> 62+38 # Golden Ratio
+/0/ -> 20+80 #For skype mini-window on the left side
+/2/ -> 50+50 #For two Thunars / 2 opera windows
+/.*/ -> 62+38 #Golden Ratio
 !
 
 # Tagging Rules
 wmiir write /rules <<!
 /Canto/ force-tags=RSS
 /Skype/ force-tags=0
-/Steam/ force-tags=steam
+/Steam/ force-tags=Steam
 !
 
-# Status Bar Info
-
-status82(){
-    echo -n label $(amixer | grep "Left: Playback" | awk {'print $5'} | cut -d "[" -f2 | cut -d "%" -f1)
-}
-
-status10(){
-    echo -n label $(free -mh | grep /cache | awk '{print $4}') 'M'
-}
-
-status20(){
-    echo -n label $(df -h / | grep / | awk '{print $5}' | sed 's/%//') '/'
-}
-
-status30(){
-    echo -n label $(df -h /home | grep home | awk '{print $5}' | sed 's/%//') 'H'
-}
-
-status40(){
-    echo -n label $(df -h /mnt/cloud | grep cloud | awk '{print $5}' | sed 's/%//') 'C'
-}
-
-status50(){
-    echo -n label $(df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//') 'B'
-}
-
-status60(){
-    echo -n label $(sensors | grep -m 1 temp1 | awk '{print $2}' | cut -c 2-3)
-}
-
-status70(){
-    echo -n label $(cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf "%.0f\n", $4}')
-}
-
-status80(){
-    echo -n label $(nvidia-settings -q=GPUCoreTemp | grep -m 1 ewanhost | awk '{print $4}' | cut -c1-2)
-}
-
-status90(){
-    echo -n label $(uptime | sed 's/.*://; s/, / /g')
-}
-
-status910(){
+timestatus(){
     echo -n label $(date +%a\ %b\ %d\ %T)
 }
 
 # Generic overridable startup details
 startup() {
     ~/runonce.sh &
-
-    pactl set-sink-port alsa_output.pci-0000_00_14.2.analog-stereo analog-output-headphones
-
+    pactl set-sink-port alsa_output.pci-0000_00_14.2.analog-stereo analog-output-headphones &
     chromium --no-startup-window &
     copy &
-
     deluge &
-#    screen -dmS irssi irssi &
-    #screen -dmS rtorrent rtorrent &
-
     dropboxd &
     feh --bg-scale --randomize ~/Dropbox/Pictures &
     ~/.dotfiles/scripts/pic ~/Dropbox/Pictures 300 &
@@ -113,9 +61,6 @@ startup() {
     gxkb &
     kalu &
     urxvt -name Canto -e canto-curses &
-
-    #skype &
-    #steam &
 }
 
 wi_runconf -s wmiirc_local
@@ -199,114 +144,13 @@ Action rssitems
         sleep 5
     done
 Action timedate
-	echo colors "$WMII_FOCUSCOLORS" | wmiir create /rbar/status910
+	echo colors "$WMII_FOCUSCOLORS" | wmiir create /rbar/timestatus
     while true; do
-        status910 | wmiir write /rbar/status910
+        timestatus | wmiir write /rbar/timestatus
         sleep 1
     done
 Action pystatus
     ~/.wmii-hg/status.py
-Action status
-	set +xv
-    echo colors "$SOUNDCOLORS" | wmiir create /rbar/status82
-	echo colors "$GOODCOLORS" | wmiir create /rbar/status10
-	echo colors "$GOODCOLORS" | wmiir create /rbar/status20
-	echo colors "$GOODCOLORS" | wmiir create /rbar/status30
-	echo colors "$GOODCOLORS" | wmiir create /rbar/status40
-	echo colors "$GOODCOLORS" | wmiir create /rbar/status50
-	echo colors "$GOODCOLORS" | wmiir create /rbar/status60
-	echo colors "$GOODCOLORS" | wmiir create /rbar/status70
-	echo colors "$GOODCOLORS" | wmiir create /rbar/status80
-	echo colors "$WMII_FOCUSCOLORS" | wmiir create /rbar/status90
-    while true; do
-        check10=$(free -m | grep /cache | awk '{print $4}')
-        check20=$(df -h / | grep / | awk '{print $5}' | sed 's/%//')
-        check30=$(df -h /home | grep home | awk '{print $5}' | sed 's/%//')
-        check40=$(df -h /mnt/cloud | grep cloud | awk '{print $5}' | sed 's/%//')
-        check50=$(df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//')
-        check60=$(sensors | grep -m 1 temp1 | awk '{print $2}' | cut -c 2-3)
-        check80=$(nvidia-settings -q=GPUCoreTemp | grep -m 1 ewanhost | awk '{print $4}' | cut -c1-2)
-#        check90=$(uptime | sed 's/.*://; s/, / /g' | awk '{print $2}' | cut -c1-1)
-
-        if [ $check10 -gt 3000 ]; then
-            nc10="$GOODCOLORS"
-        elif [ $check10 -gt 1000 ]; then
-            nc10="$MIDCOLORS"
-        else
-            nc10="$BADCOLORS"
-        fi
-
-        if [ $check20 -lt 45 ]; then
-            nc20="$GOODCOLORS"
-        elif [ $check20 -lt 75 ]; then
-            nc20="$MIDCOLORS"
-        else
-            nc20="$BADCOLORS"
-        fi
-
-        if [ $check30 -lt 45 ]; then
-            nc30="$GOODCOLORS"
-        elif [ $check30 -lt 75 ]; then
-            nc30="$MIDCOLORS"
-        else
-            nc30="$BADCOLORS"
-        fi
-
-        if [ $check40 -lt 45 ]; then
-            nc40="$GOODCOLORS"
-        elif [ $check40 -lt 75 ]; then
-            nc40="$MIDCOLORS"
-        else
-            nc40="$BADCOLORS"
-        fi
-
-        if [ $check50 -lt 45 ]; then
-            nc50="$GOODCOLORS"
-        elif [ $check50 -lt 75 ]; then
-            nc50="$MIDCOLORS"
-        else
-            nc50="$BADCOLORS"
-        fi
-
-        if [ $check60 -lt 40 ]; then
-            nc60="$GOODCOLORS"
-        elif [ $check60 -lt 50 ]; then
-            nc60="$MIDCOLORS"
-        else
-            nc60="$BADCOLORS"
-        fi
-
-        if [ $check80 -lt 40 ]; then
-            nc80="$GOODCOLORS"
-        elif [ $check80 -lt 52 ]; then
-            nc80="$MIDCOLORS"
-        else
-            nc80="$BADCOLORS"
-        fi
-
-        python ~/.wmii-hg/test.py
-
-        wmiir xwrite /rbar/status10 colors "$nc10"
-        wmiir xwrite /rbar/status20 colors "$nc20"
-        wmiir xwrite /rbar/status30 colors "$nc30"
-        wmiir xwrite /rbar/status40 colors "$nc40"
-        wmiir xwrite /rbar/status50 colors "$nc50"
-        wmiir xwrite /rbar/status60 colors "$nc60"
-        wmiir xwrite /rbar/status80 colors "$nc80"
-        wmiir xwrite /rbar/status90 colors "$NC90"
-        status82 | wmiir write /rbar/status82
-        status10 | wmiir write /rbar/status10
-        status20 | wmiir write /rbar/status20
-        status30 | wmiir write /rbar/status30
-        status40 | wmiir write /rbar/status40
-        status50 | wmiir write /rbar/status50
-        status60 | wmiir write /rbar/status60
-        status70 | wmiir write /rbar/status70
-        status80 | wmiir write /rbar/status80
-        status90 | wmiir write /rbar/status90
-
-        sleep 1
-    done
 
 # Key Bindings
 KeyGroup Moving around
@@ -459,6 +303,7 @@ action pystatus &
 action timedate &
 action rssitems &
 wi_proglist $PATH >$progsfile &
+witray &
 
 # Setup Tag Bar
 IFS="$wi_newline"
@@ -467,7 +312,6 @@ seltag=$(wmiir read /tag/sel/ctl | sed 1q)
 unset IFS
 wi_tags | while read tag
 do
-#    if [ "$tag" != "rss" ]; then
     if [ "$tag" = "$seltag" ]; then
 		echo colors "$WMII_FOCUSCOLORS"
 		echo label $tag
@@ -475,9 +319,6 @@ do
 		echo colors "$WMII_NORMCOLORS"
 		echo label $tag
 	fi | wmiir create "/lbar/$tag"
-#    fi
 done
-
-witray &
 
 wi_eventloop
