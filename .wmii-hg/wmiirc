@@ -29,10 +29,6 @@ export WMII_TERM="urxvt"
 hist="${WMII_CONFPATH%%:*}/history"
 histnum=5000
 
-timestatus(){
-    echo -n label $(date +%a\ %b\ %d\ %T)
-}
-
 wi_runconf -s wmiirc_local
 echo colors $WMII_NORMCOLORS | wmiir create $noticebar
 
@@ -111,12 +107,6 @@ Action rssitems
             rm /tmp/rssitems
         fi
         sleep 5
-    done
-Action timedate
-	echo colors "$WMII_FOCUSCOLORS" | wmiir create /rbar/timestatus
-    while true; do
-        timestatus | wmiir write /rbar/timestatus
-        sleep 1
     done
 Action pywmii
     ~/.wmii-hg/wmii.py

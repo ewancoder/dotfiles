@@ -2,6 +2,7 @@
 import os
 import re
 import settings as data
+import threading
 from time import sleep
 
 #Mask for removing \n\t\r from bash get() function result
@@ -69,6 +70,8 @@ def makeBlocks():
         else:
             color = data.GoodColors
         createBlock(x[0])
+    #CreateTime
+    createBlock("Time")
 
 #Set text for all blocks
 def statusBlocks():
@@ -84,21 +87,32 @@ def colorBlocks():
 
 #Startup function
 def startup():
-    for command in data.d.startupList:
-        os.system(command + " &")
+    if get("pidof dropbox") == "":
+        for command in data.d.startupList:
+            os.system(command + " &")
 
 #========== MAIN FUNCTION ==========
 
+def loopStatusBar():
+    threading.Timer(2.0, loopStatusBar).start()
+    colorBlocks()
+    statusBlocks()
+    sleep(2)
+
+def loopTime():
+    threading.Timer(1.0, loopTime).start()
+    setColor("Time", data.FocusColors)
+    setStatus("Time", get(data.d.time))
+
 def main():
-    #Handle rules
+    #Handle Time
+    loopTime()
+    #Handle Rules
     makeRules()
-    #After handling rules, startup
+    #After handling rules, Startup
     startup()
     #Handle StatusBar
     makeBlocks()
-    while True:
-        colorBlocks()
-        statusBlocks()
-        sleep(2)
+    loopStatusBar()
 
 main()

@@ -53,6 +53,8 @@ d.addTagRule("Skype", 0)
 d.addTagRule("Steam", "Steam")
 
 #=== STATUSBAR ===
+#Time
+d.time = "date +%a\\ %b\\ %d\\ %T\\"
 #Free RAM
 d.text = "echo $(free -mh | grep /cache | awk '{print $4}') 'M'"
 d.check = "free -m | grep /cache | awk '{print $4}'"

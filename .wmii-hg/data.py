@@ -4,6 +4,8 @@ global text, color, check, lower, bigger, mid, midColor, badColor
 text, color, check, lower, bigger, mid, midColor, badColor = "", "", "", "", "", "", "", ""
 global colRules, tagRules
 colRules, tagRules = "", ""
+global time
+time = ""
 
 def addBlock():
     global text, color, check, lower, bigger, mid, midColor, badColor
