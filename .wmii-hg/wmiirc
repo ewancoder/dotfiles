@@ -142,7 +142,7 @@ Action timedate
         sleep 1
     done
 Action pystatus
-    ~/.wmii-hg/status.py
+    ~/.wmii-hg/wmii.py
 
 # Key Bindings
 KeyGroup Moving around
