@@ -29,34 +29,11 @@ export WMII_TERM="urxvt"
 hist="${WMII_CONFPATH%%:*}/history"
 histnum=5000
 
-# Column Rules
-cat ~/.wmii-hg/colrules | wmiir write /colrules
-
-# Tagging Rules
-cat ~/.wmii-hg/tagrules | wmiir write /rules
-
 timestatus(){
     echo -n label $(date +%a\ %b\ %d\ %T)
 }
 
-# Generic overridable startup details
-startup() {
-    ~/runonce.sh &
-    pactl set-sink-port alsa_output.pci-0000_00_14.2.analog-stereo analog-output-headphones &
-    chromium --no-startup-window &
-    copy &
-    deluge &
-    dropboxd &
-    feh --bg-scale --randomize ~/Dropbox/Pictures &
-    ~/.dotfiles/scripts/pic ~/Dropbox/Pictures 300 &
-    tilda &
-    gxkb &
-    kalu &
-    urxvt -name Canto -e canto-curses &
-}
-
 wi_runconf -s wmiirc_local
-startup
 echo colors $WMII_NORMCOLORS | wmiir create $noticebar
 
 # Event processing
@@ -141,7 +118,7 @@ Action timedate
         timestatus | wmiir write /rbar/timestatus
         sleep 1
     done
-Action pystatus
+Action pywmii
     ~/.wmii-hg/wmii.py
 
 # Key Bindings
@@ -291,7 +268,7 @@ xsetroot -solid "$WMII_BACKGROUND" &
 # Misc
 progsfile="$(wmiir namespace)/.proglist"
 #action status &
-action pystatus &
+action pywmii &
 action timedate &
 action rssitems &
 wi_proglist $PATH >$progsfile &

@@ -1,7 +1,9 @@
 #!/usr/bin/env python
-block = []
+block, startupList = [], []
 global text, color, check, lower, bigger, mid, midColor, badColor
 text, color, check, lower, bigger, mid, midColor, badColor = "", "", "", "", "", "", "", ""
+global colRules, tagRules
+colRules, tagRules = "", ""
 
 def addBlock():
     global text, color, check, lower, bigger, mid, midColor, badColor
@@ -15,3 +17,14 @@ def addBlock():
     block.append([])
     block[x].extend((name, text, color, check, lower, bigger, mid, midColor, badColor))
     text, color, check, lower, bigger, mid, midColor, badColor = "", "", "", "", "", "", "", ""
+
+def addColRule(col, rule):
+    global colRules
+    colRules = colRules + "/" + str(col) + "/ -> " + str(rule) + "\n"
+
+def addTagRule(tag, forcetag):
+    global tagRules
+    tagRules = tagRules + "/" + str(tag) + "/ force-tags=" + str(forcetag) + "\n"
+
+def startup(command):
+    startupList.append(command)

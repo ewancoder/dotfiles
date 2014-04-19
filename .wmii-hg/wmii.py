@@ -54,9 +54,16 @@ def checkCondition(name, check, lower, bigger, mid, color, midColor, badColor):
     else:
         setColor(name, color)
 
+#========== RULES FUNCTIONS ==========
+
+#Create column & tagging rules
+def makeRules():
+    os.system("wmiir write /colrules <<!\n" + data.d.colRules + "!")
+    os.system("wmiir write /rules <<!\n" + data.d.tagRules + "!")
+
 #Create all blocks
-def startBlocks():
-    for x in data.s.block:
+def makeBlocks():
+    for x in data.d.block:
         if x[2] != "":
             color = x[2]
         else:
@@ -65,18 +72,30 @@ def startBlocks():
 
 #Set text for all blocks
 def statusBlocks():
-    for x in data.s.block:
+    for x in data.d.block:
         setStatus(x[0], get(x[1]))
 
 #Check all blocks and apply color
 def colorBlocks():
-    for x in data.s.block:
+    for x in data.d.block:
         checkCondition(x[0], x[3], x[4], x[5], x[6], x[2], x[7], x[8])
+
+#========== STARTUP FUNCTIONS ==========
+
+#Startup function
+def startup():
+    for command in data.d.startupList:
+        os.system(command + " &")
 
 #========== MAIN FUNCTION ==========
 
 def main():
-    startBlocks()
+    #Handle rules
+    makeRules()
+    #After handling rules, startup
+    startup()
+    #Handle StatusBar
+    makeBlocks()
     while True:
         colorBlocks()
         statusBlocks()
