@@ -243,6 +243,13 @@ Key $MODKEY-Shift-$i     # Retag selected client with the numbered tag
 	wmiir xwrite /client/sel/ctl tags "$i"
 !
 done
+
+wi_events <<!
+KeyGroup UserApps
+Key $MODKEY-Shift-q
+    urxvt &
+!
+
 wi_events -e
 
 # WM Configuration
@@ -257,9 +264,7 @@ xsetroot -solid "$WMII_BACKGROUND" &
 
 # Misc
 progsfile="$(wmiir namespace)/.proglist"
-#action status &
 action pywmii &
-action timedate &
 action rssitems &
 wi_proglist $PATH >$progsfile &
 witray &

@@ -91,6 +91,12 @@ def startup():
         for command in data.d.startupList:
             os.system(command + " &")
 
+#========== EVENTS FUNCTIONS ==========
+
+#Events handling & eventloop
+def eventloop():
+    os.system("./oldwmii")
+
 #========== MAIN FUNCTION ==========
 
 def loopStatusBar():
@@ -114,5 +120,7 @@ def main():
     #Handle StatusBar
     makeBlocks()
     loopStatusBar()
+    #EventLoop
+    #eventloop()
 
 main()

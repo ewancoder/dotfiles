@@ -3,6 +3,28 @@ import data as d
 
 #========== CONFIGURATION ==========
 
+#=== COLORS ===
+#Color of focused tag/window
+FocusColors = "#000 #fc5 #000"
+#Color of sound block (see below)
+SoundColors = "#000 #6cc #000"
+#Good, Mid & Bad colors for checking state and drawing status
+GoodColors = "#000 #6c6 #000"
+MidColors = "#000 #7c8 #000"
+BadColors = "#000 #c66 #000"
+
+#=== MAIN CONFIG ===
+d.modkey = "Mod4"
+d.up = "k"
+d.down = "j"
+d.left = "h"
+d.right = "l"
+d.normcolors = "#000 #999 #000"
+d.focuscolors = FocusColors
+d.font = "-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*"
+d.term = "urxvt"
+d.border = 1
+
 #=== STARTUP ===
 #Background
 d.startup("~/.dotfiles/scripts/pic ~/Dropbox/Pictures 300")
@@ -25,16 +47,6 @@ d.startup("gxkb")
 d.startup("kalu")
 #Run tilda - overall F12 guake-style terminal
 d.startup("tilda")
-
-#=== COLORS ===
-#Color of focused tag/window
-FocusColors = "#000 #fc5 #000"
-#Color of sound block (see below)
-SoundColors = "#000 #6cc #000"
-#Good, Mid & Bad colors for checking state and drawing status
-GoodColors = "#000 #6c6 #000"
-MidColors = "#000 #7c8 #000"
-BadColors = "#000 #c66 #000"
 
 #=== COLUMN RULES ===
 #For skype mini-window on the left side
