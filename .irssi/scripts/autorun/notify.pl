@@ -5,10 +5,7 @@
 ##       /script load notify
 ##
 
-use strict;
-use Irssi;
-use vars qw($VERSION %IRSSI);
-use HTML::Entities;
+use strict; use Irssi; use vars qw($VERSION %IRSSI); use HTML::Entities;
 
 $VERSION = "0.5";
 %IRSSI = (
@@ -86,7 +83,7 @@ sub message_public_notify {
     my $mynick = $server->{nick};
     chomp $mynick;
 
-    if ($target =~ "#ewancoder") {
+    if (($target =~ "#ewancoder") || ($target =~ "#twitter_ewancoder")) {
         if ($msg =~ m/.*$mynick.*/) {
             notify($server, "Highlight ".$nick." > ".$target, $msg, "critical", 0);
         } else {
