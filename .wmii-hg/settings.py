@@ -30,6 +30,8 @@ d.border = 1
 d.startup("~/.dotfiles/scripts/pic ~/Dropbox/Pictures 300")
 #Run RSS curses-based client
 d.startup("urxvt -name Canto -e canto-curses")
+#Irssi user daemon (screen)
+d.startup("screen -dmS irssi irssi")
 
 #Unmute pulseaudio after fresh reinstall
 d.startup("~/runonce.sh")
