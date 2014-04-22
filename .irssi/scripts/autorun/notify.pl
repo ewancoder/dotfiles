@@ -90,8 +90,9 @@ sub message_public_notify {
             if ($msg =~ m/.*$mynick.*/) {
                 notify($server, "Highlight ".$nick." > ".$target, $msg, "critical", 0);
             } else {
-                notify($server, "Public ".$nick." > ".$target, $msg, "normal", 0);
+                notify($server, "Public ".$nick." > ".$target, $date, "normal", 0);
             }
+            $date = localtime();
         } else {
             notify($server, "Test value ".$nick." > ".$target, $date, "normal", 0);
         }
@@ -104,6 +105,7 @@ sub message_public_notify {
     }
 }
 
+our $date = '';
 Irssi::signal_add('message public', 'message_public_notify');
 Irssi::signal_add('message private', 'message_private_notify');
 Irssi::signal_add('dcc request', 'dcc_request_notify');
