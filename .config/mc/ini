@@ -115,6 +115,8 @@ base_color=
 rxvt-unicode-256color=
 color_terminals=
 
+rxvt-256color=
+
 [Panels]
 show_mini_info=true
 kilobyte_si=false
