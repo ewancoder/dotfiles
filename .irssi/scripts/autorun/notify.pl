@@ -85,19 +85,17 @@ sub message_public_notify {
     our $date;
 
     if ($target =~ "#ewancoder") {
-        my $nowdate = localtime();
-        if ($date != $nowdate) {
-            if ($msg =~ m/.*$mynick.*/) {
-                notify($server, "Highlight ".$nick." > ".$target, $msg, "critical", 0);
-            } else {
-                notify($server, "Public ".$nick." > ".$target, $date, "normal", 0);
-            }
-            $date = localtime();
+        if ($msg =~ m/.*$mynick.*/) {
+            notify($server, "Highlight ".$nick." > ".$target, $msg, "critical", 0);
         } else {
-            notify($server, "Test value ".$nick." > ".$target, $date, "normal", 0);
+            notify($server, "Public ".$nick." > ".$target, $msg, "normal", 0);
         }
     } elsif ($target =~ "#twitter") {
-        notify($server, "Twitter ".$nick." > ".$target, $msg, "normal", 0);
+        my $nowdate = localtime();
+        if (not($date eq $nowdate)) {
+            notify($server, "Twitter ".$nick." > ".$target, $msg, "normal", 0);
+        }
+        $date = localtime();
     } else {
         if ($msg =~ m/.*$mynick.*/) {
             notify($server, "Highlight ".$nick." > ".$target, $msg, "low", 0);
@@ -105,7 +103,6 @@ sub message_public_notify {
     }
 }
 
-our $date = '';
 Irssi::signal_add('message public', 'message_public_notify');
 Irssi::signal_add('message private', 'message_private_notify');
 Irssi::signal_add('dcc request', 'dcc_request_notify');
