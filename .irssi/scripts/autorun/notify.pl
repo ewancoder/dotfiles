@@ -1,8 +1,7 @@
 ##
 ## Put me in ~/.irssi/scripts, and then execute the following in irssi:
 ##
-##       /load perl
-##       /script load notify
+##       /load perl ##       /script load notify
 ##
 
 use strict; use Irssi; use vars qw($VERSION %IRSSI); use HTML::Entities;
@@ -83,11 +82,18 @@ sub message_public_notify {
     my $mynick = $server->{nick};
     chomp $mynick;
 
+    our $date;
+
     if ($target =~ "#ewancoder") {
-        if ($msg =~ m/.*$mynick.*/) {
-            notify($server, "Highlight ".$nick." > ".$target, $msg, "critical", 0);
+        my $nowdate = localtime();
+        if ($date != $nowdate) {
+            if ($msg =~ m/.*$mynick.*/) {
+                notify($server, "Highlight ".$nick." > ".$target, $msg, "critical", 0);
+            } else {
+                notify($server, "Public ".$nick." > ".$target, $msg, "normal", 0);
+            }
         } else {
-            notify($server, "Public ".$nick." > ".$target, $msg, "normal", 0);
+            notify($server, "Test value ".$nick." > ".$target, $date, "normal", 0);
         }
     } elsif ($target =~ "#twitter") {
         notify($server, "Twitter ".$nick." > ".$target, $msg, "normal", 0);
