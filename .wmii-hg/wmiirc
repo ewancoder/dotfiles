@@ -182,6 +182,9 @@ Key $MODKEY-Shift-x
 Key $MODKEY-Shift-z
     killall xcompmgr &
 
+Key $MODKEY-r
+    urxvt -name Canto -e canto-curses &
+
 Key XF86Sleep
     dbss &
 Key XF86WakeUp
