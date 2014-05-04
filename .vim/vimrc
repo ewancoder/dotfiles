@@ -97,7 +97,8 @@ nmap <silent> ,ev :e $MYVIMRC<cr>
 nmap <silent> ,sv :so $MYVIMRC<cr>
 "Fast saving / sudo saving
 nmap <leader>w :w!<cr>
-nmap <leader>q :q<cr>
+"Now I'm using this for buffer closing
+"nmap <leader>q :q<cr>
 cmap w!! w !sudo tee > /dev/null %
 "Easy windows switching
 map <C-j> <C-W>j
@@ -132,8 +133,13 @@ if has('multi_byte')
 endif
 nmap <leader>l :set list!<CR>
 "Moving through tabs
-map <leader>n <esc>:tabprevious<CR>
-map <leader>m <esc>:tabnext<CR>
+"map <leader>n <esc>:tabprevious<CR>
+"map <leader>m <esc>:tabnext<CR>
+"Moving through buffers
+map <tab> <esc>:bnext<CR>
+map <S-tab> <esc>:bprevious<CR>
+"Close buffer without loosing split
+map <leader>q :bp\|bd #<cr>
 "Sort alphabetically :)
 vnoremap <Leader>s :sort<CR>
 "Moving code blocks
