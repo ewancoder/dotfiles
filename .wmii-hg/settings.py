@@ -118,6 +118,10 @@ d.addBlock()
 d.text = "amixer | grep \"Left: Playback\" | awk {'print $5'} | cut -d \"[\" -f2 | cut -d \"%\" -f1"
 d.color = SoundColors
 d.addBlock()
+#NETSTATS
+d.text = "~/.dotfiles/scripts/netmon.py"
+d.color = SoundColors
+d.addBlock()
 #CPU Uptime
 d.text = "uptime | sed 's/.*://; s/, / /g'"
 d.check = d.text + " | awk '{print $2}'"
