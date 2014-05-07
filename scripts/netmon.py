@@ -32,4 +32,5 @@ def updown():
         update()
         updown()
 
-print(updown()[0], updown()[1])
+final = updown()
+print(final[0], final[1])
