@@ -26,6 +26,8 @@ Bundle "wincent/Command-T"
 ""Bundle "klen/python-mode"
 "I need this for habrahabr's article
 Bundle "Lokaltog/vim-easymotion"
+"For RST+Sphinx
+Bundle "Rykka/riv.vim"
 
 filetype plugin indent on
 
@@ -78,6 +80,9 @@ set smartindent
 autocmd FileType html :setlocal sw=2 ts=2 sts=2
 "NoSmartIndent for python
 autocmd FileType python :setlocal nosmartindent
+"Tabs for RST
+autocmd FileType rst :setlocal shiftwidth=3
+autocmd FileType rst :setlocal tabstop=3
 set number
 "Highlight OVER 80
 ""highlight OverLength ctermbg=red ctermfg=white guibg=#592929
