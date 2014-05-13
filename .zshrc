@@ -21,7 +21,7 @@ alias gica="git commit --amend"
 alias gip="git push --all"
 alias gil="git log --oneline --graph --color --all --decorate"
 alias gid="git diff"
-alias gim="git merge"
+alias gim="git merge --no-ff"
 
 alias ch="git checkout"
 

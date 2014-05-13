@@ -50,6 +50,9 @@ d.startup("kalu")
 #Run tilda - overall F12 guake-style terminal
 d.startup("tilda")
 
+#Change current session.jpg image
+d.startup("find ~/Dropbox/Cute -type f | shuf -n 1 | xargs -I{} cp {} ~/Dropbox/Public/today.jpg")
+
 #=== COLUMN RULES ===
 #For skype mini-window on the left side
 d.addColRule(0, "20+80")
