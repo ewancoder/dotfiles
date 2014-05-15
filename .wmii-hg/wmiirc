@@ -270,7 +270,7 @@ progsfile="$(wmiir namespace)/.proglist"
 action pywmii &
 action rssitems &
 wi_proglist $PATH >$progsfile &
-witray &
+witray -N &
 
 # Setup Tag Bar
 IFS="$wi_newline"
