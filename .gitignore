@@ -7,3 +7,6 @@
 .vim/backup
 
 _*
+
+.vim/bundle/*
+!./vim/bundle/vundle
