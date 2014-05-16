@@ -10,12 +10,12 @@ def get(command):
     return float(mask.sub('', os.popen(command).read()))
 
 def update():
-    os.system("ifconfig enp2s0 | grep RX\ packets | awk '{print $5}' > /tmp/rx")
-    os.system("ifconfig enp2s0 | grep TX\ packets | awk '{print $5}' > /tmp/tx")
+    os.system("ifconfig wan | grep RX\ packets | awk '{print $5}' > /tmp/rx")
+    os.system("ifconfig wan | grep TX\ packets | awk '{print $5}' > /tmp/tx")
 
 def getnew():
-    rx_new = get("ifconfig enp2s0 | grep RX\ packets | awk '{print $5}'")
-    tx_new = get("ifconfig enp2s0 | grep TX\ packets | awk '{print $5}'")
+    rx_new = get("ifconfig wan | grep RX\ packets | awk '{print $5}'")
+    tx_new = get("ifconfig wan | grep TX\ packets | awk '{print $5}'")
     return (rx_new, tx_new)
 
 def updown():
