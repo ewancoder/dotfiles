@@ -1,4 +1,4 @@
-rm /home/ewancoder/Dropbox/Public/today.jpg
+rm -f /home/ewancoder/Dropbox/Public/today.jpg
 cp /home/ewancoder/Dropbox/Public/offline.jpg /home/ewancoder/Dropbox/Public/today.jpg
 sleep 1
 systemctl poweroff -i

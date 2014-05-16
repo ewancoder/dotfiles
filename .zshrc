@@ -12,6 +12,8 @@ ZSH_THEME="gnzh"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias sc="screen -rd"
+alias sci="screen -rd irssi"
+alias scu="screen -rd userver"
 
 alias gis="git status"
 alias gia="git add -A"
