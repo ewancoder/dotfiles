@@ -172,6 +172,23 @@ Key $MODKEY-z
 	amixer -q sset Master 2500- &
     wmiir xwrite /rbar/Status_a8 label $(amixer | grep "Left: Playback" | awk {'print $5'} | cut -d "[" -f2 | cut -d "%" -f1)
 
+
+
+
+Key $MODKEY-Control-$LEFT
+    wmiir xwrite /tag/sel/ctl grow sel sel right -1
+Key $MODKEY-Control-$RIGHT
+    wmiir xwrite /tag/sel/ctl grow sel sel right 1
+Key $MODKEY-Control-$DOWN
+    wmiir xwrite /tag/sel/ctl grow sel sel down 1
+Key $MODKEY-Control-$UP
+    wmiir xwrite /tag/sel/ctl grow sel sel down -1
+
+
+
+
+
+
 Key $MODKEY-i
     sed -i 's/ca(fr),ru/us,ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
 Key $MODKEY-Shift-i
