@@ -30,7 +30,7 @@ d.border = 1
 d.startup("wmiir xwrite /ctl bar on top")
 
 #Background
-d.startup("~/.dotfiles/scripts/pic ~/Dropbox/Pictures 300")
+d.startup("~/bin/pic ~/Dropbox/Pictures 300")
 #Run RSS curses-based client
 d.startup("urxvt -name Canto -e canto-curses")
 #Irssi user daemon (screen)
@@ -131,7 +131,7 @@ d.text = "amixer | grep \"Left: Playback\" | awk {'print $5'} | cut -d \"[\" -f2
 d.color = SoundColors
 d.addBlock()
 #NETSTATS
-d.text = "~/.dotfiles/scripts/netmon.py"
+d.text = "~/bin/netmon.py"
 d.color = SoundColors
 d.addBlock()
 #CPU Uptime
