@@ -92,4 +92,4 @@ export TERM=rxvt-unicode-256color
 
 export EDITOR=gvim
 
-export PATH=/home/bin:$PATH
+export PATH=/home/ewancoder/bin:$PATH
