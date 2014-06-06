@@ -5,6 +5,12 @@ import settings as data
 import threading
 from time import sleep
 
+try:
+    import serial
+    ser = serial.Serial('/dev/ttyUSB0', 9600)
+except ValueError:
+    print('Can\'t connect to arduino')
+
 #Mask for removing \n\t\r from bash get() function result
 mask = re.compile('[\n\t\r]')
 
@@ -62,6 +68,15 @@ def makeRules():
     os.system("wmiir write /colrules <<!\n" + data.d.colRules + "!")
     os.system("wmiir write /rules <<!\n" + data.d.tagRules + "!")
 
+def checkrss():
+    if os.path.isfile('/tmp/rssitems'):
+        os.system('wmiir xwrite /lbar/RSS colors "'+data.GoodColors+'"')
+        os.system('rm /tmp/rssitems')
+        try:
+            ser.write('12345'.encode())
+        except ValueError:
+            print('Can\'t write to arduino')
+
 #Create all blocks
 def makeBlocks():
     for x in data.d.block:
@@ -103,6 +118,7 @@ def loopStatusBar():
     threading.Timer(2.0, loopStatusBar).start()
     colorBlocks()
     statusBlocks()
+    checkrss()
     sleep(2)
 
 def loopTime():

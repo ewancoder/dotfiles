@@ -100,14 +100,6 @@ Action exec
 	wmiir xwrite /ctl exec "$@"
 Action rehash
 	wi_proglist $PATH >$progsfile
-Action rssitems
-    while true; do
-        if [ -f /tmp/rssitems ]; then
-            wmiir xwrite /lbar/RSS colors "$GOODCOLORS"
-            rm /tmp/rssitems
-        fi
-        sleep 5
-    done
 Action pywmii
     ~/.wmii-hg/wmii.py
 
