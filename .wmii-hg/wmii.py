@@ -71,12 +71,10 @@ def makeRules():
 def checkrss():
     if os.path.isfile('/tmp/rssitems'):
         try:
-            ser.write('12345'.encode())
-            sleep(1)
+            ser.write('1'.encode())
         except:
             pass
         os.system('wmiir xwrite /lbar/RSS colors "'+data.GoodColors+'"')
-        os.system('rm /tmp/rssitems')
 
 #Create all blocks
 def makeBlocks():
