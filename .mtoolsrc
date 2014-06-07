@@ -1,0 +1,3 @@
+drive c: file="/dev/sdc1"
+drive d: file="/dev/sdd1"
+drive e: file="/dev/sde1"
