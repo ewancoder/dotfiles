@@ -8,8 +8,8 @@ from time import sleep
 try:
     import serial
     ser = serial.Serial('/dev/ttyUSB0', 9600)
-except ValueError:
-    print('Can\'t connect to arduino')
+except:
+    pass
 
 #Mask for removing \n\t\r from bash get() function result
 mask = re.compile('[\n\t\r]')
@@ -70,12 +70,13 @@ def makeRules():
 
 def checkrss():
     if os.path.isfile('/tmp/rssitems'):
-        os.system('wmiir xwrite /lbar/RSS colors "'+data.GoodColors+'"')
-        os.system('rm /tmp/rssitems')
         try:
             ser.write('12345'.encode())
-        except ValueError:
-            print('Can\'t write to arduino')
+            sleep(1)
+        except:
+            pass
+        os.system('wmiir xwrite /lbar/RSS colors "'+data.GoodColors+'"')
+        os.system('rm /tmp/rssitems')
 
 #Create all blocks
 def makeBlocks():

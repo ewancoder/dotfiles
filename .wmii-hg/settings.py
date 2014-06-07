@@ -47,7 +47,7 @@ d.startup("~/runonce.sh")
 #Run chromium in background
 d.startup("chromium --no-startup-window")
 #Run copy daemon
-d.startup("copy")
+d.startup("CopyAgent")
 #Run deluge gtk-based client
 d.startup("deluge")
 #Run dropbox daemon
