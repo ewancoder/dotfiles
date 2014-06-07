@@ -68,13 +68,26 @@ def makeRules():
     os.system("wmiir write /colrules <<!\n" + data.d.colRules + "!")
     os.system("wmiir write /rules <<!\n" + data.d.tagRules + "!")
 
+def setBrightness():
+    try:
+        brightness = float(ser.readline()) / 830
+        os.system('echo '+str(brightness)+' >> /tmp/wmii.log')
+    except:
+        brightness = 1
+        pass
+    if brightness < 0.5:
+        brightness = 0.5
+    if brightness > 1.02:
+        brightness = 1.02
+    os.system('xrandr --output DVI-I-0 --brightness '+str(brightness))
+
 def checkrss():
     if os.path.isfile('/tmp/rssitems'):
+        os.system('wmiir xwrite /lbar/RSS colors "'+data.GoodColors+'"')
         try:
             ser.write('1'.encode())
         except:
             pass
-        os.system('wmiir xwrite /lbar/RSS colors "'+data.GoodColors+'"')
 
 #Create all blocks
 def makeBlocks():
@@ -118,12 +131,12 @@ def loopStatusBar():
     colorBlocks()
     statusBlocks()
     checkrss()
-    sleep(2)
 
 def loopTime():
     threading.Timer(1.0, loopTime).start()
     setColor("Time", data.FocusColors)
     setStatus("Time", get(data.d.time))
+    setBrightness()
 
 def main():
     #Handle Time
