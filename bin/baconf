@@ -1,14 +1,14 @@
 rsync -av --delete ~/.canto-ng/* /mnt/backup/$1/.canto-ng/
 
-rsync -av --delete ~/.config/chromium /mnt/backup/$1/
-rsync -av --delete ~/.config/deluge /mnt/backup/$1/
-rsync -av --delete ~/.config/libreoffice /mnt/backup/$1/
-rsync -av --delete ~/.config/mc/panels.ini /mnt/backup/$1/
-rsync -av --delete ~/.config/Thunar /mnt/backup/$1/
-rsync -av --delete ~/.config/xfce4 /mnt/backup/$1/
-rsync -av --delete ~/.config/kalu/news.conf /mnt/backup/$1/kalu-news.conf
+rsync -av --delete ~/.config/chromium /mnt/backup/$1/.config/
+rsync -av --delete ~/.config/deluge /mnt/backup/$1/.config/
+rsync -av --delete ~/.config/libreoffice /mnt/backup/$1/.config/
+rsync -av --delete ~/.config/mc/panels.ini /mnt/backup/$1/.config/mc/
+rsync -av --delete ~/.config/Thunar /mnt/backup/$1/.config/
+rsync -av --delete ~/.config/xfce4 /mnt/backup/$1/.config/
+rsync -av --delete ~/.config/kalu/news.conf /mnt/backup/$1/.config/kalu/
 
-rsync -av --delete ~/.local/share/applications /mnt/backup/$1/
+rsync -av --delete ~/.local/share/applications /mnt/backup/$1/.local/share/
 
 rsync -av --delete ~/.xboomx /mnt/backup/$1/
 
@@ -20,14 +20,14 @@ rsync -av --delete ~/Anki /mnt/backup/$1/
 
 rsync -av --delete /var/spool/cron /mnt/backup/$1/
 
-if [[ ! -d ~/Copy/Backup/$(date +%Y)/$(date +%b) ]]; then
-    mkdir -p ~/Copy/Backup/$(date +%Y)/$(date +%b)
+if [[ ! -d /mnt/backup/Hourly/$(date +%Y)/$(date +%b) ]]; then
+    mkdir -p /mnt/backup/Hourly/$(date +%Y)/$(date +%b)
 fi
 
-if [[ ! -f ~/Copy/Backup/$(date +%Y)/$(date +%b)/$(date +%d.%H).tgz ]]; then
-    tar -cpzvf ~/Copy/Backup/$(date +%Y)/$(date +%b)/$(date +%d.%H).tgz /mnt/backup/$1
+if [[ ! -f /mnt/backup/Hourly/$(date +%Y)/$(date +%b)/$(date +%d.%H).tgz ]]; then
+    tar -cpzvf /mnt/backup/Hourly/$(date +%Y)/$(date +%b)/$(date +%d.%H).tgz /mnt/backup/$1
 fi
 
-if [[ ! -f ~/Copy/Backup/Other/$1$(date +%Y.%d.%b).tgz ]]; then
-    tar -cpzvf ~/Copy/Backup/Other/$1$(date +%Y.%d.%b).tgz /mnt/backup/$1
+if [[ ! -f ~/Copy/Backup/$1$(date +%Y.%b.%d).tgz ]]; then
+    tar -cpzvf ~/Copy/Backup/$1$(date +%Y.%b.%d).tgz /mnt/backup/$1
 fi
