@@ -28,6 +28,8 @@ Bundle "wincent/Command-T"
 Bundle "Lokaltog/vim-easymotion"
 "For RST+Sphinx
 Bundle "Rykka/riv.vim"
+"For arduino
+Bundle "jplaut/vim-arduino-ino"
 
 filetype plugin indent on
 
@@ -152,6 +154,9 @@ vnoremap < <gv
 vnoremap > >gv
 "Run python
 verbose nmap <F5>!python %
+"HEX MODE
+map <leader>h :%!xxd<CR>
+map <leader>r :%!xxd -r<CR>
 
 "---------- Plugins ----------
 
