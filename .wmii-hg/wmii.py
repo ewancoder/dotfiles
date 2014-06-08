@@ -123,7 +123,6 @@ def eventloop():
 def loopStatusBar():
     threading.Timer(2.0, loopStatusBar).start()
     colorBlocks()
-    lightSensor()
     statusBlocks()
     checkrss()
 
@@ -131,6 +130,7 @@ def loopTime():
     threading.Timer(1.0, loopTime).start()
     setColor("Time", data.FocusColors)
     setStatus("Time", get(data.d.time))
+    lightSensor()
 
 def main():
     #Handle Time
