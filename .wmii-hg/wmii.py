@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+os.system('echo 900 > /tmp/lightsensor')
 import re
 import settings as data
 import threading
@@ -68,18 +69,11 @@ def makeRules():
     os.system("wmiir write /colrules <<!\n" + data.d.colRules + "!")
     os.system("wmiir write /rules <<!\n" + data.d.tagRules + "!")
 
-def setBrightness():
+def lightSensor():
     try:
-        brightness = float(ser.readline()) / 830
-        os.system('echo '+str(brightness)+' >> /tmp/wmii.log')
+        os.system('echo '+str(float(ser.readline()))+' > /tmp/lightsensor')
     except:
-        brightness = 1
         pass
-    if brightness < 0.5:
-        brightness = 0.5
-    if brightness > 1.02:
-        brightness = 1.02
-    os.system('xrandr --output DVI-I-0 --brightness '+str(brightness))
 
 def checkrss():
     if os.path.isfile('/tmp/rssitems'):
@@ -129,6 +123,7 @@ def eventloop():
 def loopStatusBar():
     threading.Timer(2.0, loopStatusBar).start()
     colorBlocks()
+    lightSensor()
     statusBlocks()
     checkrss()
 
@@ -136,7 +131,6 @@ def loopTime():
     threading.Timer(1.0, loopTime).start()
     setColor("Time", data.FocusColors)
     setStatus("Time", get(data.d.time))
-    setBrightness()
 
 def main():
     #Handle Time
