@@ -31,6 +31,8 @@ alias y="yaourt"
 alias ya="yaourt -S"
 alias yau="yaourt -Syua --noconfirm"
 
+alias mount="mount -o iocharset=utf8"
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
