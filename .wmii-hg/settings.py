@@ -82,12 +82,12 @@ d.addTagRule("Steam", "Steam")
 #Time
 d.time = "date +%a\\ %b\\ %d\\ %T\\"
 #Light Sensor
-d.text = "cat /tmp/lightsensor"
-d.check = d.text
-d.bigger = 700
-d.mid = 400
-d.color = SoundColors
-d.addBlock()
+#d.text = "cat /tmp/lightsensor"
+#d.check = d.text
+#d.bigger = 700
+#d.mid = 400
+#d.color = SoundColors
+#d.addBlock()
 #Free RAM
 d.text = "echo $(free -mh | grep /cache | awk '{print $4}') 'M'"
 d.check = "free -m | grep /cache | awk '{print $4}'"
