@@ -12,7 +12,7 @@ ZSH_THEME="gnzh"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias sc="screen -rd"
-alias sci="screen -rd irssi"
+alias sci="ssh -t root@192.168.100.33 screen -rd irssi"
 alias scu="screen -rd userver"
 
 alias gis="git status"
@@ -32,6 +32,8 @@ alias ya="yaourt -S"
 alias yau="yaourt -Syua --noconfirm"
 
 alias mount="mount -o iocharset=utf8"
+
+alias sshrpi="ssh -t root@192.168.100.33"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"

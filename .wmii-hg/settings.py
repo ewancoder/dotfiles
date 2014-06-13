@@ -33,14 +33,15 @@ d.startup("wmiir xwrite /ctl bar on top")
 d.startup("~/bin/pic ~/Dropbox/Pictures 300")
 #Run RSS curses-based client
 d.startup("urxvt -name Canto -e canto-curses")
-#Irssi user daemon (screen)
-d.startup("screen -dmS irssi irssi")
 
 #Initialize wifi lan interface
 d.startup("sudo ifconfig lan up 192.168.1.1 netmask 255.255.255.0")
 #Run UniRemote server
 d.startup("screen -dmS userver ~/Copy/UniRemote/urserver")
 d.startup("~/Copy/UniRemote/urserver")
+
+#SSH NOTIFY IRSSI
+d.startup("~/bin/notify")
 
 #Unmute pulseaudio after fresh reinstall
 d.startup("~/runonce.sh")
