@@ -92,7 +92,7 @@ source $ZSH/oh-my-zsh.sh
 
 CDPATH=".:~:~/Dropbox"
 
-export TERM=rxvt-unicode-256color
+export TERM=rxvt-256color
 
 export EDITOR=gvim
 

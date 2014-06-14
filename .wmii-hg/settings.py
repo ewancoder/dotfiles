@@ -119,6 +119,12 @@ d.check = "df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//'"
 d.lower = 45
 d.mid = 75
 d.addBlock()
+#RPI CPU Temperature
+d.text = "tail -n1 /tmp/temp | cut -c 6-7"
+d.check = "tail -n1 /tmp/temp | cut -c 6-7"
+d.lower = 48
+d.mid = 56
+d.addBlock()
 #CPU Temperature
 d.text = "sensors | grep -m 1 temp1 | awk '{print $2}' | cut -c 2-3"
 d.check = d.text

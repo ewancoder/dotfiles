@@ -1,7 +1,10 @@
 #!/bin/bash
 
+while true; do
 ssh -t root@192.168.100.33 tail -f /root/.irssi/notifications | while read line; do
     IFS='Þ' read -a parts <<< "$line"
     notify-send "${parts[0]}" "${parts[1]}";
     sleep 0.5
+done
+sleep 5
 done

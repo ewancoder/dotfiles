@@ -1,0 +1,1 @@
+ssh root@192.168.100.33 tail -f /tmp/temp > /tmp/temp &
