@@ -42,6 +42,8 @@ d.startup("~/Copy/UniRemote/urserver")
 
 #SSH NOTIFY IRSSI
 d.startup("~/bin/notify")
+#SSH automatization
+d.startup("~/bin/auto")
 
 #Unmute pulseaudio after fresh reinstall
 d.startup("~/runonce.sh")

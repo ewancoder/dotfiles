@@ -44,7 +44,11 @@ def checkCondition(name, check, lower, bigger, mid, color, midColor, badColor):
     if badColor == "":
         badColor = data.BadColors
     if check != "":
-        checked = float(get(check))
+        try:
+            checked = float(get(check))
+        except:
+            checked = 0
+            pass
         if bigger != "":
             if checked > float(bigger):
                 setColor(name, color)

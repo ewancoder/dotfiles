@@ -3,7 +3,11 @@
 while true; do
 ssh -t root@192.168.100.33 tail -f /root/.irssi/notifications | while read line; do
     IFS='Þ' read -a parts <<< "$line"
-    notify-send "${parts[0]}" "${parts[1]}";
+    if ! [ "$(grep ewancoder $line)" == "" ]; then
+        notify-send -t 0 -u critical "${parts[0]}" "${parts[1]}";
+    else
+        notify-send -t 0 "${parts[0]}" "${parts[1]}";
+    fi
     sleep 0.5
 done
 sleep 5
