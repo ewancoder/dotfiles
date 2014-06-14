@@ -38,6 +38,8 @@ alias umount="sudo umount"
 
 alias sshrpi="ssh -t root@192.168.100.33"
 
+alias rmnotes="ssh root@192.168.100.33 rm /root/.irssi/notifications"
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
