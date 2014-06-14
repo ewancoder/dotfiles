@@ -11,6 +11,8 @@ ZSH_THEME="gnzh"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias s='sudo '
+
 alias sc="screen -rd"
 alias sci="ssh -t root@192.168.100.33 screen -rd irssi"
 alias scu="screen -rd userver"
@@ -31,7 +33,8 @@ alias y="yaourt"
 alias ya="yaourt -S"
 alias yau="yaourt -Syua --noconfirm"
 
-alias mount="mount -o iocharset=utf8"
+alias mount="sudo mount -o iocharset=utf8"
+alias umount="sudo umount"
 
 alias sshrpi="ssh -t root@192.168.100.33"
 
