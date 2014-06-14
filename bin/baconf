@@ -18,7 +18,7 @@ rsync -av --delete ~/Anki /mnt/backup/$1/
 
 
 
-rsync -av --delete /var/spool/cron /mnt/backup/$1/
+rsync -av --delete /var/spool/cron /mnt/backup/Other/
 
 if [[ ! -d /mnt/backup/Hourly/$(date +%Y)/$(date +%b) ]]; then
     mkdir -p /mnt/backup/Hourly/$(date +%Y)/$(date +%b)
