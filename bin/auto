@@ -1,1 +1,6 @@
-ssh root@192.168.100.33 tail -f /tmp/temp > /tmp/temp &
+#!/bin/bash
+
+while true; do
+    ssh root@192.168.100.33 tail -f /tmp/temp > /tmp/temp &
+    sleep 5
+done
