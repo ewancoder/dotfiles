@@ -1,12 +1,1 @@
-.canto-ng/*
-.config/*
-.wmii-hg/*
-
-.irssi/config
-.vim/swap
-.vim/backup
-
-_*
-
-.vim/bundle/*
-!./vim/bundle/vundle
+*
