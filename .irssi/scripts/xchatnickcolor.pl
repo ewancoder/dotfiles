@@ -1,1 +1,0 @@
-/home/ewancoder/.irssi/scripts/autorun/xchatnickcolor.pl
