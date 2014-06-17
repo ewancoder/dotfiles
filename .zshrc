@@ -33,7 +33,7 @@ alias y="yaourt"
 alias ya="yaourt -S"
 alias yau="yaourt -Syua --noconfirm"
 
-alias mount="sudo mount -o iocharset=utf8"
+alias mnt="sudo mount -o iocharset=utf8"
 alias umount="sudo umount"
 
 alias sshrpi="ssh -t root@192.168.100.33"

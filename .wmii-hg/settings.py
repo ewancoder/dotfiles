@@ -52,13 +52,13 @@ d.startup("chromium --no-startup-window")
 #Run copy daemon
 d.startup("CopyAgent")
 #Run deluge gtk-based client
-d.startup("deluge")
+#d.startup("deluge")
 #Run dropbox daemon
 d.startup("dropboxd")
 #Run locales icon in tray
 d.startup("gxkb")
 #Run kalu - update checker
-d.startup("kalu")
+#d.startup("kalu")
 #Run tilda - overall F12 guake-style terminal
 d.startup("tilda")
 
@@ -128,7 +128,7 @@ d.lower = 48
 d.mid = 56
 d.addBlock()
 #CPU Temperature
-d.text = "sensors | grep -m 1 temp1 | awk '{print $2}' | cut -c 2-3"
+d.text = "cat /sys/class/hwmon/hwmon0/device/temp1_input | cut -c1-2"
 d.check = d.text
 d.lower = 40
 d.mid = 50
