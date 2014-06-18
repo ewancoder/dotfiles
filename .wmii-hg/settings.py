@@ -29,6 +29,9 @@ d.border = 1
 #Panel on top
 d.startup("wmiir xwrite /ctl bar on top")
 
+#Run updates checker
+d.startup("~/bin/updates")
+
 #Background
 d.startup("~/bin/pic ~/Dropbox/Pictures 300")
 #Run RSS curses-based client
