@@ -1,4 +1,6 @@
 "---------- Vundle ----------
+"SHELL
+set shell=/bin/bash
 "Vim&Vi
 set nocompatible
 filetype off
