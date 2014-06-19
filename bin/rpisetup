@@ -14,6 +14,16 @@ pacman -S $devel bitlbee git nginx python irssi perl-html-parser screen vim
 bash <(curl aur.sh) -si --asroot --noconfirm package-query yaourt
 maybe canto-curses canto-daemon (canto-next) python-feedparser (need for canto-curses)
 
+locale-gen
+setfont cyr-sun16
+#IN IRSSI:
+#/set recode_fallback cp1251
+#/set recode_out_default_charset cp1251
+#/set recode_transliterate off
+#/set recode_autodetect_utf8 on
+#/set term_charset utf-8
+#/exit
+
 #Git-configs:
 #bin/hs - script to remove HS attributes from DOS filesystem
 #WHOLE .irssi folder
