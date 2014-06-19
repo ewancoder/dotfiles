@@ -1,12 +1,14 @@
+#!/bin/bash
+
 rsync -av --delete ~/.canto-ng/* /mnt/backup/$1/.canto-ng/
 
-rsync -av --delete ~/.config/chromium /mnt/backup/$1/.config/
-rsync -av --delete ~/.config/deluge /mnt/backup/$1/.config/
-rsync -av --delete ~/.config/libreoffice /mnt/backup/$1/.config/
-rsync -av --delete ~/.config/mc/panels.ini /mnt/backup/$1/.config/mc/
-rsync -av --delete ~/.config/Thunar /mnt/backup/$1/.config/
-rsync -av --delete ~/.config/xfce4 /mnt/backup/$1/.config/
-rsync -av --delete ~/.config/kalu/news.conf /mnt/backup/$1/.config/kalu/
+rsync -av --delete ~/.config/chromium /mnt/backup/$1Config/
+rsync -av --delete ~/.config/deluge /mnt/backup/$1Config/
+rsync -av --delete ~/.config/libreoffice /mnt/backup/$1Config/
+rsync -av --delete ~/.config/mc/panels.ini /mnt/backup/$1Config/mc/
+rsync -av --delete ~/.config/Thunar /mnt/backup/$1Config/
+rsync -av --delete ~/.config/xfce4 /mnt/backup/$1Config/
+rsync -av --delete ~/.config/kalu/news.conf /mnt/backup/$1Config/kalu/
 
 rsync -av --delete ~/.local/share/applications /mnt/backup/$1/.local/share/
 
