@@ -1,7 +1,5 @@
 #!/bin/bash
 
-rsync -av --delete ~/.canto-ng/* /mnt/backup/$1/.canto-ng/
-
 rsync -av --delete ~/.config/chromium /mnt/backup/$1Config/
 rsync -av --delete ~/.config/deluge /mnt/backup/$1Config/
 rsync -av --delete ~/.config/libreoffice /mnt/backup/$1Config/
@@ -10,12 +8,11 @@ rsync -av --delete ~/.config/Thunar /mnt/backup/$1Config/
 rsync -av --delete ~/.config/xfce4 /mnt/backup/$1Config/
 rsync -av --delete ~/.config/kalu/news.conf /mnt/backup/$1Config/kalu/
 
+rsync -av --delete ~/.canto-ng/* /mnt/backup/$1/.canto-ng/
 rsync -av --delete ~/.local/share/applications /mnt/backup/$1/.local/share/
-
+rsync -av --delete ~/.ssh /mnt/backup/$1/
 rsync -av --delete ~/.xboomx /mnt/backup/$1/
-
 rsync -av --delete ~/.zsh_history /mnt/backup/$1/
-
 rsync -av --delete ~/Anki /mnt/backup/$1/
 
 if [[ ! -d /mnt/backup/Hourly/$(date +%Y)/$(date +%b) ]]; then
