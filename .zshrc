@@ -14,7 +14,7 @@ ZSH_THEME="gnzh"
 alias s='sudo '
 
 alias sc="screen -rd"
-alias sci="ssh -t root@192.168.100.33 screen -rd irssi"
+alias sci="ssh -t root@192.168.100.11 screen -rd irssi"
 alias scu="screen -rd userver"
 
 alias gis="git status"
@@ -38,7 +38,7 @@ alias umount="sudo umount"
 
 alias sshrpi="ssh -t root@192.168.100.11"
 
-alias rmnotes="ssh root@192.168.100.33 rm /root/.irssi/notifications"
+alias rmnotes="ssh root@192.168.100.11 rm /root/.irssi/notifications"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
