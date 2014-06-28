@@ -166,6 +166,10 @@ Key $MODKEY-z
 
 
 
+Key $MODKEY-v
+    synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0') &
+
+
 
 Key $MODKEY-Control-$LEFT
     wmiir xwrite /tag/sel/ctl grow sel sel right -1
