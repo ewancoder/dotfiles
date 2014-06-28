@@ -1,16 +1,9 @@
 #!/usr/bin/env python
 import os
-os.system('echo 900 > /tmp/lightsensor')
 import re
 import settings as data
 import threading
 from time import sleep
-
-try:
-    import serial
-    ser = serial.Serial('/dev/ttyUSB0', 9600)
-except:
-    pass
 
 #Mask for removing \n\t\r from bash get() function result
 mask = re.compile('[\n\t\r]')
@@ -73,19 +66,10 @@ def makeRules():
     os.system("wmiir write /colrules <<!\n" + data.d.colRules + "!")
     os.system("wmiir write /rules <<!\n" + data.d.tagRules + "!")
 
-def lightSensor():
-    try:
-        os.system('echo '+str(float(ser.readline()))+' > /tmp/lightsensor')
-    except:
-        pass
-
 def checkrss():
     if os.path.isfile('/tmp/rssitems'):
         os.system('wmiir xwrite /lbar/RSS colors "'+data.GoodColors+'"')
-        try:
-            ser.write('1'.encode())
-        except:
-            pass
+        os.system('rm /tmp/rssitems')
 
 #Create all blocks
 def makeBlocks():
@@ -134,7 +118,6 @@ def loopTime():
     threading.Timer(1.0, loopTime).start()
     setColor("Time", data.FocusColors)
     setStatus("Time", get(data.d.time))
-    lightSensor()
 
 def main():
     #Handle Time
