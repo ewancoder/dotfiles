@@ -45,8 +45,6 @@ d.startup("~/Copy/UniRemote/urserver")
 
 #SSH NOTIFY IRSSI
 d.startup("~/bin/notify")
-#SSH automatization
-d.startup("~/bin/auto")
 
 #Unmute pulseaudio after fresh reinstall
 d.startup("~/runonce.sh")
@@ -124,26 +122,14 @@ d.check = "df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//'"
 d.lower = 45
 d.mid = 75
 d.addBlock()
-#RPI CPU Temperature
-d.text = "tail -n1 /tmp/temp | cut -c 6-7"
-d.check = "tail -n1 /tmp/temp | cut -c 6-7"
-d.lower = 48
-d.mid = 56
-d.addBlock()
 #CPU Temperature
-d.text = "cat /sys/class/hwmon/hwmon0/device/temp1_input | cut -c1-2"
+d.text = "cat /sys/class/hwmon/hwmon0/device/hwmon/hwmon0/temp2_input | cut -c1-2"
 d.check = d.text
 d.lower = 40
 d.mid = 50
 d.addBlock()
 #CPU Frequency
 d.text = "cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf \"%.0f\\n\", $4}'"
-d.addBlock()
-#GPU Temperature
-d.text = "nvidia-settings -q=GPUCoreTemp | grep -m 1 ewanhost | awk '{print $4}' | cut -c1-2"
-d.check = d.text
-d.lower = 40
-d.mid = 52
 d.addBlock()
 #Sound Volume
 d.text = "amixer | grep \"Left: Playback\" | awk {'print $5'} | cut -d \"[\" -f2 | cut -d \"%\" -f1"

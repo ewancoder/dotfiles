@@ -1,6 +1,0 @@
-#!/bin/bash
-
-while true; do
-    ssh root@192.168.100.33 watch cat /tmp/temp > /tmp/temp
-    sleep 5
-done
