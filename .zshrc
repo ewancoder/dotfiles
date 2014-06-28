@@ -36,7 +36,7 @@ alias yau="yaourt -Syua --noconfirm"
 alias mnt="sudo mount -o iocharset=utf8"
 alias umount="sudo umount"
 
-alias sshrpi="ssh -t root@192.168.100.33"
+alias sshrpi="ssh -t root@192.168.100.11"
 
 alias rmnotes="ssh root@192.168.100.33 rm /root/.irssi/notifications"
 
