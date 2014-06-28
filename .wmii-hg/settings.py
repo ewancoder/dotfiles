@@ -125,8 +125,8 @@ d.addBlock()
 #CPU Temperature
 d.text = "cat /sys/class/hwmon/hwmon0/device/hwmon/hwmon0/temp2_input | cut -c1-2"
 d.check = d.text
-d.lower = 40
-d.mid = 50
+d.lower = 65
+d.mid = 70
 d.addBlock()
 #CPU Frequency
 d.text = "cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf \"%.0f\\n\", $4}'"
