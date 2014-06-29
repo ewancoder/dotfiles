@@ -213,7 +213,7 @@ Key XF86PowerOff
         cv=$seltag
         wmiir xwrite /ctl view RSS
     fi
-    rm /tmp/rssitems
+    ssh root@192.168.100.11 rm /tmp/rssitems
 
 KeyGroup Changing column modes
 Key $MODKEY-d # Set column to default mode
