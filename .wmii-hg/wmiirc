@@ -198,11 +198,11 @@ Key $MODKEY-Shift-z
 Key $MODKEY-r
     urxvt -name Canto -e canto-curses &
 
-Key XF86Sleep
+Key Prior
     dbss &
-Key XF86WakeUp
+Key Next
     urxvt -e sudo yaourt -Syua --noconfirm &
-Key XF86PowerOff
+Key End
     if [ $cv == "" ]; then
         cv="1"
     fi
