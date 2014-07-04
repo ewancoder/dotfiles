@@ -34,8 +34,8 @@ d.startup("~/bin/updates")
 
 #Background
 d.startup("~/bin/pic ~/Dropbox/Pictures 300")
-#Run RSS curses-based client
-d.startup("urxvt -name Canto -e canto-curses -a $IP_RPI -p 7070")
+#Run SSH-CANTO client
+d.startup('~/bin/canto')
 
 #Initialize wifi lan interface
 d.startup("sudo ifconfig lan up 192.168.1.1 netmask 255.255.255.0")
