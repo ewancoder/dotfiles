@@ -11,10 +11,13 @@ ZSH_THEME="gnzh"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+#export IP_RPI=192.168.100.11
+export IP_RPI=82.209.250.6
+
 alias s='sudo '
 
 alias sc="screen -rd"
-alias sci="ssh -t root@192.168.100.11 screen -rd irssi"
+alias sci="ssh -t root@$IP_RPI screen -rd irssi"
 alias scu="screen -rd userver"
 
 alias gis="git status"
@@ -36,9 +39,9 @@ alias yau="yaourt -Syua --noconfirm"
 alias mnt="sudo mount -o iocharset=utf8"
 alias umount="sudo umount"
 
-alias sshrpi="ssh -t root@192.168.100.11"
+alias sshrpi="ssh -t root@$IP_RPI"
 
-alias rmnotes="ssh root@192.168.100.11 rm /root/.irssi/notifications"
+alias rmnotes="ssh root@$IP_RPI rm /root/.irssi/notifications"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"

@@ -209,7 +209,7 @@ Key End
     seltag=$(wmiir read /tag/sel/ctl | sed 1q)
     if [ $seltag == "RSS" ]; then
         wmiir xwrite /ctl view $cv
-        ssh root@192.168.100.11 rm /tmp/rssitems &
+        ssh root@$IP_RPI rm /tmp/rssitems &
     else
         cv=$seltag
         wmiir xwrite /ctl view RSS
