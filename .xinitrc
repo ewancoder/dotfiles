@@ -15,7 +15,7 @@ xrdb -merge ~/.Xresources &
 xset +fp /usr/share/fonts/local &
 start-pulseaudio-x11 &
 pasystray &
-xcompmgr &
+compton --backend glx --paint-on-overlay --vsync opengl-swc &
 devilspie -a &
 xset -dpms s off
 
