@@ -40,6 +40,8 @@ alias sshrpi="ssh -t root@192.168.100.11"
 
 alias rmnotes="ssh root@192.168.100.11 rm /root/.irssi/notifications"
 
+alias terr='cd ~/Copy/GameSaves/Terraria && mono TerrariaServer.exe'
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
