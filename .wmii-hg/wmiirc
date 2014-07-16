@@ -214,6 +214,58 @@ Key XF86PowerOff
         wmiir xwrite /ctl view RSS
     fi
 
+Key $MODKEY-KP_End
+    if [ -f /tmp/vols.mypo ]; then
+        pactl set-sink-input-volume $(sed -n 1p /tmp/vols.mypo) -- -5000
+        ~/bin/mypo.sh
+    fi
+Key $MODKEY-KP_Down
+    if [ -f /tmp/vols.mypo ]; then
+        pactl set-sink-input-volume $(sed -n 1p /tmp/vols.mypo) -- +5000
+        ~/bin/mypo.sh
+    fi
+Key $MODKEY-KP_Next
+    if [ -f /tmp/vols.mypo ]; then
+        pactl set-sink-input-volume $(sed -n 1p /tmp/vols.mypo) -- 33000
+        ~/bin/mypo.sh
+    fi
+
+
+
+Key $MODKEY-KP_Left
+    if [ -f /tmp/vols.mypo ]; then
+        pactl set-sink-input-volume $(sed -n 2p /tmp/vols.mypo) -- -5000
+        ~/bin/mypo.sh
+    fi
+Key $MODKEY-KP_Begin
+    if [ -f /tmp/vols.mypo ]; then
+        pactl set-sink-input-volume $(sed -n 2p /tmp/vols.mypo) -- +5000
+        ~/bin/mypo.sh
+    fi
+Key $MODKEY-KP_Right
+    if [ -f /tmp/vols.mypo ]; then
+        pactl set-sink-input-volume $(sed -n 2p /tmp/vols.mypo) -- 33000
+        ~/bin/mypo.sh
+    fi
+
+
+
+Key $MODKEY-KP_Home
+    if [ -f /tmp/vols.mypo ]; then
+        pactl set-sink-input-volume $(sed -n 3p /tmp/vols.mypo) -- -5000
+        ~/bin/mypo.sh
+    fi
+Key $MODKEY-KP_Up
+    if [ -f /tmp/vols.mypo ]; then
+        pactl set-sink-input-volume $(sed -n 3p /tmp/vols.mypo) -- +5000
+        ~/bin/mypo.sh
+    fi
+Key $MODKEY-KP_Prior
+    if [ -f /tmp/vols.mypo ]; then
+        pactl set-sink-input-volume $(sed -n 3p /tmp/vols.mypo) -- 33000
+        ~/bin/mypo.sh
+    fi
+
 KeyGroup Changing column modes
 Key $MODKEY-d # Set column to default mode
 	wmiir xwrite /tag/sel/ctl colmode sel default-max

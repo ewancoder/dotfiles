@@ -113,6 +113,7 @@ def loopStatusBar():
     colorBlocks()
     statusBlocks()
     checkrss()
+    os.system("~/bin/mypo.sh &")
 
 def loopTime():
     threading.Timer(1.0, loopTime).start()
