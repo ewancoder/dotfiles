@@ -5,13 +5,18 @@ import data as d
 
 #=== COLORS ===
 #Color of focused tag/window
-FocusColors = "#000 #fc5 #000"
+#FocusColors = "#000 #fc5 #000"
+FocusColors = "#ada #234 #000"
 #Color of sound block (see below)
-SoundColors = "#000 #6cc #000"
+#SoundColors = "#000 #6cc #000"
+SoundColors = "#ada #046 #000"
 #Good, Mid & Bad colors for checking state and drawing status
-GoodColors = "#000 #6c6 #000"
-MidColors = "#000 #7c8 #000"
-BadColors = "#000 #c66 #000"
+#GoodColors = "#000 #6c6 #000"
+GoodColors = "#ada #350 #000"
+#MidColors = "#000 #7c8 #000"
+MidColors = "#dda #640 #000"
+#BadColors = "#000 #c66 #000"
+BadColors = "#daa #600 #000"
 
 #=== MAIN CONFIG ===
 d.modkey = "Mod4"
@@ -19,9 +24,10 @@ d.up = "k"
 d.down = "j"
 d.left = "h"
 d.right = "l"
-d.normcolors = "#000 #999 #000"
+#d.normcolors = "#000 #999 #000"
+d.normcolors = "#ada #000 #000"
 d.focuscolors = FocusColors
-d.font = "-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*"
+d.font = "-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*"
 d.term = "urxvt"
 d.border = 1
 

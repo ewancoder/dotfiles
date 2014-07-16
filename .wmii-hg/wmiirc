@@ -15,12 +15,15 @@ noticetimeout=5
 noticebar=/rbar/!notice
 
 # Colors tuples: "<text> <background> <border>"
-export WMII_NORMCOLORS='#000 #999 #000'
-export WMII_FOCUSCOLORS='#000 #fc5 #000'
-export GOODCOLORS='#000 #6c6 #000'
+#export WMII_NORMCOLORS='#000 #999 #000'
+export WMII_NORMCOLORS='#ada #000 #000'
+#export WMII_FOCUSCOLORS='#000 #fc5 #000'
+export WMII_FOCUSCOLORS='#ada #234 #000'
+#export GOODCOLORS='#000 #6c6 #000'
+export GOODCOLORS='#ada #350 #000'
 
 export WMII_BACKGROUND='#000000'
-export WMII_FONT='-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*'
+export WMII_FONT='-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*'
 
 set -- $(echo $WMII_NORMCOLORS $WMII_FOCUSCOLORS)
 export WMII_TERM="urxvt"
