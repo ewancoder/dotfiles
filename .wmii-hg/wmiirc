@@ -218,17 +218,17 @@ Key XF86PowerOff
 Key $MODKEY-KP_End
     if [ -f /tmp/inds.mypo ]; then
         pactl set-sink-input-volume $(awk '{print $1}' /tmp/inds.mypo) -- -5000
-        ~/bin/mypo.sh
+        ~/bin/mypo-update.sh 0 $(awk '{print $1}' /tmp/inds.mypo)
     fi
 Key $MODKEY-KP_Down
     if [ -f /tmp/inds.mypo ]; then
         pactl set-sink-input-volume $(awk '{print $1}' /tmp/inds.mypo) -- 33000
-        ~/bin/mypo.sh
+        ~/bin/mypo-update.sh 0 $(awk '{print $1}' /tmp/inds.mypo)
     fi
 Key $MODKEY-KP_Next
     if [ -f /tmp/inds.mypo ]; then
         pactl set-sink-input-volume $(awk '{print $1}' /tmp/inds.mypo) -- +5000
-        ~/bin/mypo.sh
+        ~/bin/mypo-update.sh 0 $(awk '{print $1}' /tmp/inds.mypo)
     fi
 
 
@@ -236,17 +236,17 @@ Key $MODKEY-KP_Next
 Key $MODKEY-KP_Left
     if [ -f /tmp/inds.mypo ]; then
         pactl set-sink-input-volume $(awk '{print $2}' /tmp/inds.mypo) -- -5000
-        ~/bin/mypo.sh
+        ~/bin/mypo-update.sh 1 $(awk '{print $2}' /tmp/inds.mypo)
     fi
 Key $MODKEY-KP_Begin
     if [ -f /tmp/inds.mypo ]; then
         pactl set-sink-input-volume $(awk '{print $2}' /tmp/inds.mypo) -- 33000
-        ~/bin/mypo.sh
+        ~/bin/mypo-update.sh 1 $(awk '{print $2}' /tmp/inds.mypo)
     fi
 Key $MODKEY-KP_Right
     if [ -f /tmp/inds.mypo ]; then
         pactl set-sink-input-volume $(awk '{print $2}' /tmp/inds.mypo) -- +5000
-        ~/bin/mypo.sh
+        ~/bin/mypo-update.sh 1 $(awk '{print $2}' /tmp/inds.mypo)
     fi
 
 
@@ -254,17 +254,17 @@ Key $MODKEY-KP_Right
 Key $MODKEY-KP_Home
     if [ -f /tmp/inds.mypo ]; then
         pactl set-sink-input-volume $(awk '{print $3}' /tmp/inds.mypo) -- -5000
-        ~/bin/mypo.sh
+        ~/bin/mypo-update.sh 2 $(awk '{print $3}' /tmp/inds.mypo)
     fi
 Key $MODKEY-KP_Up
     if [ -f /tmp/inds.mypo ]; then
         pactl set-sink-input-volume $(awk '{print $3}' /tmp/inds.mypo) -- 33000
-        ~/bin/mypo.sh
+        ~/bin/mypo-update.sh 2 $(awk '{print $3}' /tmp/inds.mypo)
     fi
 Key $MODKEY-KP_Prior
     if [ -f /tmp/inds.mypo ]; then
         pactl set-sink-input-volume $(awk '{print $3}' /tmp/inds.mypo) -- +5000
-        ~/bin/mypo.sh
+        ~/bin/mypo-update.sh 2 $(awk '{print $3}' /tmp/inds.mypo)
     fi
 
 KeyGroup Changing column modes
