@@ -1,19 +1,19 @@
 #!/bin/bash
 
-rsync -av --delete ~/.config/chromium /mnt/backup/$1Config/
-rsync -av --delete ~/.config/deluge /mnt/backup/$1Config/
-rsync -av --delete ~/.config/libreoffice /mnt/backup/$1Config/
-rsync -av --delete ~/.config/mc/panels.ini /mnt/backup/$1Config/mc/
-rsync -av --delete ~/.config/Thunar /mnt/backup/$1Config/
-rsync -av --delete ~/.config/xfce4 /mnt/backup/$1Config/
-rsync -av --delete ~/.config/kalu/news.conf /mnt/backup/$1Config/kalu/
+rsync -av --delete ~/.config/chromium /mnt/backup/ArchConfig/
+rsync -av --delete ~/.config/deluge /mnt/backup/ArchConfig/
+rsync -av --delete ~/.config/libreoffice /mnt/backup/ArchConfig/
+rsync -av --delete ~/.config/mc/panels.ini /mnt/backup/ArchConfig/mc/
+rsync -av --delete ~/.config/Thunar /mnt/backup/ArchConfig/
+rsync -av --delete ~/.config/xfce4 /mnt/backup/ArchConfig/
+rsync -av --delete ~/.config/kalu/news.conf /mnt/backup/ArchConfig/kalu/
 
-rsync -av --delete ~/.canto-ng/* /mnt/backup/$1/.canto-ng/
-rsync -av --delete ~/.local/share/applications /mnt/backup/$1/.local/share/
-rsync -av --delete ~/.ssh /mnt/backup/$1/
-rsync -av --delete ~/.xboomx /mnt/backup/$1/
-rsync -av --delete ~/.zsh_history /mnt/backup/$1/
-rsync -av --delete ~/Anki /mnt/backup/$1/
+rsync -av --delete ~/.canto-ng/* /mnt/backup/Arch/.canto-ng/
+rsync -av --delete ~/.local/share/applications /mnt/backup/Arch/.local/share/
+rsync -av --delete ~/.ssh /mnt/backup/Arch/
+rsync -av --delete ~/.xboomx /mnt/backup/Arch/
+rsync -av --delete ~/.zsh_history /mnt/backup/Arch/
+rsync -av --delete ~/Anki /mnt/backup/Arch/
 
 if [[ ! -d /mnt/backup/Hourly/$(date +%Y)/$(date +%b) ]]; then
     mkdir -p /mnt/backup/Hourly/$(date +%Y)/$(date +%b)
@@ -23,6 +23,6 @@ if [[ ! -f /mnt/backup/Hourly/$(date +%Y)/$(date +%b)/$(date +%d.%H).tgz ]]; the
     tar -cpzvf /mnt/backup/Hourly/$(date +%Y)/$(date +%b)/$(date +%d.%H).tgz /mnt/backup/$1
 fi
 
-if [[ ! -f ~/Copy/Backup/$1$(date +%Y.%b.%d).tgz ]]; then
-    tar -cpzvf ~/Copy/Backup/$1$(date +%Y.%b.%d).tgz /mnt/backup/$1
+if [[ ! -f ~/Copy/Backup/Arch$(date +%Y.%b.%d).tgz ]]; then
+    tar -cpzvf ~/Copy/Backup/Arch$(date +%Y.%b.%d).tgz /mnt/backup/$1
 fi
