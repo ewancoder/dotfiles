@@ -4,7 +4,7 @@ if ! [ "$(ponymix --sink-input list)" == "" ]; then
     apps="$(cat temp.mypo | awk '/sink/{getline;print}')"
     inds=$(cat temp.mypo | grep 'sink-input' | awk '{print $2}' | sed 's/://')
     vols=$(cat temp.mypo | grep 'Avg. Volume:' | awk '{print $3}' | sed 's/%//')
-    echo $inds > /tmp/vols.mypo
+    echo $inds > /tmp/inds.mypo
     rm temp.mypo
     IFS=$'\r\n' GLOBIGNORE='*' :; app=($apps)
     IFS=$'\r\n' GLOBIGNORE='*' :; ind=($inds)
@@ -17,7 +17,7 @@ if ! [ "$(ponymix --sink-input list)" == "" ]; then
         fi
     done
 else
-    rm /tmp/vols.mypo
+    rm /tmp/inds.mypo
 fi
 
 current=$(wmiir ls /rbar | grep Audio | cut -c6-8)

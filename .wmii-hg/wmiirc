@@ -18,7 +18,7 @@ noticebar=/rbar/!notice
 #export WMII_NORMCOLORS='#000 #999 #000'
 export WMII_NORMCOLORS='#ada #000 #000'
 #export WMII_FOCUSCOLORS='#000 #fc5 #000'
-export WMII_FOCUSCOLORS='#ada #234 #000'
+export WMII_FOCUSCOLORS='#add #345 #000'
 #export GOODCOLORS='#000 #6c6 #000'
 export GOODCOLORS='#ada #350 #000'
 
@@ -215,54 +215,54 @@ Key XF86PowerOff
     fi
 
 Key $MODKEY-KP_End
-    if [ -f /tmp/vols.mypo ]; then
-        pactl set-sink-input-volume $(sed -n 1p /tmp/vols.mypo) -- -5000
+    if [ -f /tmp/inds.mypo ]; then
+        pactl set-sink-input-volume $(awk '{print $1}' /tmp/inds.mypo) -- -5000
         ~/bin/mypo.sh
     fi
 Key $MODKEY-KP_Down
-    if [ -f /tmp/vols.mypo ]; then
-        pactl set-sink-input-volume $(sed -n 1p /tmp/vols.mypo) -- +5000
+    if [ -f /tmp/inds.mypo ]; then
+        pactl set-sink-input-volume $(awk '{print $1}' /tmp/inds.mypo) -- 33000
         ~/bin/mypo.sh
     fi
 Key $MODKEY-KP_Next
-    if [ -f /tmp/vols.mypo ]; then
-        pactl set-sink-input-volume $(sed -n 1p /tmp/vols.mypo) -- 33000
+    if [ -f /tmp/inds.mypo ]; then
+        pactl set-sink-input-volume $(awk '{print $1}' /tmp/inds.mypo) -- +5000
         ~/bin/mypo.sh
     fi
 
 
 
 Key $MODKEY-KP_Left
-    if [ -f /tmp/vols.mypo ]; then
-        pactl set-sink-input-volume $(sed -n 2p /tmp/vols.mypo) -- -5000
+    if [ -f /tmp/inds.mypo ]; then
+        pactl set-sink-input-volume $(awk '{print $2}' /tmp/inds.mypo) -- -5000
         ~/bin/mypo.sh
     fi
 Key $MODKEY-KP_Begin
-    if [ -f /tmp/vols.mypo ]; then
-        pactl set-sink-input-volume $(sed -n 2p /tmp/vols.mypo) -- +5000
+    if [ -f /tmp/inds.mypo ]; then
+        pactl set-sink-input-volume $(awk '{print $2}' /tmp/inds.mypo) -- 33000
         ~/bin/mypo.sh
     fi
 Key $MODKEY-KP_Right
-    if [ -f /tmp/vols.mypo ]; then
-        pactl set-sink-input-volume $(sed -n 2p /tmp/vols.mypo) -- 33000
+    if [ -f /tmp/inds.mypo ]; then
+        pactl set-sink-input-volume $(awk '{print $2}' /tmp/inds.mypo) -- +5000
         ~/bin/mypo.sh
     fi
 
 
 
 Key $MODKEY-KP_Home
-    if [ -f /tmp/vols.mypo ]; then
-        pactl set-sink-input-volume $(sed -n 3p /tmp/vols.mypo) -- -5000
+    if [ -f /tmp/inds.mypo ]; then
+        pactl set-sink-input-volume $(awk '{print $3}' /tmp/inds.mypo) -- -5000
         ~/bin/mypo.sh
     fi
 Key $MODKEY-KP_Up
-    if [ -f /tmp/vols.mypo ]; then
-        pactl set-sink-input-volume $(sed -n 3p /tmp/vols.mypo) -- +5000
+    if [ -f /tmp/inds.mypo ]; then
+        pactl set-sink-input-volume $(awk '{print $3}' /tmp/inds.mypo) -- 33000
         ~/bin/mypo.sh
     fi
 Key $MODKEY-KP_Prior
-    if [ -f /tmp/vols.mypo ]; then
-        pactl set-sink-input-volume $(sed -n 3p /tmp/vols.mypo) -- 33000
+    if [ -f /tmp/inds.mypo ]; then
+        pactl set-sink-input-volume $(awk '{print $3}' /tmp/inds.mypo) -- +5000
         ~/bin/mypo.sh
     fi
 
