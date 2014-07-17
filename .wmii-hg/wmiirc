@@ -19,6 +19,7 @@ noticebar=/rbar/!notice
 export WMII_NORMCOLORS='#ada #000 #000'
 #export WMII_FOCUSCOLORS='#000 #fc5 #000'
 export WMII_FOCUSCOLORS='#add #345 #000'
+export WMII_TAGFOCUSCOLORS='#fc5 #345 #000'
 #export GOODCOLORS='#000 #6c6 #000'
 export GOODCOLORS='#ada #350 #000'
 
@@ -43,7 +44,7 @@ Event CreateTag
 Event DestroyTag
 	wmiir remove "/lbar/$@"
 Event FocusTag
-	wmiir xwrite "/lbar/$@" colors "$WMII_FOCUSCOLORS"
+	wmiir xwrite "/lbar/$@" colors "$WMII_TAGFOCUSCOLORS"
 Event UnfocusTag
 	wmiir xwrite "/lbar/$@" colors "$WMII_NORMCOLORS"
 Event UrgentTag
