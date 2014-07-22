@@ -11,6 +11,8 @@ ZSH_THEME="gnzh"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias canto='canto-curses -a 192.168.100.11 -p 7070'
+
 alias s='sudo '
 
 alias sc="screen -rd"
