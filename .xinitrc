@@ -21,5 +21,5 @@ xset -dpms s off
 
 unclutter &
 
-exec wmii
+exec wmii -grab
 #exec startkde
