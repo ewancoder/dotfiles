@@ -17,7 +17,9 @@ if ! [ "$(ponymix --sink-input list)" == "" ]; then
         fi
     done
 else
-    rm /tmp/inds.mypo
+    if [ -f /tmp/inds.mypo ]; then
+        rm /tmp/inds.mypo
+    fi
 fi
 
 IFS=$'\r\n' GLOBIGNORE='*' :; current=($(wmiir ls /rbar | grep Audio | cut -c6-8))

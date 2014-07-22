@@ -3,37 +3,34 @@
 wmiiscript=wmiirc # For wmii.sh
 . wmii.sh
 
+# Settings
+python ~/.wmii-hg/settings.py > /tmp/settings.wmii
+SETTINGS=$(python ~/.wmii-hg/settings.py)
+var(){
+    cat /tmp/settings.wmii | sed -n "$1{p;q}"
+}
+
 # Configuration Variables
-MODKEY=Mod4
-UP=k
-DOWN=j
-LEFT=h
-RIGHT=l
+MODKEY=$(var 1)
+UP=$(var 2)
+DOWN=$(var 3)
+LEFT=$(var 4)
+RIGHT=$(var 5)
 
 # Bars
 noticetimeout=5
 noticebar=/rbar/!notice
 
 # Colors tuples: "<text> <background> <border>"
-#export WMII_NORMCOLORS='#000 #999 #000'
-export WMII_NORMCOLORS='#ada #000 #000'
-#export WMII_FOCUSCOLORS='#000 #fc5 #000'
-export WMII_FOCUSCOLORS='#add #345 #000'
-export WMII_TAGFOCUSCOLORS='#fc5 #345 #000'
-#export GOODCOLORS='#000 #6c6 #000'
-export GOODCOLORS='#ada #350 #000'
+export WMII_NORMCOLORS=$(var 6)
+export WMII_FOCUSCOLORS=$(var 7)
+export WMII_TAGFOCUSCOLORS=$(var 8)
+export GOODCOLORS=$(var 9)
 
-export WMII_BACKGROUND='#000000'
-export WMII_FONT='-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*'
+export WMII_FONT=$(var 10)
+export WMII_TERM=$(var 11)
 
 set -- $(echo $WMII_NORMCOLORS $WMII_FOCUSCOLORS)
-export WMII_TERM="urxvt"
-
-# Menu history
-hist="${WMII_CONFPATH%%:*}/history"
-histnum=5000
-
-wi_runconf -s wmiirc_local
 echo colors $WMII_NORMCOLORS | wmiir create $noticebar
 
 # Event processing
@@ -69,7 +66,6 @@ Event Unresponsive
 	}&
 Event Notice
 	wmiir xwrite $noticebar $wi_arg
-
 	kill $xpid 2>/dev/null # Let's hope this isn't reused...
 	{ sleep $noticetimeout; wmiir xwrite $noticebar ' '; }&
 	xpid = $!
@@ -102,8 +98,6 @@ Action quit
 	wmiir xwrite /ctl quit
 Action exec
 	wmiir xwrite /ctl exec "$@"
-Action rehash
-	wi_proglist $PATH >$progsfile
 Action pywmii
     ~/.wmii-hg/wmii.py
 
@@ -118,15 +112,6 @@ Key $MODKEY-$UP     # Select the client above
 Key $MODKEY-$DOWN   # Select the client below
 	wmiir xwrite /tag/sel/ctl select down
 
-Key $MODKEY-space   # Toggle between floating and managed layers
-	wmiir xwrite /tag/sel/ctl select toggle
-
-KeyGroup Moving through stacks
-Key $MODKEY-Control-$UP    # Select the stack above
-	wmiir xwrite /tag/sel/ctl select up stack
-Key $MODKEY-Control-$DOWN  # Select the stack below
-	wmiir xwrite /tag/sel/ctl select down stack
-
 KeyGroup Moving clients around
 Key $MODKEY-Shift-$LEFT   # Move selected client to the left
 	wmiir xwrite /tag/sel/ctl send sel left
@@ -137,6 +122,25 @@ Key $MODKEY-Shift-$UP     # Move selected client up
 Key $MODKEY-Shift-$DOWN   # Move selected client down
 	wmiir xwrite /tag/sel/ctl send sel down
 
+KeyGroup Resizing clients
+Key $MODKEY-Control-$LEFT
+    wmiir xwrite /tag/sel/ctl grow sel sel right -2
+Key $MODKEY-Control-$RIGHT
+    wmiir xwrite /tag/sel/ctl grow sel sel right 2
+Key $MODKEY-Control-$UP
+    wmiir xwrite /tag/sel/ctl grow sel sel down -2
+Key $MODKEY-Control-$DOWN
+    wmiir xwrite /tag/sel/ctl grow sel sel down 2
+
+KeyGroup Moving through stacks
+Key $MODKEY-Control-$UP    # Select the stack above
+	wmiir xwrite /tag/sel/ctl select up stack
+Key $MODKEY-Control-$DOWN  # Select the stack below
+	wmiir xwrite /tag/sel/ctl select down stack
+
+KeyGroup Floating switching
+Key $MODKEY-space   # Toggle between floating and managed layers
+	wmiir xwrite /tag/sel/ctl select toggle
 Key $MODKEY-Shift-space   # Toggle selected client between floating and managed layers
 	wmiir xwrite /tag/sel/ctl send sel toggle
 
@@ -149,16 +153,34 @@ Key Control-q # Close client
         wmiir xwrite /client/sel/ctl kill
     fi
 
-#My keys configuration
+KeyGroup Changing column modes
+Key $MODKEY-d # Set column to default mode
+	wmiir xwrite /tag/sel/ctl colmode sel default-max
+Key $MODKEY-s # Set column to stack mode
+	wmiir xwrite /tag/sel/ctl colmode sel stack-max
+Key $MODKEY-m # Set column to max mode
+	wmiir xwrite /tag/sel/ctl colmode sel stack+max
+
+KeyGroup Running programs
+Key $MODKEY-a   # Open wmii actions menu
+	action $(wi_actions | wimenu -h "${hist}.actions" -n $histnum) &
+Key $MODKEY-p   # Open dmenu programs menu
+    xboomx &
+Key $MODKEY-Return # Launch a terminal
+	eval wmiir setsid $WMII_TERM &
+
+KeyGroup Personal software
 Key $MODKEY-c
 	chromium &
 Key $MODKEY-g
 	gvim &
-Key $MODKEY-p
-    xboomx &
+Key $MODKEY-r
+    urxvt -name Canto -e canto-curses -a 192.168.100.11 -p 7070 &
 Key $MODKEY-q
     #urxvt -e screen -r rtorrent
     deluge &
+    
+KeyGroup Volume control   
 Key $MODKEY-w
     urxvt -e alsamixer &
 Key $MODKEY-x
@@ -168,40 +190,20 @@ Key $MODKEY-z
 	amixer -q sset Master 2500- &
     wmiir xwrite /rbar/Status_a8 label $(amixer | grep "Left: Playback" | awk {'print $5'} | cut -d "[" -f2 | cut -d "%" -f1)
 
-
-
-
-Key $MODKEY-Control-$LEFT
-    wmiir xwrite /tag/sel/ctl grow sel sel right -1
-Key $MODKEY-Control-$RIGHT
-    wmiir xwrite /tag/sel/ctl grow sel sel right 1
-Key $MODKEY-Control-$DOWN
-    wmiir xwrite /tag/sel/ctl grow sel sel down 1
-Key $MODKEY-Control-$UP
-    wmiir xwrite /tag/sel/ctl grow sel sel down -1
-
-
-
-
-
-
+KeyGroup Keyboard layouts
 Key $MODKEY-i
     sed -i 's/ca(fr),ru/us,ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
 Key $MODKEY-Shift-i
     sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
 
-Key $MODKEY-Shift-x
-    xcompmgr &
-Key $MODKEY-Shift-z
-    killall xcompmgr &
-
-Key $MODKEY-r
-    urxvt -name Canto -e canto-curses -a 192.168.100.11 -p 7070 &
-
+KeyGroup Others
+#Screenshot
 Key XF86Sleep
     dbss &
+#System update
 Key XF86WakeUp
     urxvt -e sudo yaourt -Syua --noconfirm &
+#Go to RSS tag
 Key XF86PowerOff
     if [ $cv == "" ]; then
         cv="1"
@@ -209,12 +211,12 @@ Key XF86PowerOff
     seltag=$(wmiir read /tag/sel/ctl | sed 1q)
     if [ $seltag == "RSS" ]; then
         wmiir xwrite /ctl view $cv
-        ssh root@192.168.100.11 rm /tmp/rssitems &
     else
         cv=$seltag
         wmiir xwrite /ctl view RSS
     fi
 
+KeyGroup Pulseaudio per-application volume control
 Key $MODKEY-KP_End
     if [ -f /tmp/inds.mypo ]; then
         pactl set-sink-input-volume $(awk '{print $1}' /tmp/inds.mypo) -- -5000
@@ -230,8 +232,6 @@ Key $MODKEY-KP_Next
         pactl set-sink-input-volume $(awk '{print $1}' /tmp/inds.mypo) -- +5000
         ~/bin/mypo-update.sh 0 $(awk '{print $1}' /tmp/inds.mypo)
     fi
-
-
 
 Key $MODKEY-KP_Left
     if [ -f /tmp/inds.mypo ]; then
@@ -249,8 +249,6 @@ Key $MODKEY-KP_Right
         ~/bin/mypo-update.sh 1 $(awk '{print $2}' /tmp/inds.mypo)
     fi
 
-
-
 Key $MODKEY-KP_Home
     if [ -f /tmp/inds.mypo ]; then
         pactl set-sink-input-volume $(awk '{print $3}' /tmp/inds.mypo) -- -5000
@@ -266,32 +264,6 @@ Key $MODKEY-KP_Prior
         pactl set-sink-input-volume $(awk '{print $3}' /tmp/inds.mypo) -- +5000
         ~/bin/mypo-update.sh 2 $(awk '{print $3}' /tmp/inds.mypo)
     fi
-
-KeyGroup Changing column modes
-Key $MODKEY-d # Set column to default mode
-	wmiir xwrite /tag/sel/ctl colmode sel default-max
-Key $MODKEY-s # Set column to stack mode
-	wmiir xwrite /tag/sel/ctl colmode sel stack-max
-Key $MODKEY-m # Set column to max mode
-	wmiir xwrite /tag/sel/ctl colmode sel stack+max
-
-KeyGroup Running programs
-Key $MODKEY-a      # Open wmii actions menu
-	action $(wi_actions | wimenu -h "${hist}.actions" -n $histnum) &
-
-Key $MODKEY-Return # Launch a terminal
-	eval wmiir setsid $WMII_TERM &
-
-KeyGroup Other
-Key $MODKEY-Control-t # Toggle all other key bindings
-	case $(wmiir read /keys | wc -l | tr -d ' \t\n') in
-	0|1)
-		echo -n "$Keys" | wmiir write /keys
-		wmiir xwrite /ctl grabmod $MODKEY;;
-	*)
-		wmiir xwrite /keys $MODKEY-Control-t
-		wmiir xwrite /ctl grabmod Mod3;;
-	esac
 
 KeyGroup Tag actions
 Key $MODKEY-t       # Change to another tag
@@ -312,13 +284,6 @@ Key $MODKEY-Shift-$i     # Retag selected client with the numbered tag
 	wmiir xwrite /client/sel/ctl tags "$i"
 !
 done
-
-wi_events <<!
-KeyGroup UserApps
-Key $MODKEY-Shift-q
-    urxvt &
-!
-
 wi_events -e
 
 # WM Configuration
@@ -329,13 +294,9 @@ wmiir write /ctl <<!
 	grabmod $MODKEY
 	border 1
 !
-xsetroot -solid "$WMII_BACKGROUND" &
 
 # Misc
-progsfile="$(wmiir namespace)/.proglist"
 action pywmii &
-action rssitems &
-wi_proglist $PATH >$progsfile &
 witray -N &
 
 # Setup Tag Bar
@@ -346,7 +307,7 @@ unset IFS
 wi_tags | while read tag
 do
     if [ "$tag" = "$seltag" ]; then
-		echo colors "$WMII_FOCUSCOLORS"
+		echo colors "$WMII_TAGFOCUSCOLORS"
 		echo label $tag
 	else
 		echo colors "$WMII_NORMCOLORS"

@@ -4,32 +4,44 @@ import data as d
 #========== CONFIGURATION ==========
 
 #=== COLORS ===
-#Color of focused tag/window
-#FocusColors = "#000 #fc5 #000"
-FocusColors = "#ada #234 #000"
-#Color of sound block (see below)
-#SoundColors = "#000 #6cc #000"
-SoundColors = "#ada #046 #000"
+#Color of (not)focused tag/window
+NormColors = "#ada #000 #000"
+FocusColors = "#add #345 #000"
+TagFocusColors = "#fc5 #345 #000"
+#Color of sound & download/upload block (see below)
+NeutralColors = "#ada #046 #000"
 #Good, Mid & Bad colors for checking state and drawing status
-#GoodColors = "#000 #6c6 #000"
 GoodColors = "#ada #350 #000"
-#MidColors = "#000 #7c8 #000"
 MidColors = "#dda #640 #000"
-#BadColors = "#000 #c66 #000"
 BadColors = "#daa #600 #000"
 
-#=== MAIN CONFIG ===
+#=== GENERAL CONFIG ===
 d.modkey = "Mod4"
 d.up = "k"
 d.down = "j"
 d.left = "h"
 d.right = "l"
-#d.normcolors = "#000 #999 #000"
-d.normcolors = "#ada #000 #000"
+d.normcolors = NormColors
 d.focuscolors = FocusColors
 d.font = "-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*"
 d.term = "urxvt"
 d.border = 1
+
+#Output for wmiirc
+if __name__ == "__main__":
+    print(d.modkey)
+    print(d.up)
+    print(d.down)
+    print(d.left)
+    print(d.right)
+
+    print(NormColors)
+    print(FocusColors)
+    print(TagFocusColors)
+    print(GoodColors)
+
+    print(d.font)
+    print(d.term)
 
 #=== STARTUP ===
 #Panel on top
@@ -43,11 +55,8 @@ d.startup("~/bin/pic ~/Dropbox/Pictures 300")
 #Run RSS curses-based client
 d.startup("urxvt -name Canto -e canto-curses -a 192.168.100.11 -p 7070")
 
-#Initialize wifi lan interface
-d.startup("sudo ifconfig lan up 192.168.1.1 netmask 255.255.255.0")
 #Run UniRemote server
 d.startup("screen -dmS userver ~/Copy/UniRemote/urserver")
-d.startup("~/Copy/UniRemote/urserver")
 
 #SSH NOTIFY IRSSI
 d.startup("~/bin/notify")
@@ -60,14 +69,10 @@ d.startup("~/runonce.sh")
 d.startup("chromium --no-startup-window")
 #Run copy daemon
 d.startup("CopyAgent")
-#Run deluge gtk-based client
-#d.startup("deluge")
 #Run dropbox daemon
 d.startup("dropboxd")
 #Run locales icon in tray
 d.startup("gxkb")
-#Run kalu - update checker
-#d.startup("kalu")
 #Run tilda - overall F12 guake-style terminal
 d.startup("tilda")
 
@@ -93,13 +98,6 @@ d.addTagRule("Steam", "Steam")
 #=== STATUSBAR ===
 #Time
 d.time = "date +%a\\ %b\\ %d\\ %T\\"
-#Light Sensor
-#d.text = "cat /tmp/lightsensor"
-#d.check = d.text
-#d.bigger = 700
-#d.mid = 400
-#d.color = SoundColors
-#d.addBlock()
 #Free RAM
 d.text = "echo $(free -mh | grep /cache | awk '{print $4}') 'M'"
 d.check = "free -m | grep /cache | awk '{print $4}'"
@@ -147,11 +145,11 @@ d.mid = 52
 d.addBlock()
 #Sound Volume
 d.text = "amixer | grep \"Left: Playback\" | awk {'print $5'} | cut -d \"[\" -f2 | cut -d \"%\" -f1"
-d.color = SoundColors
+d.color = NeutralColors
 d.addBlock()
 #NETSTATS
 d.text = "~/bin/netmon.py"
-d.color = SoundColors
+d.color = NeutralColors
 d.addBlock()
 #CPU Uptime
 d.text = "uptime | sed 's/.*://; s/, / /g'"

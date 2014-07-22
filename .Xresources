@@ -8,5 +8,4 @@ URxvt.perl-ext: default,url-select
 URxvt.keysym.M-l: perl:url-select:select_next
 URxvt.url-select.launcher: /usr/bin/chromium
 URxvt.url-select.underline: true
-
 URxvt.colorUL: #4682B4
