@@ -19,7 +19,7 @@ compton --backend glx --paint-on-overlay --vsync opengl-swc &
 devilspie -a &
 xset -dpms s off
 
-unclutter &
+unclutter -grab &
 
-exec wmii -grab
+exec wmii
 #exec startkde
