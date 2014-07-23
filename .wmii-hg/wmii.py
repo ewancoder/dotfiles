@@ -96,9 +96,8 @@ def colorBlocks():
 
 #Startup function
 def startup():
-    if get("pidof dropbox") == "":
-        for command in data.d.startupList:
-            os.system(command + " &")
+    for command in data.startup:
+        os.system(command + ' &')
 
 #========== EVENTS FUNCTIONS ==========
 
@@ -113,7 +112,7 @@ def loopStatusBar():
     colorBlocks()
     statusBlocks()
     checkrss()
-    os.system("~/bin/mypo.sh &")
+    os.system("~/.wmii-hg/mypo &")
 
 def loopTime():
     threading.Timer(1.0, loopTime).start()
@@ -122,17 +121,32 @@ def loopTime():
     setColor("Time", data.FocusColors)
     setStatus("Time", get(data.d.time))
 
+def loopBackground():
+    threading.Timer(data.timeout, loopBackground).start()
+    os.system('feh --bg-fill --randomize --recursive ' + data.background)
+
+def loopSysUpdate():
+    threading.Timer(data.updatesTimeout, loopSysUpdate).start()
+    upd = get('yaourt -Qua')
+    num = get('yaourt -Qua | wc -l')
+    if num != '0':
+        os.system('yaourt -Qua > /tmp/yaourt.updates && notify-send -u low "Updates available (' + num + ')" "$(cat /tmp/yaourt.updates"')
+
 def main():
+    #Before all of this - we need to set background instead of ugly gray color
+    loopBackground()
     #Handle Time
     loopTime()
     #Handle Rules
     makeRules()
+    #Set position
+    os.system("wmiir xwrite /ctl bar on " + data.position)
+    #Update system check
+    loopSysUpdate()
     #After handling rules, Startup
     startup()
     #Handle StatusBar
     makeBlocks()
     loopStatusBar()
-    #EventLoop
-    #eventloop()
 
 main()

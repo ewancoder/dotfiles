@@ -1,5 +1,4 @@
 #!/bin/bash
-
 rsync -av --delete ~/.config/chromium /mnt/backup/ArchConfig/
 rsync -av --delete ~/.config/deluge /mnt/backup/ArchConfig/
 rsync -av --delete ~/.config/libreoffice /mnt/backup/ArchConfig/
@@ -8,13 +7,6 @@ rsync -av --delete ~/.config/mc/panels.ini /mnt/backup/ArchConfig/mc/
 rsync -av --delete ~/.config/xfce4 /mnt/backup/ArchConfig/
 #User-defined actions for Thunar
 rsync -av --delete ~/.config/Thunar /mnt/backup/ArchConfig/
-
-#I don't need canto either because now it's totally on RPI side
-#rsync -av --delete ~/.canto-ng/* /mnt/backup/Arch/.canto-ng/
-
-#I will uncomment it if I will need it again
-#And then I should MANUALLY create /mnt/backup/Arch/.local/share folders because rsync doesn't =/ (strange)
-#rsync -av --delete ~/.local/share/applications /mnt/backup/Arch/.local/share/
 
 #For connecting to raspberry PI automatically after reinstall
 rsync -av --delete ~/.ssh /mnt/backup/Arch/

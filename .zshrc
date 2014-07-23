@@ -11,38 +11,7 @@ ZSH_THEME="gnzh"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias canto='canto-curses -a 192.168.100.11 -p 7070'
-
-alias s='sudo '
-
-alias sc="screen -rd"
-alias sci="ssh -t root@192.168.100.11 screen -rd irssi"
-alias scu="screen -rd userver"
-
-alias gis="git status"
-alias gia="git add -A"
-alias gic="git commit"
-alias gicm="git commit -m"
-alias gica="git commit --amend"
-alias gip="git push --all"
-alias gil="git log --oneline --graph --color --all --decorate"
-alias gid="git diff"
-alias gim="git merge --no-ff"
-
-alias ch="git checkout"
-
-alias y="yaourt"
-alias ya="yaourt -S"
-alias yau="yaourt -Syua --noconfirm"
-
-alias mnt="sudo mount -o iocharset=utf8"
-alias umount="sudo umount"
-
-alias sshrpi="ssh -t root@192.168.100.11"
-
-alias rmnotes="ssh root@192.168.100.11 rm /root/.irssi/notifications"
-
-alias terr='cd ~/Copy/GameSaves/Terraria && mono TerrariaServer.exe'
+source .zsh_aliases
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"

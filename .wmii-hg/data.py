@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-block, startupList = [], []
+block = []
 global text, color, check, lower, bigger, mid, midColor, badColor
 text, color, check, lower, bigger, mid, midColor, badColor = "", "", "", "", "", "", "", ""
 global colRules, tagRules
@@ -31,6 +31,3 @@ def addColRule(col, rule):
 def addTagRule(tag, forcetag):
     global tagRules
     tagRules = tagRules + "/" + str(tag) + "/ force-tags=" + str(forcetag) + "\n"
-
-def startup(command):
-    startupList.append(command)

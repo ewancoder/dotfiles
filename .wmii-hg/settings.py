@@ -15,69 +15,39 @@ GoodColors = "#ada #350 #000"
 MidColors = "#dda #640 #000"
 BadColors = "#daa #600 #000"
 
+d.normcolors = NormColors
+d.focuscolors = FocusColors
+
 #=== GENERAL CONFIG ===
 d.modkey = "Mod4"
 d.up = "k"
 d.down = "j"
 d.left = "h"
 d.right = "l"
-d.normcolors = NormColors
-d.focuscolors = FocusColors
+
 d.font = "-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*"
 d.term = "urxvt"
 d.border = 1
 
-#Output for wmiirc
-if __name__ == "__main__":
-    print(d.modkey)
-    print(d.up)
-    print(d.down)
-    print(d.left)
-    print(d.right)
+#Panel position (top or bottom)
+position = "top"
 
-    print(NormColors)
-    print(FocusColors)
-    print(TagFocusColors)
-    print(GoodColors)
+#Background folder
+background = "~/Dropbox/Pictures"
+#Timeout to change background, in seconds
+timeout = 300
 
-    print(d.font)
-    print(d.term)
+#Check for Arch Linux updates each N seconds
+updatesTimeout = 600
 
-#=== STARTUP ===
-#Panel on top
-d.startup("wmiir xwrite /ctl bar on top")
-
-#Run updates checker
-d.startup("~/bin/updates")
-
-#Background
-d.startup("~/bin/pic ~/Dropbox/Pictures 300")
-#Run RSS curses-based client
-d.startup("urxvt -name Canto -e canto-curses -a 192.168.100.11 -p 7070")
-
-#Run UniRemote server
-d.startup("screen -dmS userver ~/Copy/UniRemote/urserver")
-
-#SSH NOTIFY IRSSI
-d.startup("~/bin/notify")
-#SSH RSS-NOTIFY
-d.startup("~/bin/rssnotify")
-
-#Unmute pulseaudio after fresh reinstall
-d.startup("~/runonce.sh")
-#Run chromium in background
-d.startup("chromium --no-startup-window")
-#Run copy daemon
-d.startup("CopyAgent")
-#Run dropbox daemon
-d.startup("dropboxd")
-#Run locales icon in tray
-d.startup("gxkb")
-#Run tilda - overall F12 guake-style terminal
-d.startup("tilda")
-
-#Change current session.jpg image
-d.startup("find ~/Dropbox/Cute -type f | shuf -n 1 | xargs -I{} cp {} ~/Dropbox/Public/today.jpg")
+startup = [
+    'gxkb',
+    'chromium --no-startup-window',
+    'CopyAgent',
+    'dropboxd',
+    '~/bin/ircnotify',
+    'tilda'
+]
 
 #=== COLUMN RULES ===
 #For skype mini-window on the left side
@@ -148,7 +118,7 @@ d.text = "amixer | grep \"Left: Playback\" | awk {'print $5'} | cut -d \"[\" -f2
 d.color = NeutralColors
 d.addBlock()
 #NETSTATS
-d.text = "~/bin/netmon.py"
+d.text = "~/bin/netmon"
 d.color = NeutralColors
 d.addBlock()
 #CPU Uptime
@@ -157,3 +127,19 @@ d.check = d.text + " | awk '{print $2}'"
 d.color = FocusColors
 d.lower = 1.75
 d.addBlock()
+
+#Output for wmiirc
+if __name__ == "__main__":
+    print(d.modkey)
+    print(d.up)
+    print(d.down)
+    print(d.left)
+    print(d.right)
+
+    print(NormColors)
+    print(FocusColors)
+    print(TagFocusColors)
+    print(GoodColors)
+
+    print(d.font)
+    print(d.term)

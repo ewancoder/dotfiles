@@ -1,5 +1,4 @@
 #!/bin/bash
-
 while true; do
     ssh -t root@192.168.100.11 tail -f /root/.irssi/notifications | while read line; do
         IFS='Þ' read -a parts <<< "$line"

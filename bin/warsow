@@ -1,5 +1,0 @@
-#!/bin/bash
-
-/usr/bin/warsow &
-sleep 5
-wmiir xwrite /ctl view 2
