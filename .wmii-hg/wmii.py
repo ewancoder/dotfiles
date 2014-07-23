@@ -2,6 +2,7 @@
 import os
 import re
 import settings as data
+import subprocess
 import threading
 from time import sleep
 
@@ -94,10 +95,16 @@ def colorBlocks():
 
 #========== STARTUP FUNCTIONS ==========
 
+pids = []
+
 #Startup function
 def startup():
     for command in data.startup:
-        os.system(command + ' &')
+        pids.append(subprocess.Popen(command, shell = True).pid)
+
+def killAll():
+    for pid in pids:
+        os.system('kill ' + str(pid))
 
 #========== EVENTS FUNCTIONS ==========
 
@@ -130,7 +137,7 @@ def loopSysUpdate():
     upd = get('yaourt -Qua')
     num = get('yaourt -Qua | wc -l')
     if num != '0':
-        os.system('yaourt -Qua > /tmp/yaourt.updates && notify-send -u low "Updates available (' + num + ')" "$(cat /tmp/yaourt.updates"')
+        os.system('yaourt -Qua > /tmp/yaourt.updates && notify-send -u low "Updates available (' + num + ')" "$(cat /tmp/yaourt.updates)"')
 
 def main():
     #Before all of this - we need to set background instead of ugly gray color
@@ -149,4 +156,5 @@ def main():
     makeBlocks()
     loopStatusBar()
 
-main()
+if __name__ == "__main__":
+    main()

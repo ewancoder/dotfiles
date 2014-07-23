@@ -40,9 +40,11 @@ timeout = 300
 #Check for Arch Linux updates each N seconds
 updatesTimeout = 600
 
+#Copy starts here because I need it only for backup (it can be killed upon X11 destruction) and systemd isn't working for copy-agent@ewancoder
+#Dropbox is a systemd service which runs all the time 'ewancoder' is logged
 startup = [
     'gxkb',
-    'chromium --no-startup-window',
+    [ 'chromium', '--no-startup-window' ],
     'CopyAgent',
     'dropboxd',
     '~/bin/ircnotify',
