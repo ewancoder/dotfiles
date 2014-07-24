@@ -124,6 +124,7 @@ def loopStatusBar():
 def loopTime():
     threading.Timer(1.0, loopTime).start()
     if os.system('wmiir ls /') != 0:
+        killAll()
         os._exit(1)
     setColor("Time", data.FocusColors)
     setStatus("Time", get(data.d.time))
