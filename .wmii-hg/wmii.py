@@ -2,6 +2,7 @@
 import os
 import re
 import settings as data
+import shlex
 import subprocess
 import threading
 from time import sleep
@@ -100,10 +101,11 @@ pids = []
 #Startup function
 def startup():
     for command in data.startup:
-        pids.append(subprocess.Popen(command, shell = True).pid)
+        pids.append(subprocess.Popen(shlex.split(command), shell = True).pid)
 
 def killAll():
     for pid in pids:
+        print(pid)
         os.system('kill ' + str(pid))
 
 #========== EVENTS FUNCTIONS ==========
