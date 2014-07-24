@@ -219,18 +219,18 @@ Key XF86PowerOff
 KeyGroup Pulseaudio switching devices
 Key $MODKEY-Shift-KP_Insert
     pacmd set-default-sink 0
-    cat /tmp/inds.mypo | while read line; do
-        pacmd move-sink-input $line 0
+    for word in $(cat /tmp/inds.mypo); do
+        pacmd move-sink-input $word 0
     done
 Key $MODKEY-Shift-KP_End
     pacmd set-default-sink 1
-    cat /tmp/inds.mypo | while read line; do
-        pacmd move-sink-input $line 1
+    for word in $(cat /tmp/inds.mypo); do
+        pacmd move-sink-input $word 1
     done
 Key $MODKEY-Shift-KP_Down
     pacmd set-default-sink 2
-    cat /tmp/inds.mypo | while read line; do
-        pacmd move-sink-input $line 2
+    for word in $(cat /tmp/inds.mypo); do
+        pacmd move-sink-input $word 2
     done
 
 KeyGroup Pulseaudio per-application volume control
