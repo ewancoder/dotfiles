@@ -44,11 +44,13 @@ updatesTimeout = 600
 #Dropbox is a systemd service which runs all the time 'ewancoder' is logged
 startup = [
     'gxkb',
-    'chromium --no-startup-window',
     'CopyAgent',
     'dropboxd',
     '~/bin/ircnotify',
     'tilda'
+]
+rawstartup = [
+    'chromium --no-startup-window'
 ]
 
 #=== COLUMN RULES ===

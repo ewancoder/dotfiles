@@ -101,11 +101,12 @@ pids = []
 #Startup function
 def startup():
     for command in data.startup:
-        pids.append(subprocess.Popen(shlex.split(command), shell = True).pid)
+        pids.append(subprocess.Popen(command, shell = True).pid)
+    for command in data.rawstartup:
+        os.system(command + '&')
 
 def killAll():
     for pid in pids:
-        print(pid)
         os.system('kill ' + str(pid))
 
 #========== EVENTS FUNCTIONS ==========
