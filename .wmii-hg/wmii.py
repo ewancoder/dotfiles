@@ -73,6 +73,14 @@ def checkrss():
         os.system('wmiir xwrite /lbar/RSS colors "'+data.GoodColors+'"')
         os.system('rm /tmp/rssitems')
 
+def checkcv():
+    if get('cv | grep %') != '':
+        createBlock('Cv')
+        setColor('Cv', data.MidColors)
+        setStatus('Cv', get('cv | grep % | awk \'{for(i=1;i<=NF;i++) if ($i ~/%$/) {print $i+0} {print " "}}\''))
+    else:
+        os.system('wmiir rm /rbar/Cv')
+
 #Create all blocks
 def makeBlocks():
     for x in data.d.block:
@@ -122,6 +130,7 @@ def loopStatusBar():
     colorBlocks()
     statusBlocks()
     checkrss()
+    checkcv()
     os.system("~/.wmii-hg/mypo &")
 
 def loopTime():

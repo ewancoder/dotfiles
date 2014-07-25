@@ -95,7 +95,7 @@ menubar_visible=0
 free_space=1
 horizontal_split=0
 vertical_equal=1
-left_panel_size=84
+left_panel_size=40
 horizontal_equal=1
 top_panel_size=20
 
@@ -116,6 +116,8 @@ rxvt-unicode-256color=
 color_terminals=
 
 rxvt-256color=
+
+xterm=
 
 [Panels]
 show_mini_info=true
