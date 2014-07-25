@@ -215,6 +215,14 @@ Key XF86PowerOff
         cv=$seltag
         wmiir xwrite /ctl view RSS
     fi
+#Change wallpaper
+Key $MODKEY-XF86PowerOff
+    feh --bg-fill --randomize --recursive Dropbox/Pictures
+#Increase/decrease transparency of current window
+Key $MODKEY-KP_Subtract
+    transset-df -a --min 0.1 --dec 0.1
+Key $MODKEY-KP_Add
+    transset-df -a --min 0.1 --inc 0.1
 
 KeyGroup Pulseaudio switching devices
 Key $MODKEY-Shift-KP_Insert
