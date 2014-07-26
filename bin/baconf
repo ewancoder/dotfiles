@@ -2,7 +2,7 @@
 rsync -av --delete ~/.config/chromium /mnt/backup/ArchConfig/
 rsync -av --delete ~/.config/deluge /mnt/backup/ArchConfig/
 rsync -av --delete ~/.config/libreoffice /mnt/backup/ArchConfig/
-rsync -av --delete ~/.config/mc/panels.ini /mnt/backup/ArchConfig/mc/
+rsync -av --delete ~/.config/mc /mnt/backup/ArchConfig/
 #Thunar config is located here
 rsync -av --delete ~/.config/xfce4 /mnt/backup/ArchConfig/
 #User-defined actions for Thunar
