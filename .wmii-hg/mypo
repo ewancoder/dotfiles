@@ -23,7 +23,7 @@ if [ "$1" == "" ]; then
         fi
     fi
 
-    current=$(wmiir ls /rbar | grep Audio | cut -c6-8)
+    current=$(wmiir ls /rbar | grep Audio | sed -e 's/Audio//g')
     for i in $current; do
         echo $i
         if [ "$(echo $inds | grep $i)" == "" ] && ! [ "$i" == "" ]; then
