@@ -83,21 +83,20 @@ def checkcv():
         os.system('wmiir rm /rbar/Processing')
 
 def checkmedia():
-    status = get('ls -1 /media | tr "\\n" " "')
-    status = get('~/bin/gitch | xargs -L 1 basename | tr "\\n" " "')
-    if status != '':
+    media = get('ls -1 /media | tr "\\n" " "')
+    if media != '':
         createBlock('Devices')
         setColor('Devices', data.DeviceColors)
-        setStatus('Devices', status)
+        setStatus('Devices', media)
     else:
         os.system('wmiir rm /rbar/Devices')
 
 def checkgit():
-    status = get('~/bin/gitch | xargs -L 1 basename | tr "\\n" " "')
-    if status != '':
+    repos = get('~/bin/gitch | xargs -L 1 basename | tr "\\n" " "')
+    if repos != '':
         createBlock('AGitCheck')
         setColor('AGitCheck', "#f63 #000 #000")
-        setStatus('AGitCheck', status)
+        setStatus('AGitCheck', repos)
     else:
         os.system('wmiir rm /rbar/AGitCheck')
 
