@@ -83,13 +83,23 @@ def checkcv():
         os.system('wmiir rm /rbar/Processing')
 
 def checkmedia():
-    status = get('ls -m /media')
+    status = get('ls -1 /media | tr "\\n" " "')
+    status = get('~/bin/gitch | xargs -L 1 basename | tr "\\n" " "')
     if status != '':
         createBlock('Devices')
         setColor('Devices', data.DeviceColors)
         setStatus('Devices', status)
     else:
         os.system('wmiir rm /rbar/Devices')
+
+def checkgit():
+    status = get('~/bin/gitch | xargs -L 1 basename | tr "\\n" " "')
+    if status != '':
+        createBlock('AGitCheck')
+        setColor('AGitCheck', "#f63 #000 #000")
+        setStatus('AGitCheck', status)
+    else:
+        os.system('wmiir rm /rbar/AGitCheck')
 
 #Create all blocks
 def makeBlocks():
@@ -142,6 +152,7 @@ def loopStatusBar():
     checkrss()
     checkcv()
     checkmedia()
+    checkgit()
     os.system("~/.wmii-hg/mypo &")
 
 def loopTime():
