@@ -1,7 +1,7 @@
 #!/bin/bash
 for repo in ~/.dotfiles ~/eal ~/btp /etc/.dotfiles; do
     cd $repo
-    if ! [ "$(git status | grep -i "changes\|ahead")" == "" ]; then
+    if ! [ "$(git status | grep -i "changes\|ahead\|untracked")" == "" ]; then
         echo $repo
     fi
 done
