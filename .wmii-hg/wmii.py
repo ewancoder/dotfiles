@@ -75,9 +75,11 @@ def checkrss():
 
 def checkcv():
     if get('cv | grep %') != '':
-        createBlock('Cv')
-        setColor('Cv', data.MidColors)
-        setStatus('Cv', get('cv | grep % | awk \'{for(i=1;i<=NF;i++) if ($i ~/%$/) {print $i+0} {print " "}}\''))
+        status = get('cv | grep % | awk \'{for(i=1;i<=NF;i++) if ($i ~/%$/) {print $i+0} {print " "}}\'')
+        if status != '':
+            createBlock('Cv')
+            setColor('Cv', data.MidColors)
+            setStatus('Cv', status)
     else:
         os.system('wmiir rm /rbar/Cv')
 
