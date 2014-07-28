@@ -122,7 +122,7 @@ d.text = "amixer | grep \"Left: Playback\" | awk {'print $5'} | cut -d \"[\" -f2
 d.color = FocusColors
 d.addBlock()
 #NETSTATS
-d.text = "~/bin/netmon"
+d.text = "~/.wmii-hg/netmon"
 d.color = FocusColors
 d.addBlock()
 #CPU Uptime

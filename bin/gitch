@@ -1,0 +1,7 @@
+#!/bin/bash
+for repo in ~/.dotfiles ~/eal ~/btp /etc/.dotfiles; do
+    cd $repo
+    if ! [ "$(git status | grep -i "changes")" == "" ]; then
+        echo $repo
+    fi
+done
