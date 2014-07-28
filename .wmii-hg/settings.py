@@ -119,11 +119,11 @@ d.mid = 52
 d.addBlock()
 #Sound Volume
 d.text = "amixer | grep \"Left: Playback\" | awk {'print $5'} | cut -d \"[\" -f2 | cut -d \"%\" -f1"
-d.color = NormColors
+d.color = FocusColors
 d.addBlock()
 #NETSTATS
 d.text = "~/bin/netmon"
-d.color = NormColors
+d.color = FocusColors
 d.addBlock()
 #CPU Uptime
 d.text = "uptime | sed 's/.*://; s/, / /g'"

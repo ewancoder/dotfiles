@@ -13,7 +13,7 @@ if [ "$1" == "" ]; then
         for (( i = 0; i < ${#ind[@]}; i++ )); do
             if ! [ "${ind[$i]}" == "" ]; then
                 wmiir create /rbar/Audio${ind[$i]} &
-                wmiir xwrite /rbar/Audio${ind[$i]} colors "#acc #040 #000"
+                wmiir xwrite /rbar/Audio${ind[$i]} colors $(cat /tmp/settings.wmii | sed -n "7{p;q}")
                 wmiir xwrite /rbar/Audio${ind[$i]} label "${app[$i]}: ${vol[$i]}" &
             fi
         done
