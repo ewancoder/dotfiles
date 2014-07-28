@@ -7,15 +7,13 @@ import data as d
 #Color of (not)focused tag/window
 NormColors = "#ada #000 #000"
 FocusColors = "#add #345 #000"
-TagFocusColors = "#fc5 #345 #000"
-#Color of sound & download/upload block (see below)
-NeutralColors = "#ada #046 #000"
+TagFocusColors = "#fc5 #862 #000"
 #Good, Mid & Bad colors for checking state and drawing status
 GoodColors = "#ada #350 #000"
 MidColors = "#dda #640 #000"
 BadColors = "#daa #600 #000"
 #Color for mounted devices
-DeviceColors = "#ada #d44 #000"
+DeviceColors = "#ada #b42 #000"
 
 d.normcolors = NormColors
 d.focuscolors = FocusColors
@@ -121,11 +119,11 @@ d.mid = 52
 d.addBlock()
 #Sound Volume
 d.text = "amixer | grep \"Left: Playback\" | awk {'print $5'} | cut -d \"[\" -f2 | cut -d \"%\" -f1"
-d.color = NeutralColors
+d.color = NormColors
 d.addBlock()
 #NETSTATS
 d.text = "~/bin/netmon"
-d.color = NeutralColors
+d.color = NormColors
 d.addBlock()
 #CPU Uptime
 d.text = "uptime | sed 's/.*://; s/, / /g'"
