@@ -74,14 +74,22 @@ def checkrss():
         os.system('rm /tmp/rssitems')
 
 def checkcv():
-    if get('cv | grep %') != '':
-        status = get('cv | grep % | awk \'{for(i=1;i<=NF;i++) if ($i ~/%$/) {print $i+0} {print " "}}\'')
-        if status != '':
-            createBlock('Cv')
-            setColor('Cv', data.MidColors)
-            setStatus('Cv', status)
+    status = get('cv | grep % | awk \'{for(i=1;i<=NF;i++) if ($i ~/%$/) {print $i+0} {print " "}}\'')
+    if status != '':
+        createBlock('Processing')
+        setColor('Processing', data.MidColors)
+        setStatus('Processing', status)
     else:
-        os.system('wmiir rm /rbar/Cv')
+        os.system('wmiir rm /rbar/Processing')
+
+def checkmedia():
+    status = get('ls -m /media')
+    if status != '':
+        createBlock('Devices')
+        setColor('Devices', data.DeviceColors)
+        setStatus('Devices', status)
+    else:
+        os.system('wmiir rm /rbar/Devices')
 
 #Create all blocks
 def makeBlocks():
@@ -133,6 +141,7 @@ def loopStatusBar():
     statusBlocks()
     checkrss()
     checkcv()
+    checkmedia()
     os.system("~/.wmii-hg/mypo &")
 
 def loopTime():

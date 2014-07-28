@@ -14,6 +14,8 @@ NeutralColors = "#ada #046 #000"
 GoodColors = "#ada #350 #000"
 MidColors = "#dda #640 #000"
 BadColors = "#daa #600 #000"
+#Color for mounted devices
+DeviceColors = "#ada #d44 #000"
 
 d.normcolors = NormColors
 d.focuscolors = FocusColors
