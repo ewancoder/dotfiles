@@ -223,10 +223,10 @@ Key $MODKEY-KP_Add
     transset-df -a --min 0.1 --inc 0.1
 #Mount/Unmount all drives
 Key $MODKEY-Insert
-    devmon --mount-all
-    notify-send "Remount" "Remounted drives $(ls /media)"
+    devmon --mount-all &
+    notify-send "Remount" "Remounted drives $(ls /media)" &
 Key $MODKEY-Delete
-    devmon --unmount-removable
+    devmon --unmount-removable &
 
 KeyGroup Pulseaudio switching devices
 Key $MODKEY-Shift-KP_Insert
