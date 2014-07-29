@@ -1,3 +1,5 @@
+alias quit='wmiir xwrite /ctl quit'
+
 alias pow='poweroff'
 
 alias xit='exit'

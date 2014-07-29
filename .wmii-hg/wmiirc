@@ -5,7 +5,6 @@ wmiiscript=wmiirc # For wmii.sh
 
 # Settings
 python ~/.wmii-hg/settings.py > /tmp/settings.wmii
-SETTINGS=$(python ~/.wmii-hg/settings.py)
 var(){
     cat /tmp/settings.wmii | sed -n "$1{p;q}"
 }
@@ -25,10 +24,9 @@ noticebar=/rbar/!notice
 export WMII_NORMCOLORS=$(var 6)
 export WMII_FOCUSCOLORS=$(var 7)
 export WMII_TAGFOCUSCOLORS=$(var 8)
-export GOODCOLORS=$(var 9)
 
-export WMII_FONT=$(var 10)
-export WMII_TERM=$(var 11)
+export WMII_FONT=$(var 9)
+export WMII_TERM=$(var 10)
 
 set -- $(echo $WMII_NORMCOLORS $WMII_FOCUSCOLORS)
 echo colors $WMII_NORMCOLORS | wmiir create $noticebar
@@ -326,9 +324,8 @@ wmiir write /ctl <<!
 	border 1
 !
 
-# Misc
+# WMII main action
 action pywmii &
-witray -N &
 
 # Setup Tag Bar
 IFS="$wi_newline"
