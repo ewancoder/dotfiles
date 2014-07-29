@@ -28,7 +28,7 @@ def addColRule(col, rule):
 #Function forming tagrules
 def addTagRule(tag, forcetag):
     global tagRules
-    tagRules = tagRules + '/' + str(tag) + '/ force-tags=' + str(forcetag) + '\n'
+    tagRules += '/' + str(tag) + '/ tags=' + str(forcetag) + '\n'
 
 #========== CONFIGURATION ==========
 
@@ -91,7 +91,7 @@ addColRule(".*", "62+38")
 
 #=== TAGGING RULES ===
 #For canto-curses urxvt 'Canto' window
-addTagRule("Canto", "RSS")
+addTagRule("Canto", 'RSS')
 #For Skype to be at 0 :)
 addTagRule("Skype", 0)
 #For separate steam big-picture tag
