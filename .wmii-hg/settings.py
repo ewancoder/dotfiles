@@ -149,6 +149,10 @@ addBlock()
 text = "amixer | grep \"Left: Playback\" | awk {'print $5'} | cut -d \"[\" -f2 | cut -d \"%\" -f1"
 color = focusColors
 addBlock()
+#Current Device
+text = "if [ \"$(pactl stat | grep 'Default Sink' | awk '{print $3}')\" == \"alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo\" ]; then echo 'USB'; else echo 'Build-In'; fi"
+color = focusColors
+addBlock()
 #NETSTATS
 text = "~/.wmii-hg/netmon"
 color = focusColors
