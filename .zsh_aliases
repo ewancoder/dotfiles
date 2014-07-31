@@ -12,7 +12,7 @@ alias reboot='systemctl reboot -i'
 alias ftb='java -jar ~/Copy/Games/Minecraft/Feed\ The\ Beast/ftb.jar'
 alias gpart='gksu gparted'
 
-alias canto='canto-curses -a 192.168.100.11 -p 7070'
+alias canto='while true; do canto-curses -a 192.168.100.11 -p 7070; done'
 
 alias s='sudo '
 
