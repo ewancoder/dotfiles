@@ -10,6 +10,7 @@ if ! [ "$cmd" == "" ]; then
     echo ${cmd/;/} >> $freq
 fi
 
+cmdexec=$cmd
 case $cmd in
     *\;)    cmdexec="urxvt -e ${cmd/;/}"    ;;
 esac
