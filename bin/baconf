@@ -10,8 +10,8 @@ rsync -av --delete ~/.config/Thunar /mnt/backup/ArchConfig/
 
 #For connecting to raspberry PI automatically after reinstall
 rsync -av --delete ~/.ssh /mnt/backup/Arch/
-#XboomX history + zsh history :)
-rsync -av --delete ~/.xboomx /mnt/backup/Arch/
+#Dmenu history + zsh history :)
+rsync -av --delete ~/.dmenu_history /mnt/backup/Arch/
 rsync -av --delete ~/.zsh_history /mnt/backup/Arch/
 #Just lazy to log in into Anki again :)
 rsync -av --delete ~/Anki /mnt/backup/Arch/

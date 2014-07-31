@@ -1,6 +1,6 @@
 #!/bin/bash
 cache=~/.cache/dmenu_run
-freq=~/.cache/dmenu_freq
+freq=~/.dmenu_history
 aliases=~/.zsh_aliases
 source $aliases
 
