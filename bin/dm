@@ -10,13 +10,12 @@ if ! [ "$cmd" == "" ]; then
     echo ${cmd/;/} >> $freq
 fi
 
-cmdexec=$cmd
-case $cmd in
-    *\;)    cmdexec="urxvt -e ${cmd/;/}"    ;;
-esac
-
-if ! [ -z "$(grep '^alias' $aliases | cut -d '=' -f1 | grep $cmd)" ]; then
-    echo -e "source $aliases\n$cmdexec" | zsh
-else
-    exec $cmdexec &
+cmdexec=$(alias | grep "${cmd/;/}=" | cut -f2 -d"=" | tr -d "'")
+if [ -z "$cmdexec" ]; then
+    cmdexec=${cmd/;/}
 fi
+
+case $cmd in
+    *\;)    cmdexec="urxvt -e $cmdexec" ;;
+esac
+echo "$cmdexec" | bash

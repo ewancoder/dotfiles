@@ -4,6 +4,8 @@ alias pow='poweroff'
 
 alias xit='exit'
 
+alias lol='mc'
+
 alias warsow='warsow & sleep 5 && wmiir xwrite /ctl view 2'
 
 alias poweroff='systemctl poweroff -i'
@@ -12,7 +14,7 @@ alias reboot='systemctl reboot -i'
 alias ftb='java -jar ~/Copy/Games/Minecraft/Feed\ The\ Beast/ftb.jar'
 alias gpart='gksu gparted'
 
-alias canto='while true; do canto-curses -a 192.168.100.11 -p 7070; done'
+alias canto='canto-curses -a 192.168.100.11 -p 7070'
 
 alias s='sudo '
 
@@ -36,11 +38,6 @@ alias y="yaourt"
 alias ya="yaourt -S"
 alias yau="yaourt -Syua --noconfirm"
 
-alias mnt="sudo mount -o iocharset=utf8"
-alias umount="sudo umount"
-
 alias sshrpi="ssh -t root@192.168.100.11"
-
-alias rmnotes="ssh root@192.168.100.11 rm /root/.irssi/notifications"
 
 alias terr='cd ~/Copy/GameSaves/Terraria && mono TerrariaServer.exe'
