@@ -3,14 +3,10 @@ rsync -av --delete ~/.config/chromium /mnt/backup/ArchConfig/
 rsync -av --delete ~/.config/deluge /mnt/backup/ArchConfig/
 rsync -av --delete ~/.config/libreoffice /mnt/backup/ArchConfig/
 rsync -av --delete ~/.config/mc /mnt/backup/ArchConfig/
-#Thunar config is located here
-rsync -av --delete ~/.config/xfce4 /mnt/backup/ArchConfig/
-#User-defined actions for Thunar
-rsync -av --delete ~/.config/Thunar /mnt/backup/ArchConfig/
 
 #For connecting to raspberry PI automatically after reinstall
 rsync -av --delete ~/.ssh /mnt/backup/Arch/
-#Dmenu history + zsh history :)
+#Dmenu + zsh history :)
 rsync -av --delete ~/.dmenu_history /mnt/backup/Arch/
 rsync -av --delete ~/.zsh_history /mnt/backup/Arch/
 #Just lazy to log in into Anki again :)
