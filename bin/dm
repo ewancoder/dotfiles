@@ -4,18 +4,23 @@ freq=~/.dmenu_history
 aliases=~/.zsh_aliases
 source $aliases
 
+(
+    alias | awk -F '[ =]' '{print $2}'
+    dmenu_path
+) | sort > $cache
+
 sorted=$(sort $freq | uniq -c | sort -r | colrm 1 8)
 cmd=`(echo "$sorted"; cat $cache | grep -vxF "$sorted") | dmenu "$@"`
 if ! [ "$cmd" == "" ]; then
     echo ${cmd/;/} >> $freq
-fi
 
-cmdexec=$(alias | grep "${cmd/;/}=" | cut -f2 -d"=" | tr -d "'")
-if [ -z "$cmdexec" ]; then
-    cmdexec=${cmd/;/}
-fi
+    cmdexec=$(alias | grep "${cmd/;/}=" | cut -f2 -d"=" | tr -d "'")
+    if [ -z "$cmdexec" ]; then
+        cmdexec=${cmd/;/}
+    fi
 
-case $cmd in
-    *\;)    cmdexec="urxvt -e $cmdexec" ;;
-esac
-echo "$cmdexec" | bash
+    case $cmd in
+        *\;)    cmdexec="urxvt -e $cmdexec" ;;
+    esac
+    echo "$cmdexec" | bash
+fi

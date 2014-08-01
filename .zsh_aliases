@@ -4,8 +4,6 @@ alias pow='poweroff'
 
 alias xit='exit'
 
-alias lol='mc'
-
 alias warsow='warsow & sleep 5 && wmiir xwrite /ctl view 2'
 
 alias poweroff='systemctl poweroff -i'
