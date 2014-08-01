@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#Per 2 seconds :)
+bytes=2048
+
+if [ -f /tmp/rx ] && [ -f /tmp/tx ]; then
+    rx_old=$(cat /tmp/rx)
+    tx_old=$(cat /tmp/tx)
+else
+    rx_old=0
+    tx_old=0
+fi
+ifconfig wlan | grep 'RX packets' | awk '{print $5}' > /tmp/rx
+ifconfig wlan | grep 'TX packets' | awk '{print $5}' > /tmp/tx
+
+echo $(($(($(cat /tmp/rx) - $rx_old)) / $bytes)) $(($(($(cat /tmp/tx) - $tx_old)) / $bytes))

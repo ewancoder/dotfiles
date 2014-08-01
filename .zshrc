@@ -10,38 +10,7 @@ ZSH_THEME="gnzh"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-#export IP_RPI=192.168.100.11
-export IP_RPI=82.209.250.6
-
-alias s='sudo '
-
-alias sc="screen -rd"
-alias sci="ssh -t root@$IP_RPI screen -rd irssi"
-alias scu="screen -rd userver"
-
-alias gis="git status"
-alias gia="git add -A"
-alias gic="git commit"
-alias gicm="git commit -m"
-alias gica="git commit --amend"
-alias gip="git push --all"
-alias gil="git log --oneline --graph --color --all --decorate"
-alias gid="git diff"
-alias gim="git merge --no-ff"
-
-alias ch="git checkout"
-
-alias y="yaourt"
-alias ya="yaourt -S"
-alias yau="yaourt -Syua --noconfirm"
-
-alias mnt="sudo mount -o iocharset=utf8"
-alias umount="sudo umount"
-
-alias sshrpi="ssh -t root@$IP_RPI"
-
-alias rmnotes="ssh root@$IP_RPI rm /root/.irssi/notifications"
+source .zsh_aliases
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"

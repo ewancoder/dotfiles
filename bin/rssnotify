@@ -1,8 +1,0 @@
-#!/bin/bash
-
-while true; do
-    if ssh root@IP_RPI cat /tmp/rssitems > /tmp/rsstemp \> /dev/null 2\>\&1; then
-        cp /tmp/rsstemp /tmp/rssitems
-    fi
-    sleep 5
-done

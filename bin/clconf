@@ -1,2 +1,0 @@
-rsync -av --delete /mnt/cloud/Dropbox /mnt/backup/$1/
-rsync -av --delete /mnt/cloud/Copy /mnt/backup/$1/

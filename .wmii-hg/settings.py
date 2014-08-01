@@ -1,149 +1,174 @@
-#!/usr/bin/env python
-import data as d
+#========== GENERAL FUNCTIONS ==========
+
+global blocks
+blocks = []
+global colRules, tagRules
+colRules, tagRules = '', ''
+global text, name, check, lower, bigger, mid, color
+text, name, check, lower, bigger, mid, color = '', '', '', '', '', '', ''
+
+def addBlock():
+    global blocks
+    global text, name, check, lower, bigger, mid, color
+    x = len(blocks)
+    #Generate name for block
+    if x < 10:
+        name = 'Status_a' + str(x)
+    else:
+        name = 'Status_b' + str(x) #This is it, noone needs 20+ statusbars
+    #Create new block
+    blocks.append([text, name, check, lower, bigger, mid, color])
+    text, name, check, lower, bigger, mid, color = '', '', '', '', '', '', ''
+
+#Function forming colrules
+def addColRule(col, rule):
+    global colRules
+    colRules = colRules + '/' + str(col) + '/ -> ' + str(rule) + '\n'
+
+#Function forming tagrules
+def addTagRule(tag, forcetag):
+    global tagRules
+    tagRules += '/' + str(tag) + '/ tags=' + str(forcetag) + '\n'
 
 #========== CONFIGURATION ==========
 
 #=== COLORS ===
-#Color of focused tag/window
-FocusColors = "#000 #fc5 #000"
-#Color of sound block (see below)
-SoundColors = "#000 #6cc #000"
+#Color of (not)focused tag/window
+normColors = '#ada #000 #000'
+focusColors = '#add #345 #000'
+tagFocusColors = '#fc5 #862 #000'
 #Good, Mid & Bad colors for checking state and drawing status
-GoodColors = "#000 #6c6 #000"
-MidColors = "#000 #7c8 #000"
-BadColors = "#000 #c66 #000"
+goodColors = '#ada #350 #000'
+midColors = '#dda #640 #000'
+badColors = '#daa #600 #000'
+#Color for mounted devices
+deviceColors = '#ada #b42 #000'
+#Color for unstaged/unpushed/uncommited git repos
+gitColors = '#f63 #000 #000'
 
-#=== MAIN CONFIG ===
-d.modkey = "Mod4"
-d.up = "k"
-d.down = "j"
-d.left = "h"
-d.right = "l"
-d.normcolors = "#000 #999 #000"
-d.focuscolors = FocusColors
-d.font = "-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*"
-d.term = "urxvt"
-d.border = 1
+#=== GENERAL CONFIG ===
+modkey = 'Mod4'
+up = 'k'
+down = 'j'
+left = 'h'
+right = 'l'
 
-#=== STARTUP ===
-#Panel on top
-d.startup("wmiir xwrite /ctl bar on top")
+font = '-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*'
+term = 'urxvt'
+border = 1
 
-#Run updates checker
-d.startup("~/bin/updates")
+#Panel position (top or bottom)
+position = 'top'
 
-#Background
-d.startup("~/bin/pic ~/Dropbox/Pictures 300")
-#Run SSH-CANTO client
-d.startup('~/bin/canto')
+#Background folder
+background = '~/Dropbox/Pictures'
+#Timeout to change background, in seconds
+timeout = 300
 
-#Initialize wifi lan interface
-d.startup("sudo ifconfig lan up 192.168.1.1 netmask 255.255.255.0")
-#Run UniRemote server
-d.startup("screen -dmS userver ~/Copy/UniRemote/urserver")
-d.startup("~/Copy/UniRemote/urserver")
+#Check for Arch Linux updates each N seconds
+updatesTimeout = 600
 
-#SSH NOTIFY IRSSI
-d.startup("~/bin/notify")
-#SSH RSS-NOTIFY
-d.startup("~/bin/rssnotify")
-
-#Unmute pulseaudio after fresh reinstall
-d.startup("~/runonce.sh")
-#Run chromium in background
-d.startup("chromium --no-startup-window")
-#Run copy daemon
-d.startup("CopyAgent")
-#Run deluge gtk-based client
-#d.startup("deluge")
-#Run dropbox daemon
-d.startup("dropboxd")
-#Run locales icon in tray
-d.startup("gxkb")
-#Run kalu - update checker
-#d.startup("kalu")
-#Run tilda - overall F12 guake-style terminal
-d.startup("tilda")
-
-#Change current session.jpg image
-d.startup("find ~/Dropbox/Cute -type f | shuf -n 1 | xargs -I{} cp {} ~/Dropbox/Public/today.jpg")
+#Startup X11 apps
+startup = [
+    'gxkb',
+    'CopyAgent',
+    'dropboxd',
+    '~/bin/ircnotify',
+    'tilda'
+]
+#Startup as via bash (won't be killed upon X11 termination)
+rawstartup = [
+    'chromium --no-startup-window'
+]
 
 #=== COLUMN RULES ===
 #For skype mini-window on the left side
-d.addColRule(0, "20+80")
+addColRule(0, "20+80")
 #For two Thunars / 2 chromium windows
-d.addColRule(2, "50+50")
+addColRule(2, "50+50")
 #For anything else - Golden Ratio
-d.addColRule(".*", "62+38")
+addColRule(".*", "62+38")
 
 #=== TAGGING RULES ===
 #For canto-curses urxvt 'Canto' window
-d.addTagRule("Canto", "RSS")
+addTagRule("Canto", 'RSS')
 #For Skype to be at 0 :)
-d.addTagRule("Skype", 0)
+addTagRule("Skype", 0)
 #For separate steam big-picture tag
-d.addTagRule("Steam", "Steam")
+addTagRule("Steam", "Steam")
 
 #=== STATUSBAR ===
 #Time
-d.time = "date +%a\\ %b\\ %d\\ %T\\"
-#Light Sensor
-#d.text = "cat /tmp/lightsensor"
-#d.check = d.text
-#d.bigger = 700
-#d.mid = 400
-#d.color = SoundColors
-#d.addBlock()
+time = "date +%a\\ %b\\ %d\\ %T\\"
 #Free RAM
-d.text = "echo $(free -mh | grep /cache | awk '{print $4}') 'M'"
-d.check = "free -m | grep /cache | awk '{print $4}'"
-d.bigger = 3000
-d.mid = 1000
-d.addBlock()
+text = "echo $(free -mh | grep /cache | awk '{print $4}') 'M'"
+check = "free -m | grep /cache | awk '{print $4}'"
+bigger = 3000
+mid = 1000
+addBlock()
 #Space at /
-d.text = "echo $(df -h / | grep / | awk '{print $5}' | sed 's/%//') '/'"
-d.check = "df -h / | grep / | awk '{print $5}' | sed 's/%//'"
-d.lower = 45
-d.mid = 75
-d.addBlock()
+text = "echo $(df -h / | grep / | awk '{print $5}' | sed 's/%//') '/'"
+check = "df -h / | grep / | awk '{print $5}' | sed 's/%//'"
+lower = 45
+mid = 75
+addBlock()
 #Space at /home
-d.text = "echo $(df -h /home | grep home | awk '{print $5}' | sed 's/%//') 'H'"
-d.check = "df -h /home | grep home | awk '{print $5}' | sed 's/%//'"
-d.lower = 45
-d.mid = 75
-d.addBlock()
+text = "echo $(df -h /home | grep home | awk '{print $5}' | sed 's/%//') 'H'"
+check = "df -h /home | grep home | awk '{print $5}' | sed 's/%//'"
+lower = 45
+mid = 75
+addBlock()
 #Space at /mnt/cloud
-d.text = "echo $(df -h /mnt/cloud | grep cloud | awk '{print $5}' | sed 's/%//') 'C'"
-d.check = "df -h /mnt/cloud | grep cloud | awk '{print $5}' | sed 's/%//'"
-d.lower = 45
-d.mid = 75
-d.addBlock()
+text = "echo $(df -h /mnt/cloud | grep cloud | awk '{print $5}' | sed 's/%//') 'C'"
+check = "df -h /mnt/cloud | grep cloud | awk '{print $5}' | sed 's/%//'"
+lower = 45
+mid = 75
+addBlock()
 #Space at /mnt/backup
-d.text = "echo $(df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//') 'B'"
-d.check = "df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//'"
-d.lower = 45
-d.mid = 75
-d.addBlock()
+text = "echo $(df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//') 'B'"
+check = "df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//'"
+lower = 45
+mid = 75
+addBlock()
 #CPU Temperature
-d.text = "cat /sys/class/hwmon/hwmon0/device/hwmon/hwmon0/temp2_input | cut -c1-2"
-d.check = d.text
-d.lower = 65
-d.mid = 70
-d.addBlock()
+text = "cat /sys/class/hwmon/hwmon0/device/hwmon/hwmon0/temp2_input | cut -c1-2"
+check = text
+lower = 65
+mid = 70
+addBlock()
 #CPU Frequency
-d.text = "cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf \"%.0f\\n\", $4}'"
-d.addBlock()
+text = "cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf \"%.0f\\n\", $4}'"
+addBlock()
 #Sound Volume
-d.text = "amixer | grep \"Left: Playback\" | awk {'print $5'} | cut -d \"[\" -f2 | cut -d \"%\" -f1"
-d.color = SoundColors
-d.addBlock()
+text = "amixer | grep \"Left: Playback\" | awk {'print $5'} | cut -d \"[\" -f2 | cut -d \"%\" -f1"
+color = focusColors
+addBlock()
+#Current Device
+text = "if [ \"$(pactl stat | grep 'Default Sink' | awk '{print $3}')\" == \"alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo\" ]; then echo 'USB'; else echo 'Build-In'; fi"
+color = focusColors
+addBlock()
 #NETSTATS
-d.text = "~/bin/netmon.py"
-d.color = SoundColors
-d.addBlock()
+text = "~/.wmii-hg/netmon"
+color = focusColors
+addBlock()
 #CPU Uptime
-d.text = "uptime | sed 's/.*://; s/, / /g'"
-d.check = d.text + " | awk '{print $2}'"
-d.color = FocusColors
-d.lower = 1.75
-d.addBlock()
+text = "uptime | sed 's/.*://; s/, / /g'"
+check = text + " | awk '{print $2}'"
+color = focusColors
+lower = 1.75
+addBlock()
+
+#Output for wmiirc
+if __name__ == "__main__":
+    print(modkey)
+    print(up)
+    print(down)
+    print(left)
+    print(right)
+
+    print(normColors)
+    print(focusColors)
+    print(tagFocusColors)
+
+    print(font)
+    print(term)
