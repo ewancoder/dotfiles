@@ -1,5 +1,3 @@
-export IP_RPI=82.209.250.6
-
 alias quit='wmiir xwrite /ctl quit'
 
 alias pow='poweroff'
@@ -19,7 +17,7 @@ alias canto='canto-curses -a 192.168.100.11 -p 7070'
 alias s='sudo '
 
 alias sc="screen -rd"
-alias sci="ssh -t root@$IP_RPI screen -rd irssi"
+alias sci="ssh -t root@192.168.100.11 screen -rd irssi"
 alias scu="screen -rd userver"
 
 alias gis="git status"
@@ -38,6 +36,6 @@ alias y="yaourt"
 alias ya="yaourt -S"
 alias yau="yaourt -Syua --noconfirm"
 
-alias sshrpi="ssh -t root@$IP_RPI"
+alias sshrpi="ssh -t root@192.168.100.11"
 
 alias terr='cd ~/Copy/GameSaves/Terraria && mono TerrariaServer.exe'
