@@ -145,6 +145,8 @@ Key $MODKEY-Shift-space   # Toggle selected client between floating and managed 
 KeyGroup Client actions
 Key $MODKEY-f # Toggle selected client's fullsceen state
 	wmiir xwrite /client/sel/ctl Fullscreen toggle
+Key $MODKEY-bracketright # Toggle urgent
+    wmiir xwrite /client/sel/ctl urgent toggle
 Key Control-q # Close client
     sc=$(wmiir read /client/sel/label)
     if [ "$sc" != "tilda" ] && [ "$sc" != "canto-curses" ]; then
