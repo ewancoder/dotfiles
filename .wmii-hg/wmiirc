@@ -226,6 +226,7 @@ Key $MODKEY-Insert
     devmon --mount-all &
     notify-send "Remount" "Remounted drives $(ls /media)" &
 Key $MODKEY-Delete
+    sync &
     devmon --unmount-removable &
 
 KeyGroup Pulseaudio switching devices
