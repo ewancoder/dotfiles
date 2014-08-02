@@ -130,12 +130,6 @@ Key $MODKEY-Control-$UP
 Key $MODKEY-Control-$DOWN
     wmiir xwrite /tag/sel/ctl grow sel sel down 2
 
-KeyGroup Moving through stacks
-Key $MODKEY-Control-$UP    # Select the stack above
-	wmiir xwrite /tag/sel/ctl select up stack
-Key $MODKEY-Control-$DOWN  # Select the stack below
-	wmiir xwrite /tag/sel/ctl select down stack
-
 KeyGroup Floating switching
 Key $MODKEY-space   # Toggle between floating and managed layers
 	wmiir xwrite /tag/sel/ctl select toggle
