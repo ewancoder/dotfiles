@@ -114,6 +114,7 @@ def loopStatusBar():
     check('cv | grep % | awk \'{for(i=1;i<=NF;i++) if ($i ~/%$/) {print $i+0} {print " "}}\'', 'Processing', settings.midColors)
     #Check for removable media mounted and show them
     check('ls -1 /media | tr "\\n" " "', 'Devices', settings.deviceColors)
+    check('if ! [ "$(ps aux | grep "devmon --unmount" | grep -v grep)" == "" ]; then echo "Unmounting..."; fi', 'DevicesUnmount', settings.deviceColors)
     #Check for git repos unstaged/unpushed/uncommited and show them
     check('~/bin/gitch | xargs -L 1 basename | tr "\\n" " "', 'AGitCheck', settings.gitColors)
     #Check for pulseaudio sinks/sources and show them
