@@ -224,7 +224,6 @@ Key $MODKEY-KP_Add
 #Mount/Unmount all drives
 Key $MODKEY-Insert
     devmon --mount-all &
-    notify-send "Remount" "Remounted drives $(ls /media)" &
 Key $MODKEY-Delete
     sync &
     devmon --unmount-removable &
