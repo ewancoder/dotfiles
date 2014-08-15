@@ -147,6 +147,8 @@ def main():
     run("wmiir xwrite /ctl bar on " + settings.position)
     #Run tray
     run("witray")
+    #Make uname to noticebar
+    run("wmiir xwrite /rbar/\!notice label $(uname -r)")
     #Handle Time
     loopTime()
     #Handle Rules
