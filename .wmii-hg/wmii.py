@@ -148,6 +148,7 @@ def main():
     #Run tray
     run("witray")
     #Make uname to noticebar
+    setColor("\!notice", '#aad #000 #000')
     run("wmiir xwrite /rbar/\!notice label $(uname -r)")
     #Handle Time
     loopTime()
