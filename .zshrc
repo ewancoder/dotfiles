@@ -73,5 +73,3 @@ CDPATH=".:~:~/Dropbox"
 export TERM=rxvt-256color
 
 export EDITOR=gvim
-
-export PATH=/home/ewancoder/bin:$PATH
