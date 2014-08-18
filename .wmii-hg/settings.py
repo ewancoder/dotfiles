@@ -45,6 +45,8 @@ badColors = '#daa #600 #000'
 deviceColors = '#ada #b42 #000'
 #Color for unstaged/unpushed/uncommited git repos
 gitColors = '#f63 #000 #000'
+#Alternative color - for noticebar and volume
+alternativeColors = '#aad #000 #000'
 
 #=== GENERAL CONFIG ===
 modkey = 'Mod4'
@@ -147,11 +149,11 @@ mid = 52
 addBlock()
 #Sound Volume
 text = "amixer | grep \"Left: Playback\" | awk {'print $5'} | cut -d \"[\" -f2 | cut -d \"%\" -f1"
-color = focusColors
+color = alternativeColors
 addBlock()
 #Current Device
 text = "if [ \"$(pactl stat | grep 'Default Sink' | awk '{print $3}')\" == \"alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo\" ]; then echo 'USB'; else echo 'Build-In'; fi"
-color = focusColors
+color = alternativeColors
 addBlock()
 #NETSTATS
 text = "~/.wmii-hg/netmon"
