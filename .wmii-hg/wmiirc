@@ -191,12 +191,12 @@ Key $MODKEY-Shift-i
     sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
 
 KeyGroup Others
-#Screenshot
-Key XF86Sleep
-    dbss &
 #System update
 Key XF86WakeUp
     urxvt -e sudo yaourt -Syua --noconfirm &
+#Screenshot
+Key XF86Sleep
+    dbss &
 #Go to RSS tag
 Key XF86PowerOff
     if [ $cv == "" ]; then
