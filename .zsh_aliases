@@ -21,6 +21,11 @@ alias sshrpi='ssh -t root@192.168.100.11'
 
 #Git aliases
 alias gia='git add -A'
+alias gic='git commit -v'
+alias gic!='git commit -v --amend'
+alias gica='git commit -av'
+alias gica!='git commit -av --amend'
+alias gid='git diff'
 alias gil='git log --oneline --graph --color --all --decorate'
 alias gim='git merge --no-ff'
 alias gip='git push origin --all'
