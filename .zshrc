@@ -67,6 +67,6 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-CDPATH=".:~:~/Dropbox"
+CDPATH=".:/mnt/cloud/Dropbox"
 export TERM=rxvt-256color
 export EDITOR=gvim
