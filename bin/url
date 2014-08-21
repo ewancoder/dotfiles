@@ -1,5 +1,6 @@
 #!/bin/bash
 #url - update local repository
+rsync -av /var/cache/pacman/pkg /mnt/backup/
 yaourt -Sc --noconfirm
 cd /var/cache/pacman/pkg
 repo-add ./local64.db.tar.gz ./*x86_64.pkg.tar.xz
