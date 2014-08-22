@@ -1,0 +1,25 @@
+#!/usr/bin/python
+import matplotlib.pyplot as plt
+import numpy as np
+import datetime
+import os
+
+os.system('scp root@192.168.100.11:/root/graph.log /tmp')
+humid, temp, farh, light, dates = np.loadtxt('/tmp/graph.log', skiprows=1, unpack=True)
+xdates = [datetime.datetime.strptime(str(int(date)),'%m%d%Y%H%M%S') for date in dates]
+
+fig = plt.figure()
+temps = plt.subplot(211)
+plt.plot(xdates, humid, '-', label='Humidity')
+plt.plot(xdates, temp, '-', label='Temperature, C')
+#plt.plot(xdates, farh, '-', label='Temperature, F')
+plt.legend(loc=5)
+plt.ylabel('Temperature & Humidity')
+plt.xlabel('Date&Time')
+plt.grid()
+lights = plt.subplot(212)
+plt.plot(xdates, light, '-', label='Light')
+plt.ylabel('Light')
+plt.xlabel('Date&Time')
+plt.grid()
+plt.show()
