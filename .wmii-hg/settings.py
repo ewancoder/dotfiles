@@ -76,7 +76,8 @@ startup = [
     'CopyAgent',
     'dropboxd',
     '~/bin/ircnotify',
-    'tilda'
+    'tilda',
+    'weather'
 ]
 #Startup as via bash (won't be killed upon X11 termination)
 rawstartup = [
