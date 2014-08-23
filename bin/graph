@@ -9,38 +9,37 @@ import sys
 os.system('scp root@192.168.100.11:/root/graph.log /tmp/raw.log')
 
 #Prepare (shrink) data
-def prepare():
-    data = open('/tmp/raw.log', 'r')
-    f = open('/tmp/graph.log', 'w')
-    l1, l2, l3, newline, oldline = '', '', '', '', ''
+data = open('/tmp/raw.log', 'r')
+f = open('/tmp/graph.log', 'w')
+l1, l2, l3, newline, oldline = '', '', '', '', ''
 
-    def main(line):
-        if not (l2[0:4] == l1[0:4] and l2[0:4] == l3[0:4]):
-            f.write(str(line) + '')
+def main(line):
+    if not (l2[0:4] == l1[0:4] and l2[0:4] == l3[0:4]):
+        f.write(str(line) + '')
 
-    for line in data:
-        l = line.split()
-        if newline == '':
-            newline = line
-        else:
-            oldline = newline
-            newline = line
+for line in data:
+    l = line.split()
+    if newline == '':
+        newline = line
+    else:
+        oldline = newline
+        newline = line
 
-        if l1 == '':
-            l1 = l
-            f.write(line)
-        elif l2 == '':
-            l2 = l
-        elif l3 == '':
-            l3 = l
-            main(oldline)
-        else:
-            l1 = l2
-            l2 = l3
-            l3 = l
-            main(oldline)
+    if l1 == '':
+        l1 = l
+        f.write(line)
+    elif l2 == '':
+        l2 = l
+    elif l3 == '':
+        l3 = l
+        main(oldline)
+    else:
+        l1 = l2
+        l2 = l3
+        l3 = l
+        main(oldline)
 
-    f.close()
+f.close()
 
 #Process data
 humid, temp, fahr, light, dates = np.loadtxt('/tmp/graph.log', skiprows=1, unpack=True)
@@ -50,8 +49,8 @@ fig = plt.figure()
 fig.suptitle('Weather & Light sensors visualisation')
 
 temps = plt.subplot(211)
-if '-c' in sys.argv:
-    plt.plot(xdates, temp, '-', label='Celcius Temperature, C')
+if '-c' in sys.argv or '--celsius' in sys.argv:
+    plt.plot(xdates, temp, '-', label='Celsius Temperature, C')
 else:
     plt.plot(xdates, fahr, '-', label='Temperature, F')
 plt.plot(xdates, humid, '-', label='Humidity, %')
@@ -67,4 +66,7 @@ plt.grid()
 plt.ylim((0,1050))
 
 fig.autofmt_xdate()
-plt.show()
+if '-p' in sys.argv or '--png' in sys.argv:
+    plt.savefig('/tmp/graph.png')
+else:
+    plt.show()
