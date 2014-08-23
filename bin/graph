@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import datetime
 import os
+import sys
 
 os.system('scp root@192.168.100.11:/root/graph.log /tmp')
 humid, temp, fahr, light, dates = np.loadtxt('/tmp/graph.log', skiprows=1, unpack=True)
@@ -12,7 +13,10 @@ fig = plt.figure()
 fig.suptitle('Weather & Light sensors visualisation')
 
 temps = plt.subplot(211)
-plt.plot(xdates, temp, '-', label='Celcius Temperature, C')
+if len(sys.argv) > 1:
+    plt.plot(xdates, temp, '-', label='Celcius Temperature, C')
+else:
+    plt.plot(xdates, fahr, '-', label='Temperature, F')
 plt.plot(xdates, humid, '-', label='Humidity, %')
 plt.ylabel('Weather')
 plt.grid()
