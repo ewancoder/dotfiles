@@ -15,7 +15,7 @@ alias war='warsow & sleep 5 && wmiir xwrite /ctl view 2'
 #Reattach screen session(s)
 alias sc='screen -rd'
 #Reattach irssi screen session at RPI over ssh
-alias sci='ssh -t root@192.168.100.11 screen -rd irssi'
+alias sci='screen -rd irssi'
 #Connect to RPI over ssh
 alias sshrpi='ssh -t root@192.168.100.11'
 
