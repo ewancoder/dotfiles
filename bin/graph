@@ -27,6 +27,7 @@ lights = plt.subplot(212, sharex=temps)
 plt.plot(xdates, light, '-', label='Light')
 plt.ylabel('Light')
 plt.grid()
+plt.ylim((0,1050))
 
 fig.autofmt_xdate()
 plt.show()

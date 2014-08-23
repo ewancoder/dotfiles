@@ -20,6 +20,7 @@ alias sci='ssh -t root@192.168.100.11 screen -rd irssi'
 alias sshrpi='ssh -t root@192.168.100.11'
 
 #Git aliases
+alias github='ssh-add ~/.ssh/github'
 alias gia='git add -A'
 alias gic='git commit -v'
 alias gic!='git commit -v --amend'
