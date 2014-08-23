@@ -17,7 +17,7 @@ alias sc='screen -rd'
 #Reattach irssi screen session at RPI over ssh
 alias sci='ssh -t root@192.168.100.11 screen -rd irssi'
 #Connect to RPI over ssh
-alias sshrpi='ssh -i ~/.ssh/rpi -t root@192.168.100.11'
+alias sshrpi='ssh -t root@192.168.100.11'
 
 #Git aliases
 alias gia='git add -A'
