@@ -50,7 +50,7 @@ fig = plt.figure()
 fig.suptitle('Weather & Light sensors visualisation')
 
 temps = plt.subplot(211)
-if len(sys.argv) > 1:
+if '-c' in sys.argv:
     plt.plot(xdates, temp, '-', label='Celcius Temperature, C')
 else:
     plt.plot(xdates, fahr, '-', label='Temperature, F')
