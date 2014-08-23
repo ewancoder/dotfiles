@@ -50,6 +50,12 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+#Some my keys binding
+bindkey '\e[2~' overwrite-mode
+bindkey '\e[7~' beginning-of-history
+bindkey '\e[8~' end-of-history
+bindkey -s '^xb' bindkey\ 
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
