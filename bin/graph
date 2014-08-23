@@ -9,6 +9,7 @@ humid, temp, fahr, light, dates = np.loadtxt('/tmp/graph.log', skiprows=1, unpac
 xdates = [datetime.datetime.strptime(str(int(date)),'%m%d%Y%H%M%S') for date in dates]
 
 fig = plt.figure()
+fig.suptitle('Weather & Light sensors visualisation')
 
 temps = plt.subplot(211)
 plt.plot(xdates, temp, '-', label='Celcius Temperature, C')
