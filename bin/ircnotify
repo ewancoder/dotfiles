@@ -3,10 +3,17 @@ while true; do
     rsync -av --remove-source-files -e ssh root@192.168.100.11:/root/.irssi/notifications /tmp/notifications
     if [ -f /tmp/notifications ]; then
         cat /tmp/notifications | while read line; do
-            IFS='Þ' read -a parts <<< "$line"
-            echo ${parts[3]}
-            notify-send -t "${parts[3]}" "${parts[0]}" "${parts[1]}" -u ${parts[2]};
-            sleep 0.1
+            if [ "$line" == "stop" ]; then
+                wmiir remove /rbar/ZNotify
+            else
+                wmiir create /rbar/ZNOTIFY
+                wmiir xwrite /rbar/ZNOTIFY colors "`cat /tmp/settings.wmii | sed -n '11p'`"
+                wmiir xwrite /rbar/ZNOTIFY label "New messages!"
+                IFS='Þ' read -a parts <<< "$line"
+                echo ${parts[3]}
+                notify-send -t "${parts[3]}" "${parts[0]}" "${parts[1]}" -u ${parts[2]};
+                sleep 0.1
+            fi
         done
         rm /tmp/notifications
     fi

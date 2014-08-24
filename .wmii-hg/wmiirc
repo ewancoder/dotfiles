@@ -191,6 +191,9 @@ Key $MODKEY-Shift-i
     sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
 
 KeyGroup Others
+#Remove 'New messages' notification
+Key $MODKEY-apostrophe
+    wmiir remove /rbar/ZNotify
 #System update
 Key XF86WakeUp
     urxvt -e sudo yaourt -Syua --noconfirm &

@@ -47,6 +47,8 @@ deviceColors = '#ada #b42 #000'
 gitColors = '#f63 #000 #000'
 #Alternative color - for noticebar and volume
 alternativeColors = '#aad #000 #000'
+#WARNING
+warnColors = '#fff #c22 #fff'
 
 #=== GENERAL CONFIG ===
 modkey = 'Mod4'
@@ -77,8 +79,7 @@ startup = [
     'dropboxd',
     '~/bin/ircnotify',
     'tilda',
-    'weather',
-    'screen -dmUS irssi /usr/bin/irssi'
+    'weather'
 ]
 #Startup as via bash (won't be killed upon X11 termination)
 rawstartup = [
@@ -182,3 +183,5 @@ if __name__ == "__main__":
 
     print(font)
     print(term)
+
+    print(warnColors)
