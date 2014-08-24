@@ -6,9 +6,9 @@ while true; do
             if [ "$line" == "stop" ]; then
                 wmiir remove /rbar/ZNotify
             else
-                wmiir create /rbar/ZNOTIFY
-                wmiir xwrite /rbar/ZNOTIFY colors "`cat /tmp/settings.wmii | sed -n '11p'`"
-                wmiir xwrite /rbar/ZNOTIFY label "New messages!"
+                wmiir create /rbar/ZNotify
+                wmiir xwrite /rbar/ZNotify colors "`cat /tmp/settings.wmii | sed -n '11p'`"
+                wmiir xwrite /rbar/ZNotify label "New messages!"
                 IFS='Þ' read -a parts <<< "$line"
                 echo ${parts[3]}
                 notify-send -t "${parts[3]}" "${parts[0]}" "${parts[1]}" -u ${parts[2]};
