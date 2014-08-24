@@ -77,7 +77,8 @@ startup = [
     'dropboxd',
     '~/bin/ircnotify',
     'tilda',
-    'weather'
+    'weather',
+    'screen -dmUS irssi /usr/bin/irssi'
 ]
 #Startup as via bash (won't be killed upon X11 termination)
 rawstartup = [
