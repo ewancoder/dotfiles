@@ -49,6 +49,7 @@ gitColors = '#f63 #000 #000'
 alternativeColors = '#aad #000 #000'
 #WARNING
 warnColors = '#fff #c22 #fff'
+soundEffects = True
 
 #=== GENERAL CONFIG ===
 modkey = 'Mod4'
@@ -179,3 +180,5 @@ if __name__ == "__main__":
     print(term)
 
     print(warnColors)
+
+    print(soundEffects)
