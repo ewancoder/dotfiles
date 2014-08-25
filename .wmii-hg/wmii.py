@@ -141,7 +141,7 @@ def loopSysUpdate():
     if num != '0':
         run('yaourt -Qua > /tmp/yaourt.updates && notify-send -u low "Updates available (' + num + ')" "$(cat /tmp/yaourt.updates)"')
         if settings.soundEffects:
-            run('aplay ~/.wmii-hg/doorbell.wav')
+            run('mpg123 ~/Dropbox/Sounds/bell.mp3')
 
 def main():
     #Before all of this - we need to set background instead of ugly gray color

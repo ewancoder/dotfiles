@@ -12,7 +12,7 @@ while true; do
                     wmiir xwrite /rbar/ZNotify colors "`cat /tmp/settings.wmii | sed -n '11p'`"
                     wmiir xwrite /rbar/ZNotify label "New messages!"
                     if [ "`cat /tmp/settings.wmii | sed -n '12p'`" == "True" ]; then
-                        aplay ~/bin/shot.wav
+                        mpg123 ~/Dropbox/Sounds/bird.mp3
                     fi
                 fi
                 echo ${parts[0]}
