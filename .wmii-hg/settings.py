@@ -65,7 +65,7 @@ border = 1
 position = 'top'
 
 #Background folder
-background = '~/Dropbox/Pictures'
+background = '~/Dropbox/Pictures/Notebook'
 #Timeout to change background, in seconds
 timeout = 300
 

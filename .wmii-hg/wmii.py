@@ -132,7 +132,7 @@ def loopTime():
 
 def loopBackground():
     threading.Timer(settings.timeout, loopBackground).start()
-    run('feh --bg-fill --randomize --recursive ' + settings.background)
+    run('feh --bg-fill --randomize ' + settings.background)
 
 def loopSysUpdate():
     threading.Timer(settings.updatesTimeout, loopSysUpdate).start()
