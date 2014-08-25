@@ -140,6 +140,7 @@ def loopSysUpdate():
     num = get('yaourt -Qua | wc -l')
     if num != '0':
         run('yaourt -Qua > /tmp/yaourt.updates && notify-send -u low "Updates available (' + num + ')" "$(cat /tmp/yaourt.updates)"')
+        run('aplay ~/.wmii-hg/doorbell.wav')
 
 def main():
     #Before all of this - we need to set background instead of ugly gray color
