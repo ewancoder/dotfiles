@@ -61,7 +61,7 @@ if '-d' in sys.argv:
         name = destDir + '/graph-' + arg + '.log'
 elif '-a' in sys.argv:
     with open('/tmp/graph.log', 'wb') as outfile:
-        for filename in sorted(glob.glob(destDir + '/graph-*.log')):
+        for filename in sorted(glob.glob(destDir + '/graph-????????.log')):
             with open(filename, 'rb') as readfile:
                 shutil.copyfileobj(readfile, outfile)
     name = '/tmp/graph.log'
