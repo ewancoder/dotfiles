@@ -11,12 +11,18 @@ import shutil
 
 destDir = '/home/ewancoder/Dropbox/Graph'
 
+if '-d' in sys.argv:
+    getday = sys.argv[sys.argv.index('-d') + 1]
+else:
+    getday = time.strftime("%d")
+
 #Get data
-os.system('scp root@$IP_RPI:/root/graph-' + time.strftime("%Y%m%d") + '.log /tmp/raw.log')
+if os.system('scp root@$IP_RPI:/root/graph-' + time.strftime("%Y%m") + getday + '.log /tmp/raw.log') != 0:
+    sys.exit()
 
 #Prepare (shrink) data
 data = open('/tmp/raw.log', 'r')
-f = open(destDir + '/graph-' + time.strftime("%Y%m%d") + '.log', 'w')
+f = open(destDir + '/graph-' + getday + '.log', 'w')
 l1, l2, l3, newline, oldline = '', '', '', '', ''
 
 def main(line):
