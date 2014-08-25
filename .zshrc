@@ -16,7 +16,7 @@ source .zsh_aliases
 # CASE_SENSITIVE="true"
 
 # Uncomment this to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how often before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13
@@ -50,6 +50,12 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+#Some my keys binding
+bindkey '\e[2~' overwrite-mode
+bindkey '\e[7~' beginning-of-history
+bindkey '\e[8~' end-of-history
+bindkey -s '^xb' bindkey\ 
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -67,10 +73,6 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-CDPATH=".:~:~/Dropbox"
-
+CDPATH=".:/mnt/cloud/Dropbox"
 export TERM=rxvt-256color
-
 export EDITOR=gvim
-
-export PATH=/home/ewancoder/bin:$PATH

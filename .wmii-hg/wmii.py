@@ -99,7 +99,8 @@ def startup():
     for command in settings.startup:
         pids.append(subprocess.Popen(command, shell = True).pid)
     for command in settings.rawstartup:
-        run(command)
+        #run(command)
+        subprocess.check_call(command.split())
 
 def killAll():
     for pid in pids:
@@ -114,6 +115,7 @@ def loopStatusBar():
     check('cv | grep % | awk \'{for(i=1;i<=NF;i++) if ($i ~/%$/) {print $i+0} {print " "}}\'', 'Processing', settings.midColors)
     #Check for removable media mounted and show them
     check('ls -1 /media | tr "\\n" " "', 'Devices', settings.deviceColors)
+    check('if ! [ "$(ps aux | grep "devmon --unmount" | grep -v grep)" == "" ]; then echo "Unmounting..."; fi', 'DevicesUnmount', settings.deviceColors)
     #Check for git repos unstaged/unpushed/uncommited and show them
     check('~/bin/gitch | xargs -L 1 basename | tr "\\n" " "', 'AGitCheck', settings.gitColors)
     #Check for pulseaudio sinks/sources and show them
@@ -138,6 +140,7 @@ def loopSysUpdate():
     num = get('yaourt -Qua | wc -l')
     if num != '0':
         run('yaourt -Qua > /tmp/yaourt.updates && notify-send -u low "Updates available (' + num + ')" "$(cat /tmp/yaourt.updates)"')
+        run('aplay ~/.wmii-hg/doorbell.wav')
 
 def main():
     #Before all of this - we need to set background instead of ugly gray color
@@ -146,6 +149,9 @@ def main():
     run("wmiir xwrite /ctl bar on " + settings.position)
     #Run tray
     run("witray")
+    #Make uname to noticebar
+    setColor("\!notice", settings.alternativeColors)
+    run("wmiir xwrite /rbar/\!notice label $(uname -r)")
     #Handle Time
     loopTime()
     #Handle Rules

@@ -1,10 +1,24 @@
 #!/bin/bash
 while true; do
-    ssh root@192.168.100.11 cat /root/.irssi/notifications | while read line; do
-        IFS='Þ' read -a parts <<< "$line"
-        notify-send -t 0 "${parts[0]}" "${parts[1]}";
-        sleep 0.1
-    done
-    ssh root@192.168.100.11 rm /root/.irssi/notifications
+    rsync -av --remove-source-files -e ssh root@192.168.100.11:/root/.irssi/notifications /tmp/notifications
+    if [ -f /tmp/notifications ]; then
+        cat /tmp/notifications | while read line; do
+            IFS='Þ' read -a parts <<< "$line"
+            if [ "${parts[0]}" == "STOP" ]; then
+                wmiir remove /rbar/ZNotify
+            else
+                if [ "`echo ${parts[0]} | grep twitter_ewancoder`" == "" ]; then
+                    wmiir create /rbar/ZNotify
+                    wmiir xwrite /rbar/ZNotify colors "`cat /tmp/settings.wmii | sed -n '11p'`"
+                    wmiir xwrite /rbar/ZNotify label "New messages!"
+                    aplay ~/bin/shot.wav
+                fi
+                echo ${parts[0]}
+                notify-send -t "${parts[3]}" "${parts[0]}" "${parts[1]}" -u ${parts[2]};
+                sleep 0.1
+            fi
+        done
+        rm /tmp/notifications
+    fi
     sleep 5
 done

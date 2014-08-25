@@ -1,41 +1,38 @@
+#Exit wmii properly
 alias quit='wmiir xwrite /ctl quit'
 
-alias pow='poweroff'
+#Works even if other users currently logged in
+alias pow='systemctl poweroff -i'
+alias reb='systemctl reboot -i'
 
-alias xit='exit'
-
-alias warsow='warsow & sleep 5 && wmiir xwrite /ctl view 2'
-
-alias poweroff='systemctl poweroff -i'
-alias reboot='systemctl reboot -i'
-
-alias ftb='java -jar ~/Copy/Games/Minecraft/Feed\ The\ Beast/ftb.jar'
-alias gpart='gksu gparted'
-
+#Run some programs (canto over LAN, gparted, minecraft, terraria server, warsow)
 alias canto='canto-curses -a 192.168.100.11 -p 7070'
-
-alias s='sudo '
-
-alias sc="screen -rd"
-alias sci="ssh -t root@192.168.100.11 screen -rd irssi"
-alias scu="screen -rd userver"
-
-alias gis="git status"
-alias gia="git add -A"
-alias gic="git commit"
-alias gicm="git commit -m"
-alias gica="git commit --amend"
-alias gip="git push --all"
-alias gil="git log --oneline --graph --color --all --decorate"
-alias gid="git diff"
-alias gim="git merge --no-ff"
-
-alias ch="git checkout"
-
-alias y="yaourt"
-alias ya="yaourt -S"
-alias yau="yaourt -Syua --noconfirm"
-
-alias sshrpi="ssh -t root@192.168.100.11"
-
+alias gpart='gksu gparted'
+alias ftb='java -jar ~/Copy/Games/Minecraft/Feed\ The\ Beast/ftb.jar'
 alias terr='cd ~/Copy/GameSaves/Terraria && mono TerrariaServer.exe'
+alias war='warsow & sleep 5 && wmiir xwrite /ctl view 2'
+
+#Reattach screen session(s)
+alias sc='screen -rd'
+#Reattach irssi screen session at RPI over ssh
+alias sci='screen -rd irssi'
+#Connect to RPI over ssh
+alias sshrpi='ssh -t root@192.168.100.11'
+
+#Git aliases
+alias github='ssh-add ~/.ssh/github'
+alias gia='git add -A'
+alias gic='git commit -v'
+alias gic!='git commit -v --amend'
+alias gica='git commit -av'
+alias gica!='git commit -av --amend'
+alias gid='git diff'
+alias gil='git log --oneline --graph --color --all --decorate'
+alias gim='git merge --no-ff'
+alias gip='git push origin --all; if [ ! $? -eq 0 ]; then github; git push origin --all; fi'
+alias gis='git status'
+
+#For aliases working with sudo
+alias s='sudo '
+#Typo fix
+alias xit='exit'

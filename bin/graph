@@ -1,0 +1,109 @@
+#!/usr/bin/python
+import matplotlib.pyplot as plt
+import numpy as np
+import datetime
+import os
+import sys
+from matplotlib import dates as mldates
+import time
+import glob
+import shutil
+
+destDir = '/home/ewancoder/Dropbox/Graph'
+
+#Get data
+os.system('scp root@192.168.100.11:/root/graph-' + time.strftime("%Y%m%d") + '.log /tmp/raw.log')
+
+#Prepare (shrink) data
+data = open('/tmp/raw.log', 'r')
+f = open(destDir + '/graph-' + time.strftime("%Y%m%d") + '.log', 'w')
+l1, l2, l3, newline, oldline = '', '', '', '', ''
+
+def main(line):
+    if not (l2[0:4] == l1[0:4] and l2[0:4] == l3[0:4]) and len(line.split()) == 5 and len(line.split()[0]) == 2:
+        f.write(str(line) + '')
+
+for line in data:
+    l = line.split()
+    if newline == '':
+        newline = line
+    else:
+        oldline = newline
+        newline = line
+
+    if l1 == '':
+        if len(l) == 5:
+            l1 = l
+            f.write(line)
+    elif l2 == '':
+        l2 = l
+    elif l3 == '':
+        l3 = l
+        main(oldline)
+    else:
+        l1 = l2
+        l2 = l3
+        l3 = l
+        main(oldline)
+
+f.close()
+data.close()
+
+#Setup font
+title_font = {'fontname': 'Verdana', 'fontsize': 24}
+
+#Determine range
+if '-d' in sys.argv:
+    arg = sys.argv[sys.argv.index('-d') + 1]
+    if len(arg) == 2:
+        name = destDir + '/graph-' + time.strftime("%Y%m") + arg + '.log'
+    else:
+        name = destDir + '/graph-' + arg + '.log'
+elif '-a' in sys.argv:
+    with open('/tmp/graph.log', 'wb') as outfile:
+        for filename in sorted(glob.glob(destDir + '/graph-*.log')):
+            with open(filename, 'rb') as readfile:
+                shutil.copyfileobj(readfile, outfile)
+    name = '/tmp/graph.log'
+else:
+    name = destDir + '/graph-' + time.strftime("%Y%m%d") + '.log'
+
+#Process data
+humid, temp, fahr, light, dates = np.loadtxt(name, skiprows=1, unpack=True)
+xdates = [datetime.datetime.strptime(str(int(date)),'%m%d%Y%H%M%S') for date in dates]
+df = mldates.DateFormatter('%h %d %T')
+
+fig = plt.figure(facecolor='#282828')
+fig.suptitle('Weather & Light sensors visualisation', color='#55aabb', **title_font)
+
+temps = plt.subplot(211, axisbg='#202020')
+if '-c' in sys.argv:
+    plt.plot(xdates, temp, '-', label='Celsius Temperature, C', color='#cccc33')
+else:
+    plt.plot(xdates, fahr, '-', label='Temperature, F', color='#cccc33')
+for d in ['bottom', 'top', 'left', 'right']:
+    temps.spines[d].set_color('#226622')
+temps.tick_params(axis='y', colors='#aaaa55')
+plt.plot(xdates, humid, '-', label='Humidity, %', color='#44cc33')
+plt.ylabel('Weather', color="#aaaa55")
+plt.grid(color='w')
+leg = plt.legend(loc='best', fancybox=True)
+leg.get_frame().set_alpha(0.5)
+
+temps.xaxis.set_major_formatter(df)
+
+lights = plt.subplot(212, sharex=temps, axisbg='#222222')
+plt.plot(xdates, light, '-', label='Light', color='#dd4422')
+for d in ['bottom', 'top', 'left', 'right']:
+    lights.spines[d].set_color('#885555')
+lights.tick_params(axis='y', colors='#bb6644')
+lights.tick_params(axis='x', colors='#55aabb')
+plt.ylabel('Light', color='#bb6644')
+plt.grid(color='w')
+plt.ylim((0,1050))
+
+fig.autofmt_xdate()
+if '-p' in sys.argv:
+    plt.savefig(sys.argv[sys.argv.index('-p') + 1], facecolor='#282828')
+else:
+    plt.show()

@@ -12,8 +12,8 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
 fi
 
 #These needed to be startuped at login, not at startx
-devmon --exec-on-drive 'notify-send "Drive mounted" "Mounted %l (%f) on %d"' --exec-on-unmount 'notify-send "Drive unmounted" "Unmounted %l (%f)"' --exec-on-remove 'notify-send "Drive removed" "Removed %f"' &
-find ~/Dropbox/Cute -type f | shuf -n 1 | xargs -I{} cp {} ~/Dropbox/Public/today.jpg &
+#devmon --exec-on-drive 'notify-send "Drive mounted" "Mounted %l (%f) on %d"' --exec-on-unmount 'notify-send "Drive unmounted" "Unmounted %l (%f)"' --exec-on-remove 'notify-send "Drive removed" "Removed %f"' &
+devmon &
 
 #And these is just standart X configuration
 xrdb -merge ~/.Xresources &

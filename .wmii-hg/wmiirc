@@ -130,12 +130,6 @@ Key $MODKEY-Control-$UP
 Key $MODKEY-Control-$DOWN
     wmiir xwrite /tag/sel/ctl grow sel sel down 2
 
-KeyGroup Moving through stacks
-Key $MODKEY-Control-$UP    # Select the stack above
-	wmiir xwrite /tag/sel/ctl select up stack
-Key $MODKEY-Control-$DOWN  # Select the stack below
-	wmiir xwrite /tag/sel/ctl select down stack
-
 KeyGroup Floating switching
 Key $MODKEY-space   # Toggle between floating and managed layers
 	wmiir xwrite /tag/sel/ctl select toggle
@@ -145,6 +139,8 @@ Key $MODKEY-Shift-space   # Toggle selected client between floating and managed 
 KeyGroup Client actions
 Key $MODKEY-f # Toggle selected client's fullsceen state
 	wmiir xwrite /client/sel/ctl Fullscreen toggle
+Key $MODKEY-bracketright # Toggle urgent
+    wmiir xwrite /client/sel/ctl urgent toggle
 Key Control-q # Close client
     sc=$(wmiir read /client/sel/label)
     if [ "$sc" != "tilda" ] && [ "$sc" != "canto-curses" ]; then
@@ -198,6 +194,9 @@ KeyGroup Others
 #Toggle touchpad
 Key $MODKEY-v
     synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0') &
+#Remove 'New messages' notification
+Key $MODKEY-apostrophe
+    wmiir remove /rbar/ZNotify
 #System update
 Key Next
     urxvt -e sudo yaourt -Syua --noconfirm &
@@ -227,20 +226,20 @@ Key $MODKEY-KP_Add
 #Mount/Unmount all drives
 Key $MODKEY-Insert
     devmon --mount-all &
-    notify-send "Remount" "Remounted drives $(ls /media)" &
 Key $MODKEY-Delete
+    sync &
     devmon --unmount-removable &
 
 KeyGroup Pulseaudio switching devices
 Key $MODKEY-Shift-KP_Insert
-    pacmd set-default-sink 0
+    pacmd set-default-sink alsa_output.pci-0000_00_14.2.analog-stereo
     for word in $(cat /tmp/inds.mypo); do
-        pacmd move-sink-input $word 0
+        pacmd move-sink-input $word alsa_output.pci-0000_00_14.2.analog-stereo
     done
 Key $MODKEY-Shift-KP_End
-    pacmd set-default-sink 1
+    pacmd set-default-sink alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo
     for word in $(cat /tmp/inds.mypo); do
-        pacmd move-sink-input $word 1
+        pacmd move-sink-input $word alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo
     done
 Key $MODKEY-Shift-KP_Down
     pacmd set-default-sink 2

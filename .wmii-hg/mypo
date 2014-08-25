@@ -1,11 +1,11 @@
 #!/bin/bash
-ponymix --sink-input list > /tmp/temp.mypo
+pactl list sink-inputs > /tmp/temp.mypo
 
 if [ "$1" == "" ]; then
-    if ! [ "$(cat /tmp/temp.mypo)" == "" ]; then
-        apps="$(cat /tmp/temp.mypo | awk '/sink/{getline;print $1}')"
-        inds=$(cat /tmp/temp.mypo | grep 'sink-input' | awk '{print $2}' | sed 's/://')
-        vols=$(cat /tmp/temp.mypo | grep 'Avg. Volume:' | awk '{print $3}' | sed 's/%//')
+    if [ ! "$(cat /tmp/temp.mypo)" == "" ]; then
+        apps=$(cat /tmp/temp.mypo | grep 'application.icon_name' | awk '{print $3}' | tr -d '"')
+        inds=$(cat /tmp/temp.mypo | grep 'Sink Input' | awk '{print $3}' | tr -d '#')
+        vols=$(cat /tmp/temp.mypo | grep 'Volume' | awk '{print $5}' | tr -d '%')
         echo $inds > /tmp/inds.mypo
         IFS=$'\r\n' GLOBIGNORE='*' :; app=($apps)
         IFS=$'\r\n' GLOBIGNORE='*' :; ind=($inds)
@@ -31,8 +31,8 @@ if [ "$1" == "" ]; then
         fi
     done
 else
-    IFS=$'\r\n' GLOBIGNORE='*' :; app=($(cat /tmp/temp.mypo | awk '/sink/{getline;print $1}'))
-    IFS=$'\r\n' GLOBIGNORE='*' :; vol=($(cat /tmp/temp.mypo | grep 'Avg. Volume:' | awk '{print $3}' | sed 's/%//'))
+    IFS=$'\r\n' GLOBIGNORE='*' :; app=`cat /tmp/temp.mypo | grep 'application.icon_name' | awk '{print $3}' | tr -d '"'`
+    IFS=$'\r\n' GLOBIGNORE='*' :; vol=`cat /tmp/temp.mypo | grep 'Volume' | awk '{print $5}' | tr -d '%'`
     wmiir xwrite /rbar/Audio$2 label "${app[$1]}: ${vol[$1]}" &
 fi
 
