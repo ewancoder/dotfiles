@@ -20,7 +20,7 @@ f = open(destDir + '/graph-' + time.strftime("%Y%m%d") + '.log', 'w')
 l1, l2, l3, newline, oldline = '', '', '', '', ''
 
 def main(line):
-    if not (l2[0:4] == l1[0:4] and l2[0:4] == l3[0:4]) and len(line.split()) == 5:
+    if not (l2[0:4] == l1[0:4] and l2[0:4] == l3[0:4]) and len(line.split()) == 5 and len(line.split()[0]) == 2:
         f.write(str(line) + '')
 
 for line in data:
