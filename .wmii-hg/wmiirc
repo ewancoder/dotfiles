@@ -179,10 +179,10 @@ Key $MODKEY-w
     urxvt -e alsamixer &
 Key $MODKEY-x
 	amixer -q sset Master 2500+ &
-    wmiir xwrite /rbar/Status_a8 label $(amixer | grep "Left: Playback" | awk {'print $5'} | cut -d "[" -f2 | cut -d "%" -f1)
+    wmiir xwrite /rbar/Status_a7 label $(amixer | grep "Left: Playback" | awk {'print $5'} | cut -d "[" -f2 | cut -d "%" -f1)
 Key $MODKEY-z
 	amixer -q sset Master 2500- &
-    wmiir xwrite /rbar/Status_a8 label $(amixer | grep "Left: Playback" | awk {'print $5'} | cut -d "[" -f2 | cut -d "%" -f1)
+    wmiir xwrite /rbar/Status_a7 label $(amixer | grep "Left: Playback" | awk {'print $5'} | cut -d "[" -f2 | cut -d "%" -f1)
 
 KeyGroup Keyboard layouts
 Key $MODKEY-i
