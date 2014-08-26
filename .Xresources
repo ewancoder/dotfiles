@@ -29,3 +29,5 @@ xscreensaver.newLoginCommand:
 
 xscreensaver.passwd.heading.label: Session is LOCKED
 xscreensaver.passwd.body.label: Enter login information to unlock
+
+xscreensaver.captureStderr: False
