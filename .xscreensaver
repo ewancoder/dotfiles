@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.29 for ewancoder on Tue Aug 26 19:13:28 2014.
+# Written by xscreensaver-demo 5.29 for ewancoder on Tue Aug 26 19:35:25 2014.
 # http://www.jwz.org/xscreensaver/
 
 timeout:	3:00:00
@@ -21,7 +21,7 @@ fade:		False
 unfade:		False
 fadeSeconds:	0:00:02
 fadeTicks:	20
-captureStderr:	True
+captureStderr:	False
 ignoreUninstalledPrograms:False
 font:		*-medium-r-*-140-*-m-*
 dpmsEnabled:	False
@@ -142,13 +142,13 @@ programs:								      \
 - GL: 				dangerball -root			    \n\
 - GL: 				dnalogo -root				    \n\
 - GL: 				engine -root				    \n\
-  GL: 				flipscreen3d -root			    \n\
+- GL: 				flipscreen3d -root			    \n\
 - GL: 				gltext -root				    \n\
 - GL: 				menger -root				    \n\
 - GL: 				molecule -root				    \n\
 -				rotzoomer -root				    \n\
 -				speedmine -root				    \n\
-  GL: 				starwars -root -delay 24444		    \n\
+- GL: 				starwars -root -delay 24444		    \n\
 - GL: 				stonerview -root			    \n\
 -				vermiculate -root			    \n\
 -				whirlwindwarp -root			    \n\
