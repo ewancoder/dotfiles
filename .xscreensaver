@@ -221,7 +221,7 @@ programs:								      \
 - GL: 				boing -root				    \n\
 -				boxfit -root				    \n\
   GL: 				carousel -root -delay 20741 -speed 0.8022     \
-				  -duration 9 -tilt x -no-titles	    \n\
+				  -duration 9 -tilt 0 -no-titles	    \n\
 -				celtic -root				    \n\
 - GL: 				crackberg -root				    \n\
 - GL: 				cube21 -root				    \n\
