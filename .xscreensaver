@@ -1,9 +1,9 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.29 for ewancoder on Tue Aug 26 18:08:36 2014.
+# Written by xscreensaver-demo 5.29 for ewancoder on Tue Aug 26 18:21:29 2014.
 # http://www.jwz.org/xscreensaver/
 
-timeout:	0:10:00
-cycle:		0:10:00
+timeout:	3:00:00
+cycle:		0:30:00
 lock:		False
 lockTimeout:	0:00:00
 passwdTimeout:	0:00:30
