@@ -50,6 +50,9 @@ alternativeColors = '#aad #000 #000'
 #WARNING
 warnColors = '#fff #c22 #fff'
 soundEffects = True
+#AM/PM
+amColors = '#ee8 #345 #000'
+pmColors = '#8e8 #345 #000'
 
 #=== GENERAL CONFIG ===
 modkey = 'Mod4'
@@ -105,7 +108,7 @@ addTagRule("Steam", "Steam")
 
 #=== STATUSBAR ===
 #Time
-time = "date +%a\\ %b\\ %d\\ %I:%M:%S\\ %p"
+time = "date +%a\\ %b\\ %d\\ %I:%M:%S"
 #Free RAM
 text = "echo $(free -mh | grep /cache | awk '{print $4}') 'M'"
 check = "free -m | grep /cache | awk '{print $4}'"
