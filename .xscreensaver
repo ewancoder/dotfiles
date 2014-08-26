@@ -220,7 +220,7 @@ programs:								      \
 - GL: 				antmaze -root				    \n\
 - GL: 				boing -root				    \n\
 -				boxfit -root				    \n\
-  GL: 				carousel -root -delay 20741 -speed 0.8022     \
+- GL: 				carousel -root -delay 20741 -speed 0.8022     \
 				  -duration 9 -tilt 0 -no-titles	    \n\
 -				celtic -root				    \n\
 - GL: 				crackberg -root				    \n\
