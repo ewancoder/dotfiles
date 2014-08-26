@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.29 for ewancoder on Tue Aug 26 22:04:02 2014.
+# Written by xscreensaver-demo 5.29 for ewancoder on Tue Aug 26 22:11:11 2014.
 # http://www.jwz.org/xscreensaver/
 
 timeout:	3:00:00
@@ -220,7 +220,7 @@ programs:								      \
 - GL: 				antmaze -root				    \n\
 - GL: 				boing -root				    \n\
 -				boxfit -root				    \n\
-  GL: 				carousel -root -delay 20741 -speed 0.8022     \
+- GL: 				carousel -root -delay 20741 -speed 0.8022     \
 				  -duration 9 -tilt 0 -no-titles	    \n\
 -				celtic -root				    \n\
 - GL: 				crackberg -root				    \n\
