@@ -7,7 +7,7 @@ alias reb='systemctl reboot -i'
 
 #Run some programs (canto over LAN, gparted, minecraft, terraria server, warsow)
 alias canto='canto-curses -a 192.168.100.11 -p 7070'
-alias gpart='gksu gparted'
+alias gpart='xdotool mousemove - +1; xdotool mousemove - -1; gksu gparted'
 alias ftb='java -jar ~/Copy/Games/Minecraft/Feed\ The\ Beast/ftb.jar'
 alias terr='cd ~/Copy/GameSaves/Terraria && mono TerrariaServer.exe'
 alias war='warsow & sleep 5 && wmiir xwrite /ctl view 2'
@@ -37,3 +37,6 @@ alias gis='git status'
 alias s='sudo '
 #Typo fix
 alias xit='exit'
+
+#Lock screen
+alias lock='xdotool mousemove - +1; xdotool mousemove - -1; xscreensaver-command --lock'
