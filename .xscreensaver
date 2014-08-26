@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.29 for ewancoder on Tue Aug 26 19:35:25 2014.
+# Written by xscreensaver-demo 5.29 for ewancoder on Tue Aug 26 21:52:33 2014.
 # http://www.jwz.org/xscreensaver/
 
 timeout:	3:00:00
@@ -58,7 +58,7 @@ programs:								      \
 -				qix -root				    \n\
 -				rocks -root				    \n\
 -				rorschach -root				    \n\
-				decayscreen -root -delay 15556		    \n\
+-				decayscreen -root -delay 15556		    \n\
 -				flame -root				    \n\
 -				halo -root				    \n\
 -				slidescreen -root			    \n\
@@ -128,7 +128,7 @@ programs:								      \
 -				ripples -root				    \n\
 -				shadebobs -root				    \n\
 - GL: 				sierpinski3d -root			    \n\
-				spotlight -root -radius 156		    \n\
+-				spotlight -root -radius 156		    \n\
 -				squiral -root				    \n\
 -				wander -root				    \n\
 -				webcollage -root			    \n\
