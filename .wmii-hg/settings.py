@@ -105,7 +105,7 @@ addTagRule("Steam", "Steam")
 
 #=== STATUSBAR ===
 #Time
-time = "date +%a\\ %b\\ %d\\ %T\\"
+time = "date +%a\\ %b\\ %d\\ %I:%M:%S\\ %p"
 #Free RAM
 text = "echo $(free -mh | grep /cache | awk '{print $4}') 'M'"
 check = "free -m | grep /cache | awk '{print $4}'"
