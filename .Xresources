@@ -9,3 +9,23 @@ URxvt.keysym.M-l: perl:url-select:select_next
 URxvt.url-select.launcher: /usr/bin/chromium
 URxvt.url-select.underline: true
 URxvt.colorUL: #4682B4
+
+xscreensaver.Dialog.foreground: #996600
+xscreensaver.Dialog.background: #111111
+xscreensaver.Dialog.Button.foreground: #996600
+xscreensaver.Dialog.Button.background: #111111
+xscreensaver.Dialog.text.foreground: #996600
+xscreensaver.Dialog.text.background: #111111
+xscreensaver.passwd.thermometer.foreground: #000000
+xscreensaver.passwd.thermometer.background: #111111
+xscreensaver.Dialog.topShadowColor: #000000
+xscreensaver.Dialog.bottomShadowColor: #000000
+xscreensaver.Dialog.logo.width: 210
+xscreensaver.Dialog.logo.height: 210
+xscreensaver.Dialog.internalBorderWidth: 24
+xscreensaver.Dialog.borderWidth: 0
+xscreensaver.Dialog.shadowThickness: 2
+xscreensaver.newLoginCommand: 
+
+xscreensaver.passwd.heading.label: Session is LOCKED
+xscreensaver.passwd.body.label: Enter login information to unlock
