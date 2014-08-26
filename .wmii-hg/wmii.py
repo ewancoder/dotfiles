@@ -134,7 +134,7 @@ def loopTime():
     if time.strftime('%p') == 'PM':
         setColor("TimeZ", settings.pmColors)
     else:
-        setColor("TimeZ", setting.amColors)
+        setColor("TimeZ", settings.amColors)
     setStatus("Time", get(settings.time))
     setStatus("TimeZ", time.strftime('%p'))
 
