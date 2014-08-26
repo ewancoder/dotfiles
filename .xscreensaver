@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.29 for ewancoder on Tue Aug 26 17:46:49 2014.
+# Written by xscreensaver-demo 5.29 for ewancoder on Tue Aug 26 18:08:36 2014.
 # http://www.jwz.org/xscreensaver/
 
 timeout:	0:10:00
@@ -58,7 +58,7 @@ programs:								      \
 -				qix -root				    \n\
 -				rocks -root				    \n\
 -				rorschach -root				    \n\
-				decayscreen -root			    \n\
+				decayscreen -root -delay 15556		    \n\
 -				flame -root				    \n\
 -				halo -root				    \n\
 -				slidescreen -root			    \n\
@@ -148,7 +148,7 @@ programs:								      \
 - GL: 				molecule -root				    \n\
 -				rotzoomer -root				    \n\
 -				speedmine -root				    \n\
-  GL: 				starwars -root				    \n\
+  GL: 				starwars -root -delay 24444		    \n\
 - GL: 				stonerview -root			    \n\
 -				vermiculate -root			    \n\
 -				whirlwindwarp -root			    \n\
@@ -177,9 +177,10 @@ programs:								      \
 - GL: 				atunnel -root				    \n\
 -				barcode -root				    \n\
 - GL: 				blinkbox -root				    \n\
-  GL: 				blocktube -root -delay 45926 -holdtime	      \
-				  1042 -changetime 274			    \n\
-  GL: 				bouncingcow -root			    \n\
+  GL: 				blocktube -root -delay 22222 -holdtime	      \
+				  880 -changetime 274			    \n\
+  GL: 				bouncingcow -root -delay 21481 -speed	      \
+				  0.6567				    \n\
 -				cloudlife -root				    \n\
 - GL: 				cubestorm -root				    \n\
 -				eruption -root				    \n\
@@ -188,7 +189,8 @@ programs:								      \
 -				fontglide -root				    \n\
 - GL: 				gleidescope -root			    \n\
 - GL: 				glknots -root				    \n\
-  GL: 				glmatrix -root -density 27 -speed 1.1533    \n\
+  GL: 				glmatrix -root -delay 23704 -density 27	      \
+				  -speed 1.1533				    \n\
 - GL: 				glslideshow -root			    \n\
 - GL: 				hypertorus -root			    \n\
 - GL: 				jigglypuff -root			    \n\

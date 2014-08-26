@@ -23,4 +23,7 @@ devilspie &
 xset -dpms s off
 unclutter -grab &
 
+#Screensaver
+/usr/bin/xscreensaver -no-splash &
+
 exec wmii
