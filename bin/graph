@@ -22,7 +22,7 @@ if os.system('scp root@192.168.100.11:/root/graph-' + time.strftime("%Y%m") + ge
 
 #Prepare (shrink) data
 data = open('/tmp/raw.log', 'r')
-f = open(destDir + '/graph-' + getday + '.log', 'w')
+f = open(destDir + '/graph-' + time.strftime("%Y%m") + getday + '.log', 'w')
 l1, l2, l3, newline, oldline = '', '', '', '', ''
 
 def main(line):
