@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.29 for ewancoder on Tue Aug 26 18:21:29 2014.
+# Written by xscreensaver-demo 5.29 for ewancoder on Tue Aug 26 19:13:28 2014.
 # http://www.jwz.org/xscreensaver/
 
 timeout:	3:00:00
@@ -177,7 +177,7 @@ programs:								      \
 - GL: 				atunnel -root				    \n\
 -				barcode -root				    \n\
 - GL: 				blinkbox -root				    \n\
-  GL: 				blocktube -root -delay 22222 -holdtime	      \
+- GL: 				blocktube -root -delay 22222 -holdtime	      \
 				  880 -changetime 274			    \n\
   GL: 				bouncingcow -root -delay 21481 -speed	      \
 				  0.6567				    \n\
