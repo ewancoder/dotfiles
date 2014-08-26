@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.29 for ewancoder on Tue Aug 26 21:52:33 2014.
+# Written by xscreensaver-demo 5.29 for ewancoder on Tue Aug 26 22:04:02 2014.
 # http://www.jwz.org/xscreensaver/
 
 timeout:	3:00:00
@@ -31,7 +31,7 @@ dpmsSuspend:	2:00:00
 dpmsOff:	4:00:00
 grabDesktopImages:  True
 grabVideoFrames:    False
-chooseRandomImages: False
+chooseRandomImages: True
 imageDirectory:	/home/ewancoder/Dropbox/Cute
 
 mode:		random
@@ -220,8 +220,8 @@ programs:								      \
 - GL: 				antmaze -root				    \n\
 - GL: 				boing -root				    \n\
 -				boxfit -root				    \n\
-- GL: 				carousel -root -speed 0.3926 -duration 30     \
-				  -no-titles				    \n\
+  GL: 				carousel -root -delay 20741 -speed 0.8022     \
+				  -duration 9 -tilt 0 -no-titles	    \n\
 -				celtic -root				    \n\
 - GL: 				crackberg -root				    \n\
 - GL: 				cube21 -root				    \n\
