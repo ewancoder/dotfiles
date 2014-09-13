@@ -26,4 +26,7 @@ unclutter -grab &
 #Screensaver
 /usr/bin/xscreensaver -no-splash &
 
+#f.lux
+xflux -l 53.9 -g 27.5667 -k 4500 &
+
 exec wmii
