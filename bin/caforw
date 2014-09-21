@@ -1,0 +1,5 @@
+#!/bin/bash
+while true; do
+    ssh -L 7070:127.0.0.1:7070 root@192.168.100.11
+    sleep 10
+done

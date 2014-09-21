@@ -2,7 +2,7 @@
 # Written by xscreensaver-demo 5.29 for ewancoder on Wed Aug 27 01:56:56 2014.
 # http://www.jwz.org/xscreensaver/
 
-timeout:	3:00:00
+timeout:	24:00:00
 cycle:		0:30:00
 lock:		True
 lockTimeout:	0:00:00

@@ -32,6 +32,8 @@ Bundle "Lokaltog/vim-easymotion"
 Bundle "Rykka/riv.vim"
 "For arduino
 Bundle "jplaut/vim-arduino-ino"
+"For latex
+Bundle "lervag/vim-latex"
 
 filetype plugin indent on
 
