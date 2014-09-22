@@ -33,7 +33,10 @@ Bundle "Rykka/riv.vim"
 "For arduino
 Bundle "jplaut/vim-arduino-ino"
 "For latex
-Bundle "lervag/vim-latex"
+"Bundle "lervag/vim-latex"
+Bundle "jcf/vim-latex"
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
 
 filetype plugin indent on
 
