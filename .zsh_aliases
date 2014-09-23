@@ -18,7 +18,6 @@ alias sc='screen -rd'
 alias sci='screen -rd irssi'
 #Connect to RPI over ssh
 alias sshrpi='ssh -t root@192.168.100.11'
-alias sshl='sshrpi -L 7070:127.0.0.1:7070'
 
 #Git aliases
 alias github='ssh-add ~/.ssh/github'
