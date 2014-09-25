@@ -84,7 +84,7 @@ startup = [
     'dropboxd',
     '~/bin/ircnotify',
     'tilda',
-    'weather',
+    #'weather',
     'caforw'
 ]
 #Startup as via bash (won't be killed upon X11 termination)
