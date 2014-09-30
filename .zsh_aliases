@@ -35,6 +35,9 @@ alias gip='git push origin --all; if [ ! $? -eq 0 ]; then github; git push origi
 alias gipf='git push -f origin --all; if [ ! $? -eq 0 ]; then github; git push -f origin --all; fi'
 alias gis='git status'
 
+#Pogoda
+alias pog='chromium pogoda.tut.by'
+
 #For aliases working with sudo
 alias s='sudo '
 #Typo fix
