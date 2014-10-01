@@ -93,8 +93,6 @@ rawstartup = [
 ]
 
 #=== COLUMN RULES ===
-#For skype mini-window on the left side
-addColRule(0, "20+80")
 #For two Thunars / 2 chromium windows
 addColRule(2, "50+50")
 #For anything else - Golden Ratio
