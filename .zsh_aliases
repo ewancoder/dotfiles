@@ -6,7 +6,7 @@ alias pow='systemctl poweroff -i'
 alias reb='systemctl reboot -i'
 
 #Run some programs (canto over LAN, gparted, minecraft, terraria server, warsow)
-alias canto='canto-curses -a 127.0.0.1 -p 7070'
+alias canto='canto-curses -a 127.0.0.1 -p 7070 -v'
 alias gpart='xdotool mousemove - 1 mousemove restore; gksu gparted'
 alias ftb='java -jar ~/Copy/Games/Minecraft/Feed\ The\ Beast/ftb.jar'
 alias terr='cd ~/Copy/GameSaves/Terraria && mono TerrariaServer.exe'
