@@ -45,3 +45,6 @@ alias xit='exit'
 
 #Lock screen
 alias lock='xdotool mousemove - 1 mousemove restore; xscreensaver-command --lock'
+
+#Server sshfs
+alias ng='sshfs root@192.168.100.11:/usr/share/nginx/html ~/html'
