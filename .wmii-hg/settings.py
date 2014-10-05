@@ -78,12 +78,13 @@ updatesTimeout = 600
 
 #Startup X11 apps
 startup = [
+    'ssh -fNL 7070:127.0.0.1:7070 root@192.168.100.11',
     'gxkb',
     'CopyAgent',
     'dropboxd',
     '~/bin/ircnotify',
     'tilda',
-    'weather',
+    #'weather',
     'caforw'
 ]
 #Startup as via bash (won't be killed upon X11 termination)
@@ -92,8 +93,6 @@ rawstartup = [
 ]
 
 #=== COLUMN RULES ===
-#For skype mini-window on the left side
-addColRule(0, "20+80")
 #For two Thunars / 2 chromium windows
 addColRule(2, "50+50")
 #For anything else - Golden Ratio

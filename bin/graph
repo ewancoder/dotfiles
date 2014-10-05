@@ -16,44 +16,46 @@ if '-d' in sys.argv:
 else:
     getday = time.strftime("%d")
 
-#Get data
-if os.system('scp root@$IP_RPI:/root/graph-' + time.strftime("%Y%m") + getday + '.log /tmp/raw.log') != 0:
-    sys.exit()
+<<<<<<< HEAD
+if not '-a' in sys.argv:
+    #Get data
+    if os.system('scp root@$IP_RPI:/root/graph-' + time.strftime("%Y%m") + getday + '.log /tmp/raw.log') != 0:
+        sys.exit()
 
-#Prepare (shrink) data
-data = open('/tmp/raw.log', 'r')
-f = open(destDir + '/graph-' + time.strftime("%Y%m") + getday + '.log', 'w')
-l1, l2, l3, newline, oldline = '', '', '', '', ''
+    #Prepare (shrink) data
+    data = open('/tmp/raw.log', 'r')
+    f = open(destDir + '/graph-' + time.strftime("%Y%m") + getday + '.log', 'w')
+    l1, l2, l3, newline, oldline = '', '', '', '', ''
 
-def main(line):
-    if not (l2[0:4] == l1[0:4] and l2[0:4] == l3[0:4]) and len(line.split()) == 5 and len(line.split()[0]) == 2:
-        f.write(str(line) + '')
+    def main(line):
+        if not (l2[0:4] == l1[0:4] and l2[0:4] == l3[0:4]) and len(line.split()) == 5 and len(line.split()[0]) == 2:
+            f.write(str(line) + '')
 
-for line in data:
-    l = line.split()
-    if newline == '':
-        newline = line
-    else:
-        oldline = newline
-        newline = line
+    for line in data:
+        l = line.split()
+        if newline == '':
+            newline = line
+        else:
+            oldline = newline
+            newline = line
 
-    if l1 == '':
-        if len(l) == 5:
-            l1 = l
-            f.write(line)
-    elif l2 == '':
-        l2 = l
-    elif l3 == '':
-        l3 = l
-        main(oldline)
-    else:
-        l1 = l2
-        l2 = l3
-        l3 = l
-        main(oldline)
+        if l1 == '':
+            if len(l) == 5:
+                l1 = l
+                f.write(line)
+        elif l2 == '':
+            l2 = l
+        elif l3 == '':
+            l3 = l
+            main(oldline)
+        else:
+            l1 = l2
+            l2 = l3
+            l3 = l
+            main(oldline)
 
-f.close()
-data.close()
+    f.close()
+    data.close()
 
 #Setup font
 title_font = {'fontname': 'Verdana', 'fontsize': 24}

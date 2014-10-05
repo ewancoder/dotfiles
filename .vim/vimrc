@@ -33,7 +33,11 @@ Bundle "Rykka/riv.vim"
 "For arduino
 Bundle "jplaut/vim-arduino-ino"
 "For latex
-Bundle "lervag/vim-latex"
+"Bundle "lervag/vim-latex"
+"This is cool BUT WRONG C-j shortcut :(
+"Bundle "jcf/vim-latex"
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
 
 filetype plugin indent on
 
@@ -206,3 +210,6 @@ map <leader>b :CommandTBuffer<CR>
 
 
 "Python-mode
+"
+"Just BECAUSE I NEED IT
+map <C-j> <C-W>j

@@ -1,4 +1,5 @@
 URxvt*scrollBar: false
+URxvt*saveLines: 24000
 URxvt*background: #000000
 URxvt*foreground: #c2e2a2
 URxvt*.shading: 20
