@@ -18,7 +18,7 @@ devmon &
 #And these is just standart X configuration
 xrdb -merge ~/.Xresources &
 start-pulseaudio-x11 &
-compton --backend glx --paint-on-overlay --vsync opengl-swc &
+compton &
 devilspie &
 xset -dpms s off
 unclutter -grab &
