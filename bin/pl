@@ -1,0 +1,23 @@
+#!/bin/bash
+if [ "$1" == "" ]; then
+    name="Табунов Е.А."
+else
+    name="$1"
+fi
+mkdir -p ~/print
+mkdir -p ./other
+cp -r * ./other
+pdflatex main
+pdflatex main
+mv main.pdf `basename $PWD`.pdf
+
+cd other
+sed -i "s/Зырянов И.М./$name/g" title.tex
+
+pdflatex main
+pdflatex main
+cd ..
+mv ./other/main.pdf `basename $PWD`.other.pdf
+rm -r ./other
+
+cp *.pdf ~/print
