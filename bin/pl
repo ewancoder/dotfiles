@@ -7,6 +7,7 @@ fi
 mkdir -p ~/print
 mkdir -p ./other
 cp -r * ./other
+ln -s ../preamble.tex .
 pdflatex main
 bibtex main
 pdflatex main
