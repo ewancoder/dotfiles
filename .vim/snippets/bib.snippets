@@ -1,0 +1,6 @@
+snippet misc web-page citation
+	@misc{${1:},
+		title = "${2:} // ${3:}",
+		year = "${4:2014}",
+		note = "URL: \url{http://${5:}} (дата обращения: ${6:`system("date +%d.%m.%Y")`})"
+	}
