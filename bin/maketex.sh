@@ -32,7 +32,7 @@ for (( i = 1; i < 10; i++ )); do
         echo "$temp" >> $filename
 
         int=4
-        temp=`echo -e "\t\t"`'\textbf{$4}}'
+        temp=`echo -e "\t\t"`'\textbf{$4}'
         for (( k = 2; k <= $j; k++ )); do
             int=`expr $k + 3`
             temp="$temp"' & \textbf{$'"$int"'}'

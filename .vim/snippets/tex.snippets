@@ -31,6 +31,12 @@ snippet fig figure with \includegraphics
 	\end{figure}
 	${0}
 
+snippet verb verbatim block
+	\begin{verbatim}
+		${1}
+	\end{verbatim}
+	${0}
+
 snippet tab11 longtable 1x1
 	\begin{longtable}[c]{${1:|c|}}
 		\caption{${2}}
@@ -40,7 +46,7 @@ snippet tab11 longtable 1x1
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}}\\\\
+		\textbf{$4}\\\\
 		\hline
 		\endhead
 			${5}\\\\
@@ -57,7 +63,7 @@ snippet tab21 longtable 2x1
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5}\\\\
+		\textbf{$4} & \textbf{$5}\\\\
 		\hline
 		\endhead
 			${6} & ${7}\\\\
@@ -74,7 +80,7 @@ snippet tab31 longtable 3x1
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6}\\\\
 		\hline
 		\endhead
 			${7} & ${8} & ${9}\\\\
@@ -91,7 +97,7 @@ snippet tab41 longtable 4x1
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
 		\hline
 		\endhead
 			${8} & ${9} & ${10} & ${11}\\\\
@@ -108,7 +114,7 @@ snippet tab51 longtable 5x1
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
 		\hline
 		\endhead
 			${9} & ${10} & ${11} & ${12} & ${13}\\\\
@@ -125,7 +131,7 @@ snippet tab61 longtable 6x1
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
 		\hline
 		\endhead
 			${10} & ${11} & ${12} & ${13} & ${14} & ${15}\\\\
@@ -142,7 +148,7 @@ snippet tab71 longtable 7x1
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
 		\hline
 		\endhead
 			${11} & ${12} & ${13} & ${14} & ${15} & ${16} & ${17}\\\\
@@ -159,7 +165,7 @@ snippet tab81 longtable 8x1
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
 		\hline
 		\endhead
 			${12} & ${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19}\\\\
@@ -176,7 +182,7 @@ snippet tab91 longtable 9x1
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
 		\hline
 		\endhead
 			${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19} & ${20} & ${21}\\\\
@@ -196,7 +202,7 @@ snippet tab12 longtable 1x2
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}}\\\\
+		\textbf{$4}\\\\
 		\hline
 		\endhead
 			${5}\\\\
@@ -215,7 +221,7 @@ snippet tab22 longtable 2x2
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5}\\\\
+		\textbf{$4} & \textbf{$5}\\\\
 		\hline
 		\endhead
 			${6} & ${7}\\\\
@@ -234,7 +240,7 @@ snippet tab32 longtable 3x2
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6}\\\\
 		\hline
 		\endhead
 			${7} & ${8} & ${9}\\\\
@@ -253,7 +259,7 @@ snippet tab42 longtable 4x2
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
 		\hline
 		\endhead
 			${8} & ${9} & ${10} & ${11}\\\\
@@ -272,7 +278,7 @@ snippet tab52 longtable 5x2
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
 		\hline
 		\endhead
 			${9} & ${10} & ${11} & ${12} & ${13}\\\\
@@ -291,7 +297,7 @@ snippet tab62 longtable 6x2
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
 		\hline
 		\endhead
 			${10} & ${11} & ${12} & ${13} & ${14} & ${15}\\\\
@@ -310,7 +316,7 @@ snippet tab72 longtable 7x2
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
 		\hline
 		\endhead
 			${11} & ${12} & ${13} & ${14} & ${15} & ${16} & ${17}\\\\
@@ -329,7 +335,7 @@ snippet tab82 longtable 8x2
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
 		\hline
 		\endhead
 			${12} & ${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19}\\\\
@@ -348,7 +354,7 @@ snippet tab92 longtable 9x2
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
 		\hline
 		\endhead
 			${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19} & ${20} & ${21}\\\\
@@ -370,7 +376,7 @@ snippet tab13 longtable 1x3
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}}\\\\
+		\textbf{$4}\\\\
 		\hline
 		\endhead
 			${5}\\\\
@@ -391,7 +397,7 @@ snippet tab23 longtable 2x3
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5}\\\\
+		\textbf{$4} & \textbf{$5}\\\\
 		\hline
 		\endhead
 			${6} & ${7}\\\\
@@ -412,7 +418,7 @@ snippet tab33 longtable 3x3
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6}\\\\
 		\hline
 		\endhead
 			${7} & ${8} & ${9}\\\\
@@ -433,7 +439,7 @@ snippet tab43 longtable 4x3
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
 		\hline
 		\endhead
 			${8} & ${9} & ${10} & ${11}\\\\
@@ -454,7 +460,7 @@ snippet tab53 longtable 5x3
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
 		\hline
 		\endhead
 			${9} & ${10} & ${11} & ${12} & ${13}\\\\
@@ -475,7 +481,7 @@ snippet tab63 longtable 6x3
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
 		\hline
 		\endhead
 			${10} & ${11} & ${12} & ${13} & ${14} & ${15}\\\\
@@ -496,7 +502,7 @@ snippet tab73 longtable 7x3
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
 		\hline
 		\endhead
 			${11} & ${12} & ${13} & ${14} & ${15} & ${16} & ${17}\\\\
@@ -517,7 +523,7 @@ snippet tab83 longtable 8x3
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
 		\hline
 		\endhead
 			${12} & ${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19}\\\\
@@ -538,7 +544,7 @@ snippet tab93 longtable 9x3
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
 		\hline
 		\endhead
 			${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19} & ${20} & ${21}\\\\
@@ -562,7 +568,7 @@ snippet tab14 longtable 1x4
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}}\\\\
+		\textbf{$4}\\\\
 		\hline
 		\endhead
 			${5}\\\\
@@ -585,7 +591,7 @@ snippet tab24 longtable 2x4
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5}\\\\
+		\textbf{$4} & \textbf{$5}\\\\
 		\hline
 		\endhead
 			${6} & ${7}\\\\
@@ -608,7 +614,7 @@ snippet tab34 longtable 3x4
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6}\\\\
 		\hline
 		\endhead
 			${7} & ${8} & ${9}\\\\
@@ -631,7 +637,7 @@ snippet tab44 longtable 4x4
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
 		\hline
 		\endhead
 			${8} & ${9} & ${10} & ${11}\\\\
@@ -654,7 +660,7 @@ snippet tab54 longtable 5x4
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
 		\hline
 		\endhead
 			${9} & ${10} & ${11} & ${12} & ${13}\\\\
@@ -677,7 +683,7 @@ snippet tab64 longtable 6x4
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
 		\hline
 		\endhead
 			${10} & ${11} & ${12} & ${13} & ${14} & ${15}\\\\
@@ -700,7 +706,7 @@ snippet tab74 longtable 7x4
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
 		\hline
 		\endhead
 			${11} & ${12} & ${13} & ${14} & ${15} & ${16} & ${17}\\\\
@@ -723,7 +729,7 @@ snippet tab84 longtable 8x4
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
 		\hline
 		\endhead
 			${12} & ${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19}\\\\
@@ -746,7 +752,7 @@ snippet tab94 longtable 9x4
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
 		\hline
 		\endhead
 			${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19} & ${20} & ${21}\\\\
@@ -772,7 +778,7 @@ snippet tab15 longtable 1x5
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}}\\\\
+		\textbf{$4}\\\\
 		\hline
 		\endhead
 			${5}\\\\
@@ -797,7 +803,7 @@ snippet tab25 longtable 2x5
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5}\\\\
+		\textbf{$4} & \textbf{$5}\\\\
 		\hline
 		\endhead
 			${6} & ${7}\\\\
@@ -822,7 +828,7 @@ snippet tab35 longtable 3x5
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6}\\\\
 		\hline
 		\endhead
 			${7} & ${8} & ${9}\\\\
@@ -847,7 +853,7 @@ snippet tab45 longtable 4x5
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
 		\hline
 		\endhead
 			${8} & ${9} & ${10} & ${11}\\\\
@@ -872,7 +878,7 @@ snippet tab55 longtable 5x5
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
 		\hline
 		\endhead
 			${9} & ${10} & ${11} & ${12} & ${13}\\\\
@@ -897,7 +903,7 @@ snippet tab65 longtable 6x5
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
 		\hline
 		\endhead
 			${10} & ${11} & ${12} & ${13} & ${14} & ${15}\\\\
@@ -922,7 +928,7 @@ snippet tab75 longtable 7x5
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
 		\hline
 		\endhead
 			${11} & ${12} & ${13} & ${14} & ${15} & ${16} & ${17}\\\\
@@ -947,7 +953,7 @@ snippet tab85 longtable 8x5
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
 		\hline
 		\endhead
 			${12} & ${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19}\\\\
@@ -972,7 +978,7 @@ snippet tab95 longtable 9x5
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
 		\hline
 		\endhead
 			${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19} & ${20} & ${21}\\\\
@@ -1000,7 +1006,7 @@ snippet tab16 longtable 1x6
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}}\\\\
+		\textbf{$4}\\\\
 		\hline
 		\endhead
 			${5}\\\\
@@ -1027,7 +1033,7 @@ snippet tab26 longtable 2x6
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5}\\\\
+		\textbf{$4} & \textbf{$5}\\\\
 		\hline
 		\endhead
 			${6} & ${7}\\\\
@@ -1054,7 +1060,7 @@ snippet tab36 longtable 3x6
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6}\\\\
 		\hline
 		\endhead
 			${7} & ${8} & ${9}\\\\
@@ -1081,7 +1087,7 @@ snippet tab46 longtable 4x6
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
 		\hline
 		\endhead
 			${8} & ${9} & ${10} & ${11}\\\\
@@ -1108,7 +1114,7 @@ snippet tab56 longtable 5x6
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
 		\hline
 		\endhead
 			${9} & ${10} & ${11} & ${12} & ${13}\\\\
@@ -1135,7 +1141,7 @@ snippet tab66 longtable 6x6
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
 		\hline
 		\endhead
 			${10} & ${11} & ${12} & ${13} & ${14} & ${15}\\\\
@@ -1162,7 +1168,7 @@ snippet tab76 longtable 7x6
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
 		\hline
 		\endhead
 			${11} & ${12} & ${13} & ${14} & ${15} & ${16} & ${17}\\\\
@@ -1189,7 +1195,7 @@ snippet tab86 longtable 8x6
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
 		\hline
 		\endhead
 			${12} & ${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19}\\\\
@@ -1216,7 +1222,7 @@ snippet tab96 longtable 9x6
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
 		\hline
 		\endhead
 			${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19} & ${20} & ${21}\\\\
@@ -1246,7 +1252,7 @@ snippet tab17 longtable 1x7
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}}\\\\
+		\textbf{$4}\\\\
 		\hline
 		\endhead
 			${5}\\\\
@@ -1275,7 +1281,7 @@ snippet tab27 longtable 2x7
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5}\\\\
+		\textbf{$4} & \textbf{$5}\\\\
 		\hline
 		\endhead
 			${6} & ${7}\\\\
@@ -1304,7 +1310,7 @@ snippet tab37 longtable 3x7
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6}\\\\
 		\hline
 		\endhead
 			${7} & ${8} & ${9}\\\\
@@ -1333,7 +1339,7 @@ snippet tab47 longtable 4x7
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
 		\hline
 		\endhead
 			${8} & ${9} & ${10} & ${11}\\\\
@@ -1362,7 +1368,7 @@ snippet tab57 longtable 5x7
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
 		\hline
 		\endhead
 			${9} & ${10} & ${11} & ${12} & ${13}\\\\
@@ -1391,7 +1397,7 @@ snippet tab67 longtable 6x7
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
 		\hline
 		\endhead
 			${10} & ${11} & ${12} & ${13} & ${14} & ${15}\\\\
@@ -1420,7 +1426,7 @@ snippet tab77 longtable 7x7
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
 		\hline
 		\endhead
 			${11} & ${12} & ${13} & ${14} & ${15} & ${16} & ${17}\\\\
@@ -1449,7 +1455,7 @@ snippet tab87 longtable 8x7
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
 		\hline
 		\endhead
 			${12} & ${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19}\\\\
@@ -1478,7 +1484,7 @@ snippet tab97 longtable 9x7
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
 		\hline
 		\endhead
 			${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19} & ${20} & ${21}\\\\
@@ -1510,7 +1516,7 @@ snippet tab18 longtable 1x8
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}}\\\\
+		\textbf{$4}\\\\
 		\hline
 		\endhead
 			${5}\\\\
@@ -1541,7 +1547,7 @@ snippet tab28 longtable 2x8
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5}\\\\
+		\textbf{$4} & \textbf{$5}\\\\
 		\hline
 		\endhead
 			${6} & ${7}\\\\
@@ -1572,7 +1578,7 @@ snippet tab38 longtable 3x8
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6}\\\\
 		\hline
 		\endhead
 			${7} & ${8} & ${9}\\\\
@@ -1603,7 +1609,7 @@ snippet tab48 longtable 4x8
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
 		\hline
 		\endhead
 			${8} & ${9} & ${10} & ${11}\\\\
@@ -1634,7 +1640,7 @@ snippet tab58 longtable 5x8
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
 		\hline
 		\endhead
 			${9} & ${10} & ${11} & ${12} & ${13}\\\\
@@ -1665,7 +1671,7 @@ snippet tab68 longtable 6x8
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
 		\hline
 		\endhead
 			${10} & ${11} & ${12} & ${13} & ${14} & ${15}\\\\
@@ -1696,7 +1702,7 @@ snippet tab78 longtable 7x8
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
 		\hline
 		\endhead
 			${11} & ${12} & ${13} & ${14} & ${15} & ${16} & ${17}\\\\
@@ -1727,7 +1733,7 @@ snippet tab88 longtable 8x8
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
 		\hline
 		\endhead
 			${12} & ${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19}\\\\
@@ -1758,7 +1764,7 @@ snippet tab98 longtable 9x8
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
 		\hline
 		\endhead
 			${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19} & ${20} & ${21}\\\\
@@ -1792,7 +1798,7 @@ snippet tab19 longtable 1x9
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}}\\\\
+		\textbf{$4}\\\\
 		\hline
 		\endhead
 			${5}\\\\
@@ -1825,7 +1831,7 @@ snippet tab29 longtable 2x9
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5}\\\\
+		\textbf{$4} & \textbf{$5}\\\\
 		\hline
 		\endhead
 			${6} & ${7}\\\\
@@ -1858,7 +1864,7 @@ snippet tab39 longtable 3x9
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6}\\\\
 		\hline
 		\endhead
 			${7} & ${8} & ${9}\\\\
@@ -1891,7 +1897,7 @@ snippet tab49 longtable 4x9
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7}\\\\
 		\hline
 		\endhead
 			${8} & ${9} & ${10} & ${11}\\\\
@@ -1924,7 +1930,7 @@ snippet tab59 longtable 5x9
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8}\\\\
 		\hline
 		\endhead
 			${9} & ${10} & ${11} & ${12} & ${13}\\\\
@@ -1957,7 +1963,7 @@ snippet tab69 longtable 6x9
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9}\\\\
 		\hline
 		\endhead
 			${10} & ${11} & ${12} & ${13} & ${14} & ${15}\\\\
@@ -1990,7 +1996,7 @@ snippet tab79 longtable 7x9
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10}\\\\
 		\hline
 		\endhead
 			${11} & ${12} & ${13} & ${14} & ${15} & ${16} & ${17}\\\\
@@ -2023,7 +2029,7 @@ snippet tab89 longtable 8x9
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11}\\\\
 		\hline
 		\endhead
 			${12} & ${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19}\\\\
@@ -2056,7 +2062,7 @@ snippet tab99 longtable 9x9
 		\hline
 		\endfirsthead
 		\hline
-		\textbf{$4}} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
+		\textbf{$4} & \textbf{$5} & \textbf{$6} & \textbf{$7} & \textbf{$8} & \textbf{$9} & \textbf{$10} & \textbf{$11} & \textbf{$12}\\\\
 		\hline
 		\endhead
 			${13} & ${14} & ${15} & ${16} & ${17} & ${18} & ${19} & ${20} & ${21}\\\\
