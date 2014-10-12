@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ "$1" == "" ]; then
+if [ "$1" == "" -o "$1" == "-r" ]; then
     name="Табунов Е.А."
 else
     name="$1"
@@ -20,4 +20,6 @@ cd ..
 mv ./other/main.pdf `basename $PWD`.other.pdf
 rm -r ./other
 
-cp *.pdf ~/print
+if [ "$1" == "-r" ]; then
+    cp *.pdf ~/print
+fi
