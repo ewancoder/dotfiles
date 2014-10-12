@@ -53,6 +53,9 @@ for (( i = 1; i < 10; i++ )); do
             done
             temp="$temp"'\\\\'
             echo "$temp" >> $filename
+
+            temp=`echo -e "\t\t\t"`'\hline'
+            echo "$temp" >> $filename
         done
 
         temp=`echo -e "\t"`'\end{longtable}'
