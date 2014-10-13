@@ -4,11 +4,10 @@ if [ "$1" == "" -o "$1" == "-r" ]; then
 else
     name="$1"
 fi
-mkdir -p ~/print
 mkdir -p ./other
 cp -r * ./other
-ln -s ../preamble.tex .
-ln -s ../*.bib .
+ln -fs ../preamble.tex .
+ln -fs ../*.bib .
 pdflatex main
 bibtex main
 pdflatex main
@@ -27,5 +26,5 @@ mv ./other/main.pdf `basename $PWD`.other.pdf
 rm -r ./other
 
 if [ "$1" == "-r" ]; then
-    cp *.pdf ~/print
+    cp *.pdf ~/Dropbox/Print
 fi
