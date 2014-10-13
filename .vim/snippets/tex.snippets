@@ -23,11 +23,21 @@ snippet euc tkz-euclide graphics
 	\end{figure}
 	${0}
 
-snippet fig figure with \includegraphics
+snippet f figure with \includegraphics
 	\begin{figure}[ht]
 		\includegraphics[width=${1:1}\linewidth]{Figures/${2}}
 		\caption{${3}}
 		\label{fig:${4}}
+	\end{figure}
+	${0}
+
+snippet fs figure with \subfloat
+	\begin{figure}[ht]
+		\subfloat[]{\includegraphics[width=${1:.5}\linewidth]{Figures/${2}}}
+		\qquad
+		\subfloat[]{\includegraphics[width=${3:.5}\linewidth]{Figures/${4}}}
+		\caption{${5} (а) ${6}; (б) ${7}}
+		\label{fig:${8}}
 	\end{figure}
 	${0}
 
