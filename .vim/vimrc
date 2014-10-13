@@ -151,8 +151,8 @@ nmap <leader>l :set list!<CR>
 "map <leader>n <esc>:tabprevious<CR>
 "map <leader>m <esc>:tabnext<CR>
 "Moving through buffers
-map <tab> <esc>:bnext<CR>
-map <S-tab> <esc>:bprevious<CR>
+map <S-tab> <esc>:bnext<CR>
+map <C-tab> <esc>:bprevious<CR>
 "Close buffer without loosing split
 map <leader>q :bp\|bd #<cr>
 "Sort alphabetically :)

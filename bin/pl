@@ -1,0 +1,31 @@
+#!/bin/bash
+if [ "$1" == "" -o "$1" == "-r" ]; then
+    name="Табунов Е. А."
+else
+    name="$1"
+fi
+mkdir -p ~/print
+mkdir -p ./other
+cp -r * ./other
+ln -s ../preamble.tex .
+ln -s ../*.bib .
+pdflatex main
+bibtex main
+pdflatex main
+pdflatex main
+mv main.pdf `basename $PWD`.pdf
+
+cd other
+sed -i "s/Зырянов И. М./$name/g" title.tex
+
+pdflatex main
+bibtex main
+pdflatex main
+pdflatex main
+cd ..
+mv ./other/main.pdf `basename $PWD`.other.pdf
+rm -r ./other
+
+if [ "$1" == "-r" ]; then
+    cp *.pdf ~/print
+fi
