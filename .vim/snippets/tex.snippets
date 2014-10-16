@@ -47,6 +47,11 @@ snippet verb verbatim block
 	\end{verbatim}
 	${0}
 
+snippet se section with * and TOC
+	\section*{${1:}}
+	\addcontentsline{toc}{section}{$1}
+	${0}
+
 snippet tab11 longtable 1x1
 	\begin{longtable}[c]{${1:|c|}}
 		\caption{${2}}
