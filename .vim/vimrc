@@ -213,3 +213,6 @@ map <leader>b :CommandTBuffer<CR>
 "
 "Just BECAUSE I NEED IT
 map <C-j> <C-W>j
+
+"Spellchecking
+set spell spelllang=en,ru
