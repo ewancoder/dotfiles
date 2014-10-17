@@ -13,6 +13,9 @@ rsync -av --delete ~/.zsh_history /mnt/backup/Arch/
 #Just lazy to log in into Anki again :)
 rsync -av --delete ~/Anki /mnt/backup/Arch/
 
+#Vim spelling
+rsync -av --delete ~/.vim/spell /mnt/backup/Arch/.vim/
+
 #KDE4 config
 rsync -av --delete ~/.kde4/share/apps/okular/part.rc /mnt/backup/Other/
 
