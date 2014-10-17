@@ -215,4 +215,4 @@ map <leader>b :CommandTBuffer<CR>
 map <C-j> <C-W>j
 
 "Spellchecking
-set spell spelllang=en,ru
+set spell spelllang=en,ru spellfile=$HOME/.vim/spell/my.utf-8.add
