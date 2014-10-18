@@ -1,0 +1,15 @@
+#!/bin/bash
+for d in `find /media -maxdepth 1 -type d`
+do
+    if [ -f $d/.key ]; then
+        if [ "`grep "Efwxwf0" $d/.key`" == "2OS1X5pXREfwxwf06AzODSk2IUCmvqKMoDrgc0vpreAj+OM3adyf+F51UW8G+CSe" ]; then
+            dev=$d
+        fi
+    fi
+done
+
+rsync -rtv --delete /mnt/backup/Arch $dev/Backup/
+#rsync -rtv --delete /mnt/cloud $dev/Cloud
+
+notify-send -u critical "BACKUP updated at $dev"
+devmon --unmount $dev

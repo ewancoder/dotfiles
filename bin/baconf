@@ -1,32 +1,31 @@
 #!/bin/bash
-rsync -av --delete ~/.config/chromium /mnt/backup/ArchConfig/
-rsync -av --delete ~/.config/deluge /mnt/backup/ArchConfig/
-rsync -av --delete ~/.config/libreoffice /mnt/backup/ArchConfig/
-rsync -av --delete ~/.config/mc /mnt/backup/ArchConfig/
-rsync -av --delete ~/.config/Trolltech.conf /mnt/backup/ArchConfig/
+#Make subdirectories
+mkdir -p /mnt/backup/Arch/.config
+mkdir -p /mnt/backup/Arch/.kde4/share/apps
 
-#For connecting to raspberry PI automatically after reinstall
-rsync -av --delete ~/.ssh /mnt/backup/Arch/
+#Config dirs
+rsync -av --delete ~/.config/chromium/Default /mnt/backup/Arch/.config/chromium/
+rsync -av --delete ~/.config/libreoffice /mnt/backup/Arch/.config/
+rsync -av --delete ~/.config/mc /mnt/backup/Arch/.config/
+rsync -av --delete ~/.config/Trolltech.conf /mnt/backup/Arch/.config/
 #Dmenu + zsh history :)
 rsync -av --delete ~/.dmenu_history /mnt/backup/Arch/
 rsync -av --delete ~/.zsh_history /mnt/backup/Arch/
+#Vim spelling
+rsync -av --delete ~/.vim/spell /mnt/backup/Arch/.vim/
+#KDE4 config
+rsync -av --delete ~/.kde4/share/apps/okular/part.rc /mnt/backup/Arch/.kde4/share/apps/okular/
+#SSH keys
+rsync -av --delete ~/.ssh /mnt/backup/Arch/
 #Just lazy to log in into Anki again :)
 rsync -av --delete ~/Anki /mnt/backup/Arch/
 
-#Vim spelling
-rsync -av --delete ~/.vim/spell /mnt/backup/Arch/.vim/
-
-#KDE4 config
-rsync -av --delete ~/.kde4/share/apps/okular/part.rc /mnt/backup/Other/
-
-if [[ ! -d /mnt/backup/Hourly/$(date +%Y)/$(date +%b) ]]; then
-    mkdir -p /mnt/backup/Hourly/$(date +%Y)/$(date +%b)
+#Hourly backup
+if [[ ! -f /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz ]]; then
+    mkdir -p /mnt/backup/Hourly/`date +%Y`/`date +%b`
+    tar -cpzvf /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz /mnt/backup/Arch
 fi
-
-if [[ ! -f /mnt/backup/Hourly/$(date +%Y)/$(date +%b)/$(date +%d.%H).tgz ]]; then
-    tar -cpzvf /mnt/backup/Hourly/$(date +%Y)/$(date +%b)/$(date +%d.%H).tgz /mnt/backup/Arch
-fi
-
-if [[ ! -f ~/Copy/Backup/Arch$(date +%Y.%b.%d).tgz ]]; then
-    tar -cpzvf ~/Copy/Backup/Arch$(date +%Y.%b.%d).tgz /mnt/backup/Arch
+#Daily backup to ~/Copy
+if [[ ! -f ~/Copy/Backup/Arch`date +%Y.%b.%d`.tgz ]]; then
+    tar -cpzvf ~/Copy/Backup/Arch`date +%Y.%b.%d`.tgz /mnt/backup/Arch
 fi
