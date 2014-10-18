@@ -1,17 +1,35 @@
 #!/bin/bash
+#For easily making new usb backup/cloud keys
+if [ "$1" == "-b" ]; then
+    echo 'backup-'`ifconfig | grep eth | awk '{print $2}' | tr -d ':' | sha256sum | awk '{print $1}'` > $2/.key
+elif [ "$1" == "-c" ]; then
+    echo 'cloud-'`ifconfig | grep eth | awk '{print $2}' | tr -d ':' | sha256sum | awk '{print $1}'` > $cloud/.key
+fi
+
+#Determining backup/cloud drives
 for d in `find /media -maxdepth 1 -type d`
 do
     if [ -f $d/.key ]; then
-        if [ "`grep "Efwxwf0" $d/.key`" == "2OS1X5pXREfwxwf06AzODSk2IUCmvqKMoDrgc0vpreAj+OM3adyf+F51UW8G+CSe" ]; then
-            dev=$d
+        if [ "`grep "backup" $d/.key`" == "`ifconfig | grep eth | awk '{print $2}' | tr -d ':' | sha256sum | awk '{print $1}'`" ]; then
+            backup=$d
+        elif [ "`grep "cloud" $d/.key`" == "" ]; then
+            cloud=$d
         fi
     fi
 done
 
-if [ ! "$dev" == "" ]; then
-    rsync -a --no-o --no-p --no-g --safe-links --modify-window 1 -v --delete /mnt/backup/Arch $dev/Backup/
-    #rsync -rtv --delete /mnt/cloud $dev/Cloud
+#Sync "backup"
+if [ ! "$backup" == "" ]; then
+    rsync -av --delete /mnt/backup/Arch $backup/
+    echo 'backup-'`ifconfig | grep eth | awk '{print $2}' | tr -d ':' | sha256sum | awk '{print $1}'` > $cloud/.key
+    devmon --unmount $backup
+    notify-send -u critical "BACKUP updated at $backup"
+fi
 
-    notify-send -u critical "BACKUP updated at $dev"
-    #devmon --unmount $dev
+#Sync "cloud"
+if [ ! "$cloud" == "" ]; then
+    rsync -a --no-o --no-p --no-g --safe-links --modify-window 1 -v --delete /mnt/cloud/ $cloud/
+    echo 'cloud-'`ifconfig | grep eth | awk '{print $2}' | tr -d ':' | sha256sum | awk '{print $1}'` > $cloud/.key
+    devmon --unmount $cloud
+    notify-send -u critical "CLOUD updated at $cloud"
 fi
