@@ -47,7 +47,7 @@ if [ $other -eq 1 ]; then
 fi
 
 if [ $ready -eq 1 ]; then
-    cp *.pdf ~/Dropbox/Print
+    mv *.pdf ~/Dropbox/Print
 fi
 
 rm preamble.tex *.bib
