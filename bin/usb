@@ -19,6 +19,7 @@ for d in `find /media -maxdepth 1 -type d`
 do
     if [ -f $d/.key ]; then
         if [ "`grep backup $d/.key`" == "backup-`ifconfig | grep eth | awk '{print $2}' | tr -d ':' | sha256sum | awk '{print $1}'`" ]; then
+            ~/bin/baconf
             rsync -av --delete /mnt/backup/Arch $d/
             echo 'backup-'`ifconfig | grep eth | awk '{print $2}' | tr -d ':' | sha256sum | awk '{print $1}'` > $d/.key
             devmon --unmount $d
