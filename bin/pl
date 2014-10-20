@@ -51,3 +51,4 @@ if [ $ready -eq 1 ]; then
 fi
 
 rm preamble.tex *.bib
+rm -r .build
