@@ -1,0 +1,38 @@
+#!/bin/bash
+#Touch lockfile
+sleep 8
+if [ -f /tmp/usb.lock ]; then
+    exit 1
+else
+    touch /tmp/usb.lock
+fi
+
+#For easily making new usb backup/cloud keys
+if [ "$1" == "-b" ]; then
+    echo 'backup-'`ifconfig | grep eth | awk '{print $2}' | tr -d ':' | sha256sum | awk '{print $1}'` > $2/.key
+elif [ "$1" == "-c" ]; then
+    echo 'cloud-'`ifconfig | grep eth | awk '{print $2}' | tr -d ':' | sha256sum | awk '{print $1}'` > $2/.key
+fi
+
+#Determining backup/cloud drives
+for d in `find /media -maxdepth 1 -type d`
+do
+    if [ -f $d/.key ]; then
+        if [ "`grep backup $d/.key`" == "backup-`ifconfig | grep eth | awk '{print $2}' | tr -d ':' | sha256sum | awk '{print $1}'`" ]; then
+            ~/bin/baconf
+            rsync -av --delete /mnt/backup/Arch $d/
+            echo 'backup-'`ifconfig | grep eth | awk '{print $2}' | tr -d ':' | sha256sum | awk '{print $1}'` > $d/.key
+            devmon --unmount $d
+            notify-send -u critical "BACKUP updated at $d"
+        fi
+        if [ "`grep cloud $d/.key`" == "cloud-`ifconfig | grep eth | awk '{print $2}' | tr -d ':' | sha256sum | awk '{print $1}'`" ]; then
+            rsync -a --no-o --no-p --no-g --safe-links --modify-window 1 -v --delete /mnt/cloud/ $d/
+            echo 'cloud-'`ifconfig | grep eth | awk '{print $2}' | tr -d ':' | sha256sum | awk '{print $1}'` > $d/.key
+            devmon --unmount $d
+            notify-send -u critical "CLOUD updated at $d"
+        fi
+    fi
+done
+
+#Remove lock
+rm /tmp/usb.lock

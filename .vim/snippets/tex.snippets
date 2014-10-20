@@ -52,6 +52,13 @@ snippet se section with * and TOC
 	\addcontentsline{toc}{section}{$1}
 	${0}
 
+snippet fr frame with centered image
+	\begin{frame}{${1:}}
+		\centering
+		\includegraphics[width=${2:.8}\linewidth]{../Figures/${3:}}
+	\end{frame}
+	${0}
+
 snippet tab11 longtable 1x1
 	\begin{longtable}[c]{${1:|c|}}
 		\caption{${2}}

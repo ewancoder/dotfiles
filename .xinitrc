@@ -13,7 +13,7 @@ fi
 
 #These needed to be startuped at login, not at startx
 #devmon --exec-on-drive 'notify-send "Drive mounted" "Mounted %l (%f) on %d"' --exec-on-unmount 'notify-send "Drive unmounted" "Unmounted %l (%f)"' --exec-on-remove 'notify-send "Drive removed" "Removed %f"' &
-devmon &
+devmon --exec-on-drive '/home/ewancoder/bin/usb' &
 
 #And these is just standart X configuration
 xrdb -merge ~/.Xresources &

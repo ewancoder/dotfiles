@@ -1,30 +1,54 @@
 #!/bin/bash
-if [ "$1" == "" -o "$1" == "-r" ]; then
-    name="Табунов Е. А."
-else
-    name="$1"
+other=0
+ready=0
+
+if [ "$1" == "-o" -o "$2" == "-o" -o "$3" == "-o" -o "$1" == "-ro" -o "$1" == "-or" -o "$2" == "-ro" -o "$2" == "-or" ]; then
+    other=1
+    if [ ${#1} -gt 3 -o ${#2} -gt 3 -o ${#2} -gt 3 ]; then
+        if [ ${#1} -gt 3 ]; then
+            name="$1"
+        elif [ ${#2} -gt 3 ]; then
+            name="$2"
+        else
+            name="$3"
+        fi
+        if [ "$name" == "empty" ]; then
+            name=""
+        fi
+    else
+        name="Табунов Е. А."
+    fi
 fi
-mkdir -p ./other
-cp -r * ./other
-ln -fs ../preamble.tex .
-ln -fs ../*.bib .
-pdflatex main
-bibtex main
-pdflatex main
-pdflatex main
-mv main.pdf `basename $PWD`.pdf
 
-cd other
-sed -i "s/Зырянов И. М./$name/g" title.tex
-
-pdflatex main
-bibtex main
-pdflatex main
-pdflatex main
-cd ..
-mv ./other/main.pdf `basename $PWD`.other.pdf
-rm -r ./other
-
-if [ "$1" == "-r" ]; then
-    cp *.pdf ~/Dropbox/Print
+if [ "$1" == "-r" -o "$2" == "-r" -o "$3" == "-r" -o "$1" == "-ro" -o "$1" == "-or" -o "$2" == "-ro" -o "$2" == "-or" ]; then
+    ready=1
 fi
+
+mkdir -p .build
+ln -fs ../preamble.tex ../*.bib .
+
+build(){
+    pdflatex -output-directory .build main
+    cd .build
+    bibtex main
+    cd ..
+    pdflatex -output-directory .build main
+    pdflatex -output-directory .build main
+}
+
+build
+mv .build/main.pdf `basename $PWD`.pdf
+
+if [ $other -eq 1 ]; then
+    sed -i "s/Зырянов И. М./$name/g" title.tex
+    build
+    mv .build/main.pdf other.`basename $PWD`.pdf
+    sed -i "s/$name/Зырянов И. М./g" title.tex
+fi
+
+if [ $ready -eq 1 ]; then
+    mv *.pdf ~/Dropbox/Print
+fi
+
+rm preamble.tex *.bib
+rm -r .build
