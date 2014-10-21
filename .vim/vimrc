@@ -216,3 +216,6 @@ map <C-j> <C-W>j
 
 "Spellchecking
 set spell spelllang=en,ru spellfile=$HOME/.vim/spell/my.utf-8.add
+
+"Defining new filetypes
+au BufNewFile,BufRead *.info set filetype=info

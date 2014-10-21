@@ -49,5 +49,8 @@ alias lock='xdotool mousemove - 1 mousemove restore; xscreensaver-command --lock
 #Server sshfs
 alias ng='sshfs root@192.168.100.11:/usr/share/nginx/html ~/html'
 
+#Impressive
+alias imp='impressive --darkness 60 -ff'
+
 #Screenshot of a window
 alias scr='xdotool mousemove - 1 mousemove restore; scrot -s `date +%d%H%M%S`.png'
