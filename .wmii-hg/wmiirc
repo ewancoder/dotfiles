@@ -159,7 +159,7 @@ KeyGroup Running programs
 Key $MODKEY-a   # Open wmii actions menu
 	action $(wi_actions | wimenu -h "${hist}.actions" -n $histnum) &
 Key $MODKEY-p   # Open dmenu programs menu
-    ~/bin/dm -i -nb black -fn '-*-terminus-medium' -nf orange -sb black -p "#" &
+    ~/bin/dm -i -nb black -fn '-*-terminus-medium' -nf orange -sb black -p "#" -w 600 &
 Key $MODKEY-Return # Launch a terminal
 	eval wmiir setsid $WMII_TERM &
 
