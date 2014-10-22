@@ -1,5 +1,5 @@
 #!/bin/bash
 while true; do
-    wmiir xwrite /rbar/\!notice label `ssh root@192.168.100.11 cat /tmp/weather`
+    wmiir xwrite /rbar/\!notice label `ssh root@192.168.100.110 cat /tmp/weather`
     sleep 10
 done

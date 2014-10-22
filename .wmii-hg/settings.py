@@ -78,7 +78,7 @@ updatesTimeout = 600
 
 #Startup X11 apps
 startup = [
-    'ssh -fNL 7070:127.0.0.1:7070 root@192.168.100.11',
+    'ssh -fNL 7070:127.0.0.1:7070 root@192.168.100.110',
     'gxkb',
     'CopyAgent',
     'dropboxd',

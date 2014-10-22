@@ -1,6 +1,6 @@
 #!/bin/bash
 while true; do
-    rsync -av --remove-source-files -e ssh root@192.168.100.11:/root/.irssi/notifications /tmp/notifications
+    rsync -av --remove-source-files -e ssh root@192.168.100.110:/root/.irssi/notifications /tmp/notifications
     if [ -f /tmp/notifications ]; then
         cat /tmp/notifications | while read line; do
             IFS='Þ' read -a parts <<< "$line"

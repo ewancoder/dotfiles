@@ -175,7 +175,7 @@ Key $MODKEY-c
 Key $MODKEY-g
 	gvim &
 Key $MODKEY-r
-    urxvt -name Canto -e canto-curses -a 192.168.100.11 -p 7070 &
+    urxvt -name Canto -e canto-curses -a 192.168.100.110 -p 7070 &
 Key $MODKEY-q
     #urxvt -e screen -r rtorrent
     deluge &
