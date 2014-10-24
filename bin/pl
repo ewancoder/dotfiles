@@ -28,12 +28,13 @@ mkdir -p .build
 ln -fs ../preamble.tex ../*.bib .
 
 build(){
-    pdflatex -output-directory .build main
     cd .build
+    ln -fs ../*.tex .
+    pdflatex -shell-escape main
     bibtex main
+    pdflatex -shell-escape main
+    pdflatex -shell-escape main
     cd ..
-    pdflatex -output-directory .build main
-    pdflatex -output-directory .build main
 }
 
 build

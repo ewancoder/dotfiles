@@ -54,3 +54,6 @@ alias imp='impressive --darkness 60 -ff'
 
 #Screenshot of a window
 alias scr='xdotool mousemove - 1 mousemove restore; scrot -s `date +%d%H%M%S`.png'
+
+#BricsCAD
+alias bs='cd ~/Copy/Portable\ Software/Brics; ./bricscad.sh'
