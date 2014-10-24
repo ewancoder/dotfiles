@@ -85,7 +85,8 @@ startup = [
     '~/bin/ircnotify',
     'tilda',
     #'weather',
-    'caforw'
+    'caforw',
+    'twatch'
 ]
 #Startup as via bash (won't be killed upon X11 termination)
 rawstartup = [
