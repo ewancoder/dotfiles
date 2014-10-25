@@ -29,7 +29,7 @@ ln -fs ../preamble.tex ../*.bib .
 
 build(){
     cd .build
-    ln -fs ../*.tex .
+    ln -fs ../*.tex ../Figures .
     pdflatex -shell-escape main
     bibtex main
     pdflatex -shell-escape main
