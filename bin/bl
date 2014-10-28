@@ -6,10 +6,15 @@ if [ "$1" == "-r" -o "$2" == "-r" -o "$3" == "-r" -o "$1" == "-ro" -o "$1" == "-
 fi
 
 mkdir -p .build
+ln -fs ../beamer.tex ../beamer.tex
 
 build(){
-    pdflatex -output-directory .build main
-    pdflatex -output-directory .build main
+    cd .build
+    ln -fs ../*.tex .
+    ln -fs ../Figures ../Figures
+    pdflatex -shell-escape main
+    pdflatex -shell-escape main
+    cd ..
 }
 
 build
@@ -19,4 +24,4 @@ if [ $ready -eq 1 ]; then
     mv *.pdf ~/Dropbox/Print
 fi
 
-rm -r .build
+rm -r .build ../beamer.tex Figures

@@ -159,7 +159,13 @@ KeyGroup Running programs
 Key $MODKEY-a   # Open wmii actions menu
 	action $(wi_actions | wimenu -h "${hist}.actions" -n $histnum) &
 Key $MODKEY-p   # Open dmenu programs menu
-    ~/bin/dm -i -nb black -fn '-*-terminus-medium' -nf orange -sb black -p "#" &
+    echo "`wmiir ls /tag | sed '$d'`" > /tmp/tags.dm
+    x=0
+    while read line; do
+        x=$(( $x + 6 * $(( ${#line} - 1 )) + 11 ))
+    done < /tmp/tags.dm
+    w=$(( 600 - $x ))
+    ~/bin/dm -i -nb black -fn '-*-terminus-medium' -nf orange -sb black -p "#" -w $w -x $x &
 Key $MODKEY-Return # Launch a terminal
 	eval wmiir setsid $WMII_TERM &
 

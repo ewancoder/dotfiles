@@ -16,7 +16,6 @@ if '-d' in sys.argv:
 else:
     getday = time.strftime("%d")
 
-<<<<<<< HEAD
 if not '-a' in sys.argv:
     #Get data
     if os.system('scp root@$IP_RPI:/root/graph-' + time.strftime("%Y%m") + getday + '.log /tmp/raw.log') != 0:

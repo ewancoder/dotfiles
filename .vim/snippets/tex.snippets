@@ -59,6 +59,24 @@ snippet fr frame with centered image
 	\end{frame}
 	${0}
 
+snippet frcol frame with columns
+	\begin{frame}{${1:}}
+		\begin{columns}
+			\column{${2:.4}\textwidth}
+			\centering
+			\includegraphics[width=${3:1}\linewidth]{../Figures/${4:}}
+			\column{${5:.6}\textwidth}
+			\begin{itemize}
+				\pause\item ${0}
+			\end{itemize}
+		\end{columns}
+	\end{frame}
+
+snippet m minted environment
+	\begin{minted}[gobble=${1:4},fontsize=\small]{${2:tex}}
+		${0}
+	\end{minted}
+
 snippet tab11 longtable 1x1
 	\begin{longtable}[c]{${1:|c|}}
 		\caption{${2}}

@@ -1,0 +1,11 @@
+#!/bin/bash
+cd ~/Downloads/Chrome\ Downloads
+while true; do
+    for f in *.torrent; do
+        if [ ! "$f" == "*.torrent" ]; then
+            scp $f root@192.168.100.110:/mnt/data/Watch/
+            rm $f
+        fi
+    done
+    sleep 10
+done

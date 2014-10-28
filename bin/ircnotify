@@ -26,5 +26,29 @@ while true; do
     else
         sleep 60
     fi
+
+    rsync -av --remove-source-files -e ssh root@192.168.100.110:/mnt/data/.deluge/notifications /tmp/notifications
+    if [ -f /tmp/notifications ]; then
+        cat /tmp/notifications | while read line; do
+            IFS='Þ' read -a parts <<< "$line"
+            if [ "${parts[0]}" == "STOP" ]; then
+                wmiir remove /rbar/ZNotify
+            else
+                if [ "`echo ${parts[0]} | grep twitter_ewancoder`" == "" ]; then
+                    wmiir create /rbar/ZNotify
+                    wmiir xwrite /rbar/ZNotify colors "`cat /tmp/settings.wmii | sed -n '11p'`"
+                    wmiir xwrite /rbar/ZNotify label "New messages!"
+                    if [ "`cat /tmp/settings.wmii | sed -n '12p'`" == "True" ]; then
+                        mpg123 ~/Dropbox/Sounds/bird.mp3
+                    fi
+                fi
+                echo ${parts[0]}
+                notify-send -t "${parts[3]}" "${parts[0]}" "${parts[1]}" -u ${parts[2]};
+                sleep 0.1
+            fi
+        done
+        rm /tmp/notifications
+    fi
+
     sleep 5
 done
