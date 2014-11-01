@@ -173,6 +173,12 @@ check = text + " | awk '{print $2}'"
 color = focusColors
 lower = 1.75
 addBlock()
+#CPU Percentage
+text = "top -bn1 | grep 'Cpu(s)' | awk '{print 100 - $8}'"
+check = text
+color = focusColors
+lower = 90
+addBlock()
 
 #Output for wmiirc
 if __name__ == "__main__":
