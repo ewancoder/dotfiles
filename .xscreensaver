@@ -189,7 +189,7 @@ programs:								      \
 -				fontglide -root				    \n\
 - GL: 				gleidescope -root			    \n\
 - GL: 				glknots -root				    \n\
-  GL: 				glmatrix -root -delay 23704 -density 27	      \
+- GL: 				glmatrix -root -delay 23704 -density 27	      \
 				  -speed 1.1533				    \n\
 - GL: 				glslideshow -root			    \n\
 - GL: 				hypertorus -root			    \n\
@@ -220,7 +220,7 @@ programs:								      \
 - GL: 				antmaze -root				    \n\
 - GL: 				boing -root				    \n\
 -				boxfit -root				    \n\
-  GL: 				carousel -root -delay 20741 -speed 0.8022     \
+- GL: 				carousel -root -delay 20741 -speed 0.8022     \
 				  -duration 9 -tilt 0 -no-titles	    \n\
 -				celtic -root				    \n\
 - GL: 				crackberg -root				    \n\
