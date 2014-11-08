@@ -78,6 +78,7 @@ updatesTimeout = 600
 
 #Startup X11 apps
 startup = [
+    'source ~/.xinitrc', #Because SDDM doesn't do so
     'ssh -fNL 7070:127.0.0.1:7070 root@192.168.100.110',
     'gxkb',
     'CopyAgent',
@@ -85,7 +86,6 @@ startup = [
     '~/bin/ircnotify',
     'tilda',
     #'weather',
-    'caforw',
     'twatch'
 ]
 #Startup as via bash (won't be killed upon X11 termination)

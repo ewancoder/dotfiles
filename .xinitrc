@@ -16,8 +16,8 @@ fi
 devmon --exec-on-drive '/home/ewancoder/bin/usb' &
 
 #And these is just standart X configuration
-xrdb -merge ~/.Xresources &
-start-pulseaudio-x11 &
+#xrdb -merge ~/.Xresources & #SDDM doing it
+#start-pulseaudio-x11 & #SDDM doing it
 compton --backend glx --paint-on-overlay --vsync opengl-swc &
 devilspie &
 xset -dpms s off
@@ -29,4 +29,4 @@ unclutter -grab &
 #f.lux
 xflux -l 53.9 -g 27.5667 -k 4500 &
 
-exec wmii
+#exec wmii #commented because now I'm using SDDM
