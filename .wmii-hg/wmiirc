@@ -200,6 +200,8 @@ KeyGroup Others
 #Lock session (screensaver)
 Key $MODKEY-KP_Enter
     xdotool mousemove - 1 mousemove restore; xscreensaver-command --lock
+Key $MODKEY-Shift-KP_Enter
+	wmiir xwrite /ctl quit
 #Remove 'New messages' notification
 Key $MODKEY-apostrophe
     wmiir remove /rbar/ZNotify
