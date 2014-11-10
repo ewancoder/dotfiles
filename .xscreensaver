@@ -179,7 +179,7 @@ programs:								      \
 - GL: 				blinkbox -root				    \n\
 - GL: 				blocktube -root -delay 22222 -holdtime	      \
 				  880 -changetime 274			    \n\
-  GL: 				bouncingcow -root -delay 21481 -speed	      \
+- GL: 				bouncingcow -root -delay 21481 -speed	      \
 				  0.6567				    \n\
 -				cloudlife -root				    \n\
 - GL: 				cubestorm -root				    \n\
