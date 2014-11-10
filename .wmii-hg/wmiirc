@@ -225,6 +225,8 @@ Key XF86PowerOff
     fi
 Key $MODKEY-Shift-XF86PowerOff
     systemctl poweroff -i
+Key $MODKEY-Shift-XF86WakeUp
+    systemctl reboot -i
 #Change wallpaper
 Key $MODKEY-XF86PowerOff
     feh --bg-fill --randomize --recursive Dropbox/Pictures
