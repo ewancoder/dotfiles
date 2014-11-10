@@ -14,7 +14,7 @@ fi
 . ~/.xprofile
 
 #Start pulseaudio
-start-pulseaudio-x11 &
+pulseaudio --start &
 
 #Execute my WM
 exec wmii
