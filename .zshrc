@@ -76,3 +76,5 @@ bindkey -s '^xb' bindkey\
 CDPATH=".:/mnt/cloud/Dropbox"
 export TERM=rxvt-256color
 export EDITOR=gvim
+
+ls #Just for fun
