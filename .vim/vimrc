@@ -30,6 +30,8 @@ Bundle "wincent/Command-T"
 Bundle "Lokaltog/vim-easymotion"
 "For RST+Sphinx
 Bundle "Rykka/riv.vim"
+"As dependency of RIV
+Bundle "Rykka/clickable.vim"
 "For arduino
 Bundle "jplaut/vim-arduino-ino"
 "For latex
