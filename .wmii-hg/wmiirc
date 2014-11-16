@@ -243,9 +243,12 @@ Key $MODKEY-Delete
     devmon --unmount-removable &
 
 KeyGroup Pulseaudio switching devices
-Key $MODKEY-Shift-KP_Insert
+Key $MODKEY-Shift-KP_Down
     ln -fs ~/.asoundrc_pulse ~/.asoundrc
     ps -C pulseaudio > /dev/null 2>&1 || pulseaudio --start
+    if [ ! "`ps -C pulseaudio | grep defunct`" == "" ]; then
+        pulseaudio --start
+    fi
     pacmd set-default-sink alsa_output.pci-0000_00_14.2.analog-stereo
     for word in $(cat /tmp/inds.mypo); do
         pacmd move-sink-input $word alsa_output.pci-0000_00_14.2.analog-stereo
@@ -253,11 +256,17 @@ Key $MODKEY-Shift-KP_Insert
 Key $MODKEY-Shift-KP_End
     ln -fs ~/.asoundrc_pulse ~/.asoundrc
     ps -C pulseaudio > /dev/null 2>&1 || pulseaudio --start
+    if [ ! "`ps -C pulseaudio | grep defunct`" == "" ]; then
+        pulseaudio --start
+    fi
     pacmd set-default-sink alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo
     for word in $(cat /tmp/inds.mypo); do
         pacmd move-sink-input $word alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo
     done
-Key $MODKEY-Shift-KP_Down
+Key $MODKEY-Shift-KP_Left
+    ln -fs ~/.asoundrc_alsa_usb ~/.asoundrc
+    pulseaudio -k
+Key $MODKEY-Shift-KP_Begin
     ln -fs ~/.asoundrc_alsa ~/.asoundrc
     pulseaudio -k
 

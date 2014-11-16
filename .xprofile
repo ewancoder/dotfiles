@@ -2,6 +2,7 @@
 #This file is sourced by ~/.xinitrc OR by DM
 
 #Move pulseaudio here because now it's not AUTOSPAWNING
+ln -fs ~/.asoundrc_pulse ~/.asoundrc
 pulseaudio --start &
 
 #This is done by DM automatically, but I need it EXPLICITLY to load all before my other applications (like xscreensaver)
