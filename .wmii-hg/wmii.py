@@ -121,6 +121,7 @@ def loopStatusBar():
     check('if ! [ "$(ps aux | grep "devmon --unmount" | grep -v grep)" == "" ]; then echo "Unmounting..."; fi', 'DevicesUnmount', settings.deviceColors)
     #Check for git repos unstaged/unpushed/uncommited and show them
     check('~/bin/gitch | xargs -L 1 basename | tr "\\n" " "', 'AGitCheck', settings.gitColors)
+    check('~/bin/gitch blue | xargs -L 1 basename | tr "\\n" " "', 'AGitBlueCheck', settings.gitBlueColors)
     #Check for pulseaudio sinks/sources and show them
     run("~/.wmii-hg/mypo")
 

@@ -45,6 +45,7 @@ badColors = '#daa #600 #000'
 deviceColors = '#ada #b42 #000'
 #Color for unstaged/unpushed/uncommited git repos
 gitColors = '#f63 #000 #000'
+gitBlueColors = '#36f #000 #000'
 #Alternative color - for noticebar and volume
 alternativeColors = '#aad #000 #000'
 #WARNING
