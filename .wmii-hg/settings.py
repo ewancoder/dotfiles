@@ -111,10 +111,11 @@ addTagRule("Steam", "Steam")
 #Time
 time = "date +%a\\ %b\\ %d\\ %I:%M:%S"
 #Free RAM
-text = "echo $(free -mh | grep /cache | awk '{print $4}') 'M'"
+text = "echo $(top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/')"
+check = "top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/'"
 check = "free -m | grep /cache | awk '{print $4}'"
-bigger = 3000
-mid = 1000
+lower = 85
+mid = 60
 addBlock()
 #Space at /
 text = "echo $(df -h / | grep / | awk '{print $5}' | sed 's/%//') '/'"
@@ -174,7 +175,7 @@ color = focusColors
 lower = 1.75
 addBlock()
 #CPU Percentage
-text = "top -bn1 | grep 'Cpu(s)' | awk '{print 100 - $8}'"
+text = "top -bn1 | grep 'Cpu' | awk '{print $4}' | cut -f1 -d '['"
 check = text
 color = focusColors
 lower = 90
