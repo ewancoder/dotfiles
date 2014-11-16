@@ -13,8 +13,5 @@ fi
 #Source .xprofile
 . ~/.xprofile
 
-#Start pulseaudio
-pulseaudio --start &
-
 #Execute my WM
 exec wmii

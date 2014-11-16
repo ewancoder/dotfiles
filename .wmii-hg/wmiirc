@@ -244,20 +244,22 @@ Key $MODKEY-Delete
 
 KeyGroup Pulseaudio switching devices
 Key $MODKEY-Shift-KP_Insert
+    ln -fs ~/.asoundrc_pulse ~/.asoundrc
+    ps -C pulseaudio > /dev/null 2>&1 || pulseaudio --start
     pacmd set-default-sink alsa_output.pci-0000_00_14.2.analog-stereo
     for word in $(cat /tmp/inds.mypo); do
         pacmd move-sink-input $word alsa_output.pci-0000_00_14.2.analog-stereo
     done
 Key $MODKEY-Shift-KP_End
+    ln -fs ~/.asoundrc_pulse ~/.asoundrc
+    ps -C pulseaudio > /dev/null 2>&1 || pulseaudio --start
     pacmd set-default-sink alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo
     for word in $(cat /tmp/inds.mypo); do
         pacmd move-sink-input $word alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo
     done
 Key $MODKEY-Shift-KP_Down
-    pacmd set-default-sink 2
-    for word in $(cat /tmp/inds.mypo); do
-        pacmd move-sink-input $word 2
-    done
+    ln -fs ~/.asoundrc_alsa ~/.asoundrc
+    pulseaudio -k
 
 KeyGroup Pulseaudio per-application volume control
 Key $MODKEY-KP_End
