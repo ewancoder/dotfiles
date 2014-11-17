@@ -29,3 +29,6 @@ fi
 if [[ ! -f ~/Copy/Backup/Arch`date +%Y.%b.%d`.tgz ]]; then
     tar -cpzvf ~/Copy/Backup/Arch`date +%Y.%b.%d`.tgz /mnt/backup/Arch
 fi
+
+#BTP backup to ~/Copy
+rsync -av --delete ~/btp ~/Copy/
