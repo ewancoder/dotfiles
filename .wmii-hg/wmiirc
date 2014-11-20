@@ -234,8 +234,14 @@ Key XF86PowerOff
         wmiir xwrite /ctl view RSS
     fi
 Key $MODKEY-Shift-XF86PowerOff
+    wmiir xwrite /rbar/\!notice colors "#fff #c22 #fff"
+    wmiir xwrite /rbar/\!notice label "Power off..."
+    baconf
     systemctl poweroff -i
 Key $MODKEY-Shift-XF86WakeUp
+    wmiir xwrite /rbar/\!notice colors "#fff #c22 #fff"
+    wmiir xwrite /rbar/\!notice label "Reboot..."
+    baconf
     systemctl reboot -i
 #Change wallpaper
 Key $MODKEY-XF86PowerOff
