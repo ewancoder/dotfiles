@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+while true; do
+    count="`find ~/Dropbox/Public/Pages -maxdepth 1 -type f | wc -l`"
+    if [ ! $count == "`cat ~/Dropbox/Public/Pages/count`" ]; then
+        echo $count > ~/Dropbox/Public/Pages/count
+    fi
+    sleep 10
+done
