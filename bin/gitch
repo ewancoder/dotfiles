@@ -1,5 +1,5 @@
 #!/bin/bash
-for repo in ~/.dotfiles ~/eal ~/btp /etc/.dotfiles ~/archlive/releng ~/rpidots; do
+for repo in ~/.dotfiles ~/eal ~/btp /etc/.dotfiles ~/archlive/releng ~/rpidots ~/site; do
     if [ -d $repo ]; then
         cd $repo
         if ! [ "$(git status | grep -i "changes\|untracked")" == "" ]; then
