@@ -221,3 +221,5 @@ set spell spelllang=en,ru spellfile=$HOME/.vim/spell/my.utf-8.add
 
 "Defining new filetypes
 au BufNewFile,BufRead *.info set filetype=info
+"Markdown syntax
+au BufNewFile,BufRead *.md set filetype=markdown
