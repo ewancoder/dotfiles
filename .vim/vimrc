@@ -21,30 +21,33 @@ Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'
 "Snippets itself :)
 Bundle 'honza/vim-snippets'
+"Autoclosing brackets
 Bundle 'Raimondi/delimitMate'
 "Python autocompletion (jedi)
 Bundle 'davidhalter/jedi-vim'
-"Instead of powerline - airline (viml instead of python+corrupted fonts
+"Instead of powerline - airline (viml instead of python+corrupted fonts)
 Bundle "bling/vim-airline"
-"Command-T (not for Dropbox :))
-Bundle "wincent/Command-T"
-"I NEED THIS
-""Bundle "klen/python-mode"
 "I need this for habrahabr's article
 Bundle "Lokaltog/vim-easymotion"
 "For RST+Sphinx
 "Bundle "Rykka/riv.vim"
-"As dependency of RIV
-"Bundle "Rykka/clickable.vim"
-"For arduino
-Bundle "jplaut/vim-arduino-ino"
-"For latex
-"Bundle "lervag/vim-latex"
-"This is cool BUT WRONG C-j shortcut :(
-"Bundle "jcf/vim-latex"
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor='latex'
-
+"Matcher for ctrlp
+Bundle "FelikZ/ctrlp-py-matcher"
+"Find file (like command-t)
+Bundle "kien/ctrlp.vim"
+"Visualize undo/redo tree
+Bundle "vim-scripts/Gundo"
+"For %-matching if/then/else and <tags>
+Bundle "tmhedberg/matchit"
+"For quickly changing tags
+Bundle "tpope/vim-surround"
+"For filesystem browsing
+Bundle "scrooloose/nerdtree"
+"Syntax checking
+Bundle "scrooloose/syntastic"
+"Commenting multiple lines
+Bundle "scrooloose/nerdcommenter"
+"Finish Vundle, set filetype
 filetype plugin indent on
 
 "---------- General ----------
@@ -131,9 +134,9 @@ map <leader>bd :bd<cr>
 "Close all the buffers
 map <leader>ba :1,1000 bd!<cr>
 "Managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tq :tabclose<cr>
+"map <leader>tn :tabnew<cr>
+"map <leader>to :tabonly<cr>
+"map <leader>tq :tabclose<cr>
 "Just for wrapping text browsing
 map j gj
 map k gk
@@ -154,8 +157,7 @@ nmap <leader>l :set list!<CR>
 "map <leader>n <esc>:tabprevious<CR>
 "map <leader>m <esc>:tabnext<CR>
 "Moving through buffers
-map <S-tab> <esc>:bnext<CR>
-map <C-tab> <esc>:bprevious<CR>
+map <C-tab> <esc>:bnext<CR>
 "Close buffer without loosing split
 map <leader>q :bp\|bd #<cr>
 "Sort alphabetically :)
@@ -221,9 +223,19 @@ au BufNewFile,BufRead *.info set filetype=info
 "Markdown syntax
 au BufNewFile,BufRead *.md set filetype=markdown
 
+"Strange
+"set grepprg=grep\ -nH\ $*
+
+"---------- Useful Mappings ----------
+"For compiling Ino project
+nnoremap <leader>ac :!(cd ..; ino build)<CR>
+nnoremap <leader>au :!(cd ..; ino upload)<CR>
+nnoremap <leader>as :!(cd ..; ino serial)<CR>
+
 "---------- Plugins ----------
 "vim-fugitive
 nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gia :Git add -A<CR>
 nnoremap <leader>gic :Gcommit -v<CR>
 nnoremap <leader>gic! :Gcommit -v --amend<CR>
@@ -244,3 +256,14 @@ highlight GitGutterDelete guibg=black
 highlight GitGutterDelete guifg=red
 highlight GitGutterChangeDelete guibg=black
 highlight GitGutterChangeDelete guifg=yellow
+"Ctrlp
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+    \ --ignore .git
+    \ --ignore "**/*.pyc"
+    \ -g ""'
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+nnoremap <C-a> :CtrlP<Space>
+"Gundo
+nnoremap <F4> :GundoToggle<CR>
+"NerdTree
+nnoremap <F5> :NERDTree<CR>
