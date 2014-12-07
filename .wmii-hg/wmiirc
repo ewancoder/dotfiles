@@ -191,22 +191,6 @@ Key $MODKEY-x
 Key $MODKEY-z
 	amixer -q sset Master 2500- &
     wmiir xwrite /rbar/Status_a7 label $(amixer | grep "Left: Playback" | awk {'print $5'} | cut -d "[" -f2 | cut -d "%" -f1)
-#Key $MODKEY-x
-#    if [ "`pactl list; echo $?`" == "1" ]; then
-#        if [ "`amixer -q sset Master 2+; echo $?`" == "1" ]; then
-#            amixer -q sset PCM 2+ &
-#        fi
-#    else
-#	    amixer -q sset Master 2500+ &
-#    fi
-#Key $MODKEY-z
-#    if [ "`pactl list; echo $?`" == "1" ]; then
-#        if [ "`amixer -q sset Master 2-; echo $?`" == "1" ]; then
-#            amixer -q sset PCM 2- &
-#        fi
-#    else
-#	    amixer -q sset Master 2500- &
-#    fi
 
 KeyGroup Keyboard layouts
 Key $MODKEY-i
