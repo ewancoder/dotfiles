@@ -45,6 +45,7 @@ badColors = '#daa #600 #000'
 deviceColors = '#ada #b42 #000'
 #Color for unstaged/unpushed/uncommited git repos
 gitColors = '#f63 #000 #000'
+gitBlueColors = '#36f #000 #000'
 #Alternative color - for noticebar and volume
 alternativeColors = '#aad #000 #000'
 #WARNING
@@ -78,15 +79,14 @@ updatesTimeout = 600
 
 #Startup X11 apps
 startup = [
-    'ssh -fNL 7070:127.0.0.1:7070 root@192.168.100.110',
+    'pasystray',
     'gxkb',
     'CopyAgent',
     'dropboxd',
+    'ssh -fNL 7070:127.0.0.1:7070 root@192.168.100.110',
     '~/bin/ircnotify',
     'tilda',
-    #'weather',
-    'caforw',
-    'twatch'
+    'count' #as server-side for my site [bad]
 ]
 #Startup as via bash (won't be killed upon X11 termination)
 rawstartup = [
@@ -111,10 +111,11 @@ addTagRule("Steam", "Steam")
 #Time
 time = "date +%a\\ %b\\ %d\\ %I:%M:%S"
 #Free RAM
-text = "echo $(free -mh | grep /cache | awk '{print $4}') 'M'"
+text = "echo $(top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/')"
+check = "top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/'"
 check = "free -m | grep /cache | awk '{print $4}'"
-bigger = 3000
-mid = 1000
+lower = 85
+mid = 60
 addBlock()
 #Space at /
 text = "echo $(df -h / | grep / | awk '{print $5}' | sed 's/%//') '/'"
@@ -150,11 +151,11 @@ addBlock()
 text = "cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf \"%.0f\\n\", $4}'"
 addBlock()
 #Sound Volume
-text = "amixer | grep \"Left: Playback\" | awk {'print $5'} | cut -d \"[\" -f2 | cut -d \"%\" -f1"
+text = "if [ \"`amixer | grep 'Master'`\" == \"\" ]; then     if [ \"`amixer | grep 'PCM' -A 5 | grep 'Mono: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1`\" == \"\" ]; then         amixer | grep 'PCM' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;     else         amixer | grep 'PCM' -A 5 | grep 'Mono: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;     fi; else     if [ \"`amixer | grep 'Master' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;`\" == \"\" ]; then         amixer | grep 'Master' -A 5 | grep 'Mono: Playback' | awk {'print $4'} | cut -d '[' -f2 | cut -d '%' -f1;     else         amixer | grep 'Master' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;     fi; fi"
 color = alternativeColors
 addBlock()
 #Current Device
-text = "if [ \"$(pactl stat | grep 'Default Sink' | awk '{print $3}')\" == \"alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo\" ]; then echo 'USB'; else echo 'Build-In'; fi"
+text = "if [ \"`pactl stat; echo $?`\" == \"1\" ]; then echo 'ALSA'; elif [ \"$(pactl stat | grep 'Default Sink' | awk '{print $3}')\" == \"alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo\" ]; then echo 'USB'; else echo 'Build-In'; fi"
 color = alternativeColors
 addBlock()
 #NETSTATS

@@ -1,10 +1,6 @@
 #Exit wmii properly
 alias quit='wmiir xwrite /ctl quit'
 
-#Works even if other users currently logged in
-alias pow='systemctl poweroff -i'
-alias reb='systemctl reboot -i'
-
 #Run some programs (canto over LAN, gparted, minecraft, terraria server, warsow)
 alias canto='canto-curses -a 127.0.0.1 -p 7070 -v'
 alias gpart='xdotool mousemove - 1 mousemove restore; gksu gparted'
@@ -32,7 +28,7 @@ alias gid='git diff'
 alias gil='git log --oneline --graph --color --all --decorate'
 alias gim='git merge --no-ff'
 alias gip='git push origin --all; if [ ! $? -eq 0 ]; then github; git push origin --all; fi'
-alias gipf='git push -f origin --all; if [ ! $? -eq 0 ]; then github; git push -f origin --all; fi'
+alias gipp='git pull; if [ ! $? -eq 0 ]; then github; git pull; fi'
 alias gis='git status'
 
 #Pogoda

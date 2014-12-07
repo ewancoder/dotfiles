@@ -1,5 +1,0 @@
-#!/bin/bash
-while true; do
-    wmiir xwrite /rbar/\!notice label `ssh root@$IP_RPI cat /tmp/weather`
-    sleep 10
-done

@@ -141,10 +141,15 @@ Key $MODKEY-f # Toggle selected client's fullsceen state
 	wmiir xwrite /client/sel/ctl Fullscreen toggle
 Key $MODKEY-bracketright # Toggle urgent
     wmiir xwrite /client/sel/ctl urgent toggle
-Key Control-q # Close client
+Key $MODKEY-q # Close client
     sc=$(wmiir read /client/sel/label)
-    if [ "$sc" != "tilda" ] && [ "$sc" != "canto-curses" ]; then
+    if [ "$sc" != "tilda" ]; then
         wmiir xwrite /client/sel/ctl kill
+    fi
+Key $MODKEY-Shift-q #Kill client
+    sc=$(wmiir read /client/sel/label)
+    if [ "$sc" != "tilda" ]; then
+        wmiir xwrite /client/sel/ctl slay
     fi
 
 KeyGroup Changing column modes
@@ -176,9 +181,6 @@ Key $MODKEY-g
 	gvim &
 Key $MODKEY-r
     urxvt -name Canto -e canto-curses -a $IP_RPI -p 7070 &
-Key $MODKEY-q
-    #urxvt -e screen -r rtorrent
-    deluge &
     
 KeyGroup Volume control   
 Key $MODKEY-w
@@ -189,12 +191,28 @@ Key $MODKEY-x
 Key $MODKEY-z
 	amixer -q sset Master 2500- &
     wmiir xwrite /rbar/Status_a7 label $(amixer | grep "Left: Playback" | awk {'print $5'} | cut -d "[" -f2 | cut -d "%" -f1)
+#Key $MODKEY-x
+#    if [ "`pactl list; echo $?`" == "1" ]; then
+#        if [ "`amixer -q sset Master 2+; echo $?`" == "1" ]; then
+#            amixer -q sset PCM 2+ &
+#        fi
+#    else
+#	    amixer -q sset Master 2500+ &
+#    fi
+#Key $MODKEY-z
+#    if [ "`pactl list; echo $?`" == "1" ]; then
+#        if [ "`amixer -q sset Master 2-; echo $?`" == "1" ]; then
+#            amixer -q sset PCM 2- &
+#        fi
+#    else
+#	    amixer -q sset Master 2500- &
+#    fi
 
 KeyGroup Keyboard layouts
 Key $MODKEY-i
-    sed -i 's/ca(fr),ru/us,ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
+    sed -i 's/ca(fr),ru/us,ru/g' ~/.config/gxkb/gxkb.cfg && killall gxkb && gxkb &
 Key $MODKEY-Shift-i
-    sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb.cfg && killall gxkb && gxkb &
+    sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb/gxkb.cfg && killall gxkb && gxkb &
 
 KeyGroup Others
 #Toggle touchpad
@@ -203,6 +221,8 @@ Key $MODKEY-v
 #Lock session (screensaver)
 Key $MODKEY-KP_Enter
     xdotool mousemove - 1 mousemove restore; xscreensaver-command --lock
+Key $MODKEY-Shift-KP_Enter
+	wmiir xwrite /ctl quit
 #Remove 'New messages' notification
 Key $MODKEY-apostrophe
     wmiir remove /rbar/ZNotify
@@ -224,6 +244,16 @@ Key End
         cv=$seltag
         wmiir xwrite /ctl view RSS
     fi
+Key $MODKEY-Shift-XF86PowerOff
+    wmiir xwrite /rbar/\!notice colors "#fff #c22 #fff"
+    wmiir xwrite /rbar/\!notice label "Power off..."
+    baconf
+    systemctl poweroff -i
+Key $MODKEY-Shift-XF86WakeUp
+    wmiir xwrite /rbar/\!notice colors "#fff #c22 #fff"
+    wmiir xwrite /rbar/\!notice label "Reboot..."
+    baconf
+    systemctl reboot -i
 #Change wallpaper
 Key $MODKEY-End
     feh --bg-fill --randomize --recursive Dropbox/Pictures
@@ -240,21 +270,32 @@ Key $MODKEY-Delete
     devmon --unmount-removable &
 
 KeyGroup Pulseaudio switching devices
-Key $MODKEY-Shift-KP_Insert
+Key $MODKEY-Shift-KP_Down
+    ln -fs ~/.asoundrc_pulse ~/.asoundrc
+    ps -C pulseaudio > /dev/null 2>&1 || pulseaudio --start
+    if [ ! "`ps -C pulseaudio | grep defunct`" == "" ]; then
+        pulseaudio --start
+    fi
     pacmd set-default-sink alsa_output.pci-0000_00_14.2.analog-stereo
     for word in $(cat /tmp/inds.mypo); do
         pacmd move-sink-input $word alsa_output.pci-0000_00_14.2.analog-stereo
     done
 Key $MODKEY-Shift-KP_End
+    ln -fs ~/.asoundrc_pulse ~/.asoundrc
+    ps -C pulseaudio > /dev/null 2>&1 || pulseaudio --start
+    if [ ! "`ps -C pulseaudio | grep defunct`" == "" ]; then
+        pulseaudio --start
+    fi
     pacmd set-default-sink alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo
     for word in $(cat /tmp/inds.mypo); do
         pacmd move-sink-input $word alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo
     done
-Key $MODKEY-Shift-KP_Down
-    pacmd set-default-sink 2
-    for word in $(cat /tmp/inds.mypo); do
-        pacmd move-sink-input $word 2
-    done
+Key $MODKEY-Shift-KP_Left
+    ln -fs ~/.asoundrc_alsa_usb ~/.asoundrc
+    pulseaudio -k
+Key $MODKEY-Shift-KP_Begin
+    ln -fs ~/.asoundrc_alsa ~/.asoundrc
+    pulseaudio -k
 
 KeyGroup Pulseaudio per-application volume control
 Key $MODKEY-KP_End

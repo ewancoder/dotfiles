@@ -1,3 +1,4 @@
+
 #!/bin/bash
 #Make subdirectories
 mkdir -p /mnt/backup/Arch/.config
@@ -30,3 +31,6 @@ fi
 if [[ ! -f ~/Copy/Backup/Note$(date +%Y.%b.%d).tgz ]]; then
     tar -cpzvf ~/Copy/Backup/Note$(date +%Y.%b.%d).tgz /mnt/backup/Arch
 fi
+
+#BTP backup to ~/Copy
+rsync -av --delete ~/btp ~/Copy/

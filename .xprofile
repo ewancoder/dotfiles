@@ -1,0 +1,30 @@
+#!/bin/sh
+#This file is sourced by ~/.xinitrc OR by DM
+
+#Move pulseaudio here because now it's not AUTOSPAWNING
+ln -fs ~/.asoundrc_pulse ~/.asoundrc
+pulseaudio --start &
+
+#This is done by DM automatically, but I need it EXPLICITLY to load all before my other applications (like xscreensaver)
+xrdb -merge ~/.Xresources &
+
+#Composition manager (can break some DE)
+compton &
+
+#Transparency rules
+devilspie &
+
+#Shield for my eyes
+xflux -l 53.9 -g 27.5667 -k 4500 &
+
+#Grab mouse and hide it
+unclutter -grab &
+
+#Automatically mount USB drives [allow only one copy of devmon]
+ps -C devmon > /dev/null 2>&1 || devmon --exec-on-drive '/home/ewancoder/bin/usb' &
+
+#Screen locker
+/usr/bin/xscreensaver -no-splash &
+
+#Turn off power saving (screen blanking)
+xset -dpms s off

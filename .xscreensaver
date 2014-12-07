@@ -1,8 +1,8 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.29 for ewancoder on Wed Aug 27 01:56:56 2014.
+# Written by xscreensaver-demo 5.30 for ewancoder on Sat Nov  8 15:55:42 2014.
 # http://www.jwz.org/xscreensaver/
 
-timeout:	24:00:00
+timeout:	12:00:00
 cycle:		0:30:00
 lock:		True
 lockTimeout:	0:00:00
@@ -179,7 +179,7 @@ programs:								      \
 - GL: 				blinkbox -root				    \n\
 - GL: 				blocktube -root -delay 22222 -holdtime	      \
 				  880 -changetime 274			    \n\
-  GL: 				bouncingcow -root -delay 21481 -speed	      \
+- GL: 				bouncingcow -root -delay 21481 -speed	      \
 				  0.6567				    \n\
 -				cloudlife -root				    \n\
 - GL: 				cubestorm -root				    \n\
@@ -256,6 +256,7 @@ programs:								      \
 - GL: 				unknownpleasures -root			    \n\
 - GL: 				projectiveplane -root			    \n\
 -				tessellimage -root			    \n\
+- GL: 				winduprobot -root			    \n\
 
 
 pointerPollTime:    0:00:05
@@ -266,4 +267,5 @@ GetViewPortIsFullOfLies:False
 procInterrupts:	True
 xinputExtensionDev: False
 overlayStderr:	True
+authWarningSlack:   20
 
