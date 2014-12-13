@@ -22,12 +22,14 @@ do
             ~/bin/baconf
             rsync -av --delete /mnt/backup/Arch $d/
             echo 'backup-2206' > $d/.key
+            sync
             devmon --unmount $d
             notify-send -u critical "BACKUP updated at $d"
         fi
         if [ "`cat $d/.key`" == "cloud-2206" ]; then
             rsync -a --no-o --no-p --no-g --safe-links --modify-window 1 -v --delete /mnt/cloud/ $d/
             echo 'cloud-2206' > $d/.key
+            sync
             devmon --unmount $d
             notify-send -u critical "CLOUD updated at $d"
         fi
