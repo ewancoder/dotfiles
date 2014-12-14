@@ -263,6 +263,7 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
     \ -g ""'
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 nnoremap <C-a> :CtrlP<Space>
+nnoremap <C-d> :CtrlP /mnt/cloud/Dropbox<CR>
 "Gundo
 nnoremap <F4> :GundoToggle<CR>
 "NerdTree
