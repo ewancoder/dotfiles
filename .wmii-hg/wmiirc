@@ -223,7 +223,7 @@ Key $MODKEY-v
     xinput set-int-prop $id "Device Enabled" 8 $state
 #Lock session (screensaver)
 Key $MODKEY-KP_Enter
-    xdotool mousemove - 1 mousemove restore; xscreensaver-command --lock
+    slimlock
 Key $MODKEY-Shift-KP_Enter
 	wmiir xwrite /ctl quit
 #Remove 'New messages' notification
