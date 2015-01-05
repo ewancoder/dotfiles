@@ -34,3 +34,6 @@ fi
 
 #BTP backup to ~/Copy
 rsync -av --delete ~/btp ~/Copy/
+
+#Synchronize drives
+sync

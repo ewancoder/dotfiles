@@ -180,7 +180,7 @@ Key $MODKEY-c
 Key $MODKEY-g
 	gvim &
 Key $MODKEY-r
-    urxvt -name Canto -e canto-curses -a $IP_RPI -p 7070 &
+    chromium coggle.it &
     
 KeyGroup Volume control   
 Key $MODKEY-w
@@ -199,12 +199,15 @@ Key $MODKEY-Shift-i
     sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb/gxkb.cfg && killall gxkb && gxkb &
 
 KeyGroup Others
+#Google KEEP
+Key $MODKEY-e
+    chromium keep.google.com &
 #Toggle touchpad
 Key $MODKEY-v
     synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0') &
 #Lock session (screensaver)
 Key $MODKEY-KP_Enter
-    xdotool mousemove - 1 mousemove restore; xscreensaver-command --lock
+    slimlock
 Key $MODKEY-Shift-KP_Enter
 	wmiir xwrite /ctl quit
 #Remove 'New messages' notification
