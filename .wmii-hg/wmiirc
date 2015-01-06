@@ -231,7 +231,7 @@ Key $MODKEY-apostrophe
     wmiir remove /rbar/ZNotify
 #System update
 Key XF86WakeUp
-    urxvt -e sudo yaourt -Syua --noconfirm &
+    urxvt -e yaourt -Syua --noconfirm &
 #Screenshot
 Key XF86Sleep
     dbss &
