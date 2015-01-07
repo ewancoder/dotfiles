@@ -215,7 +215,7 @@ Key $MODKEY-apostrophe
     wmiir remove /rbar/ZNotify
 #System update
 Key Next
-    urxvt -e sudo yaourt -Syua --noconfirm &
+    urxvt -e yaourt -Syua --noconfirm &
 #Screenshot
 Key Prior
     dbss &
