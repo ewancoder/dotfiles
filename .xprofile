@@ -23,8 +23,5 @@ unclutter -grab &
 #Automatically mount USB drives [allow only one copy of devmon]
 ps -C devmon > /dev/null 2>&1 || devmon --exec-on-drive '/home/ewancoder/bin/usb' &
 
-#Screen locker
-/usr/bin/xscreensaver -no-splash &
-
 #Turn off power saving (screen blanking)
 xset -dpms s off
