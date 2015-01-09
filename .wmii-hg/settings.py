@@ -49,7 +49,7 @@ gitBlueColors = '#36f #000 #000'
 #Alternative color - for noticebar and volume
 alternativeColors = '#aad #000 #000'
 #WARNING
-warnColors = '#fff #c22 #fff'
+warnColors = '#faa #c00 #f44'
 soundEffects = True
 #AM/PM
 amColors = '#ee8 ' + focusColors.split()[1] + ' #000'

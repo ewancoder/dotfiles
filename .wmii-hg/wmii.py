@@ -150,7 +150,7 @@ def loopSysUpdate():
     if num != '0':
         run('yaourt -Qua > /tmp/yaourt.updates && notify-send -u low "Updates available (' + num + ')" "$(cat /tmp/yaourt.updates)"')
         if settings.soundEffects:
-            run('mpg123 ~/Dropbox/Sounds/bell.mp3')
+            run('gst123 /usr/share/sounds/freedesktop/stereo/service-login.oga')
 
 def main():
     #Before all of this - we need to set background instead of ugly gray color
