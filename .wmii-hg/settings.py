@@ -161,11 +161,6 @@ color = focusColors
 addBlock()
 #Sound Volume
 text = "if [ \"`amixer | grep 'Master'`\" == \"\" ]; then if [ \"`amixer | grep 'PCM' -A 5 | grep 'Mono: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1`\" == \"\" ]; then amixer | grep 'PCM' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1; else amixer | grep 'PCM' -A 5 | grep 'Mono: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1; fi; else if [ \"`amixer | grep 'Master' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;`\" == \"\" ]; then amixer | grep 'Master' -A 5 | grep 'Mono: Playback' | awk {'print $4'} | cut -d '[' -f2 | cut -d '%' -f1; else amixer | grep 'Master' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1; fi; fi"
-color = alternativeColors
-addBlock()
-#Current Device
-text = "if [ \"`pactl stat; echo $?`\" == \"1\" ]; then if [ \"`ls -l ~/.asoundrc | awk '{print $11}'`\" == \"/home/ewancoder/.asoundrc_alsa_usb\" ]; then echo 'ALSA USB'; else echo 'ALSA Build-In'; fi; elif [ \"$(pactl stat | grep 'Default Sink' | awk '{print $3}')\" == \"alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo\" ]; then echo 'USB'; else echo 'Build-In'; fi"
-color = alternativeColors
 addBlock()
 #CPU Uptime
 text = "uptime | sed 's/.*://; s/, / /g'"
