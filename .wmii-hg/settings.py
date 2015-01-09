@@ -35,7 +35,7 @@ def addTagRule(tag, forcetag):
 #=== COLORS ===
 #Color of (not)focused tag/window
 normColors = '#ada #000 #000'
-focusColors = '#add #345 #000'
+focusColors = '#fc5 #842 #000'
 tagFocusColors = '#fc5 #862 #000'
 #Good, Mid & Bad colors for checking state and drawing status
 goodColors = '#ada #350 #000'
