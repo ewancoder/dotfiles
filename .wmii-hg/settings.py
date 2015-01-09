@@ -35,8 +35,8 @@ def addTagRule(tag, forcetag):
 #=== COLORS ===
 #Color of (not)focused tag/window
 normColors = '#ada #000 #000'
-focusColors = '#fc5 #842 #000'
-tagFocusColors = '#fc5 #862 #000'
+focusColors = '#ada #350 #000'
+tagFocusColors = '#fc5 #730 #000'
 #Good, Mid & Bad colors for checking state and drawing status
 goodColors = '#ada #350 #000'
 midColors = '#dda #640 #000'
@@ -52,8 +52,8 @@ alternativeColors = '#aad #000 #000'
 warnColors = '#fff #c22 #fff'
 soundEffects = True
 #AM/PM
-amColors = '#ee8 #345 #000'
-pmColors = '#8e8 #345 #000'
+amColors = '#ee8 ' + focusColors.split()[1] + ' #000'
+pmColors = '#8e8 ' + focusColors.split()[1] + ' #000'
 
 #=== GENERAL CONFIG ===
 modkey = 'Mod4'
@@ -155,23 +155,23 @@ check = text
 lower = 40
 mid = 52
 addBlock()
+#NETSTATS
+text = "~/.wmii-hg/netmon"
+color = focusColors
+addBlock()
 #Sound Volume
 text = "if [ \"`amixer | grep 'Master'`\" == \"\" ]; then if [ \"`amixer | grep 'PCM' -A 5 | grep 'Mono: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1`\" == \"\" ]; then amixer | grep 'PCM' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1; else amixer | grep 'PCM' -A 5 | grep 'Mono: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1; fi; else if [ \"`amixer | grep 'Master' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;`\" == \"\" ]; then amixer | grep 'Master' -A 5 | grep 'Mono: Playback' | awk {'print $4'} | cut -d '[' -f2 | cut -d '%' -f1; else amixer | grep 'Master' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1; fi; fi"
 color = alternativeColors
 addBlock()
 #Current Device
-text = "if [ \"`pactl stat; echo $?`\" == \"1\" ]; then echo 'ALSA'; elif [ \"$(pactl stat | grep 'Default Sink' | awk '{print $3}')\" == \"alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo\" ]; then echo 'USB'; else echo 'Build-In'; fi"
+text = "if [ \"`pactl stat; echo $?`\" == \"1\" ]; then if [ \"`ls -l ~/.asoundrc | awk '{print $11}'`\" == \"/home/ewancoder/.asoundrc_alsa_usb\" ]; then echo 'ALSA USB'; else echo 'ALSA Build-In'; fi; elif [ \"$(pactl stat | grep 'Default Sink' | awk '{print $3}')\" == \"alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo\" ]; then echo 'USB'; else echo 'Build-In'; fi"
 color = alternativeColors
-addBlock()
-#NETSTATS
-text = "~/.wmii-hg/netmon"
-color = focusColors
 addBlock()
 #CPU Uptime
 text = "uptime | sed 's/.*://; s/, / /g'"
 check = text + " | awk '{print $2}'"
 color = focusColors
-lower = 1.75
+lower = 1.95
 addBlock()
 
 #Output for wmiirc
