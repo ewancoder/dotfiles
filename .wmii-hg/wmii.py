@@ -86,13 +86,13 @@ def statusBlocks():
     try:
         if get('pactl stat; echo $?') == '1':
             if get('ls -l ~/.asoundrc | awk \'{print $11}\'') == "/home/ewancoder/.asoundrc_alsa_usb":
-                setColor('Status_a9', settings.midColors)
-            else:
                 setColor('Status_a9', settings.badColors)
+            else:
+                setColor('Status_a9', settings.alsaColors)
         elif get('pactl stat | grep "Default Sink" | awk \'{print $3}\'') == "alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo":
             setColor('Status_a9', settings.goodColors)
         else:
-            setColor('Status_a9', settings.alternativeColors)
+            setColor('Status_a9', settings.usbColors)
     except:
         pass
 

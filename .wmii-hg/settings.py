@@ -54,6 +54,9 @@ soundEffects = True
 #AM/PM
 amColors = '#ee8 ' + focusColors.split()[1] + ' #000'
 pmColors = '#8e8 ' + focusColors.split()[1] + ' #000'
+#Sound device indication
+usbColors = '#aac #350 #000'
+alsaColors = '#d77 #350 #000'
 
 #=== GENERAL CONFIG ===
 modkey = 'Mod4'
