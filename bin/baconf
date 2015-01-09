@@ -1,5 +1,11 @@
-
 #!/bin/bash
+#Lockfile section
+while [ -f /tmp/baconf.lock ]; do
+    echo "Lock file is exists. Waiting for previous copy of baconf to shutdown [10 seconds]..."
+    sleep 10
+done
+touch /tmp/baconf.lock
+
 #Make subdirectories
 mkdir -p /mnt/backup/Arch/.config
 mkdir -p /mnt/backup/Arch/.kde4/share/apps
@@ -25,14 +31,22 @@ rsync -av --delete ~/Anki /mnt/backup/Arch/
 if [[ ! -f /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz ]]; then
     mkdir -p /mnt/backup/Hourly/`date +%Y`/`date +%b`
     tar -cpzvf /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz /mnt/backup/Arch
-fi
-#Daily backup to ~/Copy
-if [[ ! -f ~/Copy/Backup/Arch`date +%Y.%b.%d`.tgz ]]; then
-    tar -cpzvf ~/Copy/Backup/Arch`date +%Y.%b.%d`.tgz /mnt/backup/Arch
+    if [[ ! -f ~/Copy/Backup/Arch`date +%Y.%b.%d`.tgz ]]; then
+        cp /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz ~/Copy/Backup/Arch`date +%Y.%b.%d`.tgz
+    fi
 fi
 
-#BTP backup to ~/Copy
-rsync -av --delete ~/btp ~/Copy/
+#Backup GIT Projects to ~/Copy
+rsync -av ~/btp ~/Copy/Projects/
+rsync -av ~/site ~/Copy/Projects/
+rsync -av ~/eal ~/Copy/Projects/
+
+#Backup CLOUD (Dropbox & Copy)
+rsync -av --delete /mnt/cloud/ /mnt/backup/Cloud
+rsync -av /mnt/cloud/ /mnt/backup/CloudArchive
 
 #Synchronize drives
 sync
+
+#Remove lockfile
+rm /tmp/baconf.lock
