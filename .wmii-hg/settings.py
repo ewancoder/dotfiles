@@ -113,31 +113,31 @@ time = "date +%a\\ %b\\ %d\\ %I:%M:%S"
 #Free RAM
 text = "echo $(top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/')"
 check = "top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/'"
-lower = 60
+lower = 50
 mid = 80
 addBlock()
 #Space at /
 text = "echo $(df -h / | grep / | awk '{print $5}' | sed 's/%//') '/'"
 check = "df -h / | grep / | awk '{print $5}' | sed 's/%//'"
-lower = 45
-mid = 75
+lower = 55
+mid = 80
 addBlock()
 #Space at /home
 text = "echo $(df -h /home | grep home | awk '{print $5}' | sed 's/%//') 'H'"
 check = "df -h /home | grep home | awk '{print $5}' | sed 's/%//'"
-lower = 45
-mid = 75
+lower = 55
+mid = 80
 addBlock()
 #Space at /mnt/cloud
 text = "echo $(df -h /mnt/cloud | grep cloud | awk '{print $5}' | sed 's/%//') 'C'"
 check = "df -h /mnt/cloud | grep cloud | awk '{print $5}' | sed 's/%//'"
-lower = 45
+lower = 55
 mid = 75
 addBlock()
 #Space at /mnt/backup
 text = "echo $(df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//') 'B'"
 check = "df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//'"
-lower = 45
+lower = 55
 mid = 75
 addBlock()
 #CPU Temperature
@@ -156,7 +156,7 @@ lower = 40
 mid = 52
 addBlock()
 #Sound Volume
-text = "if [ \"`amixer | grep 'Master'`\" == \"\" ]; then     if [ \"`amixer | grep 'PCM' -A 5 | grep 'Mono: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1`\" == \"\" ]; then         amixer | grep 'PCM' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;     else         amixer | grep 'PCM' -A 5 | grep 'Mono: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;     fi; else     if [ \"`amixer | grep 'Master' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;`\" == \"\" ]; then         amixer | grep 'Master' -A 5 | grep 'Mono: Playback' | awk {'print $4'} | cut -d '[' -f2 | cut -d '%' -f1;     else         amixer | grep 'Master' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;     fi; fi"
+text = "if [ \"`amixer | grep 'Master'`\" == \"\" ]; then if [ \"`amixer | grep 'PCM' -A 5 | grep 'Mono: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1`\" == \"\" ]; then amixer | grep 'PCM' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1; else amixer | grep 'PCM' -A 5 | grep 'Mono: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1; fi; else if [ \"`amixer | grep 'Master' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;`\" == \"\" ]; then amixer | grep 'Master' -A 5 | grep 'Mono: Playback' | awk {'print $4'} | cut -d '[' -f2 | cut -d '%' -f1; else amixer | grep 'Master' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1; fi; fi"
 color = alternativeColors
 addBlock()
 #Current Device
