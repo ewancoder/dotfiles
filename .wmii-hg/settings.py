@@ -113,9 +113,8 @@ time = "date +%a\\ %b\\ %d\\ %I:%M:%S"
 #Free RAM
 text = "echo $(top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/')"
 check = "top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/'"
-check = "free -m | grep /cache | awk '{print $4}'"
-lower = 85
-mid = 60
+lower = 60
+mid = 80
 addBlock()
 #Space at /
 text = "echo $(df -h / | grep / | awk '{print $5}' | sed 's/%//') '/'"
