@@ -38,6 +38,8 @@ alias xit='exit'
 alias al='/mnt/cloud/Copy/Portable\ Software/anylogic/anylogic'
 #Canto-curses client
 alias canto='canto-curses -a 127.0.0.1 -p 7070 -v'
+#Godot
+alias god='PULSE_LATENCY_MSEC=60 godot'
 #Gparted
 alias gpart='xdotool mousemove - 1 mousemove restore; gksu gparted'
 #Minecraft FeedTheBeast
