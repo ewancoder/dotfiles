@@ -220,6 +220,13 @@ Key $MODKEY-v
         state=0
     fi
     xinput set-int-prop $id "Device Enabled" 8 $state
+#CINEMA MODE (turn off colors)
+Key $MODKEY-o
+    if [ "`wmiir read /ctl | grep focuscolors | awk {'print $3'}`" == "#000000" ]; then
+        wmiir xwrite /ctl focuscolors "`cat /tmp/settings.wmii | sed -n '7{p;q}'`"
+    else
+        wmiir xwrite /ctl focuscolors "#999 #000 #000"
+    fi
 #Lock session (screensaver)
 Key $MODKEY-KP_Enter
     slimlock
