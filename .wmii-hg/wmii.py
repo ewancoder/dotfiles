@@ -51,8 +51,8 @@ def setCondition(name, check, lower, bigger, mid, color):
 
 #Set column & tagging rules
 def setRules():
-    run("wmiir write /colrules <<!\n" + settings.colRules + "!")
-    run("wmiir write /rules <<!\n" + settings.tagRules + "!")
+    run('wmiir xwrite /colrules "' + settings.colRules + '"')
+    run('wmiir xwrite /rules "' + settings.tagRules + '"')
 
 #========== BLOCK FUNCTIONS ==========
 
