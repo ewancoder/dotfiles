@@ -145,7 +145,7 @@ def loopTime():
         killAll()
         print('Exiting wmii, bye and good luck!')
         os._exit(1)
-    setColor("Time", settings.focusColors)
+    setColor("Time", settings.goodColors)
     if time.strftime('%p') == 'PM':
         setColor("TimeZ", settings.pmColors)
     else:
@@ -163,8 +163,6 @@ def loopSysUpdate():
     num = get('yaourt -Qua | wc -l')
     if num != '0':
         run('yaourt -Qua > /tmp/yaourt.updates && notify-send -u low "Updates available (' + num + ')" "$(cat /tmp/yaourt.updates)"')
-        if settings.soundEffects:
-            run('gst123 /usr/share/sounds/freedesktop/stereo/service-login.oga')
 
 def main():
     #Before all of this - we need to set background instead of ugly gray color
@@ -174,7 +172,7 @@ def main():
     #Run tray
     run("witray")
     #Make uname to noticebar
-    setColor("\!notice", settings.alternativeColors)
+    setColor("\!notice", settings.altColors)
     run("wmiir xwrite /rbar/\!notice label $(uname -r)")
     #Handle Time
     loopTime()

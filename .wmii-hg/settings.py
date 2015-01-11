@@ -15,7 +15,7 @@ def addBlock():
     if x < 10:
         name = 'Status_a' + str(x)
     else:
-        name = 'Status_b' + str(x) #This is it, noone needs 20+ statusbars
+        name = 'Status_b' + str(x-10) #This is it, noone needs 20+ statusbars
     #Create new block
     blocks.append([text, name, check, lower, bigger, mid, color])
     text, name, check, lower, bigger, mid, color = '', '', '', '', '', '', ''
@@ -33,30 +33,24 @@ def addTagRule(tag, forcetag):
 #========== CONFIGURATION ==========
 
 #=== COLORS ===
-#Color of (not)focused tag/window
-normColors = '#ada #000 #000'
-focusColors = '#ada #350 #000'
-tagFocusColors = '#fc5 #730 #000'
-#Good, Mid & Bad colors for checking state and drawing status
-goodColors = '#ada #350 #000'
-midColors = '#dda #640 #000'
-badColors = '#daa #600 #000'
-#Color for mounted devices
+goodColors = '#ada #350 #000' #Focused + Good
+normColors = goodColors.split()[0] + ' #000 #000' #Not-focused window
+tagFocusColors = '#fc5 #730 #000' #Focused Tag
+midColors = '#dda ' + goodColors.split()[1] + ' #000' #Medium status
+badColors = '#daa #600 #000' #Bad Status
+warnColors = '#faa #c00 #f44' #For Warnings
+#Devices and GIT colors
 deviceColors = '#ada #b42 #000'
-#Color for unstaged/unpushed/uncommited git repos
 gitColors = '#f63 #000 #000'
 gitBlueColors = '#36f #000 #000'
-#Alternative color - for noticebar and volume
-alternativeColors = '#aad #000 #000'
-#WARNING
-warnColors = '#faa #c00 #f44'
-soundEffects = True
+#Alternative color - for noticebar
+altColors = '#aad #000 #000'
 #AM/PM
-amColors = '#ee8 ' + focusColors.split()[1] + ' #000'
-pmColors = '#8e8 ' + focusColors.split()[1] + ' #000'
+amColors = '#ee8 ' + goodColors.split()[1] + ' #000'
+pmColors = '#8e8 ' + goodColors.split()[1] + ' #000'
 #Sound device indication
-usbColors = '#aac #350 #000'
-alsaColors = '#d77 #350 #000'
+usbColors = '#aac ' + goodColors.split()[1] + ' #000'
+alsaColors = '#d77 ' + goodColors.split()[1] + ' #000'
 
 #=== GENERAL CONFIG ===
 modkey = 'Mod4'
@@ -77,7 +71,7 @@ background = '~/Dropbox/Pictures'
 #Timeout to change background, in seconds
 timeout = 300
 
-#Check for Arch Linux updates each N seconds
+#Notify about system updates each N seconds
 updatesTimeout = 600
 
 #Startup X11 apps
@@ -102,15 +96,13 @@ addColRule(2, "50+50")
 addColRule(".*", "62+38")
 
 #=== TAGGING RULES ===
-#For canto-curses urxvt 'Canto' window
-addTagRule("Canto", 'RSS')
 #For Skype to be at 0 :)
 addTagRule("Skype", 0)
 #For separate steam big-picture tag
 addTagRule("Steam", "Steam")
 
 #=== STATUSBAR ===
-#Time
+#Time format
 time = "date +%a\\ %b\\ %d\\ %I:%M:%S"
 #Free RAM
 text = "echo $(top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/')"
@@ -159,7 +151,6 @@ mid = 52
 addBlock()
 #NETSTATS
 text = "~/.wmii-hg/netmon"
-color = focusColors
 addBlock()
 #Sound Volume
 text = "if [ \"`amixer | grep 'Master'`\" == \"\" ]; then if [ \"`amixer | grep 'PCM' -A 5 | grep 'Mono: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1`\" == \"\" ]; then amixer | grep 'PCM' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1; else amixer | grep 'PCM' -A 5 | grep 'Mono: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1; fi; else if [ \"`amixer | grep 'Master' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;`\" == \"\" ]; then amixer | grep 'Master' -A 5 | grep 'Mono: Playback' | awk {'print $4'} | cut -d '[' -f2 | cut -d '%' -f1; else amixer | grep 'Master' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1; fi; fi"
@@ -167,7 +158,6 @@ addBlock()
 #CPU Uptime
 text = "uptime | sed 's/.*://; s/, / /g'"
 check = text + " | awk '{print $2}'"
-color = focusColors
 lower = 1.95
 addBlock()
 
@@ -178,14 +168,10 @@ if __name__ == "__main__":
     print(down)
     print(left)
     print(right)
-
-    print(normColors)
-    print(focusColors)
-    print(tagFocusColors)
-
     print(font)
     print(term)
 
+    print(normColors)
+    print(goodColors) #WMII_FOCUSCOLORS
+    print(tagFocusColors)
     print(warnColors)
-
-    print(soundEffects)
