@@ -88,8 +88,7 @@ startup = [
     'dropboxd',
     'ssh -fNL 7070:127.0.0.1:7070 root@192.168.100.110',
     '~/bin/ircnotify',
-    'tilda',
-    'count' #as server-side for my site [bad]
+    'tilda'
 ]
 #Startup as via bash (won't be killed upon X11 termination)
 rawstartup = [
