@@ -14,6 +14,7 @@ mkdir -p /mnt/backup/Arch/.kde4/share/apps
 rsync -av --delete ~/.config/chromium/Default /mnt/backup/Arch/.config/chromium/
 rsync -av --delete ~/.config/libreoffice /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/mc /mnt/backup/Arch/.config/
+rsync -av --delete ~/.config/Popcorn-Time /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/Trolltech.conf /mnt/backup/Arch/.config/
 #Dmenu + zsh history :)
 rsync -av --delete ~/.dmenu_history /mnt/backup/Arch/
