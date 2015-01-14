@@ -11,7 +11,7 @@ alias gica!='git commit -av --amend'
 alias gid='git diff'
 alias gil='git log --oneline --graph --color --all --decorate'
 alias gim='git merge --no-ff'
-alias gip='git push origin'
+alias gip='if [ "`ssh-add -L | grep github`" "==" "" ]; then github; fi; git push origin'
 alias gipp='git pull'
 alias gis='git status'
 
