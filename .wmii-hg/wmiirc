@@ -198,7 +198,7 @@ Key $MODKEY-Shift-i
 KeyGroup Others
 #Google KEEP
 Key $MODKEY-e
-    chromium --app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki &
+    chromium keep.google.com &
 #Turn off mouse
 Key $MODKEY-v
     id=`xinput --list | grep "Wheel Mouse" | awk '{print $7}' | cut -f2 -d "="`
