@@ -49,8 +49,7 @@ altColors = '#aad #000 #000'
 amColors = '#ee8 ' + goodColors.split()[1] + ' #000'
 pmColors = '#8e8 ' + goodColors.split()[1] + ' #000'
 #Sound device indication
-usbColors = '#aac ' + goodColors.split()[1] + ' #000'
-alsaColors = '#d77 ' + goodColors.split()[1] + ' #000'
+speakerColors = altColors.split()[0] + ' ' + goodColors.split()[1] + ' #000'
 
 #=== GENERAL CONFIG ===
 modkey = 'Mod4'
