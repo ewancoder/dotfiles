@@ -1,0 +1,48 @@
+#!/bin/bash
+
+if [ "`ls -l ~/.asoundrc | awk '{print $11}'`" == "$HOME/.asoundrc_pulse" ]; then
+    #Pulseaudio
+    device=1
+elif [ "`ls -l ~/.asoundrc | awk '{print $11}'`" == "$HOME/.asoundrc_alsa" ]; then
+    #Alsa Build-In
+    device=2
+elif [ "`ls -l ~/.asoundrc | awk '{print $11}'`" == "$HOME/.asoundrc_alsa_usb" ]; then
+    #Alsa USB
+    device=3
+fi
+
+if [ "$1" == "up" ]; then
+    if [ $device -eq 1 ]; then
+        amixer -q sset Master 2500+
+    elif [ $device -eq 2 ]; then
+        amixer -q sset Master 2+
+    else
+        amixer -q sset PCM 2+
+    fi
+elif [ "$1" == "down" ]; then
+    if [ $device -eq 1 ]; then
+        amixer -q sset Master 2500-
+    elif [ $device -eq 2 ]; then
+        amixer -q sset Master 2-
+    else
+        amixer -q sset PCM 2-
+    fi
+elif [ "$1" == "off" ]; then
+    if [ $device -eq 1 -o $device -eq 2 ]; then
+        amixer -q sset Master 0
+    else
+        amixer -q sset PCM 0
+    fi
+fi
+
+if [ "$device" == "2" ]; then
+    volume=`amixer | grep Master -A 4 | grep Mono | awk '{print $4}' | cut -d '[' -f2 | cut -d '%' -f1`
+else
+    volume=`amixer | grep 'Front Left:' | awk '{print $5}' | cut -d '[' -f2 | cut -d '%' -f1`
+fi
+
+if [ "$1" == "" ]; then
+    echo $volume
+else
+    notify-send "Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
+fi

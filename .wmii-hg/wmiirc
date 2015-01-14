@@ -185,21 +185,9 @@ KeyGroup Volume control
 Key $MODKEY-w
     urxvt -e alsamixer &
 Key $MODKEY-x
-    if [ "`pactl list; echo $?`" == "1" ]; then
-        if [ "`amixer -q sset Master 2+; echo $?`" == "1" ]; then
-            amixer -q sset PCM 2+ &
-        fi
-    else
-	    amixer -q sset Master 2500+ &
-    fi
+    ~/.wmii-hg/volume up
 Key $MODKEY-z
-    if [ "`pactl list; echo $?`" == "1" ]; then
-        if [ "`amixer -q sset Master 2-; echo $?`" == "1" ]; then
-            amixer -q sset PCM 2- &
-        fi
-    else
-	    amixer -q sset Master 2500- &
-    fi
+    ~/.wmii-hg/volume down
 
 KeyGroup Keyboard layouts
 Key $MODKEY-i
