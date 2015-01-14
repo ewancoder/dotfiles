@@ -11,8 +11,8 @@ alias gica!='git commit -av --amend'
 alias gid='git diff'
 alias gil='git log --oneline --graph --color --all --decorate'
 alias gim='git merge --no-ff'
-alias gip='git push origin --all; if [ ! $? -eq 0 ]; then github; git push origin --all; fi'
-alias gipp='git pull; if [ ! $? -eq 0 ]; then github; git pull; fi'
+alias gip='git push origin'
+alias gipp='git pull'
 alias gis='git status'
 
 #=== Some utils===
