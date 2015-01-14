@@ -8,6 +8,7 @@ if [ ! "`grep pulse ~/.asoundrc`" == "" ]; then
             apps=$(cat /tmp/temp.mypo | grep 'application.icon_name' | awk '{print $3}' | tr -d '"')
             inds=$(cat /tmp/temp.mypo | grep 'Sink Input' | awk '{print $3}' | tr -d '#')
             vols=$(cat /tmp/temp.mypo | grep 'Volume' | awk '{print $5}' | tr -d '%')
+            sink=$(cat /tmp/temp.mypo | grep 'Sink:' | awk '{print $2}')
             echo $inds > /tmp/inds.mypo
             IFS=$'\r\n' GLOBIGNORE='*' :; app=($apps)
             IFS=$'\r\n' GLOBIGNORE='*' :; ind=($inds)
@@ -15,7 +16,11 @@ if [ ! "`grep pulse ~/.asoundrc`" == "" ]; then
             for (( i = 0; i < ${#ind[@]}; i++ )); do
                 if ! [ "${ind[$i]}" == "" ]; then
                     wmiir create /rbar/Audio${ind[$i]} &
-                    wmiir xwrite /rbar/Audio${ind[$i]} colors "#8a8 #242 #000"
+                    if [ "$sink" == "2" ]; then
+                        wmiir xwrite /rbar/Audio${ind[$i]} colors "#aad #242 #000"
+                    else
+                        wmiir xwrite /rbar/Audio${ind[$i]} colors "#8a8 #242 #000"
+                    fi
                     wmiir xwrite /rbar/Audio${ind[$i]} label "${app[$i]}: ${vol[$i]}" &
                 fi
             done
