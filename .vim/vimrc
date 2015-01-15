@@ -267,3 +267,14 @@ nnoremap <C-a> :CtrlP /mnt/cloud/Dropbox<CR>
 nnoremap <F4> :GundoToggle<CR>
 "NerdTree
 nnoremap <F5> :NERDTree<CR>
+
+"Map for buffer
+map <A-1> :buffer 1<CR>
+map <A-2> :buffer 2<CR>
+map <A-3> :buffer 3<CR>
+map <A-4> :buffer 4<CR>
+map <A-5> :buffer 5<CR>
+map <A-6> :buffer 6<CR>
+map <A-7> :buffer 7<CR>
+map <A-8> :buffer 8<CR>
+map <A-9> :buffer 9<CR>
