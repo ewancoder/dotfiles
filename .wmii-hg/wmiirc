@@ -197,20 +197,6 @@ Key $MODKEY-i
 Key $MODKEY-Shift-i
     sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb/gxkb.cfg && killall gxkb && gxkb &
 
-KeyGroup Websites
-Key $MODKEY-Mod1-e
-    chromium keep.google.com &
-Key $MODKEY-Mod1-r
-    chromium coggle.it &
-Key $MODKEY-Mod1-t
-    chromium trakt.tv &
-Key $MODKEY-Mod1-v
-    chromium vk.com &
-Key $MODKEY-Mod1-g
-    chromium gmail.com &
-Key $MODKEY-Mod1-h
-    chromium github.com &
-
 KeyGroup Others
 #Turn off mouse
 Key $MODKEY-v
