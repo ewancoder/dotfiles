@@ -134,7 +134,7 @@ lower = 55
 mid = 75
 addBlock()
 #CPU Temperature
-text = "cat /sys/class/hwmon/hwmon0/device/temp1_input | cut -c1-2"
+text = "cat /sys/class/hwmon/hwmon0/temp1_input | cut -c1-2"
 check = text
 lower = 40
 mid = 50
