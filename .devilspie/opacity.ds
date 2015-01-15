@@ -15,6 +15,6 @@
 ( if
 ( contains ( window_class ) "Tilda" )
 ( begin
-( spawn_async (str "transset-df -i " (window_xid) " 0.65" ))
+( spawn_async (str "transset-df -i " (window_xid) " 0.85" ))
 )
 )
