@@ -99,6 +99,10 @@ addColRule(".*", "62+38")
 addTagRule("Skype", 0)
 #For separate steam big-picture tag
 addTagRule("Steam", "Steam")
+#Popcorntime
+addTagRule("Popcorn-Time", "sel+9")
+#VLC
+addTagRule("vlc", "sel+0")
 
 #=== STATUSBAR ===
 #Time format

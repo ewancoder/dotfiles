@@ -176,6 +176,8 @@ Key $MODKEY-Return # Launch a terminal
 KeyGroup Personal software
 Key $MODKEY-c
 	chromium &
+Key $MODKEY-e
+    chromium keep.google.com &
 Key $MODKEY-g
 	gvim &
     
