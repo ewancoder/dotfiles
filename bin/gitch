@@ -6,10 +6,8 @@ for repo in ~/.dotfiles ~/eal ~/btp /etc/.dotfiles ~/archlive/releng ~/rpidots ~
             if [ "$1" == "" ]; then
                 echo $repo-`basename $(dirname $repo)`
             fi
-        else
-            if [ ! "$(git status | grep -i "ahead")" == "" -a ! "$1" == "" ]; then
+        elif [ ! "$(git status | grep -i "ahead")" == "" -a ! "$1" == "" ]; then
                 echo $repo-`basename $(dirname $repo)`
-            fi
         fi
     fi
 done
