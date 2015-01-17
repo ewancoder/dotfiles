@@ -9,6 +9,10 @@ touch /tmp/baconf.lock
 #Make subdirectories
 mkdir -p /mnt/backup/Arch/.config
 mkdir -p /mnt/backup/Arch/.kde4/share/apps
+mkdir -p /mnt/backup/Arch/.local/share/vlc/lua
+
+#VLC extensions
+rsync -av --delete ~/.local/share/vlc/lua/extensions /mnt/backup/Arch/.local/share/vlc/lua/
 
 #Config dirs
 rsync -av --delete ~/.config/chromium/Default /mnt/backup/Arch/.config/chromium/
