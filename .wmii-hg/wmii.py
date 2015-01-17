@@ -159,10 +159,10 @@ def loopBackground():
 
 def loopSysUpdate():
     threading.Timer(settings.updatesTimeout, loopSysUpdate).start()
-    upd = get('yaourt -Qua')
-    num = get('yaourt -Qua | wc -l')
+    run("sed -i '/vlc 2.1.5-5/d' /tmp/yaourt.updates")
+    num = get('cat /tmp/yaourt.updates | wc -l')
     if num != '0':
-        run('yaourt -Qua > /tmp/yaourt.updates && notify-send -u low "Updates available (' + num + ')" "$(cat /tmp/yaourt.updates)"')
+        run('notify-send -u low "Updates available (' + num + ')" "' + get('cat /tmp/yaourt.updates') + '"')
 
 def main():
     #Before all of this - we need to set background instead of ugly gray color
