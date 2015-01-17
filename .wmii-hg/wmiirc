@@ -185,13 +185,13 @@ KeyGroup Volume control
 Key $MODKEY-w
     urxvt -e alsamixer &
 Key $MODKEY-x
-    ~/.wmii-hg/volume up
+    ~/.wmii-hg/volume up &
 Key $MODKEY-z
-    ~/.wmii-hg/volume down
+    ~/.wmii-hg/volume down &
 Key $MODKEY-Shift-z
-    ~/.wmii-hg/volume off
+    ~/.wmii-hg/volume off &
 Key $MODKEY-Shift-x
-    ~/.wmii-hg/volume on
+    ~/.wmii-hg/volume on &
 
 KeyGroup Keyboard layouts
 Key $MODKEY-i
