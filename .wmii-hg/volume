@@ -1,5 +1,14 @@
 #!/bin/bash
 
+#Check lock file
+if [ -f /tmp/volume.lock -a ! "$1" == "" ]; then
+    exit
+fi
+#Create lock file
+if [ ! "$1" == "" ]; then
+    touch /tmp/volume.lock
+fi
+
 if [ "`ls -l ~/.asoundrc | awk '{print $11}'`" == "$HOME/.asoundrc_pulse" ]; then
     #Pulseaudio
     device=1
@@ -69,3 +78,6 @@ if [ "$1" == "" ]; then
 else
     notify-send "Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
 fi
+
+#Remove lock file
+rm -f /tmp/volume.lock
