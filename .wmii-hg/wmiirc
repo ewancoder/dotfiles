@@ -177,7 +177,7 @@ KeyGroup Personal software
 Key $MODKEY-c
 	chromium &
 Key $MODKEY-e
-    chromium keep.google.com &
+    chromium -app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki &
 Key $MODKEY-g
 	gvim &
     
@@ -231,17 +231,17 @@ Key XF86WakeUp
 #Screenshot
 Key XF86Sleep
     dbss &
-#Go to RSS tag
+#Go to Keep tag
 Key XF86PowerOff
     if [ $cv == "" ]; then
         cv="1"
     fi
     seltag=$(wmiir read /tag/sel/ctl | sed 1q)
-    if [ $seltag == "RSS" ]; then
+    if [ $seltag == "Keep" ]; then
         wmiir xwrite /ctl view $cv
     else
         cv=$seltag
-        wmiir xwrite /ctl view RSS
+        wmiir xwrite /ctl view Keep
     fi
 Key $MODKEY-Shift-XF86PowerOff
     wmiir xwrite /rbar/\!notice colors "$(var 11)"

@@ -85,7 +85,7 @@ startup = [
 ]
 #Startup as via bash (won't be killed upon X11 termination)
 rawstartup = [
-    'chromium --no-startup-window'
+    'chromium --no-startup-window && chromium -app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki'
 ]
 
 #=== COLUMN RULES ===
@@ -101,6 +101,8 @@ addTagRule("Skype", 0)
 addTagRule("Steam", "Steam")
 #VLC
 addTagRule("vlc", "sel+0")
+#Chromium keep.google.com
+addTagRule("crx_hmjkmjkepdijhoojdojkdfohbdgmmhki", "Keep")
 
 #=== STATUSBAR ===
 #Time format
