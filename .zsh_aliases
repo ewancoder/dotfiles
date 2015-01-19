@@ -50,5 +50,7 @@ alias imp='impressive --darkness 60 -ff'
 alias pt='~/Copy/Popcorn-Time/Popcorn-Time'
 #Terraria TShock Server
 alias terr='cd ~/Copy/GameSaves/Terraria && mono TerrariaServer.exe'
+#VLC with SYNCPLAY
+alias vl='syncplay --no-gui'
 #Warsow (on the second workspace)
 alias war='warsow & sleep 5 && wmiir xwrite /ctl view 2'
