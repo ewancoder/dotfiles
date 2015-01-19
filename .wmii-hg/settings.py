@@ -85,7 +85,7 @@ startup = [
 ]
 #Startup as via bash (won't be killed upon X11 termination)
 rawstartup = [
-    'chromium --no-startup-window && chromium -app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki'
+    'chromium --no-startup-window -app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki'
 ]
 
 #=== COLUMN RULES ===
