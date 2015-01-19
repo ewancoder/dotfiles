@@ -180,6 +180,8 @@ Key $MODKEY-e
     chromium -app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki &
 Key $MODKEY-g
 	gvim &
+Key $MODKEY-r
+    urxvt -e canto-curses -a 127.0.0.1 -p 7070 -v &
     
 KeyGroup Volume control   
 Key $MODKEY-w
