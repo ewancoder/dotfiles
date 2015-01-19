@@ -1,14 +1,26 @@
-
 #!/bin/bash
+#Lockfile section
+while [ -f /tmp/baconf.lock ]; do
+    echo "Lock file is exists. Waiting for previous copy of baconf to shutdown [10 seconds]..."
+    sleep 10
+done
+touch /tmp/baconf.lock
+
 #Make subdirectories
 mkdir -p /mnt/backup/Arch/.config
 mkdir -p /mnt/backup/Arch/.kde4/share/apps
+mkdir -p /mnt/backup/Arch/.local/share/vlc/lua
+
+#VLC extensions
+rsync -av --delete ~/.local/share/vlc/lua/extensions /mnt/backup/Arch/.local/share/vlc/lua/
 
 #Config dirs
 rsync -av --delete ~/.config/chromium/Default /mnt/backup/Arch/.config/chromium/
 rsync -av --delete ~/.config/libreoffice /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/mc /mnt/backup/Arch/.config/
+rsync -av --delete ~/.config/Popcorn-Time /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/Trolltech.conf /mnt/backup/Arch/.config/
+rsync -av --delete ~/.config/vlc /mnt/backup/Arch/.config/
 #Dmenu + zsh history :)
 rsync -av --delete ~/.dmenu_history /mnt/backup/Arch/
 rsync -av --delete ~/.zsh_history /mnt/backup/Arch/
@@ -25,15 +37,22 @@ rsync -av --delete ~/Anki /mnt/backup/Arch/
 if [[ ! -f /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz ]]; then
     mkdir -p /mnt/backup/Hourly/`date +%Y`/`date +%b`
     tar -cpzvf /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz /mnt/backup/Arch
+    if [[ ! -f ~/Copy/Backup/Arch`date +%Y.%b.%d`.tgz ]]; then
+        cp /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz ~/Copy/Backup/Arch`date +%Y.%b.%d`.tgz
+    fi
 fi
 
-#Daily backup to ~/Copy
-if [[ ! -f ~/Copy/Backup/Note$(date +%Y.%b.%d).tgz ]]; then
-    tar -cpzvf ~/Copy/Backup/Note$(date +%Y.%b.%d).tgz /mnt/backup/Arch
-fi
+#Backup GIT Projects to ~/Copy
+rsync -av ~/btp ~/Copy/Projects/
+rsync -av ~/site ~/Copy/Projects/
+rsync -av ~/eal ~/Copy/Projects/
 
-#BTP backup to ~/Copy
-rsync -av --delete ~/btp ~/Copy/
+#Backup CLOUD (Dropbox & Copy)
+rsync -av --delete /mnt/cloud/ /mnt/backup/Cloud
+rsync -av /mnt/cloud/ /mnt/backup/CloudArchive
 
 #Synchronize drives
 sync
+
+#Remove lockfile
+rm /tmp/baconf.lock

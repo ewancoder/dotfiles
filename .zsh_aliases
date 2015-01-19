@@ -1,23 +1,7 @@
 #Exit wmii properly
 alias quit='wmiir xwrite /ctl quit'
 
-#Run some programs (canto over LAN, gparted, minecraft, terraria server, warsow)
-alias canto='canto-curses -a 127.0.0.1 -p 7070 -v'
-alias gpart='xdotool mousemove - 1 mousemove restore; gksu gparted'
-alias ftb='java -jar ~/Copy/Games/Minecraft/Feed\ The\ Beast/ftb.jar'
-alias terr='cd ~/Copy/GameSaves/Terraria && mono TerrariaServer.exe'
-alias war='warsow & sleep 5 && wmiir xwrite /ctl view 2'
-
-#Reattach screen session(s)
-alias sc='screen -rd'
-#Reattach irssi screen session at RPI over ssh
-alias sci='screen -rd irssi'
-#Connect to RPI over ssh
-alias sshrpi="ssh -t root@$IP_RPI"
-#SSH background tunnel
-alias sshl="ssh -fNL 7070:127.0.0.1:7070 root@$IP_RPI"
-
-#Git aliases
+#=== GIT ===
 alias github='ssh-add ~/.ssh/github'
 alias gia='git add -A'
 alias gic='git commit -v'
@@ -27,29 +11,46 @@ alias gica!='git commit -av --amend'
 alias gid='git diff'
 alias gil='git log --oneline --graph --color --all --decorate'
 alias gim='git merge --no-ff'
-alias gip='git push origin --all; if [ ! $? -eq 0 ]; then github; git push origin --all; fi'
-alias gipp='git pull; if [ ! $? -eq 0 ]; then github; git pull; fi'
+alias gip='if [ "`ssh-add -L | grep github`" "==" "" ]; then github; fi; git push origin'
+alias gipp='git pull'
 alias gis='git status'
 
-#Pogoda
-alias pog='chromium pogoda.tut.by'
-
+#=== Some utils===
+#Lock screen
+alias lock='xdotool mousemove - 1 mousemove restore; xscreensaver-command --lock'
+#Server sshfs
+alias ng='sshfs root@192.168.100.110:/usr/share/nginx/html ~/html'
 #For aliases working with sudo
 alias s='sudo '
+#Reattach screen session(s)
+alias sc='screen -rd'
+#Screenshot of a window
+alias scr='xdotool mousemove - 1 mousemove restore; scrot -s `date +%d%H%M%S`.png'
+#Connect to RPI over ssh
+alias sshrpi="ssh -t root@$IP_RPI"
+#SSH background tunnel
+alias sshl="ssh -fNL 7070:127.0.0.1:7070 root@$IP_RPI"
 #Typo fix
 alias xit='exit'
 
-#Lock screen
-alias lock='xdotool mousemove - 1 mousemove restore; xscreensaver-command --lock'
-
-#Server sshfs
-alias ng='sshfs root@192.168.100.110:/usr/share/nginx/html ~/html'
-
+#=== Software ===
+#Anylogic
+alias al='/mnt/cloud/Copy/Portable\ Software/anylogic/anylogic'
+#Canto-curses client
+alias canto='canto-curses -a 127.0.0.1 -p 7070 -v'
+#Godot
+alias god='PULSE_LATENCY_MSEC=60 godot'
+#Gparted
+alias gpart='xdotool mousemove - 1 mousemove restore; gksu gparted'
+#Minecraft FeedTheBeast
+alias ftb='java -jar ~/Copy/Games/Minecraft/Feed\ The\ Beast/ftb.jar'
 #Impressive
 alias imp='impressive --darkness 60 -ff'
-
-#Screenshot of a window
-alias scr='xdotool mousemove - 1 mousemove restore; scrot -s `date +%d%H%M%S`.png'
-
-#BricsCAD
-alias bs='cd ~/Copy/Portable\ Software/Brics; ./bricscad.sh'
+#Popcorn-Time
+alias pt='~/Copy/Popcorn-Time/Popcorn-Time'
+#Terraria TShock Server
+alias terr='cd ~/Copy/GameSaves/Terraria && mono TerrariaServer.exe'
+#VLC with SYNCPLAY
+alias vl='syncplay --no-gui'
+#Warsow (on the second workspace)
+alias war='warsow & sleep 5 && wmiir xwrite /ctl view 2'

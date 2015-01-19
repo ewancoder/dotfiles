@@ -15,7 +15,7 @@ def addBlock():
     if x < 10:
         name = 'Status_a' + str(x)
     else:
-        name = 'Status_b' + str(x) #This is it, noone needs 20+ statusbars
+        name = 'Status_b' + str(x-10) #This is it, noone needs 20+ statusbars
     #Create new block
     blocks.append([text, name, check, lower, bigger, mid, color])
     text, name, check, lower, bigger, mid, color = '', '', '', '', '', '', ''
@@ -33,27 +33,23 @@ def addTagRule(tag, forcetag):
 #========== CONFIGURATION ==========
 
 #=== COLORS ===
-#Color of (not)focused tag/window
-normColors = '#ada #000 #000'
-focusColors = '#add #345 #000'
-tagFocusColors = '#fc5 #862 #000'
-#Good, Mid & Bad colors for checking state and drawing status
-goodColors = '#ada #350 #000'
-midColors = '#dda #640 #000'
-badColors = '#daa #600 #000'
-#Color for mounted devices
+goodColors = '#ada #350 #000' #Focused + Good
+normColors = goodColors.split()[0] + ' #000 #000' #Not-focused window
+tagFocusColors = '#fc5 #730 #000' #Focused Tag
+midColors = '#dda ' + goodColors.split()[1] + ' #000' #Medium status
+badColors = '#daa #600 #000' #Bad Status
+warnColors = '#faa #c00 #f44' #For Warnings
+#Devices and GIT colors
 deviceColors = '#ada #b42 #000'
-#Color for unstaged/unpushed/uncommited git repos
 gitColors = '#f63 #000 #000'
 gitBlueColors = '#36f #000 #000'
-#Alternative color - for noticebar and volume
-alternativeColors = '#aad #000 #000'
-#WARNING
-warnColors = '#fff #c22 #fff'
-soundEffects = True
+#Alternative color - for noticebar
+altColors = '#aad #000 #000'
 #AM/PM
-amColors = '#ee8 #345 #000'
-pmColors = '#8e8 #345 #000'
+amColors = '#ee8 ' + goodColors.split()[1] + ' #000'
+pmColors = '#8e8 ' + goodColors.split()[1] + ' #000'
+#Sound device indication
+speakerColors = altColors.split()[0] + ' ' + goodColors.split()[1] + ' #000'
 
 #=== GENERAL CONFIG ===
 modkey = 'Mod4'
@@ -74,11 +70,12 @@ background = '~/Dropbox/Pictures/Notebook'
 #Timeout to change background, in seconds
 timeout = 300
 
-#Check for Arch Linux updates each N seconds
+#Notify about system updates each N seconds
 updatesTimeout = 600
 
 #Startup X11 apps
 startup = [
+    'wmiir xwrite /ctl view Keep',
     'pasystray',
     'gxkb',
     'CopyAgent',
@@ -86,11 +83,7 @@ startup = [
     'ssh -fNL 7070:127.0.0.1:7070 root@192.168.100.110',
     '~/bin/ircnotify',
     'tilda',
-    'count' #as server-side for my site [bad]
-]
-#Startup as via bash (won't be killed upon X11 termination)
-rawstartup = [
-    'chromium --no-startup-window'
+    'chromium --no-startup-window -app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki'
 ]
 
 #=== COLUMN RULES ===
@@ -100,49 +93,50 @@ addColRule(2, "50+50")
 addColRule(".*", "62+38")
 
 #=== TAGGING RULES ===
-#For canto-curses urxvt 'Canto' window
-addTagRule("Canto", 'RSS')
 #For Skype to be at 0 :)
 addTagRule("Skype", 0)
 #For separate steam big-picture tag
 addTagRule("Steam", "Steam")
+#VLC
+addTagRule("vlc", "sel+0")
+#Chromium keep.google.com
+addTagRule("crx_hmjkmjkepdijhoojdojkdfohbdgmmhki", "Keep")
 
 #=== STATUSBAR ===
-#Time
+#Time format
 time = "date +%a\\ %b\\ %d\\ %I:%M:%S"
 #Free RAM
 text = "echo $(top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/')"
 check = "top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/'"
-check = "free -m | grep /cache | awk '{print $4}'"
-lower = 85
-mid = 60
+lower = 50
+mid = 80
 addBlock()
 #Space at /
 text = "echo $(df -h / | grep / | awk '{print $5}' | sed 's/%//') '/'"
 check = "df -h / | grep / | awk '{print $5}' | sed 's/%//'"
-lower = 45
-mid = 75
+lower = 55
+mid = 80
 addBlock()
 #Space at /home
 text = "echo $(df -h /home | grep home | awk '{print $5}' | sed 's/%//') 'H'"
 check = "df -h /home | grep home | awk '{print $5}' | sed 's/%//'"
-lower = 45
-mid = 75
+lower = 55
+mid = 80
 addBlock()
 #Space at /mnt/cloud
 text = "echo $(df -h /mnt/cloud | grep cloud | awk '{print $5}' | sed 's/%//') 'C'"
 check = "df -h /mnt/cloud | grep cloud | awk '{print $5}' | sed 's/%//'"
-lower = 45
+lower = 55
 mid = 75
 addBlock()
 #Space at /mnt/backup
 text = "echo $(df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//') 'B'"
 check = "df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//'"
-lower = 45
+lower = 55
 mid = 75
 addBlock()
 #CPU Temperature
-text = "cat /sys/class/hwmon/hwmon0/device/hwmon/hwmon0/temp2_input | cut -c1-2"
+text = "cat /sys/class/hwmon/hwmon0/temp2_input | cut -c1-2"
 check = text
 lower = 65
 mid = 70
@@ -150,23 +144,16 @@ addBlock()
 #CPU Frequency
 text = "cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf \"%.0f\\n\", $4}'"
 addBlock()
-#Sound Volume
-text = "if [ \"`amixer | grep 'Master'`\" == \"\" ]; then     if [ \"`amixer | grep 'PCM' -A 5 | grep 'Mono: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1`\" == \"\" ]; then         amixer | grep 'PCM' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;     else         amixer | grep 'PCM' -A 5 | grep 'Mono: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;     fi; else     if [ \"`amixer | grep 'Master' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;`\" == \"\" ]; then         amixer | grep 'Master' -A 5 | grep 'Mono: Playback' | awk {'print $4'} | cut -d '[' -f2 | cut -d '%' -f1;     else         amixer | grep 'Master' -A 5 | grep 'Left: Playback' | awk {'print $5'} | cut -d '[' -f2 | cut -d '%' -f1;     fi; fi"
-color = alternativeColors
-addBlock()
-#Current Device
-text = "if [ \"`pactl stat; echo $?`\" == \"1\" ]; then echo 'ALSA'; elif [ \"$(pactl stat | grep 'Default Sink' | awk '{print $3}')\" == \"alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo\" ]; then echo 'USB'; else echo 'Build-In'; fi"
-color = alternativeColors
-addBlock()
 #NETSTATS
 text = "~/.wmii-hg/netmon"
-color = focusColors
+addBlock()
+#Sound Volume
+text = "~/.wmii-hg/volume"
 addBlock()
 #CPU Uptime
 text = "uptime | sed 's/.*://; s/, / /g'"
 check = text + " | awk '{print $2}'"
-color = focusColors
-lower = 1.75
+lower = 1.95
 addBlock()
 
 #Output for wmiirc
@@ -176,14 +163,10 @@ if __name__ == "__main__":
     print(down)
     print(left)
     print(right)
-
-    print(normColors)
-    print(focusColors)
-    print(tagFocusColors)
-
     print(font)
     print(term)
 
+    print(normColors)
+    print(goodColors) #WMII_FOCUSCOLORS
+    print(tagFocusColors)
     print(warnColors)
-
-    print(soundEffects)

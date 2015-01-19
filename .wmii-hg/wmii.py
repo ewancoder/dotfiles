@@ -51,8 +51,8 @@ def setCondition(name, check, lower, bigger, mid, color):
 
 #Set column & tagging rules
 def setRules():
-    run("wmiir write /colrules <<!\n" + settings.colRules + "!")
-    run("wmiir write /rules <<!\n" + settings.tagRules + "!")
+    run('wmiir xwrite /colrules "' + settings.colRules + '"')
+    run('wmiir xwrite /rules "' + settings.tagRules + '"')
 
 #========== BLOCK FUNCTIONS ==========
 
@@ -81,7 +81,21 @@ def makeBlocks():
 def statusBlocks():
     for x in settings.blocks:
         setStatus(x[1], get(x[0]))
-        setCondition(x[1], x[2], x[3], x[4], x[5], x[6])
+        if x[1] != 'Status_a9':
+            setCondition(x[1], x[2], x[3], x[4], x[5], x[6])
+    try:
+        if get('pactl stat; echo $?') == '1':
+            if get('ls -l ~/.asoundrc | awk \'{print $11}\'') == "/home/ewancoder/.asoundrc_alsa_usb":
+                setColor('Status_a9', settings.badColors)
+            else:
+                setColor('Status_a9', settings.amColors)
+        elif get('pactl stat | grep "Default Sink" | awk \'{print $3}\'') == "alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo":
+            setColor('Status_a9', settings.goodColors)
+        else:
+            setColor('Status_a9', settings.speakerColors)
+    except:
+        pass
+
 
 #Creates a block (name) if status != ''
 def check(status, name, color):
@@ -101,9 +115,6 @@ pids = []
 def startup():
     for command in settings.startup:
         pids.append(subprocess.Popen(command, shell = True).pid)
-    for command in settings.rawstartup:
-        #run(command)
-        subprocess.check_call(command.split())
 
 def killAll():
     for pid in pids:
@@ -121,7 +132,7 @@ def loopStatusBar():
     check('if ! [ "$(ps aux | grep "devmon --unmount" | grep -v grep)" == "" ]; then echo "Unmounting..."; fi', 'DevicesUnmount', settings.deviceColors)
     #Check for git repos unstaged/unpushed/uncommited and show them
     check('~/bin/gitch | xargs -L 1 basename | tr "\\n" " "', 'AGitCheck', settings.gitColors)
-    check('~/bin/gitch blue | xargs -L 1 basename | tr "\\n" " "', 'AGitBlueCheck', settings.gitBlueColors)
+    check('~/bin/gitch blue | xargs -L 1 basename | tr "\\n" " "', 'AGitCheckBlue', settings.gitBlueColors)
     #Check for pulseaudio sinks/sources and show them
     run("~/.wmii-hg/mypo")
 
@@ -131,7 +142,7 @@ def loopTime():
         killAll()
         print('Exiting wmii, bye and good luck!')
         os._exit(1)
-    setColor("Time", settings.focusColors)
+    setColor("Time", settings.goodColors)
     if time.strftime('%p') == 'PM':
         setColor("TimeZ", settings.pmColors)
     else:
@@ -145,12 +156,10 @@ def loopBackground():
 
 def loopSysUpdate():
     threading.Timer(settings.updatesTimeout, loopSysUpdate).start()
-    upd = get('yaourt -Qua')
-    num = get('yaourt -Qua | wc -l')
+    run("sed -i '/vlc 2.1.5-5/d' /tmp/yaourt.updates")
+    num = get('cat /tmp/yaourt.updates | wc -l')
     if num != '0':
-        run('yaourt -Qua > /tmp/yaourt.updates && notify-send -u low "Updates available (' + num + ')" "$(cat /tmp/yaourt.updates)"')
-        if settings.soundEffects:
-            run('mpg123 ~/Dropbox/Sounds/bell.mp3')
+        run('notify-send -u low "Updates available (' + num + ')" "' + get('cat /tmp/yaourt.updates') + '"')
 
 def main():
     #Before all of this - we need to set background instead of ugly gray color
@@ -160,7 +169,7 @@ def main():
     #Run tray
     run("witray")
     #Make uname to noticebar
-    setColor("\!notice", settings.alternativeColors)
+    setColor("\!notice", settings.altColors)
     run("wmiir xwrite /rbar/\!notice label $(uname -r)")
     #Handle Time
     loopTime()

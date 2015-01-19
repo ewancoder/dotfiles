@@ -1,7 +1,6 @@
 #!/bin/sh
 # DropBox Screenshot Script (DBSS)
 # Ewancoder, 2014
-
 user_id=70091792
 delay=0
 quality=75
