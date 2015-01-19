@@ -115,9 +115,6 @@ pids = []
 def startup():
     for command in settings.startup:
         pids.append(subprocess.Popen(command, shell = True).pid)
-    for command in settings.rawstartup:
-        #run(command)
-        subprocess.check_call(command.split())
 
 def killAll():
     for pid in pids:
