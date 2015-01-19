@@ -1,0 +1,32 @@
+﻿[client_settings]
+name = ewancoder
+room = ewancoder
+playerpath = /usr/bin/vlc
+slowdownthreshold = 1.5
+rewindthreshold = 4.0
+slowondesync = True
+rewindondesync = True
+dontslowdownwithme = False
+forceguiprompt = True
+filenameprivacymode = SendRaw
+filesizeprivacymode = SendRaw
+pauseonleave = True
+
+[gui]
+showosd = False
+showosdwarnings = False
+showslowdownosd = False
+showdifferentroomosd = False
+showsameroomosd = False
+showcontactinfo = False
+showbuttonlabels = False
+showtooltips = False
+showdurationnotification = False
+
+[general]
+language = 
+
+[server_data]
+host = 192.168.100.110
+port = 8999
+password = 
