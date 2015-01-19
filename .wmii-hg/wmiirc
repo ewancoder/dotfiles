@@ -233,7 +233,7 @@ Key XF86Sleep
     dbss &
 #Go to Keep tag
 Key XF86PowerOff
-    if [ $cv == "" ]; then
+    if [ -z "$cv" ]; then
         cv="1"
     fi
     seltag=$(wmiir read /tag/sel/ctl | sed 1q)

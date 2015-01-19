@@ -75,6 +75,7 @@ updatesTimeout = 600
 
 #Startup X11 apps
 startup = [
+    'wmiir xwrite /ctl view Keep',
     'pasystray',
     'gxkb',
     'CopyAgent',
