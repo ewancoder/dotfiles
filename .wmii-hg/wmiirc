@@ -212,9 +212,11 @@ Key $MODKEY-v
 #CINEMA MODE (turn off colors)
 Key $MODKEY-o
     if [ "`wmiir read /ctl | grep focuscolors | awk {'print $3'}`" == "#000000" ]; then
-        wmiir xwrite /ctl focuscolors "$(var 9)"
+        wmiir xwrite /ctl focuscolors "$(var 9)" &
+        killall -SIGUSR2 dunst &
     else
-        wmiir xwrite /ctl focuscolors "#999 #000 #000"
+        wmiir xwrite /ctl focuscolors "#999 #000 #000" &
+        killall -SIGUSR1 dunst &
     fi
 #Lock session (screensaver)
 Key $MODKEY-KP_Enter
