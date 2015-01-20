@@ -159,7 +159,7 @@ def loopSysUpdate():
     run("sed -i '/vlc 2.1.5-5/d' /tmp/yaourt.updates")
     num = get('cat /tmp/yaourt.updates | wc -l')
     if num != '0':
-        run('notify-send -u low "Updates available (' + num + ')" "' + get('cat /tmp/yaourt.updates') + '"')
+        run('notify-send -u low "Updates available (' + num + ')" "`cat /tmp/yaourt.updates`"')
 
 def main():
     #Before all of this - we need to set background instead of ugly gray color
