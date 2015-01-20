@@ -103,8 +103,6 @@ addTagRule("vlc", "sel+0")
 addTagRule("crx_hmjkmjkepdijhoojdojkdfohbdgmmhki", "Keep")
 #PopcornTime
 addTagRule("Popcorn-Time", 9)
-#Deluge
-addTagRule("Deluge", 9)
 
 #=== STATUSBAR ===
 #Time format
