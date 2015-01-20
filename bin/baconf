@@ -16,6 +16,7 @@ rsync -av --delete ~/.local/share/vlc/lua/extensions /mnt/backup/Arch/.local/sha
 
 #Config dirs
 rsync -av --delete ~/.config/chromium/Default /mnt/backup/Arch/.config/chromium/
+rsync -av --delete ~/.config/deluge /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/libreoffice /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/mc /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/Popcorn-Time /mnt/backup/Arch/.config/
