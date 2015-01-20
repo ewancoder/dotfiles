@@ -9,9 +9,9 @@ fi
 
 #For easily making new usb backup/cloud keys
 if [ "$1" == "-b" ]; then
-    echo 'backup-2206' > $2/.key
+    echo 'backup-3317' > $2/.key
 elif [ "$1" == "-c" ]; then
-    echo 'cloud-2206' > $2/.key
+    echo 'cloud-3317' > $2/.key
 fi
 
 #Determining backup/cloud drives
