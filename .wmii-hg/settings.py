@@ -101,6 +101,8 @@ addTagRule("Steam", "Steam")
 addTagRule("vlc", "sel+0")
 #Chromium keep.google.com
 addTagRule("crx_hmjkmjkepdijhoojdojkdfohbdgmmhki", "Keep")
+#PopcornTime
+addTagRule("Popcorn-Time", 9)
 
 #=== STATUSBAR ===
 #Time format
