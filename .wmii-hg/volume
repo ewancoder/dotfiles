@@ -37,18 +37,18 @@ elif [ "$1" == "down" ]; then
         amixer -q sset PCM 2-
     fi
 elif [ "$1" == "off" ]; then
-    if [ $device -eq 1 -a ! "`amixer | grep 'Front Left:' | awk '{print $4}'`" == "0" ]; then
+    if [ $device -eq 1 -a ! "`amixer | grep 'Front Left: Playback' | awk '{print $4}'`" == "0" ]; then
         if [ "`pactl info | grep 'Default Sink' | awk '{print $3}'`" == "alsa_output.pci-0000_00_14.2.analog-stereo" ]; then
-            echo `amixer | grep 'Front Left:' | awk '{print $4}'` > /tmp/vol0.wmii
+            echo `amixer | grep 'Front Left: Playback' | awk '{print $4}'` > /tmp/vol0.wmii
         else
-            echo `amixer | grep 'Front Left:' | awk '{print $4}'` > /tmp/vol1.wmii
+            echo `amixer | grep 'Front Left: Playback' | awk '{print $4}'` > /tmp/vol1.wmii
         fi
         amixer -q sset Master 0
     elif [ $device -eq 2 -a ! "`amixer | grep Master -A 4 | grep 'Mono:' | awk '{print $3}'`" == "0" ]; then
         echo `amixer | grep Master -A 4 | grep 'Mono:' | awk '{print $3}'` > /tmp/vol2.wmii
         amixer -q sset Master 0
-    elif [ ! "`amixer | grep 'Front Left:' | awk '{print $4}'`" == "0" ]; then
-        echo `amixer | grep 'Front Left:' | awk '{print $4}'` > /tmp/vol3.wmii
+    elif [ ! "`amixer | grep 'Front Left: Playback' | awk '{print $4}'`" == "0" ]; then
+        echo `amixer | grep 'Front Left: Playback' | awk '{print $4}'` > /tmp/vol3.wmii
         amixer -q sset PCM 0
     fi
 elif [ "$1" == "on" ]; then
@@ -70,7 +70,7 @@ fi
 if [ "$device" == "2" ]; then
     volume=`amixer | grep Master -A 4 | grep 'Mono:' | awk '{print $4}' | cut -d '[' -f2 | cut -d '%' -f1`
 else
-    volume=`amixer | grep 'Front Left:' | awk '{print $5}' | cut -d '[' -f2 | cut -d '%' -f1`
+    volume=`amixer | grep 'Front Left: Playback' | awk '{print $5}' | cut -d '[' -f2 | cut -d '%' -f1`
 fi
 
 if [ "$1" == "" ]; then

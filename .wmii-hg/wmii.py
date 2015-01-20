@@ -81,18 +81,18 @@ def makeBlocks():
 def statusBlocks():
     for x in settings.blocks:
         setStatus(x[1], get(x[0]))
-        if x[1] != 'Status_a9':
+        if x[1] != 'Status_a8':
             setCondition(x[1], x[2], x[3], x[4], x[5], x[6])
     try:
         if get('pactl stat; echo $?') == '1':
             if get('ls -l ~/.asoundrc | awk \'{print $11}\'') == "/home/ewancoder/.asoundrc_alsa_usb":
-                setColor('Status_a9', settings.badColors)
+                setColor('Status_a8', settings.badColors)
             else:
-                setColor('Status_a9', settings.amColors)
+                setColor('Status_a8', settings.amColors)
         elif get('pactl stat | grep "Default Sink" | awk \'{print $3}\'') == "alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo":
-            setColor('Status_a9', settings.goodColors)
+            setColor('Status_a8', settings.goodColors)
         else:
-            setColor('Status_a9', settings.speakerColors)
+            setColor('Status_a8', settings.speakerColors)
     except:
         pass
 
