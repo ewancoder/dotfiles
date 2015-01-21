@@ -33,6 +33,8 @@ rsync -av --delete ~/.kde4/share/apps/okular/part.rc /mnt/backup/Arch/.kde4/shar
 rsync -av --delete ~/.ssh /mnt/backup/Arch/
 #Just lazy to log in into Anki again :)
 rsync -av --delete ~/Anki /mnt/backup/Arch/
+#WizNote
+rsync -av --delete ~/.wiznote /mnt/backup/Arch/
 
 #Hourly backup
 if [[ ! -f /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz ]]; then
