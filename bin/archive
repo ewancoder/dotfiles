@@ -1,0 +1,28 @@
+#!/bin/bash
+while true; do
+    for f in ~/Downloads/Chrome\ Downloads/*.{tar,zip,7z,rar}*; do
+        if [ -f "$f" ]; then
+            mkdir "$f-dir"
+            file=$(basename "$f")
+            a=1 #Check if it's archive
+            case "${file##*.}" in
+                gz) tar zxf "$f" -C "$f-dir";;
+                zip) unzip "$f" -d "$f-dir";;
+                rar) unrar x "$f" "$f-dir";;
+                *) a=0
+            esac
+            succ=$?
+            if [ $a -eq 1 ]; then
+                if [ $succ -eq 0 ]; then
+                    mv "$f" ~/Downloads/Chrome\ Downloads/Unarchived
+                else
+                    rm -rf "$f-dir"
+                    mv "$f" ~/Downloads/Chrome\ Downloads/Corrupted
+                fi
+            else
+                rm -rf "$f-dir"
+            fi
+        fi
+    done
+    sleep 5
+done
