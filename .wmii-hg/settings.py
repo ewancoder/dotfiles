@@ -84,7 +84,8 @@ startup = [
     '~/bin/ircnotify',
     'tilda',
     'chromium --no-startup-window -app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki',
-    'WizNote'
+    'WizNote',
+    '~/bin/unarchive'
 ]
 
 #=== COLUMN RULES ===
