@@ -35,7 +35,7 @@ alias xit='exit'
 
 #=== Software ===
 #Anylogic
-alias al='/mnt/cloud/Copy/Portable\ Software/anylogic/anylogic'
+alias al='/mnt/cloud/Mega/Portable\ Software/anylogic/anylogic'
 #Canto-curses client
 alias canto='canto-curses -a 127.0.0.1 -p 7070 -v'
 #Godot
@@ -43,13 +43,13 @@ alias god='PULSE_LATENCY_MSEC=60 godot'
 #Gparted
 alias gpart='xdotool mousemove - 1 mousemove restore; gksu gparted'
 #Minecraft FeedTheBeast
-alias ftb='java -jar ~/Copy/Games/Minecraft/Feed\ The\ Beast/ftb.jar'
+alias ftb='java -jar ~/Mega/Games/Minecraft/Feed\ The\ Beast/ftb.jar'
 #Impressive
 alias imp='impressive --darkness 60 -ff'
 #Popcorn-Time
-alias pt='~/Copy/Popcorn-Time/Popcorn-Time'
+alias pt='~/Mega/Popcorn-Time/Popcorn-Time'
 #Terraria TShock Server
-alias terr='cd ~/Copy/GameSaves/Terraria && mono TerrariaServer.exe'
+alias terr='cd ~/Mega/GameSaves/Terraria && mono TerrariaServer.exe'
 #VLC with SYNCPLAY
 alias vl='syncplay --no-gui'
 #Warsow (on the second workspace)
