@@ -182,10 +182,10 @@ Key $MODKEY-g
 	gvim &
 Key $MODKEY-r
     urxvt -e canto-curses -a 127.0.0.1 -p 7070 -v &
+Key $MODKEY-w
+    chromium --app-id=iiooodelglhkcpgbajoejffhijaclcdg
     
 KeyGroup Volume control   
-Key $MODKEY-w
-    urxvt -e alsamixer &
 Key $MODKEY-x
     ~/.wmii-hg/volume up &
 Key $MODKEY-z
