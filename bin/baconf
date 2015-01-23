@@ -16,6 +16,7 @@ rsync -av --delete ~/.local/share/vlc/lua/extensions /mnt/backup/Arch/.local/sha
 
 #Config dirs
 rsync -av --delete ~/.config/chromium/Default /mnt/backup/Arch/.config/chromium/
+rsync -av --delete ~/.config/deluge /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/libreoffice /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/mc /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/Popcorn-Time /mnt/backup/Arch/.config/
@@ -32,6 +33,8 @@ rsync -av --delete ~/.kde4/share/apps/okular/part.rc /mnt/backup/Arch/.kde4/shar
 rsync -av --delete ~/.ssh /mnt/backup/Arch/
 #Just lazy to log in into Anki again :)
 rsync -av --delete ~/Anki /mnt/backup/Arch/
+#WizNote
+rsync -av --delete ~/.wiznote /mnt/backup/Arch/
 
 #Hourly backup
 if [[ ! -f /mnt/backup/Hourly/`date +%Y`/`date +%b`/Note`date +%d.%H`.tgz ]]; then
