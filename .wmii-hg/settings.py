@@ -84,7 +84,6 @@ startup = [
     '~/bin/ircnotify',
     'tilda',
     'chromium --no-startup-window -app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki',
-    'WizNote',
     '~/bin/unarchive'
 ]
 

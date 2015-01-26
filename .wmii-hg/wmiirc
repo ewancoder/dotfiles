@@ -178,6 +178,8 @@ Key $MODKEY-c
 	chromium &
 Key $MODKEY-e
     chromium -app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki &
+Key $MODKEY-Shift-w
+    virtualbox --startvm Windows7 &
 Key $MODKEY-g
 	gvim &
 Key $MODKEY-r
