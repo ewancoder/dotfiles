@@ -58,7 +58,7 @@ down = 'j'
 left = 'h'
 right = 'l'
 
-font = '-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*'
+font = '-*-*-medium-r-*-*-12-*-*-*-*-*-*-*'
 term = 'urxvt'
 border = 1
 
