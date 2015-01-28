@@ -42,8 +42,9 @@ alias canto='canto-curses -a 127.0.0.1 -p 7070 -v'
 alias god='PULSE_LATENCY_MSEC=60 godot'
 #Gparted
 alias gpart='xdotool mousemove - 1 mousemove restore; gksu gparted'
-#Minecraft FeedTheBeast
+#Minecraft FeedTheBeast + Technic
 alias ftb='java -jar ~/Mega/Games/Minecraft/ftb.jar'
+alias tech='java -jar ~/Mega/Games/Minecraft/tech.jar'
 #Impressive
 alias imp='impressive --darkness 60 -ff'
 #Popcorn-Time
