@@ -58,7 +58,7 @@ down = 'j'
 left = 'h'
 right = 'l'
 
-font = '-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*'
+font = '-*-*-medium-r-*-*-12-*-*-*-*-*-*-*'
 term = 'urxvt'
 border = 1
 
@@ -75,7 +75,6 @@ updatesTimeout = 600
 
 #Startup X11 apps
 startup = [
-    'wmiir xwrite /ctl view Keep',
     'pasystray',
     'gxkb',
     'dropboxd',
@@ -83,8 +82,7 @@ startup = [
     'ssh -fNL 7070:127.0.0.1:7070 root@192.168.100.110',
     '~/bin/ircnotify',
     'tilda',
-    'chromium --no-startup-window -app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki',
-    'WizNote',
+    'chromium --no-startup-window',
     '~/bin/unarchive'
 ]
 
@@ -101,8 +99,6 @@ addTagRule("Skype", 0)
 addTagRule("Steam", "Steam")
 #VLC
 addTagRule("vlc", "sel+0")
-#Chromium keep.google.com
-addTagRule("crx_hmjkmjkepdijhoojdojkdfohbdgmmhki", "Keep")
 #PopcornTime
 addTagRule("Popcorn-Time", 9)
 

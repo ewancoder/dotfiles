@@ -10,6 +10,7 @@ alias gica='git commit -av'
 alias gica!='git commit -av --amend'
 alias gid='git diff'
 alias gil='git log --oneline --graph --color --all --decorate'
+alias gils='git ls-files | less'
 alias gim='git merge --no-ff'
 alias gip='if [ "`ssh-add -L | grep github`" "==" "" ]; then github; fi; git push origin'
 alias gipp='git pull'
@@ -42,12 +43,13 @@ alias canto='canto-curses -a 127.0.0.1 -p 7070 -v'
 alias god='PULSE_LATENCY_MSEC=60 godot'
 #Gparted
 alias gpart='xdotool mousemove - 1 mousemove restore; gksu gparted'
-#Minecraft FeedTheBeast
-alias ftb='java -jar ~/Mega/Games/Minecraft/Feed\ The\ Beast/ftb.jar'
+#Minecraft FeedTheBeast + Technic
+alias ftb='java -jar ~/Mega/Games/Minecraft/ftb.jar'
+alias tech='java -jar ~/Mega/Games/Minecraft/tech.jar'
 #Impressive
 alias imp='impressive --darkness 60 -ff'
 #Popcorn-Time
-alias pt='~/Mega/Popcorn-Time/Popcorn-Time'
+alias pt='~/Mega/Software/Popcorn-Time/Popcorn-Time'
 #Terraria TShock Server
 alias terr='cd ~/Mega/GameSaves/Terraria && mono TerrariaServer.exe'
 #VLC with SYNCPLAY
