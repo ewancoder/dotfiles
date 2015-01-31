@@ -9,10 +9,6 @@ touch /tmp/baconf.lock
 #Make subdirectories
 mkdir -p /mnt/backup/Arch/.config
 mkdir -p /mnt/backup/Arch/.kde4/share/apps
-mkdir -p /mnt/backup/Arch/.local/share/vlc/lua
-
-#VLC extensions
-rsync -av --delete ~/.local/share/vlc/lua/extensions /mnt/backup/Arch/.local/share/vlc/lua/
 
 #Config dirs
 rsync -av --delete ~/.config/chromium/Default /mnt/backup/Arch/.config/chromium/
@@ -40,12 +36,13 @@ rsync -av --delete ~/.wiznote /mnt/backup/Arch/
 if [[ ! -f /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz ]]; then
     mkdir -p /mnt/backup/Hourly/`date +%Y`/`date +%b`
     tar -cpzvf /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz /mnt/backup/Arch
-    if [[ ! -f ~/Copy/Backup/Arch`date +%Y.%b.%d`.tgz ]]; then
-        cp /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz ~/Copy/Backup/Arch`date +%Y.%b.%d`.tgz
+    if [[ ! -f ~/Mega/Backup/PC/`date +%Y.%b.%d`.tgz ]]; then
+        echo lol
+        cp /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz ~/Mega/Backup/PC/`date +%Y.%b.%d`.tgz
     fi
 fi
 
-#Backup CLOUD (Dropbox & Copy)
+#Backup CLOUD (Dropbox & Mega)
 rsync -av --delete /mnt/cloud/ /mnt/backup/Cloud
 rsync -av /mnt/cloud/ /mnt/backup/CloudArchive
 
