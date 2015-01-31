@@ -13,4 +13,4 @@ fi
 ifconfig enp2s0 | grep 'RX packets' | awk '{print $5}' > /tmp/rx
 ifconfig enp2s0 | grep 'TX packets' | awk '{print $5}' > /tmp/tx
 
-echo $(($(($(cat /tmp/rx) - $rx_old)) / $bytes)) $(($(($(cat /tmp/tx) - $tx_old)) / $bytes))
+echo $(($(($(cat /tmp/rx) - $rx_old)) / $bytes)) $(($(($(cat /tmp/tx) - $tx_old)) / $bytes)) $(((`cat /tmp/rx` + `cat /tmp/tx`) / 1000000))M
