@@ -177,7 +177,7 @@ KeyGroup Personal software
 Key $MODKEY-c
 	chromium &
 Key $MODKEY-e
-    chromium -app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki &
+    chromium keep.google.com &
 Key $MODKEY-Shift-w
     virtualbox --startvm Windows7 &
 Key $MODKEY-g
