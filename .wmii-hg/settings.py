@@ -75,7 +75,6 @@ updatesTimeout = 600
 
 #Startup X11 apps
 startup = [
-    'wmiir xwrite /ctl view Keep',
     'pasystray',
     'gxkb',
     'dropboxd',
@@ -100,8 +99,6 @@ addTagRule("Skype", 0)
 addTagRule("Steam", "Steam")
 #VLC
 addTagRule("vlc", "sel+0")
-#Chromium keep.google.com
-addTagRule("crx_hmjkmjkepdijhoojdojkdfohbdgmmhki", "Keep")
 #PopcornTime
 addTagRule("Popcorn-Time", 9)
 
