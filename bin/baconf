@@ -40,8 +40,8 @@ if [[ ! -f /mnt/backup/Hourly/`date +%Y`/`date +%b`/Note`date +%d.%H`.tgz ]]; th
 fi
 
 #Backup CLOUD (Dropbox & Mega)
-#rsync -av --delete /mnt/cloud/ /mnt/backup/Cloud
-#rsync -av /mnt/cloud/ /mnt/backup/CloudArchive
+rsync -av --delete /mnt/cloud/ /mnt/backup/Cloud
+rsync -av /mnt/cloud/ /mnt/backup/CloudArchive
 
 #Synchronize drives
 sync
