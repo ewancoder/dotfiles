@@ -32,6 +32,6 @@ m = rx ~ /^.{,3}$/ {
 m = traffic ~ /^.{,3}$/ {
     printf "%.0fM", traffic;
 } !m {
-    printf "%.1fG", traffic;
+    printf "%.1fG", traffic/1000;
 }
 '
