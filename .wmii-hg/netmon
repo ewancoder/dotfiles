@@ -13,4 +13,5 @@ fi
 ifconfig | grep 'enp2s0\|wlan' -A 7 | grep 'RX packets' | awk '{print $5}' > /tmp/rx
 ifconfig | grep 'enp2s0\|wlan' -A 7 | grep 'TX packets' | awk '{print $5}' > /tmp/tx
 
-echo $(($(($(cat /tmp/rx) - $rx_old)) / $bytes)) $(($(($(cat /tmp/tx) - $tx_old)) / $bytes)) $(((`cat /tmp/rx` + `cat /tmp/tx`) / 1000000))M
+echo $(($(($(cat /tmp/rx) - $rx_old)) / $bytes)) $(($(($(cat /tmp/tx) - $tx_old)) / $bytes)) ' '
+echo $(((`cat /tmp/rx` + `cat /tmp/tx`) / 1000000)) | awk '/^.{,3}$/ {print $1} /^.{,4}$/ {printf "%.1fG", $1/1000}'
