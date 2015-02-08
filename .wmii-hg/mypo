@@ -21,6 +21,9 @@ if [ ! "`grep pulse ~/.asoundrc`" == "" ]; then
                     else
                         wmiir xwrite /rbar/Audio${ind[$i]} colors "#8a8 #242 #000"
                     fi
+                    if [ "${app[$i]}" == "" ]; then
+                        app[$i]=U
+                    fi
                     wmiir xwrite /rbar/Audio${ind[$i]} label "${app[$i]}: ${vol[$i]}" &
                 fi
             done
