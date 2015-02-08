@@ -1,52 +1,69 @@
 #!/bin/bash
 #Don't waste CPU ticks if currently ALSA is configured
-if [ ! "`grep pulse ~/.asoundrc`" == "" ]; then
-    pactl list sink-inputs > /tmp/temp.mypo
-
-    if [ "$1" == "" ]; then
-        if [ ! "$(cat /tmp/temp.mypo)" == "" ]; then
-            apps=$(cat /tmp/temp.mypo | grep 'application.icon_name' | awk '{print $3}' | tr -d '"')
-            inds=$(cat /tmp/temp.mypo | grep 'Sink Input' | awk '{print $3}' | tr -d '#')
-            vols=$(cat /tmp/temp.mypo | grep 'Volume' | awk '{print $5}' | tr -d '%')
-            sink=$(cat /tmp/temp.mypo | grep 'Sink:' | awk '{print $2}')
-            echo $inds > /tmp/inds.mypo
-            IFS=$'\r\n' GLOBIGNORE='*' :; app=($apps)
-            IFS=$'\r\n' GLOBIGNORE='*' :; ind=($inds)
-            IFS=$'\r\n' GLOBIGNORE='*' :; vol=($vols)
-            for (( i = 0; i < ${#ind[@]}; i++ )); do
-                if ! [ "${ind[$i]}" == "" ]; then
-                    wmiir create /rbar/Audio${ind[$i]} &
-                    if [ "$sink" == "2" ]; then
-                        wmiir xwrite /rbar/Audio${ind[$i]} colors "#aad #242 #000"
-                    else
-                        wmiir xwrite /rbar/Audio${ind[$i]} colors "#8a8 #242 #000"
-                    fi
-                    if [ "${app[$i]}" == "" ]; then
-                        app[$i]=U
-                    fi
-                    wmiir xwrite /rbar/Audio${ind[$i]} label "${app[$i]}: ${vol[$i]}" &
-                fi
-            done
-        else
-            rm -f /tmp/inds.mypo
-        fi
-
-        current=$(wmiir ls /rbar | grep Audio | sed -e 's/Audio//g')
-        for i in $current; do
-            echo $i
-            if [ "$(echo $inds | grep $i)" == "" ] && ! [ "$i" == "" ]; then
-                wmiir rm /rbar/Audio$i
-            fi
-        done
-    else
-        IFS=$'\r\n' GLOBIGNORE='*' :; app=`cat /tmp/temp.mypo | grep 'application.icon_name' | awk '{print $3}' | tr -d '"'`
-        if [ "${app[$i]}" == "" ]; then
-            app[$i]=U
-        fi
-        IFS=$'\r\n' GLOBIGNORE='*' :; vol=`cat /tmp/temp.mypo | grep 'Volume' | awk '{print $5}' | tr -d '%'`
-        wmiir xwrite /rbar/Audio$2 label "${app[$1]}: ${vol[$1]}" &
-    fi
-
-    rm /tmp/temp.mypo
-
+if [ "`grep pulse ~/.asoundrc`" == "" ]; then
+    exit
 fi
+
+if [ ! "$1" == "" ]; then
+    itemp=( `cat /tmp/inds.mypo` )
+    for (( j = 0; j < ${#itemp[@]}; j++ )); do
+        if [ "${itemp[$j]}" == "`cat /tmp/cind.mypo`" ]; then
+            curr=$j
+        fi
+    done
+    if [ "$1" == "prev" ]; then
+        if [ "$curr" == "0" ]; then
+            echo "${itemp[$((${#itemp[@]} - 1))]}" > /tmp/cind.mypo
+        else
+            echo "${itemp[$(($curr - 1))]}" > /tmp/cind.mypo
+        fi
+    elif [ "$1" == "next" ]; then
+        if [ "$curr" == "$((${#itemp[@]} - 1))" ]; then
+            echo "${itemp[0]}" > /tmp/cind.mypo
+        else
+            echo "${itemp[$(($curr + 1))]}" > /tmp/cind.mypo
+        fi
+    fi
+fi
+
+pactl list sink-inputs > /tmp/temp.mypo
+if [ "`cat /tmp/temp.mypo`" == "" ]; then
+    exit
+fi
+
+apps=$(cat /tmp/temp.mypo | grep 'application.name ' | awk '{print $3}' | tr -d '"')
+inds=$(cat /tmp/temp.mypo | grep 'Sink Input' | awk '{print $3}' | tr -d '#')
+vols=$(cat /tmp/temp.mypo | grep 'Volume' | awk '{print $5}' | tr -d '%')
+sink=$(cat /tmp/temp.mypo | grep 'Sink:' | awk '{print $2}')
+echo $inds > /tmp/inds.mypo
+IFS=$'\r\n' GLOBIGNORE='*' :; app=($apps)
+IFS=$'\r\n' GLOBIGNORE='*' :; ind=($inds)
+IFS=$'\r\n' GLOBIGNORE='*' :; vol=($vols)
+grep $(cat /tmp/cind.mypo) /tmp/inds.mypo > /dev/null 2>&1
+if [ ! $? -eq 0 ]; then
+    echo "${ind[0]}" > /tmp/cind.mypo
+fi
+for (( i = 0; i < ${#ind[@]}; i++ )); do
+    if ! [ "${ind[$i]}" == "" ]; then
+        wmiir create /rbar/Audio${ind[$i]} &
+        if [ "${ind[$i]}" == "`cat /tmp/cind.mypo`" ]; then
+            back="#422"
+        else
+            back="#242"
+        fi
+        if [ "$sink" == "2" ]; then
+            fore="#aac"
+        else
+            fore="#8a8"
+        fi
+        wmiir xwrite /rbar/Audio${ind[$i]} colors "$fore $back #000" &
+        wmiir xwrite /rbar/Audio${ind[$i]} label "${app[$i]}: ${vol[$i]}" &
+    fi
+done
+
+current=$(wmiir ls /rbar | grep Audio | sed -e 's/Audio//g')
+for i in $current; do
+    if [ "$(echo $inds | grep $i)" == "" ] && ! [ "$i" == "" ]; then
+        wmiir rm /rbar/Audio$i
+    fi
+done
