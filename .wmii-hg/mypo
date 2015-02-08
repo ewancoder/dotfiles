@@ -28,9 +28,7 @@ if [ ! "`grep pulse ~/.asoundrc`" == "" ]; then
                 fi
             done
         else
-            if [ -f /tmp/inds.mypo ]; then
-                rm /tmp/inds.mypo
-            fi
+            rm -f /tmp/inds.mypo
         fi
 
         current=$(wmiir ls /rbar | grep Audio | sed -e 's/Audio//g')
@@ -42,6 +40,9 @@ if [ ! "`grep pulse ~/.asoundrc`" == "" ]; then
         done
     else
         IFS=$'\r\n' GLOBIGNORE='*' :; app=`cat /tmp/temp.mypo | grep 'application.icon_name' | awk '{print $3}' | tr -d '"'`
+        if [ "${app[$i]}" == "" ]; then
+            app[$i]=U
+        fi
         IFS=$'\r\n' GLOBIGNORE='*' :; vol=`cat /tmp/temp.mypo | grep 'Volume' | awk '{print $5}' | tr -d '%'`
         wmiir xwrite /rbar/Audio$2 label "${app[$1]}: ${vol[$1]}" &
     fi
