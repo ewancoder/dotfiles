@@ -1,3 +1,4 @@
+#Pulseaudio
 pcm.pulse { type pulse }
 ctl.pulse { type pulse }
 pcm.!default { type pulse }
