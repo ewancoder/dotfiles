@@ -4,8 +4,8 @@ if [ "`grep pulse ~/.asoundrc`" == "" ]; then
     exit
 fi
 
+itemp=( `cat /tmp/inds.mypo` )
 if [ ! "$1" == "" ]; then
-    itemp=( `cat /tmp/inds.mypo` )
     for (( j = 0; j < ${#itemp[@]}; j++ )); do
         if [ "${itemp[$j]}" == "`cat /tmp/cind.mypo`" ]; then
             curr=$j
@@ -28,6 +28,9 @@ fi
 
 pactl list sink-inputs > /tmp/temp.mypo
 if [ "`cat /tmp/temp.mypo`" == "" ]; then
+    for i in $itemp; do
+        wmiir rm /rbar/Audio$i
+    done
     exit
 fi
 
