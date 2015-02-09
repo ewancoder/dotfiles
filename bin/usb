@@ -1,34 +1,32 @@
 #!/bin/bash
 #Touch lockfile
-sleep 8
 if [ -f /tmp/usb.lock ]; then
     exit 1
 else
     touch /tmp/usb.lock
 fi
+sleep 8
 
 #For easily making new usb backup/cloud keys
 if [ "$1" == "-b" ]; then
-    echo 'backup-2206' > $2/.key
+    echo 'backup-2216' > $2/.key
 elif [ "$1" == "-c" ]; then
-    echo 'cloud-2206' > $2/.key
+    echo 'cloud-2216' > $2/.key
 fi
 
 #Determining backup/cloud drives
 for d in `find /media -maxdepth 1 -type d`
 do
     if [ -f $d/.key ]; then
-        if [ "`cat $d/.key`" == "backup-2206" ]; then
+        if [ "`cat $d/.key`" == "backup-2216" ]; then
             ~/bin/baconf
             rsync -av --delete /mnt/backup/Arch $d/
-            echo 'backup-2206' > $d/.key
             sync
             devmon --unmount $d
             notify-send -u critical "BACKUP updated at $d"
         fi
-        if [ "`cat $d/.key`" == "cloud-2206" ]; then
-            rsync -a --no-o --no-p --no-g --safe-links --modify-window 1 -v --delete /mnt/cloud/ $d/
-            echo 'cloud-2206' > $d/.key
+        if [ "`cat $d/.key`" == "cloud-2216" ]; then
+            rsync -av --delete --exclude=Mega/{Backup,.debris} --no-o --no-p --no-g --safe-links --modify-window 1 /mnt/cloud/ $d/Cloud
             sync
             devmon --unmount $d
             notify-send -u critical "CLOUD updated at $d"
