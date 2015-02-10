@@ -48,7 +48,7 @@ Bundle "scrooloose/syntastic"
 "Commenting multiple lines
 Bundle "scrooloose/nerdcommenter"
 "Taglist plugin
-Bundle "vim-scripts/taglist.vim"
+"Bundle "vim-scripts/taglist.vim"
 "Finish Vundle, set filetype
 filetype plugin indent on
 
