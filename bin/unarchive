@@ -4,12 +4,15 @@ while true; do
         if [ -f "$f" ]; then
             mkdir "$f-dir"
             file=$(basename "$f")
-            a=1 #Check if it's archive
+            a=1
             case "${file##*.}" in
-                gz) tar zxf "$f" -C "$f-dir";;
-                zip) unzip "$f" -d "$f-dir";;
-                rar) unrar x "$f" "$f-dir";;
-                *) a=0
+                gz)     mkdir "$f-dir"
+                        tar zxf "$f" -C "$f-dir";;
+                zip)    mkdir "$f-dir"
+                        unzip "$f" -d "$f-dir";;
+                rar)    mkdir "$f-dir"
+                        unrar x "$f" "$f-dir";;
+                *)      a=0;;
             esac
             succ=$?
             if [ $a -eq 1 ]; then
@@ -19,8 +22,6 @@ while true; do
                     rm -rf "$f-dir"
                     mv "$f" ~/Downloads/Chrome\ Downloads/Corrupted
                 fi
-            else
-                rm -rf "$f-dir"
             fi
         fi
     done

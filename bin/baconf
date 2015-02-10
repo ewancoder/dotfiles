@@ -18,17 +18,16 @@ rsync -av --delete ~/.config/mc /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/Popcorn-Time /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/Trolltech.conf /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/vlc /mnt/backup/Arch/.config/
+rsync -av --delete ~/.config/VirtualBox /mnt/backup/Arch/.config/
 #Dmenu + zsh history :)
 rsync -av --delete ~/.dmenu_history /mnt/backup/Arch/
 rsync -av --delete ~/.zsh_history /mnt/backup/Arch/
 #Vim spelling
 rsync -av --delete ~/.vim/spell /mnt/backup/Arch/.vim/
 #KDE4 config
-rsync -av --delete ~/.kde4/share/apps/okular/part.rc /mnt/backup/Arch/.kde4/share/apps/okular/
+rsync -av --delete ~/.kde4/share/apps/okular /mnt/backup/Arch/.kde4/share/apps/
 #SSH keys
 rsync -av --delete ~/.ssh /mnt/backup/Arch/
-#Just lazy to log in into Anki again :)
-rsync -av --delete ~/Anki /mnt/backup/Arch/
 
 #Hourly backup
 if [[ ! -f /mnt/backup/Hourly/`date +%Y`/`date +%b`/Note`date +%d.%H`.tgz ]]; then

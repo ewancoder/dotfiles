@@ -112,26 +112,26 @@ lower = 50
 mid = 80
 addBlock()
 #Space at /
-text = "echo $(df -h / | grep / | awk '{print $5}' | sed 's/%//') '/'"
-check = "df -h / | grep / | awk '{print $5}' | sed 's/%//'"
+text = "echo $(df -h / | grep / | awk '{print $5}' | tr -d '%') '/'"
+check = "df -h / | grep / | awk '{print $5}' | tr -d '%'"
 lower = 55
 mid = 80
 addBlock()
 #Space at /home
-text = "echo $(df -h /home | grep home | awk '{print $5}' | sed 's/%//') 'H'"
-check = "df -h /home | grep home | awk '{print $5}' | sed 's/%//'"
+text = "echo $(df -h /home | grep home | awk '{print $5}' | tr -d '%') 'H'"
+check = "df -h /home | grep home | awk '{print $5}' | tr -d '%'"
 lower = 55
 mid = 80
 addBlock()
 #Space at /mnt/cloud
-text = "echo $(df -h /mnt/cloud | grep cloud | awk '{print $5}' | sed 's/%//') 'C'"
-check = "df -h /mnt/cloud | grep cloud | awk '{print $5}' | sed 's/%//'"
+text = "echo $(df -h /mnt/cloud | grep cloud | awk '{print $5}' | tr -d '%') 'C'"
+check = "df -h /mnt/cloud | grep cloud | awk '{print $5}' | tr -d '%'"
 lower = 55
 mid = 75
 addBlock()
 #Space at /mnt/backup
-text = "echo $(df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//') 'B'"
-check = "df -h /mnt/backup | grep backup | awk '{print $5}' | sed 's/%//'"
+text = "echo $(df -h /mnt/backup | grep backup | awk '{print $5}' | tr -d '%') 'B'"
+check = "df -h /mnt/backup | grep backup | awk '{print $5}' | tr -d '%'"
 lower = 55
 mid = 75
 addBlock()

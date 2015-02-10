@@ -263,7 +263,7 @@ Key $MODKEY-KP_Add
     transset-df -a --min 0.1 --inc 0.1
 #Mount/Unmount all drives
 Key $MODKEY-Insert
-    devmon --mount-all &
+    devmon --ignore-device /dev/sdb --ignore-device /dev/sdc --ignore-device /dev/sdd --ignore-device /dev/sde --mount-all &
 Key $MODKEY-Delete
     sync &
     devmon --unmount-removable &
@@ -299,51 +299,23 @@ Key $MODKEY-Shift-KP_Begin
 KeyGroup Pulseaudio per-application volume control
 Key $MODKEY-KP_End
     if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume $(awk '{print $1}' /tmp/inds.mypo) -- -5000
-        ~/.wmii-hg/mypo 0 $(awk '{print $1}' /tmp/inds.mypo)
+        pactl set-sink-input-volume `cat /tmp/cind.mypo` -- -5000
+        ~/.wmii-hg/mypo
     fi
 Key $MODKEY-KP_Down
     if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume $(awk '{print $1}' /tmp/inds.mypo) -- 65536
-        ~/.wmii-hg/mypo 0 $(awk '{print $1}' /tmp/inds.mypo)
+        pactl set-sink-input-volume `cat /tmp/cind.mypo` -- 65536
+        ~/.wmii-hg/mypo
     fi
 Key $MODKEY-KP_Next
     if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume $(awk '{print $1}' /tmp/inds.mypo) -- +5000
-        ~/.wmii-hg/mypo 0 $(awk '{print $1}' /tmp/inds.mypo)
+        pactl set-sink-input-volume `cat /tmp/cind.mypo` -- +5000
+        ~/.wmii-hg/mypo
     fi
-
 Key $MODKEY-KP_Left
-    if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume $(awk '{print $2}' /tmp/inds.mypo) -- -5000
-        ~/.wmii-hg/mypo 1 $(awk '{print $2}' /tmp/inds.mypo)
-    fi
-Key $MODKEY-KP_Begin
-    if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume $(awk '{print $2}' /tmp/inds.mypo) -- 65536
-        ~/.wmii-hg/mypo 1 $(awk '{print $2}' /tmp/inds.mypo)
-    fi
+    ~/.wmii-hg/mypo prev
 Key $MODKEY-KP_Right
-    if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume $(awk '{print $2}' /tmp/inds.mypo) -- +5000
-        ~/.wmii-hg/mypo 1 $(awk '{print $2}' /tmp/inds.mypo)
-    fi
-
-Key $MODKEY-KP_Home
-    if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume $(awk '{print $3}' /tmp/inds.mypo) -- -5000
-        ~/.wmii-hg/mypo 2 $(awk '{print $3}' /tmp/inds.mypo)
-    fi
-Key $MODKEY-KP_Up
-    if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume $(awk '{print $3}' /tmp/inds.mypo) -- 65536
-        ~/.wmii-hg/mypo 2 $(awk '{print $3}' /tmp/inds.mypo)
-    fi
-Key $MODKEY-KP_Prior
-    if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume $(awk '{print $3}' /tmp/inds.mypo) -- +5000
-        ~/.wmii-hg/mypo 2 $(awk '{print $3}' /tmp/inds.mypo)
-    fi
+    ~/.wmii-hg/mypo next
 
 KeyGroup Tag actions
 Key $MODKEY-t       # Change to another tag
