@@ -269,7 +269,7 @@ Key $MODKEY-KP_Add
     transset-df -a --min 0.1 --inc 0.1
 #Mount/Unmount all drives
 Key $MODKEY-Insert
-    devmon --mount-all &
+    devmon --ignore-device /dev/sdb --ignore-device /dev/sdc --ignore-device /dev/sdd --ignore-device /dev/sde --mount-all &
 Key $MODKEY-Delete
     sync &
     devmon --unmount-removable &
