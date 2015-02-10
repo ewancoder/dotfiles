@@ -7,13 +7,6 @@ else
 fi
 sleep 8
 
-#For easily making new usb backup/cloud keys
-if [ "$1" == "-b" ]; then
-    echo 'backup-2216' > $2/.key
-elif [ "$1" == "-c" ]; then
-    echo 'cloud-2216' > $2/.key
-fi
-
 #Determining backup/cloud drives
 for d in `find /media -maxdepth 1 -type d`
 do
