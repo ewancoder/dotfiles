@@ -21,7 +21,7 @@ xflux -l 53.9 -g 27.5667 -k 4500 &
 unclutter -grab &
 
 #Automatically mount USB drives [allow only one copy of devmon]
-ps -C devmon > /dev/null 2>&1 || devmon --exec-on-drive '/home/ewancoder/bin/usb' &
+ps -C devmon > /dev/null 2>&1 || devmon --ignore-device /dev/sdb --ignore-device /dev/sdc --ignore-device /dev/sdd --ignore-device /dev/sde --exec-on-drive '/home/ewancoder/bin/usb' &
 
 #Turn off power saving (screen blanking)
 xset -dpms s off
