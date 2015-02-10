@@ -28,8 +28,6 @@ rsync -av --delete ~/.vim/spell /mnt/backup/Arch/.vim/
 rsync -av --delete ~/.kde4/share/apps/okular /mnt/backup/Arch/.kde4/share/apps/
 #SSH keys
 rsync -av --delete ~/.ssh /mnt/backup/Arch/
-#Just lazy to log in into Anki again :)
-rsync -av --delete ~/Anki /mnt/backup/Arch/
 
 #Hourly backup
 if [[ ! -f /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz ]]; then
