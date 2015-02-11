@@ -130,11 +130,11 @@ lower = 55
 mid = 75
 addBlock()
 #Space at /mnt/backup
-text = "echo $(df -h /mnt/backup | grep backup | awk '{print $5}' | tr -d '%') 'B'"
-check = "df -h /mnt/backup | grep backup | awk '{print $5}' | tr -d '%'"
-lower = 55
-mid = 75
-addBlock()
+#text = "echo $(df -h /mnt/backup | grep backup | awk '{print $5}' | tr -d '%') 'B'"
+#check = "df -h /mnt/backup | grep backup | awk '{print $5}' | tr -d '%'"
+#lower = 55
+#mid = 75
+#addBlock()
 #CPU Temperature
 text = "cat /sys/class/hwmon/hwmon0/temp2_input | cut -c1-2"
 check = text
