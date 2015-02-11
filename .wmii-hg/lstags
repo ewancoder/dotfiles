@@ -1,4 +1,5 @@
 #!/bin/bash
+rm /tmp/lstags.message
 input=$1
 regex="(witray|lstags($|\s\w+$))" #Filter 'witray' and 'lstags'
 wmiir ls /client | while read line; do
@@ -12,9 +13,8 @@ wmiir ls /client | while read line; do
     tagregex="(^|\+)$input($|\+)" #Regex for each TAG
     if [[ ! $label =~ $regex ]]; then
         if [[ $tags =~ $tagregex ]]; then
-            echo "$message$tags --> $label\n" >> /tmp/lstags.message
+            echo "$message$tags --> $label" >> /tmp/lstags.message
         fi
     fi
 done
 notify-send -t 0 -h string:fgcolor:#faaa00 -h string:bgcolor:#000000 "`cat /tmp/lstags.message`"
-rm /tmp/lstags.message
