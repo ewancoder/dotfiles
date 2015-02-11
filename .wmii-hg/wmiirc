@@ -204,6 +204,8 @@ Key $MODKEY-Shift-i
     sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb/gxkb.cfg && killall gxkb && gxkb &
 
 KeyGroup Others
+Key $MODKEY-Control-Return
+    ~/.wmii-hg/lstags
 #Turn off mouse
 Key $MODKEY-v
     id=`xinput --list | grep "Wheel Mouse" | awk '{print $7}' | cut -f2 -d "="`
