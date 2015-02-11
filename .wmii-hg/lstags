@@ -12,7 +12,9 @@ wmiir ls /client | while read line; do
     tagregex="(^|\+)$input($|\+)" #Regex for each TAG
     if [[ ! $label =~ $regex ]]; then
         if [[ $tags =~ $tagregex ]]; then
-            echo $tags "-->" $label
+            echo "$message$tags --> $label\n" >> /tmp/lstags.message
         fi
     fi
 done
+notify-send -t 0 -h string:fgcolor:#faaa00 -h string:bgcolor:#000000 "`cat /tmp/lstags.message`"
+rm /tmp/lstags.message

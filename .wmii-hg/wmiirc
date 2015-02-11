@@ -340,6 +340,9 @@ Key $MODKEY-$i		 # Move to the numbered view
 	wmiir xwrite /ctl view "$i"
 Key $MODKEY-Shift-$i     # Retag selected client with the numbered tag
 	wmiir xwrite /client/sel/ctl tags "$i"
+#LSTAGS
+Key $MODKEY-Control-$i
+    ~/.wmii-hg/lstags $i
 !
 done
 wi_events -e
