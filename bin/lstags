@@ -1,0 +1,18 @@
+#!/bin/bash
+input=$1
+regex="(witray|lstags($|\s\w+$))" #Filter 'witray' and 'lstags'
+wmiir ls /client | while read line; do
+    #Do all queries first to spare time
+    label="`wmiir cat /client/$line/label`"
+    tags="`wmiir cat /client/$line/ctl | awk '/tags/ {print $2}'`"
+    now="`wmiir cat /ctl | awk '/view/ {print $2}'`"
+    if [ -z $1 ]; then
+        input=$now
+    fi
+    tagregex="(^|\+)$input($|\+)" #Regex for each TAG
+    if [[ ! $label =~ $regex ]]; then
+        if [[ $tags =~ $tagregex ]]; then
+            echo $tags "-->" $label
+        fi
+    fi
+done
