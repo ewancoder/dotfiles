@@ -3,6 +3,9 @@ rm /tmp/lstags.message
 input=$1
 regex="(witray|lstags($|\s\w+$))" #Filter 'witray' and 'lstags'
 wmiir ls /client | while read line; do
+    if [ "$line" == "sel/" ]; then
+        break
+    fi
     #Do all queries first to spare time
     label="`wmiir cat /client/$line/label`"
     tags="`wmiir cat /client/$line/ctl | awk '/tags/ {print $2}'`"
