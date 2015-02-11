@@ -233,14 +233,14 @@ Key $MODKEY-Shift-KP_Enter
 Key $MODKEY-apostrophe
     wmiir remove /rbar/ZNotify
 #System update
-Key XF86WakeUp
+Key $MODKEY-Scroll_Lock
     rm /tmp/yaourt.updates
     urxvt -e yaourt -Syua --noconfirm &
 #Screenshot
-Key XF86Sleep
+Key Print
     dbss &
 #Go to Keep tag
-Key XF86PowerOff
+Key $MODKEY-Pause
     if [ -z "$cv" ]; then
         cv="1"
     fi
@@ -251,18 +251,18 @@ Key XF86PowerOff
         cv=$seltag
         wmiir xwrite /ctl view Keep
     fi
-Key $MODKEY-Shift-XF86PowerOff
+Key $MODKEY-Shift-Pause
     wmiir xwrite /rbar/\!notice colors "$(var 11)"
     wmiir xwrite /rbar/\!notice label "Power off..."
     baconf
     systemctl poweroff -i
-Key $MODKEY-Shift-XF86WakeUp
+Key $MODKEY-Shift-Scroll_Lock
     wmiir xwrite /rbar/\!notice colors "$(var 11)"
     wmiir xwrite /rbar/\!notice label "Reboot..."
     baconf
     systemctl reboot -i
 #Change wallpaper
-Key $MODKEY-XF86PowerOff
+Key $MODKEY-Print
     feh --bg-fill --randomize --recursive Dropbox/Pictures
 #Increase/decrease transparency of current window
 Key $MODKEY-KP_Subtract
