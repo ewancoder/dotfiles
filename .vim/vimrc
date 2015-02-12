@@ -224,6 +224,8 @@ set spell spelllang=en,ru spellfile=$HOME/.vim/spell/my.utf-8.add
 au BufNewFile,BufRead *.info set filetype=info
 "Markdown syntax
 au BufNewFile,BufRead *.md set filetype=markdown
+"Tex
+au BufNewFile,BufRead *.tex set filetype=tex
 
 "Strange
 "set grepprg=grep\ -nH\ $*
