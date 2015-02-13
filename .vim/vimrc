@@ -14,53 +14,70 @@ call vundle#rc()
 
 "---------- Vundle Bundles ----------
 Bundle 'gmarik/vundle'
+
 "Coloring #abc and #aabbcc
 Bundle 'lilydjwg/colorizer'
+
 "Completion engine
 Bundle "Shougo/neocomplete"
 let g:neocomplete#enable_at_startup = 1
-"Git wrapper
+let g:neocomplete#enable_auto_select = 1
+
+"Git wrapper + diffs
 Bundle 'tpope/vim-fugitive'
-"Diffs on the left
 Bundle "airblade/vim-gitgutter"
-"Fast snippets engine :)
+nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gia :Git add -A<CR>
+nnoremap <leader>gic :Gcommit -v<CR>
+nnoremap <leader>gic! :Gcommit -v --amend<CR>
+nnoremap <leader>gica :Gcommit -av<CR>
+nnoremap <leader>gica! :Gcommit -av --amend<CR>
+nnoremap <leader>gim :Git merge --no-ff<CR>
+nnoremap <leader>gip :Git push origin --all<CR>
+nnoremap <leader>gis :Gstatus<CR>
+nnoremap <leader>gid :Gdiff<CR>
+nnoremap <leader>gco :Git checkout<Space>
+
+"Fast snippets engine + snippets
 Bundle "sirver/ultisnips"
+Bundle 'honza/vim-snippets'
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-"Snippets itself :)
-Bundle 'honza/vim-snippets'
+
 "Autoclosing brackets
-"Bundle 'Raimondi/delimitMate'
 Bundle "jiangmiao/auto-pairs"
-"Instead of powerline - airline (viml instead of python+corrupted fonts)
+
+"Statusbar
 Bundle "bling/vim-airline"
-"I need this for habrahabr's article
+
+"Browsing through file
 Bundle "justinmk/vim-sneak"
 nmap f <Plug>Sneak_s
 nmap F <Plug>Sneak_S
-"For RST+Sphinx
-"Bundle "Rykka/riv.vim"
-"Matcher for ctrlp
+
+"Fuzzy files find + SilverSearcher
 Bundle "FelikZ/ctrlp-py-matcher"
-"Find file (like command-t)
 Bundle "kien/ctrlp.vim"
-"Visualize undo/redo tree
-Bundle "vim-scripts/Gundo"
-"For %-matching if/then/else and <tags>
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+    \ --ignore .git
+    \ --ignore "**/*.pyc"
+    \ -g ""'
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+
+"%-matching for if/then/else, html, latex
 Bundle "tmhedberg/matchit"
+
 "For quickly changing tags
 Bundle "tpope/vim-surround"
-"For filesystem browsing
-Bundle "scrooloose/nerdtree"
+
 "Syntax checking
 Bundle "scrooloose/syntastic"
+
 "For tags
 Bundle "majutsushi/tagbar"
 nmap <F7> :TagbarToggle<CR>
-"Commenting multiple lines
-Bundle "scrooloose/nerdcommenter"
-"Taglist plugin
-"Bundle "vim-scripts/taglist.vim"
+
 "Finish Vundle, set filetype
 filetype plugin indent on
 
@@ -242,26 +259,7 @@ au BufNewFile,BufRead *.tex set filetype=tex
 "Strange
 "set grepprg=grep\ -nH\ $*
 
-"---------- Useful Mappings ----------
-"For compiling Ino project
-nnoremap <leader>ac :!(cd ..; ino build)<CR>
-nnoremap <leader>au :!(cd ..; ino upload)<CR>
-nnoremap <leader>as :!(cd ..; ino serial)<CR>
-
 "---------- Plugins ----------
-"vim-fugitive
-nnoremap <leader>ga :Git add %:p<CR><CR>
-nnoremap <leader>gb :Gblame<CR>
-nnoremap <leader>gia :Git add -A<CR>
-nnoremap <leader>gic :Gcommit -v<CR>
-nnoremap <leader>gic! :Gcommit -v --amend<CR>
-nnoremap <leader>gica :Gcommit -av<CR>
-nnoremap <leader>gica! :Gcommit -av --amend<CR>
-nnoremap <leader>gim :Git merge --no-ff<CR>
-nnoremap <leader>gip :Git push origin --all<CR>
-nnoremap <leader>gis :Gstatus<CR>
-nnoremap <leader>gid :Gdiff<CR>
-nnoremap <leader>gco :Git checkout<Space>
 "vim-gitgutter
 highlight clear SignColumn
 highlight GitGutterAdd guibg=black
@@ -272,12 +270,6 @@ highlight GitGutterDelete guibg=black
 highlight GitGutterDelete guifg=red
 highlight GitGutterChangeDelete guibg=black
 highlight GitGutterChangeDelete guifg=yellow
-"Ctrlp
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-    \ --ignore .git
-    \ --ignore "**/*.pyc"
-    \ -g ""'
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 "Gundo
 nnoremap <F4> :GundoToggle<CR>
 "NerdTree
