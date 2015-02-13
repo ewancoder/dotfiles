@@ -78,7 +78,7 @@ updatesTimeout = 600
 startup = [
     'pasystray',
     'gxkb',
-    'dropboxd',
+    'dropbox',
     'megasync',
     'ssh -fNL 7070:127.0.0.1:7070 root@192.168.100.110',
     '~/bin/ircnotify',
