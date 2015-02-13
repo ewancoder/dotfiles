@@ -134,6 +134,7 @@ def loopStatusBar():
     #Check for git repos unstaged/unpushed/uncommited and show them
     check('~/bin/gitch | xargs -L 1 basename | tr "\\n" " "', 'AGitCheck', settings.gitColors)
     check('~/bin/gitch blue | xargs -L 1 basename | tr "\\n" " "', 'AGitCheckBlue', settings.gitBlueColors)
+    check('~/bin/gitch green | xargs -L 1 basename | tr "\\n" " "', 'AGitCheckGreen', settings.gitGreenColors)
     #Check for pulseaudio sinks/sources and show them
     run("~/.wmii-hg/mypo")
 

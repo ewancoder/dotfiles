@@ -43,6 +43,7 @@ warnColors = '#faa #c00 #f44' #For Warnings
 deviceColors = '#ada #b42 #000'
 gitColors = '#f63 #000 #000'
 gitBlueColors = '#36f #000 #000'
+gitGreenColors = '#6f6 #000 #000'
 #Alternative color - for noticebar
 altColors = '#aad #000 #000'
 #AM/PM
