@@ -2,6 +2,12 @@ set shell=/bin/bash "Set external shell
 set nocompatible    "Be iMproved
 filetype off        "Required by Vundle
 
+"Set Cyrillic keymap
+set keymap=russian-jcukenwin
+set iminsert=0
+set imsearch=0
+highlight lCursor guifg=NONE guibg=Cyan
+
 "Execute VUNDLE
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -10,23 +16,25 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 "Coloring #abc and #aabbcc
 Bundle 'lilydjwg/colorizer'
+"Completion engine
+Bundle "Shougo/neocomplete"
+let g:neocomplete#enable_at_startup = 1
 "Git wrapper
 Bundle 'tpope/vim-fugitive'
 "Diffs on the left
 Bundle "airblade/vim-gitgutter"
 "Fast snippets engine :)
 Bundle "sirver/ultisnips"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 "Snippets itself :)
 Bundle 'honza/vim-snippets'
 "Autoclosing brackets
 "Bundle 'Raimondi/delimitMate'
 Bundle "jiangmiao/auto-pairs"
-"Python autocompletion (jedi)
-Bundle 'davidhalter/jedi-vim'
 "Instead of powerline - airline (viml instead of python+corrupted fonts)
 Bundle "bling/vim-airline"
 "I need this for habrahabr's article
-"Bundle "Lokaltog/vim-easymotion"
 Bundle "justinmk/vim-sneak"
 nmap f <Plug>Sneak_s
 nmap F <Plug>Sneak_S
