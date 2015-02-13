@@ -29,7 +29,7 @@ Bundle "airblade/vim-gitgutter"
 nnoremap <leader>ga :Git add %:p<CR><CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gic :Gcommit -v<CR>
-nnoremap <leader>gip :Git push origin<CR>
+nnoremap <leader>gip :Git push origin &<CR>
 nnoremap <leader>gis :Gstatus<CR>
 nnoremap <leader>gid :Gdiff<CR>
 nnoremap <leader>gco :Git checkout<Space>
