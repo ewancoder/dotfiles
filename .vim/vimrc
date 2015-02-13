@@ -22,6 +22,10 @@ Bundle 'gmarik/vundle'
 "Coloring #abc and #aabbcc
 Bundle 'lilydjwg/colorizer'
 
+"Most recent files
+Bundle "yegappan/mru"
+nmap <F9> :MRU<CR>
+
 "Completion engine
 Bundle "Shougo/neocomplete"
 let g:neocomplete#enable_at_startup = 1
