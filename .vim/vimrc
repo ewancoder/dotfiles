@@ -28,13 +28,8 @@ Bundle 'tpope/vim-fugitive'
 Bundle "airblade/vim-gitgutter"
 nnoremap <leader>ga :Git add %:p<CR><CR>
 nnoremap <leader>gb :Gblame<CR>
-nnoremap <leader>gia :Git add -A<CR>
 nnoremap <leader>gic :Gcommit -v<CR>
-nnoremap <leader>gic! :Gcommit -v --amend<CR>
-nnoremap <leader>gica :Gcommit -av<CR>
-nnoremap <leader>gica! :Gcommit -av --amend<CR>
-nnoremap <leader>gim :Git merge --no-ff<CR>
-nnoremap <leader>gip :Git push origin --all<CR>
+nnoremap <leader>gip :Git push origin<CR>
 nnoremap <leader>gis :Gstatus<CR>
 nnoremap <leader>gid :Gdiff<CR>
 nnoremap <leader>gco :Git checkout<Space>
