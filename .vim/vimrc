@@ -12,23 +12,24 @@ Bundle 'gmarik/vundle'
 Bundle 'lilydjwg/colorizer'
 "Git wrapper
 Bundle 'tpope/vim-fugitive'
-"Diff cool thing
+"Diffs on the left
 Bundle "airblade/vim-gitgutter"
-"Snipmate depencencies
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-"Snipmate itself
-Bundle 'garbas/vim-snipmate'
+"Fast snippets engine :)
+Bundle "sirver/ultisnips"
 "Snippets itself :)
 Bundle 'honza/vim-snippets'
 "Autoclosing brackets
-Bundle 'Raimondi/delimitMate'
+"Bundle 'Raimondi/delimitMate'
+Bundle "jiangmiao/auto-pairs"
 "Python autocompletion (jedi)
 Bundle 'davidhalter/jedi-vim'
 "Instead of powerline - airline (viml instead of python+corrupted fonts)
 Bundle "bling/vim-airline"
 "I need this for habrahabr's article
-Bundle "Lokaltog/vim-easymotion"
+"Bundle "Lokaltog/vim-easymotion"
+Bundle "justinmk/vim-sneak"
+nmap f <Plug>Sneak_s
+nmap F <Plug>Sneak_S
 "For RST+Sphinx
 "Bundle "Rykka/riv.vim"
 "Matcher for ctrlp
@@ -45,6 +46,9 @@ Bundle "tpope/vim-surround"
 Bundle "scrooloose/nerdtree"
 "Syntax checking
 Bundle "scrooloose/syntastic"
+"For tags
+Bundle "majutsushi/tagbar"
+nmap <F7> :TagbarToggle<CR>
 "Commenting multiple lines
 Bundle "scrooloose/nerdcommenter"
 "Taglist plugin
