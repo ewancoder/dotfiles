@@ -7,8 +7,8 @@ else
     rx=0
     tx=0
 fi
-ifconfig | grep 'enp2s0\|wlan' -A 7 | grep 'RX packets' | awk '{print $5}' > /tmp/rx
-ifconfig | grep 'enp2s0\|wlan' -A 7 | grep 'TX packets' | awk '{print $5}' > /tmp/tx
+ifconfig | awk '/RX packets/ {print $5; exit}' > /tmp/rx
+ifconfig | awk '/TX packets/ {print $5; exit}' > /tmp/tx
 
 echo `cat /tmp/rx` `cat /tmp/tx` $rx $tx $bytes | awk '
 {
