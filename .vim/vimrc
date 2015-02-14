@@ -37,13 +37,6 @@ autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 "Git wrapper + diffs
 Bundle 'tpope/vim-fugitive'
 Bundle "airblade/vim-gitgutter"
-nnoremap <leader>ga :Git add %:p<CR><CR>
-nnoremap <leader>gb :Gblame<CR>
-nnoremap <leader>gc :Gcommit -v<CR>
-nnoremap <leader>gp :Git push origin &<CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gd :Gdiff<CR>
-nnoremap <leader>gco :Git checkout<Space>
 
 "Fast snippets engine + snippets
 Bundle "sirver/ultisnips"
@@ -201,3 +194,14 @@ vmap > >gv
 "HEX MODE
 map <leader>h :%!xxd<CR>
 map <leader>r :%!xxd -r<CR>
+"---Plugins---
+"Git fugitive
+nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gc :Gcommit -v<CR>
+nnoremap <leader>gp :Git push origin &<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gco :Git checkout<Space>
+"CtrlP
+nmap <leader>d :CtrlP ~/Dropbox<CR>
