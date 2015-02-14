@@ -89,7 +89,7 @@ def statusBlocks():
                 setColor('Status_a8', settings.badColors)
             else:
                 setColor('Status_a8', settings.amColors)
-        elif get('pactl stat | grep "Default Sink" | awk \'{print $3}\'') == "alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo":
+        elif get('pactl info | grep "Default Sink" | awk \'{print $3}\'') == "alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo":
             setColor('Status_a8', settings.speakerColors)
         else:
             setColor('Status_a8', settings.goodColors)
@@ -134,6 +134,7 @@ def loopStatusBar():
     #Check for git repos unstaged/unpushed/uncommited and show them
     check('~/bin/gitch | xargs -L 1 basename | tr "\\n" " "', 'AGitCheck', settings.gitColors)
     check('~/bin/gitch blue | xargs -L 1 basename | tr "\\n" " "', 'AGitCheckBlue', settings.gitBlueColors)
+    check('~/bin/gitch green | xargs -L 1 basename | tr "\\n" " "', 'AGitCheckGreen', settings.gitGreenColors)
     #Check for pulseaudio sinks/sources and show them
     run("~/.wmii-hg/mypo")
 

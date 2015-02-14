@@ -43,6 +43,7 @@ warnColors = '#faa #c00 #f44' #For Warnings
 deviceColors = '#ada #b42 #000'
 gitColors = '#f63 #000 #000'
 gitBlueColors = '#36f #000 #000'
+gitGreenColors = '#6f6 #000 #000'
 #Alternative color - for noticebar
 altColors = '#aad #000 #000'
 #AM/PM
@@ -77,7 +78,7 @@ updatesTimeout = 600
 startup = [
     'pasystray',
     'gxkb',
-    'dropboxd',
+    'dropbox',
     'megasync',
     'ssh -fNL 7070:127.0.0.1:7070 root@192.168.100.110',
     '~/bin/ircnotify',

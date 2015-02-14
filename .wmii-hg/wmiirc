@@ -204,6 +204,8 @@ Key $MODKEY-Shift-i
     sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb/gxkb.cfg && killall gxkb && gxkb &
 
 KeyGroup Others
+Key $MODKEY-Control-Return
+    ~/.wmii-hg/lstags
 #Toggle touchpad
 Key $MODKEY-v
     synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0') &
@@ -225,14 +227,14 @@ Key $MODKEY-Shift-KP_Enter
 Key $MODKEY-apostrophe
     wmiir remove /rbar/ZNotify
 #System update
-Key Next
+Key $MODKEY-Next
     rm /tmp/yaourt.updates
     urxvt -e yaourt -Syua --noconfirm &
 #Screenshot
-Key Prior
+Key Print
     dbss &
 #Go to Keep tag
-Key End
+Key $MODKEY-End
     if [ -z "$cv" ]; then
         cv="1"
     fi
@@ -254,7 +256,7 @@ Key $MODKEY-Shift-Next
     baconf
     systemctl reboot -i
 #Change wallpaper
-Key $MODKEY-End
+Key $MODKEY-Print
     feh --bg-fill --randomize --recursive Dropbox/Pictures
 #Increase/decrease transparency of current window
 Key $MODKEY-KP_Subtract
@@ -299,17 +301,17 @@ Key $MODKEY-Shift-KP_Begin
 KeyGroup Pulseaudio per-application volume control
 Key $MODKEY-KP_End
     if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume `cat /tmp/cind.mypo` -- -5000
+        pactl set-sink-input-volume `cat /tmp/cind.mypo` -5000
         ~/.wmii-hg/mypo
     fi
 Key $MODKEY-KP_Down
     if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume `cat /tmp/cind.mypo` -- 65536
+        pactl set-sink-input-volume `cat /tmp/cind.mypo` 65536
         ~/.wmii-hg/mypo
     fi
 Key $MODKEY-KP_Next
     if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume `cat /tmp/cind.mypo` -- +5000
+        pactl set-sink-input-volume `cat /tmp/cind.mypo` +5000
         ~/.wmii-hg/mypo
     fi
 Key $MODKEY-KP_Left
@@ -334,6 +336,9 @@ Key $MODKEY-$i		 # Move to the numbered view
 	wmiir xwrite /ctl view "$i"
 Key $MODKEY-Shift-$i     # Retag selected client with the numbered tag
 	wmiir xwrite /client/sel/ctl tags "$i"
+#LSTAGS
+Key $MODKEY-Control-$i
+    ~/.wmii-hg/lstags $i
 !
 done
 wi_events -e

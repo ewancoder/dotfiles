@@ -2,53 +2,85 @@ set shell=/bin/bash "Set external shell
 set nocompatible    "Be iMproved
 filetype off        "Required by Vundle
 
+"Set Cyrillic keymap
+set keymap=russian-jcukenwin
+set iminsert=0
+set imsearch=0
+highlight lCursor guifg=NONE guibg=Cyan
+"Spellchecking
+set spell spelllang=en,ru spellfile=$HOME/.vim/spell/my.utf-8.add
+"Encoding
+set encoding=utf8
+
 "Execute VUNDLE
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 "---------- Vundle Bundles ----------
 Bundle 'gmarik/vundle'
+
 "Coloring #abc and #aabbcc
 Bundle 'lilydjwg/colorizer'
-"Git wrapper
+
+"Most recent files
+Bundle "yegappan/mru"
+nmap <F9> :MRU<CR>
+
+"Completion engine
+Bundle "OmniSharp/omnisharp"
+Bundle "tpope/vim-dispatch"
+Bundle "Shougo/neocomplete"
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_auto_select = 1
+autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+
+"Git wrapper + diffs
 Bundle 'tpope/vim-fugitive'
-"Diff cool thing
 Bundle "airblade/vim-gitgutter"
-"Snipmate depencencies
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-"Snipmate itself
-Bundle 'garbas/vim-snipmate'
-"Snippets itself :)
+
+"Fast snippets engine + snippets
+Bundle "sirver/ultisnips"
 Bundle 'honza/vim-snippets'
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
 "Autoclosing brackets
-Bundle 'Raimondi/delimitMate'
-"Python autocompletion (jedi)
-Bundle 'davidhalter/jedi-vim'
-"Instead of powerline - airline (viml instead of python+corrupted fonts)
+Bundle "jiangmiao/auto-pairs"
+
+"Statusbar
 Bundle "bling/vim-airline"
-"I need this for habrahabr's article
-Bundle "Lokaltog/vim-easymotion"
-"For RST+Sphinx
-"Bundle "Rykka/riv.vim"
-"Matcher for ctrlp
+let g:airline_theme = 'dark'
+let g:airline#extensions#tabline#enabled = 1
+set laststatus=2 "Work with 1 window
+
+"Browsing through file
+Bundle "justinmk/vim-sneak"
+let g:sneak#use_ic_scs = 1
+nmap f <Plug>Sneak_s
+nmap F <Plug>Sneak_S
+
+"Fuzzy files find + SilverSearcher
 Bundle "FelikZ/ctrlp-py-matcher"
-"Find file (like command-t)
 Bundle "kien/ctrlp.vim"
-"Visualize undo/redo tree
-Bundle "vim-scripts/Gundo"
-"For %-matching if/then/else and <tags>
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+    \ --ignore .git
+    \ --ignore "**/*.pyc"
+    \ -g ""'
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+
+"%-matching for if/then/else, html, latex
 Bundle "tmhedberg/matchit"
+
 "For quickly changing tags
 Bundle "tpope/vim-surround"
-"For filesystem browsing
-Bundle "scrooloose/nerdtree"
+
 "Syntax checking
 Bundle "scrooloose/syntastic"
-"Commenting multiple lines
-Bundle "scrooloose/nerdcommenter"
-"Taglist plugin
-"Bundle "vim-scripts/taglist.vim"
+
+"For tags
+Bundle "majutsushi/tagbar"
+nmap <F7> :TagbarToggle<CR>
+
 "Finish Vundle, set filetype
 filetype plugin indent on
 
@@ -59,21 +91,21 @@ set autoread
 "Setup backup&swap dirs
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
-"Set hidden buffer
+"Allow multiple files at once
 set hidden
-"STRANGE option (but good perfomance)
-""set lazyredraw (dont redraw while executing macros)
+"Don't redraw while executing macros
+set lazyredraw
 "Searching
 set ignorecase
 set smartcase
 set hlsearch
 set incsearch
-"Encoding
-set encoding=utf8
-"Backspace acts like normal (Do I need it?)
-"Set backspace=eol,start,indent
-"For autocd
+"Autochange PWD
 set autochdir
+"Filetypes
+au BufNewFile,BufRead *.info set filetype=info
+au BufNewFile,BufRead *.md set filetype=markdown
+au BufNewFile,BufRead *.tex set filetype=tex
 
 "---------- Colors/interface ----------
 colorscheme desert
@@ -83,13 +115,10 @@ set so=5
 "Turn on wildmenu (highlight commandline Tab)
 set wildmenu
 set wildignore=*.o,*~
-"Show matching brackets / blink time
+"Highlight matching brackets
 set showmatch
-set mat=2
-"Remove all gui menus (only hardcore)
+"Remove all gui menus
 set guioptions=ac
-"Little bit margin to the left
-set foldcolumn=1
 "TABS configuration
 set expandtab		"Turn Tab to Spaces
 set smarttab		"Backspace delete all Spaces
@@ -101,154 +130,15 @@ set smartindent
 autocmd FileType html :setlocal sw=2 ts=2 sts=2
 "NoSmartIndent for python
 autocmd FileType python :setlocal nosmartindent
-"Tabs for RST
-autocmd FileType rst :setlocal shiftwidth=3
-autocmd FileType rst :setlocal tabstop=3
+"Lines numbering
 set number
 "Highlight OVER 80
-""highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-""match OverLength /\%81v.\+/
-"Autocompletion pink color remove
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+autocmd FileType c,python,css,sh match OverLength /\%81v.\+/
+"Autocompletion better colors
 :highlight Pmenu guibg=black guifg=yellow
 :highlight PmenuSel guibg=green
-
-"---------- Mapping ----------
-"Timeout ,g vs ,gv (default=1000)
-set timeoutlen=500
-"Leader key
-let mapleader=","
-let g:mapleader=","
-"Easy edit .vimrc
-nmap <silent> ,ev :e $MYVIMRC<cr>
-nmap <silent> ,sv :so $MYVIMRC<cr>
-"Fast saving / sudo saving
-nmap <leader>w :w!<cr>
-"Now I'm using this for buffer closing
-"nmap <leader>q :q<cr>
-cmap w!! w !sudo tee > /dev/null %
-"Easy windows switching
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-"Close current buffer
-map <leader>bd :bd<cr>
-"Close all the buffers
-map <leader>ba :1,1000 bd!<cr>
-"Managing tabs
-"map <leader>tn :tabnew<cr>
-"map <leader>to :tabonly<cr>
-"map <leader>tq :tabclose<cr>
-"Just for wrapping text browsing
-map j gj
-map k gk
-"Don't jump on *
-nnoremap * *N
-"Turn off lights
-nnoremap <F8> :nohlsearch<CR>
-"Whitespaces signs
-if has('multi_byte')
-    if version >= 700
-        set listchars=tab:▸\ ,eol:¬
-    else
-        set listchars=tab:»\ ,trail:·,eol:¶,extends:>,precedes:<,nbsp:_
-    endif
-endif
-nmap <leader>l :set list!<CR>
-"Moving through tabs
-"map <leader>n <esc>:tabprevious<CR>
-"map <leader>m <esc>:tabnext<CR>
-"Moving through buffers
-map <C-tab> <esc>:bnext<CR>
-"Close buffer without loosing split
-map <leader>q :bp\|bd #<cr>
-"Sort alphabetically :)
-vnoremap <Leader>s :sort<CR>
-"Moving code blocks
-vnoremap < <gv
-vnoremap > >gv
-"Run python
-verbose nmap <F5>!python %
-"HEX MODE
-map <leader>h :%!xxd<CR>
-map <leader>r :%!xxd -r<CR>
-
-"---------- Plugins ----------
-
-"DelimitMate
-let delimitMate_expand_space=1
-let delimitMate_expand_cr=1
-
-"Snipmate Tab remap
-"map <C-j> <Plug>snipMateNextOrTrigger
-
-"AutoCompletion colors
-""highlight Pmenu guibg=black
-
-"For Airline for working with 1 window
-""set laststatus=2
-
-"YCM
-""let g:ycm_autoclose_preview_window_after_completion=1
-""nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-"AirLine
-let g:airline_theme = 'dark'
-let g:airline_enable_fugitive=1 "Fugitive
-""let g:airline_enable_syntastic=1 "Syntastic
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '◀'
-let g:airline_linecolumn_prefix = '¶ '
-let g:airline_fugitive_prefix = '⎇ '
-let g:airline_paste_symbol = 'p'
-
-""let g:airline_section_c = '%t ' "Separate sections change
-
-""let g:airline#extensions#tagbar#enabled = 1 "Tagbar support
-""let g:airline#extensions#syntastic#enabled=1
-
-
-map <leader>f :CommandT<CR>
-map <leader>b :CommandTBuffer<CR>
-
-
-"Python-mode
-"
-"Just BECAUSE I NEED IT
-map <C-j> <C-W>j
-
-"Spellchecking
-set spell spelllang=en,ru spellfile=$HOME/.vim/spell/my.utf-8.add
-
-"Defining new filetypes
-au BufNewFile,BufRead *.info set filetype=info
-"Markdown syntax
-au BufNewFile,BufRead *.md set filetype=markdown
-
-"Strange
-"set grepprg=grep\ -nH\ $*
-
-"---------- Useful Mappings ----------
-"For compiling Ino project
-nnoremap <leader>ac :!(cd ..; ino build)<CR>
-nnoremap <leader>au :!(cd ..; ino upload)<CR>
-nnoremap <leader>as :!(cd ..; ino serial)<CR>
-
-"---------- Plugins ----------
-"vim-fugitive
-nnoremap <leader>ga :Git add %:p<CR><CR>
-nnoremap <leader>gb :Gblame<CR>
-nnoremap <leader>gia :Git add -A<CR>
-nnoremap <leader>gic :Gcommit -v<CR>
-nnoremap <leader>gic! :Gcommit -v --amend<CR>
-nnoremap <leader>gica :Gcommit -av<CR>
-nnoremap <leader>gica! :Gcommit -av --amend<CR>
-nnoremap <leader>gim :Git merge --no-ff<CR>
-nnoremap <leader>gip :Git push origin --all<CR>
-nnoremap <leader>gis :Gstatus<CR>
-nnoremap <leader>gid :Gdiff<CR>
-nnoremap <leader>gco :Git checkout<Space>
-"vim-gitgutter
+"GitGutter colors
 highlight clear SignColumn
 highlight GitGutterAdd guibg=black
 highlight GitGutterAdd guifg=lime
@@ -258,25 +148,60 @@ highlight GitGutterDelete guibg=black
 highlight GitGutterDelete guifg=red
 highlight GitGutterChangeDelete guibg=black
 highlight GitGutterChangeDelete guifg=yellow
-"Ctrlp
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-    \ --ignore .git
-    \ --ignore "**/*.pyc"
-    \ -g ""'
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-nnoremap <C-a> :CtrlP /mnt/cloud/Dropbox<CR>
-"Gundo
-nnoremap <F4> :GundoToggle<CR>
-"NerdTree
-nnoremap <F5> :NERDTree<CR>
 
-"Map for buffer
-map <A-1> :buffer 1<CR>
-map <A-2> :buffer 2<CR>
-map <A-3> :buffer 3<CR>
-map <A-4> :buffer 4<CR>
-map <A-5> :buffer 5<CR>
-map <A-6> :buffer 6<CR>
-map <A-7> :buffer 7<CR>
-map <A-8> :buffer 8<CR>
-map <A-9> :buffer 9<CR>
+"---------- Mapping ----------
+set timeoutlen=500 "Multiple keys timeout
+"Leader key
+let mapleader=","
+"Easy edit & source .vimrc
+nmap <silent> ,ev :e $MYVIMRC<cr>
+nmap <silent> ,sv :so $MYVIMRC<cr>
+"Fast saving / sudo saving
+nmap <leader>w :w!<cr>
+cmap w!! w !sudo tee > /dev/null %
+"Close buffer without loosing split
+map <leader>q :bp\|bd #<cr>
+"Easy windows switching
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+"Managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tq :tabclose<cr>
+"Moving through tabs
+map <leader>n <esc>:tabprevious<CR>
+map <leader>m <esc>:tabnext<CR>
+"Moving through buffers
+map <leader><Tab> <esc>:bnext<CR>
+map <C-tab> <esc>:bprevious<CR>
+"Just for wrapping text browsing
+map j gj
+map k gk
+"Don't jump on *
+nmap * *N
+"Turn off lights
+nmap <F8> :nohlsearch<CR>
+"Markup signs
+set listchars=tab:▸\ ,eol:¬
+nmap <leader>l :set list!<CR>
+"Sort alphabetically :)
+vmap <Leader>s :sort<CR>
+"Moving code blocks
+vmap < <gv
+vmap > >gv
+"HEX MODE
+map <leader>h :%!xxd<CR>
+map <leader>r :%!xxd -r<CR>
+"---Plugins---
+"Git fugitive
+nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gc :Gcommit -v<CR>
+nnoremap <leader>gp :Git push origin &<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gco :Git checkout<Space>
+"CtrlP
+nmap <leader>d :CtrlP ~/Dropbox<CR>
