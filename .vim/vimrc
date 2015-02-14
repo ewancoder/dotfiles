@@ -27,9 +27,12 @@ Bundle "yegappan/mru"
 nmap <F9> :MRU<CR>
 
 "Completion engine
+Bundle "OmniSharp/omnisharp"
+Bundle "tpope/vim-dispatch"
 Bundle "Shougo/neocomplete"
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_auto_select = 1
+autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 
 "Git wrapper + diffs
 Bundle 'tpope/vim-fugitive'
