@@ -8,7 +8,6 @@ touch /tmp/baconf.lock
 
 #Make subdirectories
 mkdir -p /mnt/backup/Arch/.config
-mkdir -p /mnt/backup/Arch/.kde4/share/apps
 
 #Config dirs
 rsync -av --delete ~/.config/chromium/Default /mnt/backup/Arch/.config/chromium/
@@ -24,8 +23,6 @@ rsync -av --delete ~/.dmenu_history /mnt/backup/Arch/
 rsync -av --delete ~/.zsh_history /mnt/backup/Arch/
 #Vim spelling
 rsync -av --delete ~/.vim/spell /mnt/backup/Arch/.vim/
-#KDE4 config
-rsync -av --delete ~/.kde4/share/apps/okular /mnt/backup/Arch/.kde4/share/apps/
 #SSH keys
 rsync -av --delete ~/.ssh /mnt/backup/Arch/
 
