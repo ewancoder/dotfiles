@@ -59,6 +59,7 @@ set laststatus=2 "Work with 1 window
 
 "Browsing through file
 Bundle "justinmk/vim-sneak"
+let g:sneak#use_ic_scs = 1
 nmap f <Plug>Sneak_s
 nmap F <Plug>Sneak_S
 
