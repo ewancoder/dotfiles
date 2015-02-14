@@ -1,4 +1,7 @@
 #========== GENERAL FUNCTIONS ==========
+import os
+def get(command):
+    return os.popen(command).read()
 
 global blocks
 blocks = []
@@ -11,6 +14,10 @@ def addBlock():
     global blocks
     global text, name, check, lower, bigger, mid
     x = len(blocks)
+    try:
+        int(lower)
+    except:
+        lower=get(lower)
     #Generate name for block
     if x < 10:
         name = 'Status_a' + str(x)
@@ -142,8 +149,8 @@ addBlock()
 #CPU Temperature
 text = "awk '{printf \"%.0f\", $1/1000; exit}' /sys/class/hwmon/hwmon0/temp*_input"
 check = text
-lower = 40
-mid = 50
+lower = "awk '{printf \"%.0f\", $1/1400; exit}' /sys/class/hwmon/hwmon0/temp*_max"
+mid = "awk '{printf \"%.0f\", $1/1200; exit}' /sys/class/hwmon/hwmon0/temp*_crit"
 addBlock()
 #CPU Frequency
 text = "cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf \"%.0f\\n\", $4}'"
