@@ -4,12 +4,12 @@ global blocks
 blocks = []
 global colRules, tagRules
 colRules, tagRules = '', ''
-global text, name, check, lower, bigger, mid, color
-text, name, check, lower, bigger, mid, color = '', '', '', '', '', '', ''
+global text, name, check, lower, bigger, mid
+text, name, check, lower, bigger, mid = '', '', '', '', '', ''
 
 def addBlock():
     global blocks
-    global text, name, check, lower, bigger, mid, color
+    global text, name, check, lower, bigger, mid
     x = len(blocks)
     #Generate name for block
     if x < 10:
@@ -17,8 +17,8 @@ def addBlock():
     else:
         name = 'Status_b' + str(x-10) #This is it, noone needs 20+ statusbars
     #Create new block
-    blocks.append([text, name, check, lower, bigger, mid, color])
-    text, name, check, lower, bigger, mid, color = '', '', '', '', '', '', ''
+    blocks.append([text, name, check, lower, bigger, mid])
+    text, name, check, lower, bigger, mid = '', '', '', '', '', ''
 
 #Function forming colrules
 def addColRule(col, rule):
@@ -82,8 +82,12 @@ startup = [
     'megasync',
     'ssh -fNL 7070:127.0.0.1:7070 root@192.168.100.110',
     'tilda',
-    'chromium --no-startup-window',
-    '~/bin/unarchive'
+    'chromium --no-startup-window'
+]
+#Events are executed each 5 seconds
+events = [
+    '~/bin/unarchive',
+    '~/bin/ircnotify'
 ]
 
 #=== COLUMN RULES ===

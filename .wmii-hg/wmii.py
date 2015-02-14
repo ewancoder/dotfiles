@@ -22,32 +22,28 @@ def run(command):
 #========== SET FUNCTIONS ==========
 
 #Set condition (Good/Middle/Bad) for a block
-def setCondition(name, check, lower, bigger, mid, color):
+def setCondition(name, check, lower, bigger, mid):
     if check != '':
         try:
             checked = float(get(check))
         except:
             checked = 0
-            pass
-        if bigger != "":
+        if bigger != '':
             if checked > float(bigger):
                 setColor(name, settings.goodColors)
-            elif (mid != "") and (checked > float(mid)):
+            elif (mid != '') and (checked > float(mid)):
                 setColor(name, settings.midColors)
             else:
                 setColor(name, settings.badColors)
         else:
             if checked < float(lower):
                 setColor(name, settings.goodColors)
-            elif (mid != "") and (checked < float(mid)):
+            elif (mid != '') and (checked < float(mid)):
                 setColor(name, settings.midColors)
             else:
                 setColor(name, settings.badColors)
     else:
-        if color != '':
-            setColor(name, color)
-        else:
-            setColor(name, settings.goodColors)
+        setColor(name, settings.goodColors)
 
 #Set column & tagging rules
 def setRules():
@@ -80,7 +76,7 @@ def makeBlocks():
 def statusBlocks():
     for x in settings.blocks:
         setStatus(x[1], get(x[0]))
-        setCondition(x[1], x[2], x[3], x[4], x[5], x[6])
+        setCondition(x[1], x[2], x[3], x[4], x[5])
 
 #Creates a block (name) if status != ''
 def check(status, name, color):
@@ -122,8 +118,6 @@ def loopStatusBar():
     check('~/bin/gitch green | xargs -L 1 basename | tr "\\n" " "', 'AGitCheckGreen', settings.gitGreenColors)
     #Check for pulseaudio sinks/sources and show them
     run("~/.wmii-hg/mypo")
-    #Check for IRC messages
-    run("~/bin/ircnotify")
 
 def loopTime():
     threading.Timer(1.0, loopTime).start()
@@ -140,10 +134,14 @@ def loopBackground():
 
 def loopSysUpdate():
     threading.Timer(settings.updatesTimeout, loopSysUpdate).start()
-    run("sed -i '/vlc 2.1.5-5/d' /tmp/yaourt.updates")
     num = get('cat /tmp/yaourt.updates | wc -l')
     if num != '0':
         run('notify-send -u low "Updates available (' + num + ')" "`cat /tmp/yaourt.updates`"')
+
+def loopEvents():
+    threading.Timer(5.0, loopEvents).start()
+    for e in settings.events:
+        run(e)
 
 def main():
     #Before all of this - we need to set background instead of ugly gray color
@@ -164,6 +162,8 @@ def main():
     loopStatusBar()
     #Update system check
     loopSysUpdate()
+    #Loop user-based events
+    loopEvents()
     #After all, Startup
     startup()
 
