@@ -18,6 +18,10 @@ def addBlock():
         int(lower)
     except:
         lower=get(lower)
+    try:
+        int(mid)
+    except:
+        mid=get(mid)
     #Generate name for block
     if x < 10:
         name = 'Status_a' + str(x)
