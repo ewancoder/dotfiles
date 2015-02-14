@@ -307,17 +307,17 @@ Key $MODKEY-Shift-KP_Begin
 KeyGroup Pulseaudio per-application volume control
 Key $MODKEY-KP_End
     if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume `cat /tmp/cind.mypo` -- -5000
+        pactl set-sink-input-volume `cat /tmp/cind.mypo` -5000
         ~/.wmii-hg/mypo
     fi
 Key $MODKEY-KP_Down
     if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume `cat /tmp/cind.mypo` -- 65536
+        pactl set-sink-input-volume `cat /tmp/cind.mypo` 65536
         ~/.wmii-hg/mypo
     fi
 Key $MODKEY-KP_Next
     if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume `cat /tmp/cind.mypo` -- +5000
+        pactl set-sink-input-volume `cat /tmp/cind.mypo` +5000
         ~/.wmii-hg/mypo
     fi
 Key $MODKEY-KP_Left
