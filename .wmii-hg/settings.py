@@ -105,7 +105,7 @@ addTagRule("Popcorn-Time", 9)
 
 #=== STATUSBAR ===
 #Time format
-time = "date +%a\\ %b\\ %d\\ %I:%M:%S"
+time = "date +%a\\ %b\\ %d\\ %I:%M:%S\\ %p"
 #Free RAM
 text = "echo $(top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/')"
 check = "top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/'"
@@ -146,7 +146,7 @@ addBlock()
 text = "cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf \"%.0f\\n\", $4}'"
 addBlock()
 #GPU Temperature
-text = "gnvidia-settings -q=GPUCoreTemp | grep -m 1 GPUCoreTemp | awk '{printf \"%.0f\\n\", $4}'"
+text = "nvidia-settings -q=GPUCoreTemp | grep -m 1 GPUCoreTemp | awk '{printf \"%.0f\\n\", $4}'"
 check = text
 lower = 40
 mid = 52

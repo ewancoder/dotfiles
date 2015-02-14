@@ -75,8 +75,6 @@ def makeBlocks():
             createBlock(x[1])
     #CreateTime
     createBlock("Time")
-    #Create AM/PM
-    createBlock("TimeZ")
 
 #Set text&color for all blocks
 def statusBlocks():
@@ -132,12 +130,7 @@ def loopTime():
         print('Exiting wmii, bye and good luck!')
         os._exit(1)
     setColor("Time", settings.goodColors)
-    if time.strftime('%p') == 'PM':
-        setColor("TimeZ", settings.pmColors)
-    else:
-        setColor("TimeZ", settings.amColors)
     setStatus("Time", get(settings.time))
-    setStatus("TimeZ", time.strftime('%p'))
 
 def loopBackground():
     threading.Timer(settings.timeout, loopBackground).start()
