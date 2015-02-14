@@ -1,3 +1,0 @@
-#!/bin/bash
-ssh -L 7070:127.0.0.1:7070 root@$IP_RPI -N &
-urxvt -name Canto -e canto-curses -a 127.0.0.1 -p 7070
