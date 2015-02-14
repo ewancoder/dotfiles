@@ -16,13 +16,10 @@ rsync -av --delete ~/.config/libreoffice /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/mc /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/Popcorn-Time /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/Trolltech.conf /mnt/backup/Arch/.config/
-rsync -av --delete ~/.config/vlc /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/VirtualBox /mnt/backup/Arch/.config/
 #Dmenu + zsh history :)
 rsync -av --delete ~/.dmenu_history /mnt/backup/Arch/
 rsync -av --delete ~/.zsh_history /mnt/backup/Arch/
-#Vim spelling
-rsync -av --delete ~/.vim/spell /mnt/backup/Arch/.vim/
 #SSH keys
 rsync -av --delete ~/.ssh /mnt/backup/Arch/
 
