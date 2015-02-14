@@ -206,8 +206,15 @@ Key $MODKEY-Shift-i
 KeyGroup Others
 Key $MODKEY-Control-Return
     ~/.wmii-hg/lstags
-#Toggle touchpad
+#Turn off mouse/touchpad
 Key $MODKEY-v
+    id=`xinput --list | grep "Wheel Mouse" | awk '{print $7}' | cut -f2 -d "="`
+    if [ "`xinput --list-props $id | grep "Device Enabled" | awk '{print $4}'`" == "0" ]; then
+        state=1
+    else
+        state=0
+    fi
+    xinput set-int-prop $id "Device Enabled" 8 $state
     synclient TouchpadOff=$(synclient -l | grep -c 'TouchpadOff.*=.*0') &
 #CINEMA MODE (turn off colors)
 Key $MODKEY-o
@@ -227,14 +234,14 @@ Key $MODKEY-Shift-KP_Enter
 Key $MODKEY-apostrophe
     wmiir remove /rbar/ZNotify
 #System update
-Key $MODKEY-Next
+Key $MODKEY-F10
     rm /tmp/yaourt.updates
     urxvt -e yaourt -Syua --noconfirm &
 #Screenshot
 Key Print
     dbss &
 #Go to Keep tag
-Key $MODKEY-End
+Key $MODKEY-F11
     if [ -z "$cv" ]; then
         cv="1"
     fi
@@ -245,12 +252,12 @@ Key $MODKEY-End
         cv=$seltag
         wmiir xwrite /ctl view Keep
     fi
-Key $MODKEY-Shift-End
+Key $MODKEY-Shift-F11
     wmiir xwrite /rbar/\!notice colors "$(var 11)"
     wmiir xwrite /rbar/\!notice label "Power off..."
     baconf
     systemctl poweroff -i
-Key $MODKEY-Shift-Next
+Key $MODKEY-Shift-F10
     wmiir xwrite /rbar/\!notice colors "$(var 11)"
     wmiir xwrite /rbar/\!notice label "Reboot..."
     baconf
@@ -277,9 +284,9 @@ Key $MODKEY-Shift-KP_Down
     if [ ! "`ps -C pulseaudio | grep defunct`" == "" ]; then
         pulseaudio --start
     fi
-    pacmd set-default-sink alsa_output.pci-0000_00_1b.0.analog-stereo
+    pacmd set-default-sink `pactl list | awk '/alsa_output.pci.*analog-stereo$/ {print $2; exit}'`
     for word in $(cat /tmp/inds.mypo); do
-        pacmd move-sink-input $word alsa_output.pci-0000_00_1b.0.analog-stereo
+        pacmd move-sink-input $word `pactl list | awk '/alsa_output.pci.*analog-stereo$/ {print $2; exit}'`
     done
 Key $MODKEY-Shift-KP_End
     ln -fs ~/.asoundrc_pulse ~/.asoundrc
