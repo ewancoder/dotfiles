@@ -1,5 +1,5 @@
 ﻿[client_settings]
-name = notebook
+name = ewancoder
 room = ewancoder
 playerpath = /usr/bin/vlc
 slowdownthreshold = 1.5
