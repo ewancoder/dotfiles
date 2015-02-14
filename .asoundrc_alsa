@@ -1,6 +1,6 @@
 #ALSA Build-In
-!defaults.pcm.card MID
-defaults.ctl.card MID
+!defaults.pcm.card CARDNAME
+defaults.ctl.card CARDNAME
 defaults.pcm.device 0
 defaults.pcm.subdevice -1
 defaults.pcm.nonblock 1
