@@ -9,7 +9,11 @@ pulseaudio --start &
 xrdb -merge ~/.Xresources &
 
 #Composition manager (can break some DE)
-compton --backend glx --paint-on-overlay --vsync opengl-swc &
+if [ `pacman -Q nvidia` ]; then
+    compton --backend glx --paint-on-overlay --vsync opengl-swc &
+else
+    compton &
+fi
 
 #Transparency rules
 devilspie &
