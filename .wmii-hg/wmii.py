@@ -122,6 +122,8 @@ def loopStatusBar():
     check('~/bin/gitch green | xargs -L 1 basename | tr "\\n" " "', 'AGitCheckGreen', settings.gitGreenColors)
     #Check for pulseaudio sinks/sources and show them
     run("~/.wmii-hg/mypo")
+    #Check for IRC messages
+    run("~/bin/ircnotify")
 
 def loopTime():
     threading.Timer(1.0, loopTime).start()
