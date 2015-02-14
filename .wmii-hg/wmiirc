@@ -299,10 +299,13 @@ Key $MODKEY-Shift-KP_End
         pacmd move-sink-input $word alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo
     done
 Key $MODKEY-Shift-KP_Left
-    ln -fs ~/.asoundrc_alsa_usb ~/.asoundrc
+    cp ~/.asoundrc_alsa ~/.asoundrc
+    sed -i 's/CARDNAME/Device/g'
     pulseaudio -k
 Key $MODKEY-Shift-KP_Begin
     ln -fs ~/.asoundrc_alsa ~/.asoundrc
+    cp ~/.asoundrc_alsa ~/.asoundrc
+    sed -i "s/CARDNAME/`awk '/\[SB|\[MID/ {print substr($2,2)}' /proc/asound/cards`/g"
     pulseaudio -k
 
 KeyGroup Pulseaudio per-application volume control
