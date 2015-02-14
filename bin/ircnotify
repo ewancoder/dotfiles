@@ -1,6 +1,6 @@
 #!/bin/bash
-while true; do
-    rsync -av --remove-source-files -e ssh root@192.168.100.110:/root/.irssi/notifications /tmp/notifications
+if ifconfig | grep 192.168.100.22 || ! ping -c 1 192.168.100.22; then
+    rsync -av --remove-source-files -e ssh root@192.168.100.110:/root/.irssi/notifications /tmp/notifications 2>/dev/null
     if [ -f /tmp/notifications ]; then
         cat /tmp/notifications | while read line; do
             IFS='Þ' read -a parts <<< "$line"
@@ -19,5 +19,4 @@ while true; do
         done
         rm /tmp/notifications
     fi
-    sleep 5
-done
+fi
