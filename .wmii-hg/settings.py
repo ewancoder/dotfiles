@@ -67,7 +67,7 @@ border = 1
 position = 'top'
 
 #Background folder
-background = '~/Dropbox/Pictures/Notebook'
+background = '~/Dropbox/Pictures'
 #Timeout to change background, in seconds
 timeout = 300
 
@@ -131,19 +131,25 @@ lower = 55
 mid = 75
 addBlock()
 #Space at /mnt/backup
-#text = "echo $(df -h /mnt/backup | grep backup | awk '{print $5}' | tr -d '%') 'B'"
-#check = "df -h /mnt/backup | grep backup | awk '{print $5}' | tr -d '%'"
-#lower = 55
-#mid = 75
-#addBlock()
+text = "echo $(df -h /mnt/backup | grep backup | awk '{print $5}' | tr -d '%') 'B'"
+check = "df -h /mnt/backup | grep backup | awk '{print $5}' | tr -d '%'"
+lower = 55
+mid = 75
+addBlock()
 #CPU Temperature
 text = "awk '{printf \"%.0f\", $1/1000}' /sys/class/hwmon/hwmon0/temp{1,2}_input"
 check = text
-lower = 65
-mid = 70
+lower = 40
+mid = 50
 addBlock()
 #CPU Frequency
 text = "cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf \"%.0f\\n\", $4}'"
+addBlock()
+#GPU Temperature
+text = "nvidia-settings -q=GPUCoreTemp | grep -m 1 GPUCoreTemp | awk '{printf \"%.0f\\n\", $4}'"
+check = text
+lower = 40
+mid = 52
 addBlock()
 #NETSTATS
 text = "~/.wmii-hg/netmon"
