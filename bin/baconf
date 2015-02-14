@@ -15,9 +15,10 @@ rsync -av --delete ~/.config/deluge /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/libreoffice /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/mc /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/VirtualBox /mnt/backup/Arch/.config/
-#Dmenu + zsh history :)
+#Dmenu + zsh + vim history :)
 rsync -av --delete ~/.dmenu_history /mnt/backup/Arch/
 rsync -av --delete ~/.zsh_history /mnt/backup/Arch/
+rsync -av --delete ~/.vim_mru_files /mnt/backup/Arch/
 #SSH keys
 rsync -av --delete ~/.ssh /mnt/backup/Arch/
 
