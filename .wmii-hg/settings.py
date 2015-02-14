@@ -105,7 +105,7 @@ addTagRule("Popcorn-Time", 9)
 
 #=== STATUSBAR ===
 #Time format
-time = "date +%a\\ %b\\ %d\\ %I:%M:%S"
+time = "date +%a\\ %b\\ %d\\ %I:%M:%S\\ %p"
 #Free RAM
 text = "echo $(top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/')"
 check = "top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/'"
@@ -137,7 +137,7 @@ addBlock()
 #mid = 75
 #addBlock()
 #CPU Temperature
-text = "cat /sys/class/hwmon/hwmon0/temp2_input | cut -c1-2"
+text = "awk '{printf \"%.0f\", $1/1000}' /sys/class/hwmon/hwmon0/temp{1,2}_input"
 check = text
 lower = 65
 mid = 70
@@ -147,9 +147,6 @@ text = "cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf \"%.0f\\n\", $4}'"
 addBlock()
 #NETSTATS
 text = "~/.wmii-hg/netmon"
-addBlock()
-#Sound Volume
-text = "~/.wmii-hg/volume"
 addBlock()
 #CPU Uptime
 text = "uptime | sed 's/.*://; s/, / /g'"

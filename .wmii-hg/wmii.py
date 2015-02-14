@@ -71,31 +71,16 @@ def setColor(name, color):
 #Create all blocks
 def makeBlocks():
     for x in settings.blocks:
-        createBlock(x[1])
+        if get(x[0]) != '':
+            createBlock(x[1])
     #CreateTime
     createBlock("Time")
-    #Create AM/PM
-    createBlock("TimeZ")
 
 #Set text&color for all blocks
 def statusBlocks():
     for x in settings.blocks:
         setStatus(x[1], get(x[0]))
-        if x[1] != 'Status_a8':
-            setCondition(x[1], x[2], x[3], x[4], x[5], x[6])
-    try:
-        if get('pactl stat; echo $?') == '1':
-            if get('ls -l ~/.asoundrc | awk \'{print $11}\'') == "/home/ewancoder/.asoundrc_alsa_usb":
-                setColor('Status_a8', settings.badColors)
-            else:
-                setColor('Status_a8', settings.amColors)
-        elif get('pactl info | grep "Default Sink" | awk \'{print $3}\'') == "alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo":
-            setColor('Status_a8', settings.speakerColors)
-        else:
-            setColor('Status_a8', settings.goodColors)
-    except:
-        pass
-
+        setCondition(x[1], x[2], x[3], x[4], x[5], x[6])
 
 #Creates a block (name) if status != ''
 def check(status, name, color):
@@ -145,12 +130,7 @@ def loopTime():
         print('Exiting wmii, bye and good luck!')
         os._exit(1)
     setColor("Time", settings.goodColors)
-    if time.strftime('%p') == 'PM':
-        setColor("TimeZ", settings.pmColors)
-    else:
-        setColor("TimeZ", settings.amColors)
     setStatus("Time", get(settings.time))
-    setStatus("TimeZ", time.strftime('%p'))
 
 def loopBackground():
     threading.Timer(settings.timeout, loopBackground).start()
