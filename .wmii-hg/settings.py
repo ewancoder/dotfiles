@@ -137,7 +137,7 @@ lower = 55
 mid = 75
 addBlock()
 #CPU Temperature
-text = "cat /sys/class/hwmon/hwmon0/temp1_input | cut -c1-2"
+text = "awk '{printf \"%.0f\", $1/1000}' /sys/class/hwmon/hwmon0/temp{1,2}_input"
 check = text
 lower = 40
 mid = 50
@@ -146,16 +146,13 @@ addBlock()
 text = "cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf \"%.0f\\n\", $4}'"
 addBlock()
 #GPU Temperature
-text = "nvidia-settings -q=GPUCoreTemp | grep -m 1 GPUCoreTemp | awk '{printf \"%.0f\\n\", $4}'"
+text = "gnvidia-settings -q=GPUCoreTemp | grep -m 1 GPUCoreTemp | awk '{printf \"%.0f\\n\", $4}'"
 check = text
 lower = 40
 mid = 52
 addBlock()
 #NETSTATS
 text = "~/.wmii-hg/netmon"
-addBlock()
-#Sound Volume
-text = "~/.wmii-hg/volume"
 addBlock()
 #CPU Uptime
 text = "uptime | sed 's/.*://; s/, / /g'"
