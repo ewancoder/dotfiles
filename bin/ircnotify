@@ -14,7 +14,7 @@ if ifconfig | grep 192.168.100.22 || ! ping -c 1 192.168.100.22; then
                 fi
                 echo ${parts[0]}
                 notify-send -t "${parts[3]}" "${parts[0]}" "${parts[1]}" -u ${parts[2]};
-                sleep 0.1
+                sleep .1
             fi
         done
         rm /tmp/notifications
