@@ -140,7 +140,7 @@ lower = 55
 mid = 75
 addBlock()
 #CPU Temperature
-text = "awk '{printf \"%.0f\", $1/1000}' /sys/class/hwmon/hwmon0/temp{1,2}_input"
+text = "awk '{printf \"%.0f\", $1/1000; exit}' /sys/class/hwmon/hwmon0/temp*_input"
 check = text
 lower = 40
 mid = 50
