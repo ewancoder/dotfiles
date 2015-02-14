@@ -15,6 +15,7 @@ alias gim='git merge --no-ff'
 alias gip='if [ "`ssh-add -L | grep github`" "==" "" ]; then github; fi; git push origin'
 alias gipp='git pull'
 alias gis='git status'
+alias gif='if [ "`ssh-add -L | grep github`" "==" "" ]; then github; fi; git fetch && git pull'
 
 #=== Some utils===
 #Lock screen
