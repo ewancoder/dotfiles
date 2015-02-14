@@ -28,9 +28,9 @@ alias sc='screen -rd'
 #Screenshot of a window
 alias scr='xdotool mousemove - 1 mousemove restore; scrot -s `date +%d%H%M%S`.png'
 #Connect to RPI over ssh
-alias sshrpi='ssh -t root@192.168.100.110'
+alias sshrpi='ssh -t root@`cat .rpi`'
 #SSH background tunnel
-alias sshl='ssh -fNL 7070:127.0.0.1:7070 root@192.168.100.110'
+alias sshl='ssh -fNL 7070:127.0.0.1:7070 root@`cat .rpi`'
 #Typo fix
 alias xit='exit'
 
