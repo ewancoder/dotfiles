@@ -129,19 +129,21 @@ def loopTime():
     setStatus("Time", get(settings.time))
 
 def loopBackground():
-    threading.Timer(settings.timeout, loopBackground).start()
+    threading.Timer(settings.bgTimeout, loopBackground).start()
     run('feh --bg-fill --randomize --recursive ' + settings.background)
+
+def loopEvents():
+    threading.Timer(settings.eventsTimeout, loopEvents).start()
+    for e in settings.events:
+        run(e)
 
 def loopSysUpdate():
     threading.Timer(settings.updatesTimeout, loopSysUpdate).start()
-    num = get('cat /tmp/yaourt.updates | wc -l')
-    if num != '0':
-        run('notify-send -u low "Updates available (' + num + ')" "`cat /tmp/yaourt.updates`"')
-
-def loopEvents():
-    threading.Timer(5.0, loopEvents).start()
-    for e in settings.events:
-        run(e)
+    try:
+        if os.stat("/tmp/yaourt.updates").st_size != 0:
+            run('notify-send -u low "Updates available (`wc -l /tmp/yaourt.updates`)" "`cat /tmp/yaourt.updates`"')
+    except:
+        pass
 
 def main():
     #Before all of this - we need to set background instead of ugly gray color
@@ -160,10 +162,10 @@ def main():
     #Handle StatusBar
     makeBlocks()
     loopStatusBar()
-    #Update system check
-    loopSysUpdate()
     #Loop user-based events
     loopEvents()
+    #Update system check
+    loopSysUpdate()
     #After all, Startup
     startup()
 

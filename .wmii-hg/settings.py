@@ -80,9 +80,11 @@ position = 'top'
 #Background folder
 background = '~/Dropbox/Pictures'
 #Timeout to change background, in seconds
-timeout = 300
 
-#Notify about system updates each N seconds
+#Timeouts (in seconds)
+bgTimeout = 300
+eventsTimeout = 5
+statusTimeout = 2
 updatesTimeout = 600
 
 #Startup X11 apps
