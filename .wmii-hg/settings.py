@@ -87,7 +87,6 @@ updatesTimeout = 600
 
 #Startup X11 apps
 startup = [
-    'pasystray',
     'gxkb',
     'dropbox',
     'megasync',
