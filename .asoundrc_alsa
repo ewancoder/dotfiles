@@ -1,4 +1,4 @@
-#ALSA Build-In
+#ALSA
 !defaults.pcm.card CARDNAME
 defaults.ctl.card CARDNAME
 defaults.pcm.device 0
