@@ -1,5 +1,6 @@
 #=== GIT ===
 alias github='ssh-add ~/.ssh/github'
+alias ga='git add'
 alias gia='git add -A'
 alias gic='git commit -v'
 alias gic!='git commit -v --amend'
