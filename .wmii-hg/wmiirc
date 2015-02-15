@@ -329,6 +329,16 @@ Key $MODKEY-KP_Left
 Key $MODKEY-KP_Right
     ~/.wmii-hg/mypo next
 
+Key $MODKEY-KP_Home
+    amixer -q sset Capture 5000-
+    notify-send "Capture" -t 500 -h int:value:`amixer | awk '/(Mono|Left): Capture/ {print $4}' | tr -d '[]%'` -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
+Key $MODKEY-KP_Up
+    amixer -q sset Capture 65536
+    notify-send "Capture" -t 500 -h int:value:`amixer | awk '/(Mono|Left): Capture/ {print $4}' | tr -d '[]%'` -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
+Key $MODKEY-KP_Prior
+    amixer -q sset Capture 5000+
+    notify-send "Capture" -t 500 -h int:value:`amixer | awk '/(Mono|Left): Capture/ {print $4}' | tr -d '[]%'` -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
+
 KeyGroup Tag actions
 Key $MODKEY-t       # Change to another tag
 	wmiir xwrite /ctl view $(wi_tags | wimenu -h "${hist}.tags" -n 50) &
