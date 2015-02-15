@@ -1,6 +1,3 @@
-#Exit wmii properly
-alias quit='wmiir xwrite /ctl quit'
-
 #=== GIT ===
 alias github='ssh-add ~/.ssh/github'
 alias gia='git add -A'
@@ -13,17 +10,10 @@ alias gil='git log --oneline --graph --color --all --decorate'
 alias gils='git ls-files | less'
 alias gim='git merge --no-ff'
 alias gip='if [ "`ssh-add -L | grep github`" "==" "" ]; then github; fi; git push origin'
-alias gipp='git pull'
 alias gis='git status'
 alias gif='if [ "`ssh-add -L | grep github`" "==" "" ]; then github; fi; git fetch && git pull'
 
-#=== Some utils===
-#Lock screen
-alias lock='xdotool mousemove - 1 mousemove restore; xscreensaver-command --lock'
-#Server sshfs
-alias ng='sshfs root@`cat .rpi`:/usr/share/nginx/html ~/html'
-#For aliases working with sudo
-alias s='sudo '
+#=== Utils===
 #Reattach screen session(s)
 alias sc='screen -rd'
 #Screenshot of a window
@@ -32,16 +22,8 @@ alias scr='xdotool mousemove - 1 mousemove restore; scrot -s `date +%d%H%M%S`.pn
 alias sshrpi='ssh -t root@`cat .rpi`'
 #SSH background tunnel
 alias sshl='ssh -fNL 7070:127.0.0.1:7070 root@`cat .rpi`'
-#Typo fix
-alias xit='exit'
 
 #=== Software ===
-#Anylogic
-alias al='/mnt/cloud/Mega/Portable\ Software/anylogic/anylogic'
-#Canto-curses client
-alias canto='canto-curses -a 127.0.0.1 -p 7070 -v'
-#Godot
-alias god='PULSE_LATENCY_MSEC=60 godot'
 #Gparted
 alias gpart='xdotool mousemove - 1 mousemove restore; gksu gparted'
 #Minecraft FeedTheBeast + Technic
@@ -55,5 +37,3 @@ alias pt='~/Mega/Software/Popcorn-Time/Popcorn-Time'
 alias terr='cd ~/Mega/GameSaves/Terraria && mono TerrariaServer.exe'
 #VLC with SYNCPLAY
 alias vl='syncplay --no-gui'
-#Warsow (on the second workspace)
-alias war='warsow & sleep 5 && wmiir xwrite /ctl view 2'
