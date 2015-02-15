@@ -15,6 +15,7 @@ set encoding=utf8
 "Execute VUNDLE
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+imap <A-z> <C-^>
 
 "---------- Vundle Bundles ----------
 Bundle 'gmarik/vundle'
