@@ -144,15 +144,12 @@ def main():
     loopBackground()
     #Set position
     run("wmiir xwrite /ctl bar on " + settings.position)
+    #Set Rules
+    setRules()
     #Run tray
     run("witray")
-    #Make uname to noticebar
-    setColor("\!notice", settings.altColors)
-    run("wmiir xwrite /rbar/\!notice label $(uname -r)")
     #Handle Time
     loopTime()
-    #Handle Rules
-    setRules()
     #Handle StatusBar
     loopStatusBar()
     #Loop user-based events

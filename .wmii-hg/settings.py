@@ -88,7 +88,7 @@ startup = [
 events = [
     '~/bin/unarchive',
     '~/bin/ircnotify',
-    '~/.wmii-hg/mypo'
+    '~/bin/mypo'
 ]
 
 #=== COLUMN RULES ===
@@ -111,6 +111,10 @@ addTagRule("Popcorn-Time", 9)
 time = "date +%a\\ %b\\ %d\\ %I:%M:%S\\ %p"
 
 #=== PRE-STATUSBAR ===
+#Kernel
+text = 'uname -r'
+color = altColors
+addBlock()
 #GIT activity
 text = "~/bin/gitch | awk '/Unstaged/ {print $2}'"
 color = gitColors
