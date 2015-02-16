@@ -279,7 +279,7 @@ Key $MODKEY-Delete
 
 KeyGroup Pulseaudio switching devices
 Key $MODKEY-Shift-KP_Down
-    ln -fs ~/.asoundrc_pulse ~/.asoundrc
+    cp ~/.asoundrc_pulse ~/.asoundrc
     ps -C pulseaudio > /dev/null 2>&1 || pulseaudio --start
     if [ ! "`ps -C pulseaudio | grep defunct`" == "" ]; then
         pulseaudio --start
@@ -288,8 +288,9 @@ Key $MODKEY-Shift-KP_Down
     for word in $(cat /tmp/inds.mypo); do
         pacmd move-sink-input $word `pactl list | awk '/alsa_output.pci.*analog-stereo$/ {print $2; exit}'`
     done
+    ~/bin/mypo
 Key $MODKEY-Shift-KP_End
-    ln -fs ~/.asoundrc_pulse ~/.asoundrc
+    cp ~/.asoundrc_pulse ~/.asoundrc
     ps -C pulseaudio > /dev/null 2>&1 || pulseaudio --start
     if [ ! "`ps -C pulseaudio | grep defunct`" == "" ]; then
         pulseaudio --start
@@ -298,12 +299,12 @@ Key $MODKEY-Shift-KP_End
     for word in $(cat /tmp/inds.mypo); do
         pacmd move-sink-input $word alsa_output.usb-05e1_USB_VoIP_Device-00-Device.analog-stereo
     done
+    ~/bin/mypo
 Key $MODKEY-Shift-KP_Left
     cp ~/.asoundrc_alsa ~/.asoundrc
     sed -i 's/CARDNAME/Device/g'
     pulseaudio -k
 Key $MODKEY-Shift-KP_Begin
-    ln -fs ~/.asoundrc_alsa ~/.asoundrc
     cp ~/.asoundrc_alsa ~/.asoundrc
     sed -i "s/CARDNAME/`awk '/\[SB|\[MID/ {print substr($2,2)}' /proc/asound/cards`/g"
     pulseaudio -k
@@ -312,22 +313,22 @@ KeyGroup Pulseaudio per-application volume control
 Key $MODKEY-KP_End
     if [ -f /tmp/inds.mypo ]; then
         pactl set-sink-input-volume `cat /tmp/cind.mypo` -5000
-        ~/.wmii-hg/mypo
+        ~/bin/mypo
     fi
 Key $MODKEY-KP_Down
     if [ -f /tmp/inds.mypo ]; then
         pactl set-sink-input-volume `cat /tmp/cind.mypo` 65536
-        ~/.wmii-hg/mypo
+        ~/bin/mypo
     fi
 Key $MODKEY-KP_Next
     if [ -f /tmp/inds.mypo ]; then
         pactl set-sink-input-volume `cat /tmp/cind.mypo` +5000
-        ~/.wmii-hg/mypo
+        ~/bin/mypo
     fi
 Key $MODKEY-KP_Left
-    ~/.wmii-hg/mypo prev
+    ~/bin/mypo prev
 Key $MODKEY-KP_Right
-    ~/.wmii-hg/mypo next
+    ~/bin/mypo next
 
 Key $MODKEY-KP_Home
     amixer -q sset Capture 5000-
