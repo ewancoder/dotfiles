@@ -6,6 +6,9 @@ import subprocess
 import threading
 import time
 
+#Variable to store created blocks names
+blocknames = []
+
 #Mask for removing \n\t\r from bash get() function result
 mask = re.compile('[\n\t\r]')
 
@@ -65,11 +68,15 @@ def setRules():
 
 #Create block
 def createBlock(name):
-    run('wmiir create /rbar/' + name)
+    if name not in blocknames:
+        run('wmiir create /rbar/' + name)
+        blocknames.append(name)
 
 #Remove block
 def removeBlock(name):
-    run('wmiir rm /rbar/' + name)
+    if name in blocknames:
+        run('wmiir rm /rbar/' + name)
+        blocknames.remove(name)
 
 #Set block text
 def setStatus(name, text):
