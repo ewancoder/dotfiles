@@ -13,8 +13,10 @@ def addBlock():
     #Generate name for block
     if x < 10:
         name = 'Status_a' + str(x)
+    elif x < 20:
+        name = 'Status_b' + str(x-10)
     else:
-        name = 'Status_b' + str(x-10) #This is it, noone needs 20+ statusbars
+        name = 'Status_c' + str(x-20)
     #Create new block
     blocks.append([text, name, check, lower, bigger, mid, color])
     text, name, check, lower, bigger, mid, color = '', '', '', '', '', '', ''
