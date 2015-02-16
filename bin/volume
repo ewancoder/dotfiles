@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #Check lock file
 if [ -f /tmp/volume.lock -a ! "$1" == "" ]; then
     exit

@@ -189,13 +189,13 @@ Key $MODKEY-w
     
 KeyGroup Volume control   
 Key $MODKEY-x
-    ~/.wmii-hg/volume up &
+    ~/bin/volume up &
 Key $MODKEY-z
-    ~/.wmii-hg/volume down &
+    ~/bin/volume down &
 Key $MODKEY-Shift-z
-    ~/.wmii-hg/volume off &
+    ~/bin/volume off &
 Key $MODKEY-Shift-x
-    ~/.wmii-hg/volume on &
+    ~/bin/volume on &
 
 KeyGroup Keyboard layouts
 Key $MODKEY-i
