@@ -302,11 +302,11 @@ Key $MODKEY-Shift-KP_End
     ~/bin/mypo
 Key $MODKEY-Shift-KP_Left
     cp ~/.asoundrc_alsa ~/.asoundrc
-    sed -i 's/CARDNAME/Device/g'
+    sed -i 's/CARDNAME/Device/g' ~/.asoundrc
     pulseaudio -k
 Key $MODKEY-Shift-KP_Begin
     cp ~/.asoundrc_alsa ~/.asoundrc
-    sed -i "s/CARDNAME/`awk '/\[SB|\[MID/ {print substr($2,2)}' /proc/asound/cards`/g"
+    sed -i "s/CARDNAME/`awk '/\[SB|\[MID/ {print substr($2,2)}' /proc/asound/cards`/g" ~/.asoundrc
     pulseaudio -k
 
 KeyGroup Pulseaudio per-application volume control
