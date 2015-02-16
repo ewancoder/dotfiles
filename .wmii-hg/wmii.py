@@ -9,41 +9,52 @@ import time
 #Mask for removing \n\t\r from bash get() function result
 mask = re.compile('[\n\t\r]')
 
-#========== REGULAR FUNCTIONS ==========
+#========== OS FUNCTIONS ==========
 
 #Get result from bash command
 def get(command):
     return mask.sub('', os.popen(command).read())
 
-#Just os.system but with '&'
+#Run command in background
 def run(command):
     os.system(command + ' > /dev/null 2>&1 &')
 
 #========== SET FUNCTIONS ==========
 
 #Set condition (Good/Middle/Bad) for a block
-def setCondition(name, check, lower, bigger, mid):
+def setCondition(name, check, lower, bigger, mid, color):
+    try:
+        check = float(get(check))
+    except:
+        check = ''
+    if color == '':
+        color = settings.goodColors
     if check != '':
-        try:
-            checked = float(get(check))
-        except:
-            checked = 0
-        if bigger != '':
-            if checked > float(bigger):
-                setColor(name, settings.goodColors)
-            elif (mid != '') and (checked > float(mid)):
+        lbm = [0, 0, 0]
+        for index, i in enumerate([lower, bigger, mid]):
+            try:
+                lbm[index] = float(i)
+            except:
+                try:
+                    lbm[index] = float(get(i))
+                except:
+                    lbm[index] = 0
+        if lbm[1] != 0:
+            if check > lbm[1]:
+                setColor(name, color)
+            elif check > lbm[2]:
                 setColor(name, settings.midColors)
             else:
                 setColor(name, settings.badColors)
         else:
-            if checked < float(lower):
-                setColor(name, settings.goodColors)
-            elif (mid != '') and (checked < float(mid)):
+            if check < lbm[0]:
+                setColor(name, color)
+            elif check < lbm[2]:
                 setColor(name, settings.midColors)
             else:
                 setColor(name, settings.badColors)
     else:
-        setColor(name, settings.goodColors)
+        setColor(name, color)
 
 #Set column & tagging rules
 def setRules():
@@ -56,6 +67,10 @@ def setRules():
 def createBlock(name):
     run('wmiir create /rbar/' + name)
 
+#Remove block
+def removeBlock(name):
+    run('wmiir rm /rbar/' + name)
+
 #Set block text
 def setStatus(name, text):
     run('wmiir xwrite /rbar/' + name + ' label "' + text + '"')
@@ -63,30 +78,6 @@ def setStatus(name, text):
 #Set block color
 def setColor(name, color):
     run('wmiir xwrite /rbar/' + name + ' colors "' + color + '"')
-
-#Create all blocks
-def makeBlocks():
-    for x in settings.blocks:
-        if get(x[0]) != '':
-            createBlock(x[1])
-    #CreateTime
-    createBlock("Time")
-
-#Set text&color for all blocks
-def statusBlocks():
-    for x in settings.blocks:
-        setStatus(x[1], get(x[0]))
-        setCondition(x[1], x[2], x[3], x[4], x[5])
-
-#Creates a block (name) if status != ''
-def check(status, name, color):
-    currentStatus = get(status)
-    if currentStatus != '':
-        createBlock(name)
-        setColor(name, color)
-        setStatus(name, currentStatus)
-    else:
-        run('wmiir rm /rbar/' + name)
 
 #========== STARTUP FUNCTIONS ==========
 
@@ -105,19 +96,15 @@ def killAll():
 
 def loopStatusBar():
     threading.Timer(2.0, loopStatusBar).start()
-    statusBlocks()
-    #Check for cp (cv) running and show percentage
-    check('cv | grep % | awk \'{for(i=1;i<=NF;i++) if ($i ~/%$/) {print $i+0} {print " "}}\'', 'Processing', settings.midColors)
-    #Check for removable media mounted and show them
-    check('ls -1 /media | tr "\\n" " "', 'Devices', settings.deviceColors)
-    check('if [ -f /tmp/usb.lock ]; then echo "Working..."; fi', 'DevicesBackup', settings.deviceColors)
-    check('if ! [ "$(ps aux | grep "devmon --unmount" | grep -v grep)" == "" ]; then echo "Unmounting..."; fi', 'DevicesUnmount', settings.deviceColors)
-    #Check for git repos unstaged/unpushed/uncommited and show them
-    check('~/bin/gitch | xargs -L 1 basename | tr "\\n" " "', 'AGitCheck', settings.gitColors)
-    check('~/bin/gitch blue | xargs -L 1 basename | tr "\\n" " "', 'AGitCheckBlue', settings.gitBlueColors)
-    check('~/bin/gitch green | xargs -L 1 basename | tr "\\n" " "', 'AGitCheckGreen', settings.gitGreenColors)
-    #Check for pulseaudio sinks/sources and show them
-    run("~/.wmii-hg/mypo")
+    createBlock("Time")
+    for x in settings.blocks:
+        currentStatus = get(x[0])
+        if currentStatus != '':
+            createBlock(x[1])
+            setStatus(x[1], get(x[0]))
+            setCondition(x[1], x[2], x[3], x[4], x[5], x[6])
+        else:
+            removeBlock(x[1])
 
 def loopTime():
     threading.Timer(1.0, loopTime).start()
@@ -160,7 +147,6 @@ def main():
     #Handle Rules
     setRules()
     #Handle StatusBar
-    makeBlocks()
     loopStatusBar()
     #Loop user-based events
     loopEvents()

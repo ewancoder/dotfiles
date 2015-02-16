@@ -2,14 +2,20 @@
 for repo in ~/.dotfiles ~/eal ~/btp /etc/.dotfiles ~/archlive/releng ~/rpidots ~/site; do
     if [ -d $repo ]; then
         cd $repo
-        if [ ! "$(git status | grep -i "not staged\|untracked")" == "" -a "$1" == "" ]; then
-            echo $repo-`basename $(dirname $repo)`
+        if git status | grep -i "not staged\|untracked"; then
+            echo "Unstaged: `basename $repo`-`basename $(dirname $repo)`"
+        else
+            echo ""
         fi
-        if [ ! "$(git status | grep -i "ahead")" == "" -a "$1" == "blue" ]; then
-            echo $repo-`basename $(dirname $repo)`
+        if git status | grep -i "ahead"; then
+            echo "Ahead: `basename $repo`-`basename $(dirname $repo)`"
+        else
+            echo ""
         fi
-        if [ ! "$(git status | grep -i "to be committed")" == "" -a "$1" == "green" ]; then
-            echo $repo-`basename $(dirname $repo)`
+        if git status | grep -i "to be committed"; then
+            echo "Staged: `basename $repo`-`basename $(dirname $repo)`"
+        else
+            echo ""
         fi
     fi
 done

@@ -1,35 +1,23 @@
 #========== GENERAL FUNCTIONS ==========
-import os
-def get(command):
-    return os.popen(command).read()
-
 global blocks
 blocks = []
 global colRules, tagRules
 colRules, tagRules = '', ''
-global text, name, check, lower, bigger, mid
-text, name, check, lower, bigger, mid = '', '', '', '', '', ''
+global text, name, check, lower, bigger, mid, color
+text, name, check, lower, bigger, mid, color = '', '', '', '', '', '', ''
 
 def addBlock():
     global blocks
-    global text, name, check, lower, bigger, mid
+    global text, name, check, lower, bigger, mid, color
     x = len(blocks)
-    try:
-        int(lower)
-    except:
-        lower=get(lower)
-    try:
-        int(mid)
-    except:
-        mid=get(mid)
     #Generate name for block
     if x < 10:
         name = 'Status_a' + str(x)
     else:
         name = 'Status_b' + str(x-10) #This is it, noone needs 20+ statusbars
     #Create new block
-    blocks.append([text, name, check, lower, bigger, mid])
-    text, name, check, lower, bigger, mid = '', '', '', '', '', ''
+    blocks.append([text, name, check, lower, bigger, mid, color])
+    text, name, check, lower, bigger, mid, color = '', '', '', '', '', '', ''
 
 #Function forming colrules
 def addColRule(col, rule):
@@ -99,7 +87,8 @@ startup = [
 #Events are executed each 5 seconds
 events = [
     '~/bin/unarchive',
-    '~/bin/ircnotify'
+    '~/bin/ircnotify',
+    '~/.wmii-hg/mypo'
 ]
 
 #=== COLUMN RULES ===
@@ -118,9 +107,38 @@ addTagRule("vlc", "sel+0")
 #PopcornTime
 addTagRule("Popcorn-Time", 9)
 
-#=== STATUSBAR ===
 #Time format
 time = "date +%a\\ %b\\ %d\\ %I:%M:%S\\ %p"
+
+#=== PRE-STATUSBAR ===
+#GIT activity
+text = "~/bin/gitch | awk '/Unstaged/ {print $2}'"
+color = gitColors
+addBlock()
+text = "~/bin/gitch | awk '/Ahead/ {print $2}'"
+color = gitBlueColors
+addBlock()
+text = "~/bin/gitch | awk '/Staged/ {print $2}'"
+color = gitGreenColors
+addBlock()
+#Removable USB
+text = 'ls -1 /media | tr "\\n" " "'
+color = deviceColors
+addBlock()
+#USB backup
+text = 'if [ -f /tmp/usb.lock ]; then echo "Working..."; fi'
+color = deviceColors
+addBlock()
+#Unmounting message
+text = 'if ! [ "$(ps aux | grep "devmon --unmount" | grep -v grep)" == "" ]; then echo "Unmounting..."; fi'
+color = deviceColors
+addBlock()
+#Check for cp/mv activity
+text = "cv | awk '/%/ {for(i=1;i<=NF;i++) if ($i ~/%$/) {print $i+0} {print " "}}'"
+color = midColors
+addBlock()
+
+#=== STATUSBAR ===
 #Free RAM
 text = "echo $(top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/')"
 check = "top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/'"
