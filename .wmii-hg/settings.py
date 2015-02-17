@@ -191,7 +191,7 @@ lower = 40
 mid = 52
 addBlock()
 #NETSTATS
-text = "~/.wmii-hg/netmon"
+text = "~/bin/netmon"
 addBlock()
 #CPU Uptime
 text = "uptime | sed 's/.*://; s/, / /g'"
