@@ -108,7 +108,7 @@ def loopStatusBar():
         currentStatus = get(x[0])
         if currentStatus != '':
             createBlock(x[1])
-            setStatus(x[1], get(x[0]))
+            setStatus(x[1], currentStatus)
             setCondition(x[1], x[2], x[3], x[4], x[5], x[6])
         else:
             removeBlock(x[1])
