@@ -1,38 +1,32 @@
 #!/bin/bash
 other=0
 ready=0
-
-if [ "$1" == "-o" -o "$2" == "-o" -o "$3" == "-o" -o "$1" == "-ro" -o "$1" == "-or" -o "$2" == "-ro" -o "$2" == "-or" ]; then
-    other=1
-    if [ ${#1} -gt 3 -o ${#2} -gt 3 -o ${#2} -gt 3 ]; then
-        if [ ${#1} -gt 3 ]; then
-            name="$1"
-        elif [ ${#2} -gt 3 ]; then
-            name="$2"
-        else
-            name="$3"
-        fi
-        if [ "$name" == "empty" ]; then
-            name=""
-        fi
-    else
-        name="Табунов Е. А."
-    fi
-fi
-
-if [ "$1" == "-r" -o "$2" == "-r" -o "$3" == "-r" -o "$1" == "-ro" -o "$1" == "-or" -o "$2" == "-ro" -o "$2" == "-or" ]; then
-    ready=1
-fi
+while [ $1 ]; do
+    case $1 in
+        -o|--other)
+            other=1
+            name=$2
+            shift;;
+        -r|--ready)
+            ready=1;;
+        -b|--beamer)
+            beamer=1;;
+    esac
+    shift
+done
 
 mkdir -p .build
-ln -fs ../preamble.tex ../*.bib .
-
+cd .build
+ln -fs ../*.{tex,bib} .
+if [ $beamer -eq 1 ]; then
+    ln -fs ../../../*.{tex,bib} .
+else
+    ln -fs ../../*.{tex,bib} .
+fi
+ln -fs ../Figures .
 build(){
-    cd .build
-    ln -fs ../*.tex ../Figures .
     pdflatex -shell-escape main
     bibtex main
-    pdflatex -shell-escape main
     pdflatex -shell-escape main
     cd ..
 }
@@ -42,14 +36,14 @@ mv .build/main.pdf `basename $PWD`.pdf
 
 if [ $other -eq 1 ]; then
     sed -i "s/Зырянов И. М./$name/g" title.tex
+    cd .build
     build
     mv .build/main.pdf other.`basename $PWD`.pdf
     sed -i "s/$name/Зырянов И. М./g" title.tex
 fi
 
 if [ $ready -eq 1 ]; then
-    mv *.pdf ~/Dropbox/Print
+    cp *.pdf ~/Dropbox/Print
 fi
 
-rm preamble.tex *.bib
 rm -r .build
