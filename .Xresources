@@ -2,7 +2,7 @@ URxvt*scrollBar: false
 URxvt*saveLines: 24000
 URxvt*background: #000000
 URxvt*foreground: #cccccc
-URxvt*color4: RoyalBlue
+URxvt*color12: RoyalBlue
 URxvt*.shading: 20
 URxvt*font: -*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*
 
