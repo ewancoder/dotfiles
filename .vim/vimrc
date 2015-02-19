@@ -13,56 +13,56 @@ set spell spelllang=en,ru spellfile=$HOME/.vim/spell/my.utf-8.add
 set encoding=utf8
 
 "Execute VUNDLE
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/vundle
+call vundle#begin()
 imap <A-z> <C-^>
 
 "---------- Vundle Bundles ----------
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 "Coloring #abc and #aabbcc
-Bundle 'lilydjwg/colorizer'
+Plugin 'lilydjwg/colorizer'
 
 "Most recent files
-Bundle "yegappan/mru"
+Plugin 'yegappan/mru'
 nmap <F9> :MRU<CR>
 
 "Completion engine
-Bundle "OmniSharp/omnisharp"
-Bundle "tpope/vim-dispatch"
-Bundle "Shougo/neocomplete"
+Plugin 'OmniSharp/omnisharp'
+Plugin 'tpope/vim-dispatch'
+Plugin 'Shougo/neocomplete'
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_auto_select = 1
 autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 
 "Git wrapper + diffs
-Bundle 'tpope/vim-fugitive'
-Bundle "airblade/vim-gitgutter"
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 
 "Fast snippets engine + snippets
-Bundle "sirver/ultisnips"
-Bundle 'honza/vim-snippets'
+Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 "Autoclosing brackets
-Bundle "jiangmiao/auto-pairs"
+Plugin 'jiangmiao/auto-pairs'
 
 "Statusbar
-Bundle "bling/vim-airline"
+Plugin 'bling/vim-airline'
 let g:airline_theme = 'dark'
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2 "Work with 1 window
 
 "Browsing through file
-Bundle "justinmk/vim-sneak"
+Plugin 'justinmk/vim-sneak'
 let g:sneak#use_ic_scs = 1
 nmap f <Plug>Sneak_s
 nmap F <Plug>Sneak_S
 
 "Fuzzy files find + SilverSearcher
-Bundle "FelikZ/ctrlp-py-matcher"
-Bundle "kien/ctrlp.vim"
+Plugin 'FelikZ/ctrlp-py-matcher'
+Plugin 'kien/ctrlp.vim'
 let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
     \ --ignore .git
     \ --ignore "**/*.pyc"
@@ -70,19 +70,20 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 "%-matching for if/then/else, html, latex
-Bundle "tmhedberg/matchit"
+Plugin 'tmhedberg/matchit'
 
 "For quickly changing tags
-Bundle "tpope/vim-surround"
+Plugin 'tpope/vim-surround'
 
 "Syntax checking
-Bundle "scrooloose/syntastic"
+Plugin 'scrooloose/syntastic'
 
 "For tags
-Bundle "majutsushi/tagbar"
+Plugin 'majutsushi/tagbar'
 nmap <F7> :TagbarToggle<CR>
 
 "Finish Vundle, set filetype
+call vundle#end()
 filetype plugin indent on
 
 "---------- General ----------
