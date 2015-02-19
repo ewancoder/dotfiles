@@ -1,43 +1,37 @@
 #!/bin/bash
 #Don't waste CPU ticks if currently ALSA is configured
-if [ "`grep pulse ~/.asoundrc`" == "" ]; then
+pactl list sink-inputs > /tmp/sinks.mypo 2>/dev/null
+if [ "`cat /tmp/sinks.mypo`" == "" ]; then
     exit
 fi
 
-itemp=( `cat /tmp/inds.mypo` )
+#If passed 'next' or 'prev'
 if [ ! "$1" == "" ]; then
-    for (( j = 0; j < ${#itemp[@]}; j++ )); do
-        if [ "${itemp[$j]}" == "`cat /tmp/cind.mypo`" ]; then
+    indlist=( `cat /tmp/inds.mypo` )
+    for (( j = 0; j < ${#indlist[@]}; j++ )); do
+        if [ "${indlist[$j]}" == "`cat /tmp/cind.mypo`" ]; then
             curr=$j
         fi
     done
     if [ "$1" == "prev" ]; then
         if [ "$curr" == "0" ]; then
-            echo "${itemp[$((${#itemp[@]} - 1))]}" > /tmp/cind.mypo
+            echo "${indlist[$((${#indlist[@]} - 1))]}" > /tmp/cind.mypo
         else
-            echo "${itemp[$(($curr - 1))]}" > /tmp/cind.mypo
+            echo "${indlist[$(($curr - 1))]}" > /tmp/cind.mypo
         fi
     elif [ "$1" == "next" ]; then
-        if [ "$curr" == "$((${#itemp[@]} - 1))" ]; then
-            echo "${itemp[0]}" > /tmp/cind.mypo
+        if [ "$curr" == "$((${#indlist[@]} - 1))" ]; then
+            echo "${indlist[0]}" > /tmp/cind.mypo
         else
-            echo "${itemp[$(($curr + 1))]}" > /tmp/cind.mypo
+            echo "${indlist[$(($curr + 1))]}" > /tmp/cind.mypo
         fi
     fi
 fi
 
-pactl list sink-inputs > /tmp/temp.mypo
-if [ "`cat /tmp/temp.mypo`" == "" ]; then
-    for i in $itemp; do
-        wmiir rm /rbar/Audio$i
-    done
-    exit
-fi
-
-apps=$(cat /tmp/temp.mypo | grep 'application.name ' | awk '{print $3}' | tr -d '"')
-inds=$(cat /tmp/temp.mypo | grep 'Sink Input' | awk '{print $3}' | tr -d '#')
-vols=$(cat /tmp/temp.mypo | grep 'Volume' | awk '{print $5}' | tr -d '%')
-sink=$(cat /tmp/temp.mypo | grep 'Sink:' | awk '{print $2}')
+inds=$(cat /tmp/sinks.mypo | grep 'Sink Input' | awk '{print $3}' | tr -d '#')
+apps=$(cat /tmp/sinks.mypo | grep 'application.name ' | awk '{print $3}' | tr -d '"')
+vols=$(cat /tmp/sinks.mypo | grep 'Volume' | awk '{print $5}' | tr -d '%')
+sink=$(cat /tmp/sinks.mypo | grep 'Sink:' | awk '{print $2}')
 echo $inds > /tmp/inds.mypo
 IFS=$'\r\n' GLOBIGNORE='*' :; app=($apps)
 IFS=$'\r\n' GLOBIGNORE='*' :; ind=($inds)
@@ -47,26 +41,10 @@ if [ ! $? -eq 0 ]; then
     echo "${ind[0]}" > /tmp/cind.mypo
 fi
 for (( i = 0; i < ${#ind[@]}; i++ )); do
-    if ! [ "${ind[$i]}" == "" ]; then
-        wmiir create /rbar/Audio${ind[$i]} &
-        if [ "${ind[$i]}" == "`cat /tmp/cind.mypo`" ]; then
-            back="#422"
-        else
-            back="#242"
-        fi
-        if [ "$sink" == "2" ]; then
-            fore="#aac"
-        else
-            fore="#8a8"
-        fi
-        wmiir xwrite /rbar/Audio${ind[$i]} colors "$fore $back #000" &
-        wmiir xwrite /rbar/Audio${ind[$i]} label "${app[$i]}: ${vol[$i]}" &
+    if [ "${ind[$i]}" == "`cat /tmp/cind.mypo`" ]; then
+        active="Active"
+    else
+        active=""
     fi
-done
-
-current=$(wmiir ls /rbar | grep Audio | sed -e 's/Audio//g')
-for i in $current; do
-    if [ "$(echo $inds | grep $i)" == "" ] && ! [ "$i" == "" ]; then
-        wmiir rm /rbar/Audio$i
-    fi
+    echo "${ind[$i]}|[${app[$i]}: ${vol[$i]}]|$active"
 done
