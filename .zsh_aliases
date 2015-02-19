@@ -1,18 +1,18 @@
 #=== GIT ===
-alias github='ssh-add ~/.ssh/github'
 alias ga='git add'
 alias gia='git add -A'
-alias gic='git commit -v'
 alias gic!='git commit -v --amend'
-alias gica='git commit -av'
+alias gic='git commit -v'
 alias gica!='git commit -av --amend'
+alias gica='git commit -av'
 alias gid='git diff'
+alias gif='if [ "`ssh-add -L | grep github`" "==" "" ]; then github; fi; git fetch && git pull'
 alias gil='git log --oneline --graph --color --all --decorate'
 alias gils='git ls-files | less'
 alias gim='git merge --no-ff'
 alias gip='if [ "`ssh-add -L | grep github`" "==" "" ]; then github; fi; git push origin'
 alias gis='git status'
-alias gif='if [ "`ssh-add -L | grep github`" "==" "" ]; then github; fi; git fetch && git pull'
+alias github='ssh-add ~/.ssh/github'
 
 #=== Utils===
 #Reattach screen session(s)
