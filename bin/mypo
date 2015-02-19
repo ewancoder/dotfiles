@@ -25,6 +25,14 @@ if [ ! "$1" == "" ]; then
         else
             echo "${indlist[$(($curr + 1))]}" > /tmp/cind.mypo
         fi
+    elif [ "$1" == "up" ]; then
+        pactl set-sink-input-volume `cat /tmp/cind.mypo` +5000
+    elif [ "$1" == "down" ]; then
+        pactl set-sink-input-volume `cat /tmp/cind.mypo` -5000
+    elif [ "$1" == "off" ]; then
+        pactl set-sink-input-volume `cat /tmp/cind.mypo` 0
+    elif [ "$1" == "max" ]; then
+        pactl set-sink-input-volume `cat /tmp/cind.mypo` 65536
     fi
 fi
 
