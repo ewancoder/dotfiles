@@ -3,7 +3,7 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="fino" #Better than gnzh
 HIST_STAMPS="mm/dd/yyyy"
 source $ZSH/oh-my-zsh.sh
-bindkey '\e[2~' overwrite-mode
+bindkey '\e[2~' overwrite-mode #Insert key
 
 #My aliases
 source .zsh_aliases
