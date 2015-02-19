@@ -7,75 +7,58 @@ fi
 if [ ! "$1" == "" ]; then
     touch /tmp/volume.lock
 fi
-
-if [ "`ls -l ~/.asoundrc | awk '{print $11}'`" == "$HOME/.asoundrc_pulse" ]; then
-    #Pulseaudio
-    device=1
-elif [ "`ls -l ~/.asoundrc | awk '{print $11}'`" == "$HOME/.asoundrc_alsa" ]; then
-    #Alsa Build-In
-    device=2
-elif [ "`ls -l ~/.asoundrc | awk '{print $11}'`" == "$HOME/.asoundrc_alsa_usb" ]; then
-    #Alsa USB
-    device=3
+#Determine subsystem
+if grep pulse ~/.asoundrc > /dev/null; then
+    device=1 #Pulseaudio
+else
+    device=2 #ALSA
 fi
 
+#Commands execution
+vol=`amixer | egrep 'Master|PCM' -A 5 | awk '/Front Left: Playback/ {print $4}; /Mono:./ {print $3}' | head -1`
 if [ "$1" == "up" ]; then
     if [ $device -eq 1 ]; then
         amixer -q sset Master 2500+
-    elif [ $device -eq 2 ]; then
-        amixer -q sset Master 2+
     else
+        amixer -q sset Master 2+
         amixer -q sset PCM 2+
     fi
 elif [ "$1" == "down" ]; then
     if [ $device -eq 1 ]; then
         amixer -q sset Master 2500-
-    elif [ $device -eq 2 ]; then
-        amixer -q sset Master 2-
     else
+        amixer -q sset Master 2-
         amixer -q sset PCM 2-
     fi
 elif [ "$1" == "off" ]; then
-    if [ $device -eq 1 -a ! "`amixer | grep 'Front Left: Playback' | awk '{print $4}'`" == "0" ]; then
-        if [ "`pactl info | grep 'Default Sink' | awk '{print $3}'`" == "alsa_output.pci-0000_00_14.2.analog-stereo" ]; then
-            echo `amixer | grep 'Front Left: Playback' | awk '{print $4}'` > /tmp/vol0.wmii
-        else
-            echo `amixer | grep 'Front Left: Playback' | awk '{print $4}'` > /tmp/vol1.wmii
-        fi
+    if [ $device -eq 1 -a ! "$vol" == "0" ]; then
+        echo $vol > /tmp/vol1.wmii
         amixer -q sset Master 0
     elif [ $device -eq 2 -a ! "`amixer | grep Master -A 4 | grep 'Mono:' | awk '{print $3}'`" == "0" ]; then
-        echo `amixer | grep Master -A 4 | grep 'Mono:' | awk '{print $3}'` > /tmp/vol2.wmii
+        echo $vol > /tmp/vol2.wmii
         amixer -q sset Master 0
-    elif [ ! "`amixer | grep 'Front Left: Playback' | awk '{print $4}'`" == "0" ]; then
-        echo `amixer | grep 'Front Left: Playback' | awk '{print $4}'` > /tmp/vol3.wmii
         amixer -q sset PCM 0
     fi
 elif [ "$1" == "on" ]; then
-    if [ $device -eq 1 ]; then
-         if [ "`pactl info | grep 'Default Sink' | awk '{print $3}'`" == "alsa_output.pci-0000_00_14.2.analog-stereo" ]; then
-             if [ -f /tmp/vol0.wmii ]; then
-                 amixer -q sset Master `cat /tmp/vol0.wmii`
-             fi
-         elif [ -f /tmp/vol1.wmii ]; then
-             amixer -q sset Master `cat /tmp/vol1.wmii`
-         fi
-     elif [ $device -eq 2 -a -f /tmp/vol2.wmii ]; then
-         amixer -q sset Master `cat /tmp/vol2.wmii`
-     elif [ $device -eq 3 -a -f /tmp/vol3.wmii ]; then
-         amixer -q sset PCM `cat /tmp/vol3.wmii`
-     fi
+    if [ $device -eq 1 -a -f /tmp/vol1.wmii ]; then
+        amixer -q sset Master `cat /tmp/vol1.wmii`
+    elif [ $device -eq 2 -a -f /tmp/vol2.wmii ]; then
+        amixer -q sset Master `cat /tmp/vol2.wmii`
+        amixer -q sset PCM `cat /tmp/vol2.wmii`
+    fi
 fi
 
-if [ "$device" == "2" ]; then
-    volume=`amixer | grep Master -A 4 | grep 'Mono:' | awk '{print $4}' | cut -d '[' -f2 | cut -d '%' -f1`
+#Print volume value
+vol=`amixer | egrep 'Master|PCM' -A 5 | awk '/Front Left: Playback/ {print $4}; /Mono:./ {print $3}' | head -1`
+if [ $device -eq 1 ]; then
+    vol=$(($vol / 655))
 else
-    volume=`amixer | grep 'Front Left: Playback' | awk '{print $5}' | cut -d '[' -f2 | cut -d '%' -f1`
+    vol=$(($vol * 3))
 fi
-
 if [ "$1" == "" ]; then
-    echo $volume
+    echo $vol
 else
-    notify-send "Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
+    notify-send "Volume" -t 500 -h int:value:$vol -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
 fi
 
 #Remove lock file
