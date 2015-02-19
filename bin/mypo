@@ -54,5 +54,5 @@ for (( i = 0; i < ${#ind[@]}; i++ )); do
     else
         active=""
     fi
-    echo "${ind[$i]}|[${app[$i]}: ${vol[$i]}]|$active"
+    echo "${ind[$i]}|${app[$i]}: ${vol[$i]}|$active"
 done

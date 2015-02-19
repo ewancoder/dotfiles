@@ -114,7 +114,7 @@ time = "date +%a\\ %b\\ %d\\ %I:%M:%S\\ %p"
 
 #=== PRE-STATUSBAR ===
 #Pulseaudio sinks
-text = "~/bin/mypo | awk -F '|' '!/Active/ {print \" \"$2\" \"}; /Active/ {print \" A-\"$2\" \"}'"
+text = "~/bin/mypo | awk -F '|' '!/Active/ {print \" \"$2\" \"}; /Active/ {print \" [\"$2\"] \"}'"
 color = goodColors
 addBlock()
 #Kernel
