@@ -82,7 +82,7 @@ startup = [
     'gxkb',
     'dropbox',
     'megasync',
-    'ssh -fNL 7070:127.0.0.1:7070 root@192.168.100.110',
+    'ssh -fNL 7070:127.0.0.1:7070 root@`cat ~/.rpi`',
     'tilda',
     'chromium --no-startup-window'
 ]
