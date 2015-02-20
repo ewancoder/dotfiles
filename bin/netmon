@@ -1,5 +1,5 @@
 #!/bin/bash
-bytes=$((`cat /tmp/settings.wmii | awk '/statusTimeout/ {print $2}'` * 1024)) #1024 bytes per second
+bytes=$((`cat /tmp/settings.wmii | awk -F '|' '/statusTimeout/ {print $2}'` * 1024)) #1024 bytes per second
 if [ -f /tmp/rx ]; then
     rx=$(cat /tmp/rx)
     tx=$(cat /tmp/tx)
