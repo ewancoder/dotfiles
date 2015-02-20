@@ -45,8 +45,6 @@ deviceColors = '#ada #b42 #000'
 gitColors = '#f63 #000 #000'
 gitGreenColors = '#6f6 #000 #000'
 gitBlueColors = '#36f #000 #000'
-#Alternative color - for noticebar
-altColors = '#aad #000 #000'
 
 #=== GENERAL CONFIG ===
 modkey = 'Mod4'
@@ -64,7 +62,6 @@ position = 'top'
 
 #Background folder
 background = '~/Dropbox/Pictures'
-#Timeout to change background, in seconds
 
 #Timeouts (in seconds)
 statusTimeout = 2
@@ -106,10 +103,6 @@ addTagRule("Popcorn-Time", 9)
 #Pulseaudio sinks
 text = "~/bin/mypo | awk -F '|' '!/Active/ {print \" \"$2\" \"}; /Active/ {print \" [\"$2\"] \"}'"
 addBlock()
-#Kernel
-text = 'uname -r'
-color = altColors
-addBlock()
 #GIT activity
 text = "~/bin/gitch | awk '/Unstaged/ {print $2}'"
 color = gitColors
@@ -139,47 +132,47 @@ addBlock()
 
 #=== STATUSBAR ===
 #Free RAM
-text = "echo $(top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/')"
-check = "top -bn1 | grep 'Mem' | awk '{print $4}' | cut -f1 -d '/'"
+check = "top -bn1 | awk '/Mem/ {print $4}' | awk -F '/' '{print $1}'"
+text = check
 lower = 50
 mid = 80
 addBlock()
 #Space at /
-text = "echo $(df -h / | grep / | awk '{print $5}' | tr -d '%') '/'"
-check = "df -h / | grep / | awk '{print $5}' | tr -d '%'"
+check = "df -h / | awk '/\// {print substr($5, 0, length($5) - 1)}'"
+text = "echo `" + check + "` /"
 lower = 55
 mid = 80
 addBlock()
 #Space at /home
-text = "echo $(df -h /home | grep home | awk '{print $5}' | tr -d '%') 'H'"
-check = "df -h /home | grep home | awk '{print $5}' | tr -d '%'"
+check = "df -h /home | awk '/home/ {print substr($5, 0, length($5) - 1)}'"
+text = "echo `" + check + "` H"
 lower = 55
 mid = 80
 addBlock()
 #Space at /mnt/cloud
-text = "echo $(df -h /mnt/cloud | grep cloud | awk '{print $5}' | tr -d '%') 'C'"
-check = "df -h /mnt/cloud | grep cloud | awk '{print $5}' | tr -d '%'"
+check = "df -h /mnt/cloud | awk '/cloud/ {print substr($5, 0, length($5) - 1)}'"
+text = "echo `" + check + "` C"
 lower = 55
 mid = 75
 addBlock()
 #Space at /mnt/backup
-text = "echo $(df -h /mnt/backup | grep backup | awk '{print $5}' | tr -d '%') 'B'"
-check = "df -h /mnt/backup | grep backup | awk '{print $5}' | tr -d '%'"
+check = "df -h /mnt/backup | awk '/backup/ {print substr($5, 0, length($5) - 1)}'"
+text = "echo `" + check + "` B"
 lower = 55
 mid = 75
 addBlock()
 #CPU Temperature
-text = "awk '{printf \"%.0f\", $1/1000; exit}' /sys/class/hwmon/hwmon0/temp*_input"
-check = text
+check = "awk '{printf \"%.0f\", $1/1000; exit}' /sys/class/hwmon/hwmon0/temp*_input"
+text = check
 lower = "awk '{printf \"%.0f\", $1/1400; exit}' /sys/class/hwmon/hwmon0/temp*_max"
 mid = "awk '{printf \"%.0f\", $1/1200; exit}' /sys/class/hwmon/hwmon0/temp*_crit"
 addBlock()
 #CPU Frequency
-text = "cat /proc/cpuinfo | grep -m 1 MHz | awk '{printf \"%.0f\\n\", $4}'"
+text = "cat /proc/cpuinfo | awk '/MHz/ {printf \"%.1f \", $4/1000}'"
 addBlock()
 #GPU Temperature
-text = "nvidia-settings -q=GPUCoreTemp | grep -m 1 GPUCoreTemp | awk '{printf \"%.0f\\n\", $4}'"
-check = text
+check = "nvidia-settings -q=GPUCoreTemp | awk '/GPUCoreTemp/ {printf \"%.0f\\n\", $4; exit}'"
+text = check
 lower = 40
 mid = 52
 addBlock()
@@ -187,8 +180,8 @@ addBlock()
 text = "~/bin/netmon"
 addBlock()
 #CPU Uptime
-text = "uptime | sed 's/.*://; s/, / /g'"
-check = text + " | awk '{print $2}'"
+text = "uptime | awk '{print $3, $9, $10, $11}' | tr -d ','"
+check = text + " | awk '{print $3}'"
 lower = 1.95
 addBlock()
 #Time
