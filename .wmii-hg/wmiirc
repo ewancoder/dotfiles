@@ -229,6 +229,7 @@ Key $MODKEY-o
 Key $MODKEY-KP_Enter
     slimlock
 Key $MODKEY-Shift-KP_Enter
+    kill `ps aux | awk '/wmii.py/ {print $2}'`
 	wmiir xwrite /ctl quit
 #Remove 'New messages' notification
 Key $MODKEY-apostrophe

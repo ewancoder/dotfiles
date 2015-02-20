@@ -2,10 +2,15 @@
 import os
 import re
 import settings
+import signal
 import subprocess
 import threading
 import time
 
+#DevNull device for running command without output
+devnull = open(os.devnull, 'w')
+
+#Arrays for reducing CPU ticks
 blocknames = [] #Array for created blocks names
 static = []     #Array for static (without color check) blocks
 
@@ -16,13 +21,12 @@ mask = re.compile('[\n\t\r]')
 
 #Get result from bash command
 def get(command):
-    return mask.sub('', os.popen(command).read())
-    #return mask.sub('', subprocess.Popen(command, stdout = subprocess.PIPE, shell = True).communicate()[0].decode("utf-8"))
+    return mask.sub('', subprocess.Popen(command, stdout = subprocess.PIPE, shell = True).communicate()[0].decode("utf-8"))
 
 #Run command in background
 def run(command):
     os.system(command + ' > /dev/null 2>&1 &')
-    #subprocess.Popen(command, shell = True)
+    subprocess.Popen(command, stdout = devnull, shell = True)
 
 #========== SET FUNCTIONS ==========
 
@@ -100,9 +104,13 @@ def startup():
     for command in settings.startup:
         apps.append(subprocess.Popen(command, shell = True))
 
-def killAll():
+def killAll(signal, frame):
     for app in apps:
         app.kill()
+    print('Exiting wmii, bye and good luck!')
+    os._exit(1)
+
+signal.signal(signal.SIGTERM, killAll)
 
 #========== LOOP FUNCTIONS ==========
 
@@ -120,12 +128,6 @@ def loopStatusBar():
 
 def loopTime():
     threading.Timer(1.0, loopTime).start()
-    try:
-        subprocess.check_call("wmiir ls /", shell = True)
-    except:
-        killAll()
-        print('Exiting wmii, bye and good luck!')
-        os._exit(1)
     setColor("Time", settings.goodColors)
     setStatus("Time", get(settings.time))
 
