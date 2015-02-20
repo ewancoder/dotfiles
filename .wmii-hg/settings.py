@@ -205,17 +205,17 @@ addBlock()
 
 #Output for wmiirc
 if __name__ == "__main__":
-    print(modkey)
-    print(up)
-    print(down)
-    print(left)
-    print(right)
-    print(font)
-    print(term)
+    print("modkey|" + modkey)
+    print("up|" + up)
+    print("down|" + down)
+    print("left|" + left)
+    print("right|" + right)
+    print("font|" + font)
+    print("term|" + term)
 
-    print(normColors)
-    print(goodColors) #WMII_FOCUSCOLORS
-    print(tagFocusColors)
-    print(warnColors)
+    print("normColors|" + normColors)
+    print("goodColors|" + goodColors) #WMII_FOCUSCOLORS
+    print("tagFocusColors|" + tagFocusColors)
+    print("warnColors|" + warnColors)
 
-    print("statusTimeout " + str(statusTimeout))
+    print("statusTimeout|" + str(statusTimeout))

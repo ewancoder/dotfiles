@@ -5,27 +5,27 @@ wmiiscript=wmiirc # For wmii.sh
 # Settings
 python ~/.wmii-hg/settings.py > /tmp/settings.wmii
 var(){
-    cat /tmp/settings.wmii | sed -n "$1{p;q}"
+    awk -F '|' "/$1/ {print \$2}" /tmp/settings.wmii
 }
 
 # Configuration Variables
-MODKEY=$(var 1)
-UP=$(var 2)
-DOWN=$(var 3)
-LEFT=$(var 4)
-RIGHT=$(var 5)
+MODKEY=`var modkey`
+UP=`var up`
+DOWN=`var down`
+LEFT=`var left`
+RIGHT=`var right`
 
 # Bars
 noticetimeout=5
 noticebar=/rbar/!notice
 
 # Colors tuples: "<text> <background> <border>"
-export WMII_FONT=$(var 6)
-export WMII_TERM=$(var 7)
+export WMII_FONT=`var font`
+export WMII_TERM=`var term`
 
-export WMII_NORMCOLORS=$(var 8)
-export WMII_FOCUSCOLORS=$(var 9)
-export WMII_TAGFOCUSCOLORS=$(var 10)
+export WMII_NORMCOLORS=`var normColors`
+export WMII_FOCUSCOLORS=`var goodColors`
+export WMII_TAGFOCUSCOLORS=`var tagFocusColors`
 
 set -- $(echo $WMII_NORMCOLORS $WMII_FOCUSCOLORS)
 echo colors $WMII_NORMCOLORS | wmiir create $noticebar
@@ -219,7 +219,7 @@ Key $MODKEY-v
 #CINEMA MODE (turn off colors)
 Key $MODKEY-o
     if [ "`wmiir read /ctl | grep focuscolors | awk {'print $3'}`" == "#000000" ]; then
-        wmiir xwrite /ctl focuscolors "$(var 9)" &
+        wmiir xwrite /ctl focuscolors "`var goodColors`" &
         killall -SIGUSR2 dunst &
     else
         wmiir xwrite /ctl focuscolors "#999 #000 #000" &
@@ -253,12 +253,12 @@ Key $MODKEY-F11
         wmiir xwrite /ctl view Keep
     fi
 Key $MODKEY-Shift-F11
-    wmiir xwrite /rbar/\!notice colors "$(var 11)"
+    wmiir xwrite /rbar/\!notice colors "`var warnColors`"
     wmiir xwrite /rbar/\!notice label "Power off..."
     baconf
     systemctl poweroff -i
 Key $MODKEY-Shift-F10
-    wmiir xwrite /rbar/\!notice colors "$(var 11)"
+    wmiir xwrite /rbar/\!notice colors "`var warnColors`"
     wmiir xwrite /rbar/\!notice label "Reboot..."
     baconf
     systemctl reboot -i
