@@ -16,11 +16,13 @@ mask = re.compile('[\n\t\r]')
 
 #Get result from bash command
 def get(command):
-    return mask.sub('', subprocess.Popen(command, stdout = subprocess.PIPE, shell = True).communicate()[0].decode("utf-8"))
+    return mask.sub('', os.popen(command).read())
+    #return mask.sub('', subprocess.Popen(command, stdout = subprocess.PIPE, shell = True).communicate()[0].decode("utf-8"))
 
 #Run command in background
 def run(command):
-    subprocess.Popen(command, shell = True)
+    os.system(command + ' > /dev/null 2>&1 &')
+    #subprocess.Popen(command, shell = True)
 
 #========== SET FUNCTIONS ==========
 
@@ -115,12 +117,12 @@ def loopStatusBar():
 
 def loopTime():
     threading.Timer(1.0, loopTime).start()
-    try:
-        subprocess.check_call("wmiir ls /", shell = True)
-    except:
-        killAll()
-        print('Exiting wmii, bye and good luck!')
-        os._exit(1)
+    #try:
+    #    subprocess.check_call("wmiir ls /", shell = True)
+    #except:
+    #    killAll()
+    #    print('Exiting wmii, bye and good luck!')
+    #    os._exit(1)
     setColor("Time", settings.goodColors)
     setStatus("Time", get(settings.time))
 
