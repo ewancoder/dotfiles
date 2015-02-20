@@ -43,15 +43,10 @@ warnColors = '#faa #c00 #f44' #For Warnings
 #Devices and GIT colors
 deviceColors = '#ada #b42 #000'
 gitColors = '#f63 #000 #000'
-gitBlueColors = '#36f #000 #000'
 gitGreenColors = '#6f6 #000 #000'
+gitBlueColors = '#36f #000 #000'
 #Alternative color - for noticebar
 altColors = '#aad #000 #000'
-#AM/PM
-amColors = '#ee8 ' + goodColors.split()[1] + ' #000'
-pmColors = '#8e8 ' + goodColors.split()[1] + ' #000'
-#Sound device indication
-speakerColors = altColors.split()[0] + ' ' + goodColors.split()[1] + ' #000'
 
 #=== GENERAL CONFIG ===
 modkey = 'Mod4'
@@ -72,14 +67,13 @@ background = '~/Dropbox/Pictures'
 #Timeout to change background, in seconds
 
 #Timeouts (in seconds)
-bgTimeout = 300
-eventsTimeout = 5
 statusTimeout = 2
+eventsTimeout = 5
+bgTimeout = 300
 updatesTimeout = 600
 
 #Startup X11 apps
 startup = [
-    'gxkb',
     'dropbox',
     'megasync',
     'ssh -fNL 7070:127.0.0.1:7070 root@`cat ~/.rpi`',

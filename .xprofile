@@ -29,3 +29,6 @@ ps -C devmon > /dev/null 2>&1 || devmon --ignore-device /dev/sdb --ignore-device
 
 #Turn off power saving (screen blanking)
 xset -dpms s off
+
+#Language switcher
+gxkb
