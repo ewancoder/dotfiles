@@ -108,13 +108,9 @@ addTagRule("vlc", "sel+0")
 #PopcornTime
 addTagRule("Popcorn-Time", 9)
 
-#Time format
-time = "date +%a\\ %b\\ %d\\ %I:%M:%S\\ %p"
-
 #=== PRE-STATUSBAR ===
 #Pulseaudio sinks
 text = "~/bin/mypo | awk -F '|' '!/Active/ {print \" \"$2\" \"}; /Active/ {print \" [\"$2\"] \"}'"
-color = goodColors
 addBlock()
 #Kernel
 text = 'uname -r'
@@ -200,6 +196,9 @@ addBlock()
 text = "uptime | sed 's/.*://; s/, / /g'"
 check = text + " | awk '{print $2}'"
 lower = 1.95
+addBlock()
+#Time
+text = "date +%a\\ %b\\ %d\\ %I:%M:%S\\ %p"
 addBlock()
 
 #Output for wmiirc

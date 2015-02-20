@@ -31,8 +31,6 @@ def run(command):
 
 #Set condition (Good/Middle/Bad) for a block
 def setCondition(name, check, lower, bigger, mid, color):
-    if name in static:
-        return
     try:
         check = float(get(check))
     except:
@@ -85,6 +83,7 @@ def removeBlock(name):
     if name in blocknames:
         run('wmiir rm /rbar/' + name)
         blocknames.remove(name)
+        static.remove(name)
 
 #Set block text
 def setStatus(name, text):
@@ -115,22 +114,15 @@ signal.signal(signal.SIGTERM, killAll)
 
 def loopStatusBar():
     threading.Timer(settings.statusTimeout, loopStatusBar).start()
-    createBlock("Time")
     for x in settings.blocks:
         currentStatus = get(x[0])
         if currentStatus != '':
             createBlock(x[1])
             setStatus(x[1], currentStatus)
-            setCondition(x[1], x[2], x[3], x[4], x[5], x[6])
+            if x[1] not in static:
+                setCondition(x[1], x[2], x[3], x[4], x[5], x[6])
         else:
             removeBlock(x[1])
-
-def loopTime():
-    threading.Timer(1.0, loopTime).start()
-    if "Time" not in static:
-        setColor("Time", settings.goodColors)
-        static.append("Time")
-    setStatus("Time", get(settings.time))
 
 def loopBackground():
     threading.Timer(settings.bgTimeout, loopBackground).start()
@@ -150,16 +142,14 @@ def loopSysUpdate():
         pass
 
 def main():
-    #Before all of this - we need to set background instead of ugly gray color
-    loopBackground()
     #Set position
     run("wmiir xwrite /ctl bar on " + settings.position)
-    #Set Rules
-    setRules()
     #Run tray
     run("witray")
-    #Handle Time
-    loopTime()
+    #Before all of this - we need to set background instead of ugly gray color
+    loopBackground()
+    #Set Rules
+    setRules()
     #Handle StatusBar
     loopStatusBar()
     #Loop user-based events
