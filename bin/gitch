@@ -1,21 +1,17 @@
 #!/bin/bash
-for repo in ~/.dotfiles ~/eal ~/btp /etc/.dotfiles ~/archlive/releng ~/rpidots ~/site; do
+for repo in\
+    /etc/.dotfiles\
+    ~/.dotfiles\
+    ~/archlive/releng\
+    ~/btp\
+    ~/eal\
+    ~/rpidots\
+    ~/site; do
     if [ -d $repo ]; then
         cd $repo
-        if git status | grep -i "not staged\|untracked"; then
-            echo "Unstaged: `basename $repo`-`basename $(dirname $repo)`"
-        else
-            echo ""
-        fi
-        if git status | grep -i "ahead"; then
-            echo "Ahead: `basename $repo`-`basename $(dirname $repo)`"
-        else
-            echo ""
-        fi
-        if git status | grep -i "to be committed"; then
-            echo "Staged: `basename $repo`-`basename $(dirname $repo)`"
-        else
-            echo ""
-        fi
+        git status | awk -v repo="`basename $repo`-`basename $(dirname $repo)`"\
+            '/not staged|untracked/ {print "Unstaged: "repo};
+            /ahead/ {print "Ahead: "repo};
+            /to be committed/ {print "Staged: "repo}'
     fi
 done
