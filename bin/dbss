@@ -2,7 +2,6 @@
 # DropBox Screenshot Script (DBSS)
 # Ewancoder, 2014
 user_id=70091792
-delay=0
 quality=75
 month=$(date +%B)
 ssdir=Screenshots
@@ -11,7 +10,7 @@ filename=$(date +%d-%H%M%S).png
 
 mkdir -p $dbdir
 cd $dbdir
-scrot -d $delay -q $quality $filename
+scrot -q $quality $filename
  
 url="http://dl.dropbox.com/u/$user_id/$ssdir/$month/$filename"
 echo $url | xclip -sel clip
