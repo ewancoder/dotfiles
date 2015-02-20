@@ -89,8 +89,7 @@ startup = [
 #Events are executed each 5 seconds
 events = [
     '~/bin/unarchive',
-    '~/bin/ircnotify',
-    '~/bin/mypo'
+    '~/bin/ircnotify'
 ]
 
 #=== COLUMN RULES ===
