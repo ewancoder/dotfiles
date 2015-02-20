@@ -127,7 +127,9 @@ def loopStatusBar():
 
 def loopTime():
     threading.Timer(1.0, loopTime).start()
-    setColor("Time", settings.goodColors)
+    if "Time" not in static:
+        setColor("Time", settings.goodColors)
+        static.append("Time")
     setStatus("Time", get(settings.time))
 
 def loopBackground():
