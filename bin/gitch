@@ -11,7 +11,7 @@ for repo in\
         cd $repo
         git status | awk -v repo="`basename $repo`-`basename $(dirname $repo)`"\
             '/not staged|untracked/ {print "Unstaged: "repo};
-            /ahead/ {print "Ahead: "repo};
+            /ahead|different commit/ {print "Ahead: "repo};
             /to be committed/ {print "Staged: "repo}'
     fi
 done
