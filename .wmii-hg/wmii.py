@@ -6,8 +6,8 @@ import subprocess
 import threading
 import time
 
-#Variable to store created blocks names
-blocknames = []
+blocknames = [] #Array for created blocks names
+static = []     #Array for static (without color check) blocks
 
 #Mask for removing \n\t\r from bash get() function result
 mask = re.compile('[\n\t\r]')
@@ -28,6 +28,8 @@ def run(command):
 
 #Set condition (Good/Middle/Bad) for a block
 def setCondition(name, check, lower, bigger, mid, color):
+    if name in static:
+        return
     try:
         check = float(get(check))
     except:
@@ -60,6 +62,7 @@ def setCondition(name, check, lower, bigger, mid, color):
                 setColor(name, settings.badColors)
     else:
         setColor(name, color)
+        static.append(name)
 
 #Set column & tagging rules
 def setRules():
@@ -117,12 +120,12 @@ def loopStatusBar():
 
 def loopTime():
     threading.Timer(1.0, loopTime).start()
-    #try:
-    #    subprocess.check_call("wmiir ls /", shell = True)
-    #except:
-    #    killAll()
-    #    print('Exiting wmii, bye and good luck!')
-    #    os._exit(1)
+    try:
+        subprocess.check_call("wmiir ls /", shell = True)
+    except:
+        killAll()
+        print('Exiting wmii, bye and good luck!')
+        os._exit(1)
     setColor("Time", settings.goodColors)
     setStatus("Time", get(settings.time))
 
