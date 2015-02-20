@@ -25,7 +25,6 @@ def get(command):
 
 #Run command in background
 def run(command):
-    os.system(command + ' > /dev/null 2>&1 &')
     subprocess.Popen(command, stdout = devnull, shell = True)
 
 #========== SET FUNCTIONS ==========
