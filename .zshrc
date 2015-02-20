@@ -1,6 +1,6 @@
 #Oh-My-ZSH Configuration
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="fino" #Better than gnzh
+ZSH_THEME="ewancoder" #Better than gnzh
 HIST_STAMPS="mm/dd/yyyy"
 source $ZSH/oh-my-zsh.sh
 bindkey '\e[2~' overwrite-mode #Insert key
