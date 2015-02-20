@@ -5,14 +5,11 @@ for f in ~/Downloads/Chrome\ Downloads/*.{tar,zip,7z,rar}*; do
         file=$(basename "$f")
         a=1
         case "${file##*.}" in
-            gz)     mkdir "$f-dir"
-                    tar zxf "$f" -C "$f-dir";;
-            zip)    mkdir "$f-dir"
-                    unzip "$f" -d "$f-dir";;
-            rar)    mkdir "$f-dir"
-                    unrar x "$f" "$f-dir";;
-            xz)     mkdir "$f-dir"
-                    tar xf "$f" -C "$f-dir";;
+            7z)     7z x "$f" -o "$f-dir";;
+            gz)     tar zxf "$f" -C "$f-dir";;
+            zip)    unzip "$f" -d "$f-dir";;
+            rar)    unrar x "$f" "$f-dir";;
+            xz)     tar xf "$f" -C "$f-dir";;
             *)      a=0;;
         esac
         succ=$?
