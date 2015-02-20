@@ -16,11 +16,11 @@ mask = re.compile('[\n\t\r]')
 
 #Get result from bash command
 def get(command):
-    return mask.sub('', os.popen(command).read())
+    return mask.sub('', subprocess.Popen(command, stdout = subprocess.PIPE, shell = True).communicate()[0].decode("utf-8"))
 
 #Run command in background
 def run(command):
-    os.system(command + ' > /dev/null 2>&1 &')
+    subprocess.Popen(command, shell = True)
 
 #========== SET FUNCTIONS ==========
 
@@ -88,16 +88,16 @@ def setColor(name, color):
 
 #========== STARTUP FUNCTIONS ==========
 
-pids = []
+apps = []
 
 #Startup function
 def startup():
     for command in settings.startup:
-        pids.append(subprocess.Popen(command, shell = True).pid)
+        apps.append(subprocess.Popen(command, shell = True))
 
 def killAll():
-    for pid in pids:
-        run('kill ' + str(pid))
+    for app in apps:
+        app.kill()
 
 #========== LOOP FUNCTIONS ==========
 
@@ -115,7 +115,9 @@ def loopStatusBar():
 
 def loopTime():
     threading.Timer(1.0, loopTime).start()
-    if os.system('wmiir ls / > /dev/null 2>&1') != 0:
+    try:
+        subprocess.check_call("wmiir ls /", shell = True)
+    except:
         killAll()
         print('Exiting wmii, bye and good luck!')
         os._exit(1)
