@@ -31,4 +31,4 @@ ps -C devmon > /dev/null 2>&1 || devmon --ignore-device /dev/sdb --ignore-device
 xset -dpms s off
 
 #Language switcher
-gxkb
+gxkb &
