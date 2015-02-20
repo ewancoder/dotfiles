@@ -102,7 +102,7 @@ def killAll():
 #========== LOOP FUNCTIONS ==========
 
 def loopStatusBar():
-    threading.Timer(2.0, loopStatusBar).start()
+    threading.Timer(settings.statusTimeout, loopStatusBar).start()
     createBlock("Time")
     for x in settings.blocks:
         currentStatus = get(x[0])
