@@ -180,8 +180,8 @@ addBlock()
 text = "~/bin/netmon"
 addBlock()
 #CPU Uptime
-text = "uptime | awk '{print $3, $4, $9, $10, $11}' | tr -d ','"
-check = text + " | awk '{print $4}'"
+text = "uptime | awk -F: '{print $NF}' | tr -d ','"
+check = text + " | awk '{print $2}'"
 lower = 1.95
 addBlock()
 #Time
