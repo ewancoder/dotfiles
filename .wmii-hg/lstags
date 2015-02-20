@@ -1,12 +1,11 @@
 #!/bin/bash
-rm /tmp/lstags.message
 input=$1
 regex="(witray|lstags($|\s\w+$))" #Filter 'witray' and 'lstags'
 wmiir ls /client | while read line; do
     if [ "$line" == "sel/" ]; then
         break
     fi
-    #Do all queries first to spare time
+    #Save all queries first to spare time
     label="`wmiir cat /client/$line/label`"
     tags="`wmiir cat /client/$line/ctl | awk '/tags/ {print $2}'`"
     now="`wmiir cat /ctl | awk '/view/ {print $2}'`"
@@ -14,10 +13,9 @@ wmiir ls /client | while read line; do
         input=$now
     fi
     tagregex="(^|\+)$input($|\+)" #Regex for each TAG
-    if [[ ! $label =~ $regex ]]; then
-        if [[ $tags =~ $tagregex ]]; then
-            echo "$message$tags --> $label" >> /tmp/lstags.message
-        fi
+    if [[ ! $label =~ $regex && $tags =~ $tagregex ]]; then
+        echo "$message$tags --> $label" >> /tmp/lstags.message
     fi
 done
 notify-send -t 0 -h string:fgcolor:#faaa00 -h string:bgcolor:#000000 "`cat /tmp/lstags.message`"
+rm /tmp/lstags.message
