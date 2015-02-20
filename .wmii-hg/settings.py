@@ -217,3 +217,5 @@ if __name__ == "__main__":
     print(goodColors) #WMII_FOCUSCOLORS
     print(tagFocusColors)
     print(warnColors)
+
+    print("statusTimeout " + str(statusTimeout))
