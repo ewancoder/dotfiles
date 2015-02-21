@@ -154,13 +154,13 @@ set timeoutlen=500 "Multiple keys timeout
 "Leader key
 let mapleader=","
 "Easy edit & source .vimrc
-nmap <silent> ,ev :e $MYVIMRC<cr>
-nmap <silent> ,sv :so $MYVIMRC<cr>
+nmap <silent> <leader>ev :e $MYVIMRC<cr>
+nmap <silent> <leader>sv :so $MYVIMRC<cr>
 "For LaTeX background compilation
-nmap <silent> ,pl :!pl<cr>
+nmap <silent> <leader>pl :!pl<cr>
 "Fast saving / sudo saving
 nmap <leader>w :w!<cr>
-cmap w!! w !sudo tee > /dev/null %
+cmap w! w !sudo tee > /dev/null %
 "Close buffer without loosing split
 map <leader>q :bp\|bd #<cr>
 "Easy windows switching
