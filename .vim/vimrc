@@ -158,6 +158,8 @@ let mapleader=","
 "Easy edit & source .vimrc
 nmap <silent> ,ev :e $MYVIMRC<cr>
 nmap <silent> ,sv :so $MYVIMRC<cr>
+"For LaTeX background compilation
+nmap <silent> ,pl :!pl<cr>
 "Fast saving / sudo saving
 nmap <leader>w :w!<cr>
 cmap w!! w !sudo tee > /dev/null %
