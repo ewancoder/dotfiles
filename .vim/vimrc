@@ -2,11 +2,6 @@ set shell=/bin/bash "Set external shell
 set nocompatible    "Be iMproved
 filetype off        "Required by Vundle
 
-"Set Cyrillic keymap
-set keymap=russian-jcukenwin
-set iminsert=0
-set imsearch=0
-highlight lCursor guifg=NONE guibg=Cyan
 "Spellchecking
 set spell spelllang=en,ru spellfile=$HOME/.vim/spell/my.utf-8.add
 "Encoding
@@ -19,6 +14,9 @@ imap <A-z> <C-^>
 
 "---------- Vundle Bundles ----------
 Plugin 'gmarik/vundle'
+
+"RusMode
+Plugin 'ruscmd'
 
 "Coloring #abc and #aabbcc
 Plugin 'lilydjwg/colorizer'
