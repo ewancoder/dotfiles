@@ -179,10 +179,13 @@ addBlock()
 #NETSTATS
 text = "~/bin/netmon"
 addBlock()
-#CPU Uptime
+#CPU Load
 text = "uptime | awk -F: '{print $NF}' | tr -d ','"
 check = text + " | awk '{print $2}'"
 lower = 1.95
+addBlock()
+#Uptime
+text = "uptime | sed 's/.*up \\([^,]*\\).*/\\1/'"
 addBlock()
 #Time
 text = "date +%a\\ %b\\ %d\\ %I:%M:%S\\ %p"
