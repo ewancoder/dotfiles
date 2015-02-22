@@ -6,10 +6,11 @@ for f in ~/Downloads/Chrome\ Downloads/*.{tar,zip,7z,rar}*; do
         a=1
         case "${file##*.}" in
             7z)     7z x "$f" -o "$f-dir";;
+            bz2)    tar xjf "$f" -C "$f-dir";;
             gz)     tar zxf "$f" -C "$f-dir";;
-            zip)    unzip "$f" -d "$f-dir";;
             rar)    unrar x "$f" "$f-dir";;
             xz)     tar xf "$f" -C "$f-dir";;
+            zip)    unzip "$f" -d "$f-dir";;
             *)      a=0;;
         esac
         succ=$?
