@@ -26,8 +26,8 @@ Plugin 'yegappan/mru'
 nmap <F9> :MRU<CR>
 
 "Completion engine
-Plugin 'OmniSharp/omnisharp'
-Plugin 'tpope/vim-dispatch'
+"Plugin 'OmniSharp/omnisharp'
+"Plugin 'tpope/vim-dispatch'
 Plugin 'Shougo/neocomplete'
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_auto_select = 1
