@@ -25,6 +25,8 @@ alias sshrpi='ssh -t root@`cat ~/.rpi`'
 alias sshl='ssh -fNL 7070:127.0.0.1:7070 root@`cat ~/.rpi`'
 
 #=== Software ===
+#Google calendar agenda
+alias agenda='gcalcli agenda'
 #Minecraft FeedTheBeast + Technic
 alias ftb='java -jar ~/Mega/Games/Minecraft/ftb.jar'
 alias tech='java -jar ~/Mega/Games/Minecraft/tech.jar'
