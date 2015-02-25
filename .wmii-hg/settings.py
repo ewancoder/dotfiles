@@ -97,7 +97,7 @@ addTagRule("Steam", "Steam")
 #VLC
 addTagRule("vlc", "sel+0")
 #PopcornTime
-addTagRule("Popcorn-Time", 9)
+addTagRule("Popcorn-Time", 0)
 
 #=== PRE-STATUSBAR ===
 #Pulseaudio sinks
