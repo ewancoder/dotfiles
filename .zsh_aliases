@@ -13,6 +13,7 @@ alias gim='git merge --no-ff'
 alias gip='if [ "`ssh-add -L | grep github`" "==" "" ]; then github; fi; git push origin'
 alias gis='git status'
 alias github='ssh-add ~/.ssh/github'
+alias gco='git checkout'
 
 #=== Utils===
 #Reattach screen session(s)

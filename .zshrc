@@ -12,3 +12,4 @@ export TERM=rxvt-256color
 export EDITOR=gvim
 #List files upon start
 ls
+agenda &
