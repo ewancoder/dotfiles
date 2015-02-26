@@ -134,7 +134,7 @@ autocmd FileType python :setlocal nosmartindent
 set number
 "Highlight OVER 80
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-autocmd FileType c,python,css,sh match OverLength /\%81v.\+/
+autocmd FileType c,python,css,sh,cs match OverLength /\%81v.\+/
 "Autocompletion better colors
 :highlight Pmenu guibg=black guifg=#970
 :highlight PmenuSel guibg=#770
