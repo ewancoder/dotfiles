@@ -1,3 +1,4 @@
 #!/bin/bash
+cp ~/adroit/ValueTrend.cs ~/Debugging/Debugging/
 xbuild ~/Debugging/Debugging.sln
 mono ~/Debugging/Debugging/bin/Debug/Debugging.exe 2>&1 | less
