@@ -2,6 +2,7 @@
 for repo in\
     /etc/.dotfiles\
     ~/.dotfiles\
+    ~/adroit\
     ~/archlive/releng\
     ~/btp\
     ~/eal\
