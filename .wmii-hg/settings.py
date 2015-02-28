@@ -85,7 +85,7 @@ events = [
 
 #=== COLUMN RULES ===
 #Debugging code - 80 column rule
-addColRule(1, "56+44")
+addColRule(1, "55+45")
 #Two Thunars / 2 chromium windows
 addColRule(2, "50+50")
 #Anything else - Golden Ratio
