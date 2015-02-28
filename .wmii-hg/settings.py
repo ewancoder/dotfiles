@@ -84,9 +84,11 @@ events = [
 ]
 
 #=== COLUMN RULES ===
-#For two Thunars / 2 chromium windows
+#Debugging code - 80 column rule
+addColRule(1, "56+44")
+#Two Thunars / 2 chromium windows
 addColRule(2, "50+50")
-#For anything else - Golden Ratio
+#Anything else - Golden Ratio
 addColRule(".*", "62+38")
 
 #=== TAGGING RULES ===
