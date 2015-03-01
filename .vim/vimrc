@@ -206,4 +206,4 @@ nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gco :Git checkout<Space>
 "CtrlP
-nmap <leader>d :CtrlP ~/Dropbox<CR>
+map <leader>p :CtrlP ~/Dropbox<CR>
