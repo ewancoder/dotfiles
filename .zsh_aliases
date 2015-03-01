@@ -28,6 +28,8 @@ alias sshl='ssh -fNL 7070:127.0.0.1:7070 root@`cat ~/.rpi`'
 #=== Software ===
 #Google calendar agenda
 alias agenda='gcalcli agenda'
+#Fast gource
+alias gc='gource --hide filenames --date-format "%d, %B %Y" --seconds-per-day .15 --highlight-all-users --auto-skip-seconds .5 --file-idle-time 0 --max-files 99999999 --multi-sampling --elasticity .1 -b 000000 --disable-progress --user-friction .2'
 #Minecraft FeedTheBeast + Technic
 alias ftb='java -jar ~/Mega/Games/Minecraft/ftb.jar'
 alias tech='java -jar ~/Mega/Games/Minecraft/tech.jar'
