@@ -369,6 +369,10 @@ Key $MODKEY-9
     wmiir xwrite /ctl view "Steam"
 Key $MODKEY-Shift-9
     wmiir xwrite /client/sel/ctl tags "Steam"
+Key $MODKEY-Control-8
+    ~/.wmii-hg/lstags Garbage
+Key $MODKEY-Control-9
+    ~/.wmii-hg/lstags Steam
 !
 wi_events -e
 
