@@ -349,7 +349,7 @@ Key $MODKEY-n	    # Move to the next tag
 Key $MODKEY-b	    # Move to the previous tag
 	wmiir xwrite /ctl view $(wi_tags | sort -r | wi_nexttag)
 !
-	for i in 0 1 2 3 4 5 6 7 8 9; do
+	for i in 0 1 2 3 4 5 6 7; do
 		wi_events <<!
 Key $MODKEY-$i		 # Move to the numbered view
 	wmiir xwrite /ctl view "$i"
@@ -360,6 +360,12 @@ Key $MODKEY-Control-$i
     ~/.wmii-hg/lstags $i
 !
 done
+wi_events <<'!'
+Key $MODKEY-8
+    wmiir xwrite /ctl view "Garbage"
+Key $MODKEY-Shift-8
+    wmiir xwrite /client/sel/ctl tags "Garbage"
+!
 wi_events -e
 
 # WM Configuration
