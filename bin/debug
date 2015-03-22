@@ -1,4 +1,4 @@
 #!/bin/bash
-cp ~/adroit/ValueTrend.cs ~/Dropbox/Projects/Monodevelop/Debugging/Debugging/
+cp ~/Dropbox/Work/value-trend/ValueTrend.cs ~/Dropbox/Projects/Monodevelop/Debugging/Debugging/
 xbuild ~/Dropbox/Projects/Monodevelop/Debugging/Debugging.sln
 mono ~/Dropbox/Projects/Monodevelop/Debugging/Debugging/bin/Debug/Debugging.exe 2>&1 | less
