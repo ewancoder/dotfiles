@@ -138,6 +138,11 @@ autocmd FileType c,python,css,sh,cs,bas match OverLength /\%81v.\+/
 "Autocompletion better colors
 :highlight Pmenu guibg=black guifg=#970
 :highlight PmenuSel guibg=#770
+"Gdiff
+highlight DiffAdd guibg=#130
+highlight DiffChange guibg=#130
+highlight DiffDelete guifg=#310 guibg=#310
+highlight DiffText guibg=#990000
 "GitGutter colors
 highlight clear SignColumn
 highlight GitGutterAdd guibg=black
