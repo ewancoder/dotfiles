@@ -1,3 +1,4 @@
 
 [Default Applications]
 x-scheme-handler/http=chromium.desktop
+image/png=geeqie.desktop
