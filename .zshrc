@@ -13,3 +13,4 @@ export EDITOR=gvim
 #List files upon start
 ls
 cat ~/.agenda 2>/dev/null
+cat ~/Dropbox/.agenda 2>/dev/null
