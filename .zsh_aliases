@@ -16,6 +16,8 @@ alias github='ssh-add ~/.ssh/github'
 alias gco='git checkout'
 
 #=== Utils===
+#Rectify last command
+alias fuck='$(thefuck `fc -ln -1`)'
 #Reattach screen session(s)
 alias sc='screen -rd'
 #Screenshot of a window
