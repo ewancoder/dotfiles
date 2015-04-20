@@ -39,8 +39,6 @@ alias ftb='java -jar ~/Mega/Games/Minecraft/ftb.jar'
 alias tech='java -jar ~/Mega/Games/Minecraft/tech.jar'
 #Impressive
 alias imp='impressive --darkness 60 -ff'
-#Popcorn-Time
-alias pt='~/Mega/Software/Popcorn-Time/Popcorn-Time'
 #Terraria TShock Server
 alias terr='cd ~/Mega/GameSaves/Terraria && mono TerrariaServer.exe'
 #VLC with SYNCPLAY
