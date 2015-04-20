@@ -1,5 +1,5 @@
 #!/bin/bash
-for f in ~/Downloads/Chrome\ Downloads/*.{tar,zip,7z,rar}*; do
+for f in ~/Downloads/Chrome\ Downloads/*.{tar,zip,7z,rar}; do
     if [ -f "$f" ]; then
         mkdir "$f-dir"
         file=$(basename "$f")
