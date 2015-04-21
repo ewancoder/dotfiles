@@ -19,8 +19,7 @@ do
             notify-send -u critical "BACKUP updated at $d"
         fi
         if [ "`cat $d/.key`" == "cloud-2216" ]; then
-            rsync -av --delete --no-o --no-p --no-g --safe-links --modify-window 1 /mnt/cloud/Dropbox/ $d/Cloud/Dropbox
-            rsync -av --delete --exclude={Backup,.debris} --no-o --no-p --no-g --safe-links --modify-window 1 /mnt/cloud/Mega/ $d/Cloud/Mega
+            rsync -av --delete --no-o --no-p --no-g --safe-links --modify-window 1 /mnt/cloud/Dropbox/ $d/Dropbox
             sync
             devmon --unmount $d
             notify-send -u critical "CLOUD updated at $d"
