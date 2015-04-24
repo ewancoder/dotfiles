@@ -185,7 +185,7 @@ addBlock()
 #CPU Load
 text = "uptime | awk -F: '{print $NF}' | tr -d ','"
 check = text + " | awk '{print $2}'"
-lower = 1.95
+lower = 7
 addBlock()
 #Uptime
 text = "uptime | sed 's/.*up \\([^,]*\\).*/\\1/'"
