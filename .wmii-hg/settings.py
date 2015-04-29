@@ -170,6 +170,11 @@ text = check
 lower = "awk '{printf \"%.0f\", $1/1400; exit}' /sys/class/hwmon/hwmon0/temp*_max"
 mid = "awk '{printf \"%.0f\", $1/1200; exit}' /sys/class/hwmon/hwmon0/temp*_crit"
 addBlock()
+check = "awk '{printf \"%.0f\", $1/1000; exit}' /sys/class/hwmon/hwmon1/temp*_input"
+text = check
+lower = "awk '{printf \"%.0f\", $1/1400; exit}' /sys/class/hwmon/hwmon1/temp*_max"
+mid = "awk '{printf \"%.0f\", $1/1200; exit}' /sys/class/hwmon/hwmon1/temp*_crit"
+addBlock()
 #CPU Frequency
 text = "cat /proc/cpuinfo | awk '/MHz/ {printf \"%.1f \", $4/1000}'"
 addBlock()
