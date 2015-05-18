@@ -32,6 +32,7 @@ Plugin 'Shougo/neocomplete'
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_auto_select = 1
 autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+autocmd FileType tex NeoCompleteLock "Turn off on LaTeX, too much lagging
 
 "Git wrapper + diffs
 Plugin 'tpope/vim-fugitive'
