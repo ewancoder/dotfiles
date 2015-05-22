@@ -101,6 +101,8 @@ addTagRule("vlc", "sel+0")
 addTagRule("Popcorn-Time", 0)
 #Mesages from devmon
 addTagRule("Zenity", "Garbage")
+#Feed the beast
+addTagRule("net-ftb-tracking-piwik-PiwikTracker", "Garbage")
 
 #=== PRE-STATUSBAR ===
 #Pulseaudio sinks
