@@ -213,3 +213,6 @@ nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gco :Git checkout<Space>
 "CtrlP
 map <leader>p :CtrlP ~/Dropbox<CR>
+
+"Superduper VS-like opening files
+nmap <F12> bvwhy:e <S-Insert>
