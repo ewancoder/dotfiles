@@ -183,7 +183,7 @@ Key $MODKEY-Shift-w
 Key $MODKEY-g
 	gvim &
 Key $MODKEY-r
-    urxvt -e canto-curses -a 127.0.0.1 -p 7070 -v &
+    urxvt -e canto-curses &
 Key $MODKEY-w
     chromium --app-id=iiooodelglhkcpgbajoejffhijaclcdg
     
