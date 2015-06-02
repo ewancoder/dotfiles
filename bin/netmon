@@ -7,8 +7,8 @@ else
     rx=0
     tx=0
 fi
-ifconfig | awk '/RX packets/ {print $5; exit}' > /tmp/rx
-ifconfig | awk '/TX packets/ {print $5; exit}' > /tmp/tx
+ifconfig | egrep "enp|wl" -A 8 | awk '/RX packets/ {print $5; exit}' > /tmp/rx
+ifconfig | egrep "enp|wl" -A 8 | awk '/TX packets/ {print $5; exit}' > /tmp/tx
 
 echo `cat /tmp/rx` `cat /tmp/tx` $rx $tx $bytes | awk '
 {
