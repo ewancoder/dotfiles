@@ -19,7 +19,8 @@ fi
 devilspie &
 
 #Shield for my eyes
-xflux -l 53.9 -g 27.5667 -k 4500 &
+#xflux -l 53.9 -g 27.5667 -k 4500 &
+redshift &
 
 #Grab mouse and hide it
 unclutter -grab &
