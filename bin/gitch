@@ -5,7 +5,8 @@ for repo in\
     ~/adroit\
     ~/archlive/releng\
     ~/btp\
-    ~/eal\
+    ~/Dropbox/Projects/*\
+    ~/Dropbox/Work/*\
     ~/rpidots\
     ~/site; do
     if [ -d $repo ]; then
