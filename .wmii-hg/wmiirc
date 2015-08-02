@@ -179,7 +179,7 @@ Key $MODKEY-c
 Key $MODKEY-e
     chromium keep.google.com &
 Key $MODKEY-Shift-w
-    virtualbox --startvm Windows7 &
+    virtualbox --startvm "Windows 7" &
 Key $MODKEY-g
 	gvim &
 Key $MODKEY-r
