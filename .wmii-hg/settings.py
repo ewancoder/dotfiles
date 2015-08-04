@@ -109,7 +109,7 @@ addTagRule("net-ftb-tracking-piwik-PiwikTracker", "Garbage")
 text = "~/bin/mypo | awk -F '|' '!/Active/ {print \" \"$2\" \"}; /Active/ {print \" [\"$2\"] \"}'"
 addBlock()
 #GIT activity
-text = "~/bin/gitch | awk '/Unstaged/ {print $2}'"
+text = "~/bin/gitch | awk '/Unstaged/ {print $2\" \"}'"
 color = gitColors
 addBlock()
 text = "~/bin/gitch | awk '/Ahead/ {print $2}'"
