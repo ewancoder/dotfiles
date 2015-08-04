@@ -1,0 +1,6 @@
+#!/bin/bash
+while cat /proc/acpi/wakeup | grep -v PWRB | grep enabled; do
+    cat /proc/acpi/wakeup | grep enabled
+    cat /proc/acpi/wakeup | awk '/enabled/ && ! /PWRB/ {print $1}' | xargs echo > /proc/acpi/wakeup
+    sleep 1
+done

@@ -256,13 +256,15 @@ Key $MODKEY-F11
 Key $MODKEY-Shift-F11
     wmiir xwrite /rbar/\!notice colors "`var warnColors`"
     wmiir xwrite /rbar/\!notice label "Power off..."
-    baconf
-    systemctl poweroff -i
+    if [ ! -f /tmp/baconf.lock ]; then
+        systemctl poweroff -i
+    fi
 Key $MODKEY-Shift-F10
     wmiir xwrite /rbar/\!notice colors "`var warnColors`"
     wmiir xwrite /rbar/\!notice label "Reboot..."
-    baconf
-    systemctl reboot -i
+    if [ ! -f /tmp/baconf.lock ]; then
+        systemctl reboot -i
+    fi
 #Change wallpaper
 Key $MODKEY-Print
     feh --bg-fill --randomize --recursive Dropbox/Pictures
