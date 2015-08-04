@@ -227,7 +227,8 @@ Key $MODKEY-o
     fi
 #Lock session (screensaver)
 Key $MODKEY-KP_Enter
-    slimlock
+    slimlock &
+    sudo pm-suspend
 Key $MODKEY-Shift-KP_Enter
     kill `ps aux | awk '/wmii.py/ {print $2}'`
 	wmiir xwrite /ctl quit
