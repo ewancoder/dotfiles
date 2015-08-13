@@ -20,6 +20,8 @@ alias gco='git checkout'
 alias fuck='$(thefuck `fc -ln -1`)'
 #Reattach screen session(s)
 alias sc='screen -rd'
+#Reattach tmux session(s)
+alias ta='tmux attach'
 #Screenshot of a window
 alias scr='xdotool mousemove - 1 mousemove restore; scrot -s `date +%d%H%M%S`.png'
 #Connect to RPI over ssh

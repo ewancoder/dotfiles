@@ -109,7 +109,7 @@ au BufNewFile,BufRead *.md set filetype=markdown
 au BufNewFile,BufRead *.tex set filetype=tex
 
 "---------- Colors/interface ----------
-colorscheme desert
+colorscheme desert-warm-256
 syntax on
 "Set scrolloff to 5 lines
 set so=5
