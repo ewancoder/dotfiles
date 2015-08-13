@@ -157,7 +157,7 @@ highlight GitGutterDelete guifg=red
 highlight GitGutterChangeDelete guifg=yellow
 "Spellcheck colors
 highlight clear SpellBad
-highlight SpellBad gui=undercurl cterm=undercurl guisp=red ctermfg=red
+highlight SpellBad gui=undercurl cterm=underline guisp=#ff5f5f guifg=#ff5f5f ctermfg=203
 "Better find
 hi Search ctermfg=black ctermbg=214 guifg=black guibg=#ffaf00
 
