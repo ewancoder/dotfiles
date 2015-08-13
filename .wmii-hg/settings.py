@@ -112,10 +112,10 @@ addBlock()
 text = "~/bin/gitch | awk '/Unstaged/ {print $2\" \"}'"
 color = gitColors
 addBlock()
-text = "~/bin/gitch | awk '/Ahead/ {print $2}'"
+text = "~/bin/gitch | awk '/Ahead/ {print $2\" \"}'"
 color = gitBlueColors
 addBlock()
-text = "~/bin/gitch | awk '/Staged/ {print $2}'"
+text = "~/bin/gitch | awk '/Staged/ {print $2\" \"}'"
 color = gitGreenColors
 addBlock()
 #Removable USB
