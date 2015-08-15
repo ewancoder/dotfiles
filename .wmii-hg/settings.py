@@ -64,7 +64,7 @@ position = 'top'
 background = '~/Dropbox/Pictures'
 
 #Timeouts (in seconds)
-statusTimeout = 2
+statusTimeout = 5
 eventsTimeout = 5
 bgTimeout = 300
 updatesTimeout = 600
