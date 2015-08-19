@@ -1,0 +1,6 @@
+#!/bin/bash
+mesg="$(date)"
+for ((i = 0; i < 1000; i++)); do
+    eval "$1"
+done
+echo "$mesg   ->   $(date)"

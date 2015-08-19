@@ -131,7 +131,7 @@ text = 'if ! [ "$(ps aux | grep "devmon --unmount" | grep -v grep)" == "" ]; the
 color = deviceColors
 addBlock()
 #Check for cp/mv activity
-text = "cv | egrep -o '[0-9]+..%' | egrep -v 'grep|cut'"
+text = "progress | egrep -o '[0-9]+..%' | egrep -v 'grep|cut'"
 color = midColors
 addBlock()
 
