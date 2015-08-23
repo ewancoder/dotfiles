@@ -79,6 +79,7 @@ startup = [
 #Events are executed each 5 seconds
 events = [
     '~/bin/unarchive',
+    '~/bin/gitch > /dev/shm/wmii.gitch'
     #'~/bin/ircnotify'
 ]
 
@@ -109,13 +110,13 @@ addTagRule("net-ftb-tracking-piwik-PiwikTracker", "Garbage")
     #text = "~/bin/mypo | nawk -F '|' '!/Active/ {print \" \"$2\" \"}; /Active/ {print \" [\"$2\"] \"}'"
     #addBlock()
 #GIT activity
-text = "~/bin/gitch | nawk '/Unstaged/ {print $2\" \"}'"
+text = "cat /dev/shm/wmii.gitch | nawk '/Unstaged/ {print $2\" \"}'"
 color = gitColors
 addBlock()
-text = "~/bin/gitch | nawk '/Ahead/ {print $2\" \"}'"
+text = "cat /dev/shm/wmii.gitch | nawk '/Ahead/ {print $2\" \"}'"
 color = gitBlueColors
 addBlock()
-text = "~/bin/gitch | nawk '/Staged/ {print $2\" \"}'"
+text = "cat /dev/shm/wmii.gitch | nawk '/Staged/ {print $2\" \"}'"
 color = gitGreenColors
 addBlock()
 #Removable USB
@@ -127,7 +128,7 @@ addBlock()
 #color = deviceColors
 #addBlock()
 #Unmounting message
-text = 'if ! [ "$(ps aux | grep "devmon --unmount" | grep -v grep)" == "" ]; then echo "Unmounting..."; fi'
+text = 'if [[ ! `ps aux | nawk \'/devmon --unmount/ && !/awk/\'` == "" ]]; then echo "Unmounting..."; fi'
 color = deviceColors
 addBlock()
 #Check for cp/mv activity
@@ -181,7 +182,7 @@ addBlock()
 text = "cat /proc/cpuinfo | nawk '/MHz/ {printf \"%.1f \", $4/1000}'"
 addBlock()
 #GPU Temperature
-check = "nvidia-settings -q=GPUCoreTemp | nawk '/GPUCoreTemp/ {printf \"%.0f\\n\", $4; exit}'"
+check = "nvidia-smi | nawk '/[0-9]+C/ {print $3}' | sed 's/.$//'"
 text = check
 lower = 40
 mid = 52
