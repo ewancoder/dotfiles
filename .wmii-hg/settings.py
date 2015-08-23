@@ -79,7 +79,8 @@ startup = [
 #Events are executed each 5 seconds
 events = [
     '~/bin/unarchive',
-    '~/bin/gitch > /dev/shm/wmii.gitch'
+    '~/bin/gitch > /dev/shm/wmii.gitch',
+    'df -h > /dev/shm/wmii.df'
     #'~/bin/ircnotify'
 ]
 
@@ -110,17 +111,17 @@ addTagRule("net-ftb-tracking-piwik-PiwikTracker", "Garbage")
     #text = "~/bin/mypo | nawk -F '|' '!/Active/ {print \" \"$2\" \"}; /Active/ {print \" [\"$2\"] \"}'"
     #addBlock()
 #GIT activity
-text = "cat /dev/shm/wmii.gitch | nawk '/Unstaged/ {print $2\" \"}'"
+text = "nawk '/Unstaged/ {print $2\" \"}' /dev/shm/wmii.gitch"
 color = gitColors
 addBlock()
-text = "cat /dev/shm/wmii.gitch | nawk '/Ahead/ {print $2\" \"}'"
+text = "nawk '/Ahead/ {print $2\" \"}' /dev/shm/wmii.gitch"
 color = gitBlueColors
 addBlock()
-text = "cat /dev/shm/wmii.gitch | nawk '/Staged/ {print $2\" \"}'"
+text = "nawk '/Staged/ {print $2\" \"}' /dev/shm/wmii.gitch"
 color = gitGreenColors
 addBlock()
 #Removable USB
-text = 'ls -1 /media | tr "\\n" " "'
+text = 'ls /media'
 color = deviceColors
 addBlock()
 #USB backup
@@ -138,31 +139,31 @@ addBlock()
 
 #=== STATUSBAR ===
 #Free RAM
-check = "top -bn1 | nawk '/Mem/ {print $4}' | nawk -F '/' '{print $1}'"
+check = "free -m | nawk '/Mem:/ {print $7}'"
 text = check
-lower = 50
-mid = 80
+bigger = 8000
+mid = 3000
 addBlock()
 #Space at /
-check = "df -h / | nawk '/\// {print substr($5, 0, length($5) - 1)}'"
+check = "nawk '/\/$/ {print substr($5, 0, length($5) - 1)}' /dev/shm/wmii.df"
 text = "echo `" + check + "` /"
 lower = 55
 mid = 80
 addBlock()
 #Space at /home
-check = "df -h /home | nawk '/home/ {print substr($5, 0, length($5) - 1)}'"
+check = "nawk '/home/ {print substr($5, 0, length($5) - 1)}' /dev/shm/wmii.df"
 text = "echo `" + check + "` H"
 lower = 55
 mid = 80
 addBlock()
 #Space at /mnt/cloud
-check = "df -h /mnt/cloud | nawk '/cloud/ {print substr($5, 0, length($5) - 1)}'"
+check = "nawk '/cloud/ {print substr($5, 0, length($5) - 1)}' /dev/shm/wmii.df"
 text = "echo `" + check + "` C"
 lower = 55
 mid = 75
 addBlock()
 #Space at /mnt/backup
-check = "df -h /mnt/backup | nawk '/backup/ {print substr($5, 0, length($5) - 1)}'"
+check = "nawk '/backup/ {print substr($5, 0, length($5) - 1)}' /dev/shm/wmii.df"
 text = "echo `" + check + "` B"
 lower = 55
 mid = 75
