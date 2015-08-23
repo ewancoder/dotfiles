@@ -72,14 +72,14 @@ updatesTimeout = 600
 #Startup X11 apps
 startup = [
     'dropbox',
-    'ssh -fNL 7070:127.0.0.1:7070 root@`cat ~/.rpi`',
+    #'ssh -fNL 7070:127.0.0.1:7070 root@`cat ~/.rpi`',
     'tilda',
     'chromium --no-startup-window'
 ]
 #Events are executed each 5 seconds
 events = [
     '~/bin/unarchive',
-    '~/bin/ircnotify'
+    #'~/bin/ircnotify'
 ]
 
 #=== COLUMN RULES ===
@@ -105,17 +105,17 @@ addTagRule("Zenity", "Garbage")
 addTagRule("net-ftb-tracking-piwik-PiwikTracker", "Garbage")
 
 #=== PRE-STATUSBAR ===
-#Pulseaudio sinks
-text = "~/bin/mypo | awk -F '|' '!/Active/ {print \" \"$2\" \"}; /Active/ {print \" [\"$2\"] \"}'"
-addBlock()
+    #Pulseaudio sinks
+    #text = "~/bin/mypo | nawk -F '|' '!/Active/ {print \" \"$2\" \"}; /Active/ {print \" [\"$2\"] \"}'"
+    #addBlock()
 #GIT activity
-text = "~/bin/gitch | awk '/Unstaged/ {print $2\" \"}'"
+text = "~/bin/gitch | nawk '/Unstaged/ {print $2\" \"}'"
 color = gitColors
 addBlock()
-text = "~/bin/gitch | awk '/Ahead/ {print $2\" \"}'"
+text = "~/bin/gitch | nawk '/Ahead/ {print $2\" \"}'"
 color = gitBlueColors
 addBlock()
-text = "~/bin/gitch | awk '/Staged/ {print $2\" \"}'"
+text = "~/bin/gitch | nawk '/Staged/ {print $2\" \"}'"
 color = gitGreenColors
 addBlock()
 #Removable USB
@@ -123,65 +123,65 @@ text = 'ls -1 /media | tr "\\n" " "'
 color = deviceColors
 addBlock()
 #USB backup
-text = 'if [ -f /tmp/usb.lock ]; then echo "Working..."; fi'
-color = deviceColors
-addBlock()
+#text = 'if [ -f /tmp/usb.lock ]; then echo "Working..."; fi'
+#color = deviceColors
+#addBlock()
 #Unmounting message
 text = 'if ! [ "$(ps aux | grep "devmon --unmount" | grep -v grep)" == "" ]; then echo "Unmounting..."; fi'
 color = deviceColors
 addBlock()
 #Check for cp/mv activity
-text = "progress | egrep -o '[0-9]+..%' | egrep -v 'grep|cut'"
-color = midColors
-addBlock()
+#text = "progress | egrep -o '[0-9]+..%' | egrep -v 'grep|cut'"
+#color = midColors
+#addBlock()
 
 #=== STATUSBAR ===
 #Free RAM
-check = "top -bn1 | awk '/Mem/ {print $4}' | awk -F '/' '{print $1}'"
+check = "top -bn1 | nawk '/Mem/ {print $4}' | nawk -F '/' '{print $1}'"
 text = check
 lower = 50
 mid = 80
 addBlock()
 #Space at /
-check = "df -h / | awk '/\// {print substr($5, 0, length($5) - 1)}'"
+check = "df -h / | nawk '/\// {print substr($5, 0, length($5) - 1)}'"
 text = "echo `" + check + "` /"
 lower = 55
 mid = 80
 addBlock()
 #Space at /home
-check = "df -h /home | awk '/home/ {print substr($5, 0, length($5) - 1)}'"
+check = "df -h /home | nawk '/home/ {print substr($5, 0, length($5) - 1)}'"
 text = "echo `" + check + "` H"
 lower = 55
 mid = 80
 addBlock()
 #Space at /mnt/cloud
-check = "df -h /mnt/cloud | awk '/cloud/ {print substr($5, 0, length($5) - 1)}'"
+check = "df -h /mnt/cloud | nawk '/cloud/ {print substr($5, 0, length($5) - 1)}'"
 text = "echo `" + check + "` C"
 lower = 55
 mid = 75
 addBlock()
 #Space at /mnt/backup
-check = "df -h /mnt/backup | awk '/backup/ {print substr($5, 0, length($5) - 1)}'"
+check = "df -h /mnt/backup | nawk '/backup/ {print substr($5, 0, length($5) - 1)}'"
 text = "echo `" + check + "` B"
 lower = 55
 mid = 75
 addBlock()
 #CPU Temperature
-check = "awk '{printf \"%.0f\", $1/1000; exit}' /sys/class/hwmon/hwmon0/temp*_input"
+check = "nawk '{printf \"%.0f\", $1/1000; exit}' /sys/class/hwmon/hwmon0/temp*_input"
 text = check
-lower = "awk '{printf \"%.0f\", $1/1400; exit}' /sys/class/hwmon/hwmon0/temp*_max"
-mid = "awk '{printf \"%.0f\", $1/1200; exit}' /sys/class/hwmon/hwmon0/temp*_crit"
+lower = "nawk '{printf \"%.0f\", $1/1400; exit}' /sys/class/hwmon/hwmon0/temp*_max"
+mid = "nawk '{printf \"%.0f\", $1/1200; exit}' /sys/class/hwmon/hwmon0/temp*_crit"
 addBlock()
-check = "awk '{printf \"%.0f\", $1/1000; exit}' /sys/class/hwmon/hwmon1/temp*_input"
+check = "nawk '{printf \"%.0f\", $1/1000; exit}' /sys/class/hwmon/hwmon1/temp*_input"
 text = check
-lower = "awk '{printf \"%.0f\", $1/1400; exit}' /sys/class/hwmon/hwmon1/temp*_max"
-mid = "awk '{printf \"%.0f\", $1/1200; exit}' /sys/class/hwmon/hwmon1/temp*_crit"
+lower = "nawk '{printf \"%.0f\", $1/1400; exit}' /sys/class/hwmon/hwmon1/temp*_max"
+mid = "nawk '{printf \"%.0f\", $1/1200; exit}' /sys/class/hwmon/hwmon1/temp*_crit"
 addBlock()
 #CPU Frequency
-text = "cat /proc/cpuinfo | awk '/MHz/ {printf \"%.1f \", $4/1000}'"
+text = "cat /proc/cpuinfo | nawk '/MHz/ {printf \"%.1f \", $4/1000}'"
 addBlock()
 #GPU Temperature
-check = "nvidia-settings -q=GPUCoreTemp | awk '/GPUCoreTemp/ {printf \"%.0f\\n\", $4; exit}'"
+check = "nvidia-settings -q=GPUCoreTemp | nawk '/GPUCoreTemp/ {printf \"%.0f\\n\", $4; exit}'"
 text = check
 lower = 40
 mid = 52
@@ -190,13 +190,13 @@ addBlock()
 text = "~/bin/netmon"
 addBlock()
 #CPU Load
-text = "uptime | awk -F: '{print $NF}' | tr -d ','"
-check = text + " | awk '{print $2}'"
+text = "uptime | nawk -F: '{print $NF}' | tr -d ','"
+check = text + " | nawk '{print $2}'"
 lower = 7
 addBlock()
 #Uptime
-text = "uptime | sed 's/.*up \\([^,]*\\).*/\\1/'"
-addBlock()
+#text = "uptime | sed 's/.*up \\([^,]*\\).*/\\1/'"
+#addBlock()
 #Time
 text = "date +%a\\ %b\\ %d\\ %I:%M:%S\\ %p"
 addBlock()

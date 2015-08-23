@@ -2,16 +2,11 @@
 for repo in\
     /etc/.dotfiles\
     ~/.dotfiles\
-    ~/adroit\
-    ~/archlive/releng\
-    ~/btp\
     ~/Dropbox/Projects/*\
-    ~/Dropbox/Work/*\
-    ~/rpidots\
-    ~/site; do
-    if [ -d $repo ]; then
+    ~/Dropbox/Work/*; do
+    if [ -d "$repo/.git" ]; then
         cd $repo
-        git status | awk -v repo="`basename $repo`-`basename $(dirname $repo)`"\
+        git status | nawk -v repo="`basename $repo`-`basename $(dirname $repo)`"\
             '/not staged|untracked/ {print "Unstaged: "repo};
             /ahead|different commit/ {print "Ahead: "repo};
             /to be committed/ {print "Staged: "repo}'

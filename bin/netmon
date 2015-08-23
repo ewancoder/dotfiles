@@ -1,5 +1,5 @@
 #!/bin/bash
-bytes=$((`cat /tmp/settings.wmii | awk -F '|' '/statusTimeout/ {print $2}'` * 1024)) #1024 bytes per second
+bytes=$((`cat /tmp/settings.wmii | nawk -F '|' '/statusTimeout/ {print $2}'` * 1024)) #1024 bytes per second
 if [ -f /tmp/rx ]; then
     rx=$(cat /tmp/rx)
     tx=$(cat /tmp/tx)
@@ -7,8 +7,8 @@ else
     rx=0
     tx=0
 fi
-ifconfig | egrep "enp|wl" -A 8 | awk '/RX packets/ {print $5; exit}' > /tmp/rx
-ifconfig | egrep "enp|wl" -A 8 | awk '/TX packets/ {print $5; exit}' > /tmp/tx
+ifconfig | egrep "enp|wl" -A 8 | nawk '/RX packets/ {print $5; exit}' > /tmp/rx
+ifconfig | egrep "enp|wl" -A 8 | nawk '/TX packets/ {print $5; exit}' > /tmp/tx
 
 echo `cat /tmp/rx` `cat /tmp/tx` $rx $tx $bytes | awk '
 {
