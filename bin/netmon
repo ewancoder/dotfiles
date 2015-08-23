@@ -10,7 +10,7 @@ fi
 cat /sys/class/net/enp5s0/statistics/rx_bytes > /tmp/rx
 cat /sys/class/net/enp5s0/statistics/tx_bytes > /tmp/tx
 
-echo `cat /tmp/rx` `cat /tmp/tx` $rx $tx $bytes | nawk '
+echo `cat /tmp/rx` `cat /tmp/tx` $rx $tx $bytes | awk '
 {
     tx = int(($1 - $3) / $5);
     rx = int(($2 - $4) / $5);
