@@ -85,6 +85,9 @@ nmap <F7> :TagbarToggle<CR>
 call vundle#end()
 filetype plugin indent on
 
+"Extend background to the whole screen
+set t_ut=
+
 "---------- General ----------
 set history=5000
 "Autoread when file is changed from the outside
