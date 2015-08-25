@@ -9,7 +9,15 @@ bindkey '\e[2~' overwrite-mode #Insert key
 source .zsh_aliases
 #My environment variables
 export TERM=rxvt-256color
-export EDITOR=gvim
+export EDITOR=vim
+
+# CD to saved (work) directory
+if [ -f ~/.cd ]; then
+    if [ -d "$(cat ~/.cd)" ]; then
+        cd "$(cat ~/.cd)"
+    fi
+fi
+
 #List files upon start
 ls
 cat ~/.agenda 2>/dev/null
