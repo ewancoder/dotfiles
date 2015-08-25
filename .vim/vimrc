@@ -164,6 +164,19 @@ highlight SpellBad gui=undercurl cterm=underline guisp=#ff5f5f guifg=#ff5f5f cte
 "Better find
 hi Search ctermfg=black ctermbg=214 guifg=black guibg=#ffaf00
 
+"Cursor under cygwin
+if exists('$TMUX')
+    let &t_ti.="\<Esc>Ptmux;\<Esc>\e[1 q\<Esc>\\"
+    let &t_SI.="\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
+    let &t_EI.="\<Esc>Ptmux;\<Esc>\e[1 q\<Esc>\\"
+    let &t_te.="\<Esc>Ptmux;\<Esc>\e[0 q\<Esc>\\"
+else
+    let &t_ti.="\e[1 q"
+    let &t_SI.="\e[5 q"
+    let &t_EI.="\e[1 q"
+    let &t_te.="\e[0 q"
+endif
+
 "---------- Mapping ----------
 set timeoutlen=500 "Multiple keys timeout
 "Leader key
