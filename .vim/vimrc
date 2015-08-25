@@ -130,6 +130,8 @@ set shiftwidth=4	"1 Tab = 4 Spaces
 set tabstop=4		"Real Tab length = 4 Spaces
 set autoindent
 set smartindent
+"Backspace intended behaviour (windows)
+set backspace=indent,eol,start
 "TABS for html
 autocmd FileType html :setlocal sw=2 ts=2 sts=2
 "NoSmartIndent for python
