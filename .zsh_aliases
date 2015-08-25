@@ -1,3 +1,6 @@
+# Save current folder for automatic CD
+alias savecd='echo "$PWD" > ~/.cd'
+
 #=== GIT ===
 alias ga='git add'
 alias gia='git add -A'
@@ -5,9 +8,10 @@ alias gic!='git commit -v --amend'
 alias gic='git commit -v'
 alias gica!='git commit -av --amend'
 alias gica='git commit -av'
-alias gid='git diff'
+alias gid='git diff --color=always | less'
+alias gidc='git diff --cached --color=always | less'
 alias gif='if [ "`ssh-add -L | grep github`" "==" "" ]; then github; fi; git fetch && git pull'
-alias gil='git log --graph --all --pretty=format:"%C(yellow)%h%Creset %Cgreen(%cr)%Creset -%C(auto)%d%Creset %s" --decorate'
+alias gil='git log --graph --all --pretty=format:"%C(yellow)%h%Creset %Cgreen(%cr)%Creset -%C(auto)%d%Creset %s" --decorate | less'
 alias gils='git ls-files | less'
 alias gim='git merge --no-ff'
 alias gip='if [ "`ssh-add -L | grep github`" "==" "" ]; then github; fi; git push origin'
@@ -21,7 +25,13 @@ alias fuck='$(thefuck `fc -ln -1`)'
 #Reattach screen session(s)
 alias sc='screen -rd'
 #Reattach tmux session(s)
-alias ta='tmux attach'
+ta() {
+    if [ -z $1 ]; then
+        tmux attach
+    else
+        tmux attach -t $1
+    fi
+}
 #Screenshot of a window
 alias scr='xdotool mousemove - 1 mousemove restore; scrot -s `date +%d%H%M%S`.png'
 #Connect to RPI over ssh
