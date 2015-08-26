@@ -6,6 +6,12 @@ ln -fs ~/.dotfiles/.zsh_aliases ~/
 ln -fs ~/.dotfiles/.tmux.conf ~/
 ln -fs ~/.dotfiles/.oh-my-zsh/themes/ewancoder.zsh-theme ~/.oh-my-zsh/themes
 
+ln -fs ~/.dotfiles/.config/mc ~/.config/
+(
+    cd ~/.dotfiles/.config
+    git update-index --assume-unchanged mc/*
+)
+
 rm -rf ~/.vim /etc/vimrc
 ln -fs ~/.dotfiles/.vim ~/
 
