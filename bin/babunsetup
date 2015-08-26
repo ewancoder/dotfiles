@@ -1,4 +1,11 @@
 #!/bin/bash
+git config --global user.name ewancoder
+git config --global user.email ewancoder@gmail.com
+git config --global core.editor vim
+git config --global merge.tool vimdiff
+git config --global push.default simple
+git config --global core.autocrlf input
+
 git clone http://github.com/ewancoder/dotfiles.git ~/.dotfiles
 ln -fs ~/.dotfiles/.minttyrc ~/
 ln -fs ~/.dotfiles/.zshrc ~/
