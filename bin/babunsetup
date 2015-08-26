@@ -1,10 +1,4 @@
 #!/bin/bash
-echo "Start?"
-read
-
-pact install tmux && pact update git
-read
-
 git clone http://github.com/ewancoder/dotfiles.git ~/.dotfiles
 ln -fs ~/.dotfiles/.minttyrc ~/
 ln -fs ~/.dotfiles/.zshrc ~/
@@ -20,15 +14,9 @@ folder=~/.vim/spell
 mkdir -p $folder
 (
     cd $folder
-    ls ../../..
-    ls ../..
-    ls ..
-    ls
-    read
-    curl -LO https://www.dropbox.com/sh/opimtkj7948ket2/AABUDDjVTeWC6hvLxkZuR3E8a/my.utf-8.add
-    curl -LO https://www.dropbox.com/sh/opimtkj7948ket2/AAAln0hJGsdg40S-G_BrDkNAa/my.utf-8.add.spl
-    curl -LO https://www.dropbox.com/sh/opimtkj7948ket2/AAA8_kUvUhzVgWDCwiYzfcATa/ru.utf-8.spl
-    curl -LO https://www.dropbox.com/sh/opimtkj7948ket2/AAA5s0O8dEzNt88xwjOz1zZea/ru.utf-8.sug
+    curl -L -o myspell.zip https://www.dropbox.com/sh/opimtkj7948ket2/AACHt_eZYob536oslnDRq_NUa?dl=1
+    unzip -o myspell.zip
+    rm myspell.zip
 )
 
 cd ~/.dotfiles
