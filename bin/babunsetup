@@ -31,3 +31,6 @@ vim +PluginInstall +qall
 
 ln -s /d/Dropbox ~/Dropbox
 ln -s /c/Users/i.zyrianov/Downloads ~/Downloads
+
+pact install tmux
+pact update git
