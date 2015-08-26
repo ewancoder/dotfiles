@@ -42,3 +42,8 @@ ln -s /c/Users/i.zyrianov/Downloads ~/Downloads
 
 pact install tmux
 pact update git
+
+pid=$(ps | awk '/mintty/ {print $1}')
+babun.bat
+echo $pid
+kill $pid
