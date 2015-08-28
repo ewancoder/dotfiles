@@ -45,7 +45,13 @@ pact update git
 
 curl -o /c/Users/i.zyrianov/Documents/AutoHotkey.ahk https://gist.githubusercontent.com/sedm0784/4443120/raw/3b3292e59050be582c995d5ca2f2c96d2e9c644c/CapsLockCtrlEscape.ahk
 
-echo "LAlt::Esc" >> /c/Users/i.zyrianov/Documents/AutoHotkey.ahk
+echo """
+LAlt::Esc
+    return
+#q::
+    Send !{F4}
+    return
+""" >> /c/Users/i.zyrianov/Documents/AutoHotkey.ahk
 
 pid=$(ps | awk '/mintty/ {print $1}')
 babun.bat
