@@ -13,7 +13,7 @@ ln -fs ~/.dotfiles/.zsh_aliases ~/
 ln -fs ~/.dotfiles/.tmux.conf ~/
 ln -fs ~/.dotfiles/.oh-my-zsh/themes/ewancoder.zsh-theme ~/.oh-my-zsh/themes
 
-rm -rf ~/.config/mc
+mkdir -p ~/.config
 ln -fs ~/.dotfiles/.config/mc ~/.config/
 (
     cd ~/.dotfiles/.config
