@@ -197,18 +197,33 @@ Key $MODKEY-Shift-z
 Key $MODKEY-Shift-x
     ~/bin/volume on &
 Key $MODKEY-F1
-    device=$(pactl list sinks | grep -B 3 "Description: Built-in" | awk '/Sink/ {print $2}' | tr -d '#')
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: Built-in")
+    device=$(echo "$sink" | nawk '/Sink/ {print $2}' | tr -d '#')
     pactl set-sink-volume $device -5%
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: Built-in")
+    volume=$(echo "$sink" | nawk '/Volume: / {print $5}' | tr -d '%')
+    notify-send "AKG Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
 Key $MODKEY-F2
-    device=$(pactl list sinks | grep -B 3 "Description: Built-in" | awk '/Sink/ {print $2}' | tr -d '#')
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: Built-in")
+    device=$(echo "$sink" | nawk '/Sink/ {print $2}' | tr -d '#')
     pactl set-sink-volume $device +5%
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: Built-in")
+    volume=$(echo "$sink" | nawk '/Volume: / {print $5}' | tr -d '%')
+    notify-send "AKG Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
 Key $MODKEY-F7
-    device=$(pactl list sinks | grep -B 3 "Description: ARCTIC" | awk '/Sink/ {print $2}' | tr -d '#')
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: ARCTIC")
+    device=$(echo "$sink" | nawk '/Sink/ {print $2}' | tr -d '#')
     pactl set-sink-volume $device -5%
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: ARCTIC")
+    volume=$(echo "$sink" | nawk '/Volume: / {print $5}' | tr -d '%')
+    notify-send "USB Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
 Key $MODKEY-F8
-    device=$(pactl list sinks | grep -B 3 "Description: ARCTIC" | awk '/Sink/ {print $2}' | tr -d '#')
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: ARCTIC")
+    device=$(echo "$sink" | nawk '/Sink/ {print $2}' | tr -d '#')
     pactl set-sink-volume $device +5%
-
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: ARCTIC")
+    volume=$(echo "$sink" | nawk '/Volume: / {print $5}' | tr -d '%')
+    notify-send "USB Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
 KeyGroup Keyboard layouts
 Key $MODKEY-i
     sed -i 's/ca(fr),ru/us,ru/g' ~/.config/gxkb/gxkb.cfg && killall gxkb && gxkb &
