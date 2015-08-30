@@ -181,7 +181,7 @@ Key $MODKEY-e
 Key $MODKEY-Shift-w
     virtualbox --startvm "Windows 7" &
 Key $MODKEY-g
-	gvim &
+    urxvt -e vim &
 Key $MODKEY-r
     urxvt -e canto-curses &
 Key $MODKEY-w
