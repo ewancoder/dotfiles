@@ -196,6 +196,18 @@ Key $MODKEY-Shift-z
     ~/bin/volume off &
 Key $MODKEY-Shift-x
     ~/bin/volume on &
+Key $MODKEY-F1
+    device=$(pactl list sinks | grep -B 3 "Description: Built-in" | awk '/Sink/ {print $2}' | tr -d '#')
+    pactl set-sink-volume $device -5%
+Key $MODKEY-F2
+    device=$(pactl list sinks | grep -B 3 "Description: Built-in" | awk '/Sink/ {print $2}' | tr -d '#')
+    pactl set-sink-volume $device +5%
+Key $MODKEY-F7
+    device=$(pactl list sinks | grep -B 3 "Description: ARCTIC" | awk '/Sink/ {print $2}' | tr -d '#')
+    pactl set-sink-volume $device -5%
+Key $MODKEY-F8
+    device=$(pactl list sinks | grep -B 3 "Description: ARCTIC" | awk '/Sink/ {print $2}' | tr -d '#')
+    pactl set-sink-volume $device +5%
 
 KeyGroup Keyboard layouts
 Key $MODKEY-i
