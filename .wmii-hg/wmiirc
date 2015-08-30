@@ -382,21 +382,26 @@ Key $MODKEY-Shift-KP_Begin
 
 KeyGroup Pulseaudio per-application volume control
 Key $MODKEY-KP_End
-    if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume `cat /tmp/cind.mypo` -5000
+    if [ ! -f /dev/shm/sink.input ]; then
+        pactl list sink-inputs | nawk '/Sink Input #/ {print $3}' | tr -d '#' | head -1 > /dev/shm/sink.input
     fi
+    pactl set-sink-input-volume $(cat /dev/shm/sink.input) -5%
 Key $MODKEY-KP_Down
-    if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume `cat /tmp/cind.mypo` 65536
+    if [ ! -f /dev/shm/sink.input ]; then
+        pactl list sink-inputs | nawk '/Sink Input #/ {print $3}' | tr -d '#' | head -1 > /dev/shm/sink.input
     fi
+    pactl set-sink-input-volume $(cat /dev/shm/sink.input) 100%
 Key $MODKEY-KP_Next
-    if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume `cat /tmp/cind.mypo` +5000
+    if [ ! -f /dev/shm/sink.input ]; then
+        pactl list sink-inputs | nawk '/Sink Input #/ {print $3}' | tr -d '#' | head -1 > /dev/shm/sink.input
     fi
+    pactl set-sink-input-volume $(cat /dev/shm/sink.input) +5%
 Key $MODKEY-KP_Left
-    ~/bin/mypo prev
+    pactl list sink-inputs | nawk '/Sink Input #/ {print $3}' | tr -d '#' | head -1 > /dev/shm/sink.input
 Key $MODKEY-KP_Right
-    ~/bin/mypo next
+    pactl list sink-inputs | nawk '/Sink Input #/ {print $3}' | tr -d '#' | sed -n 2p > /dev/shm/sink.input
+Key $MODKEY-KP_Begin
+    pactl list sink-inputs | nawk '/Sink Input #/ {print $3}' | tr -d '#' | sed -n 3p > /dev/shm/sink.input
 
 Key $MODKEY-KP_Home
     amixer -q sset Capture 5000-
