@@ -1,4 +1,6 @@
 set timeout=30
+set record="=Sent"
+set postponed="=Drafts"
 
 color normal		color253	color234
 color indicator    	color230     	color238
