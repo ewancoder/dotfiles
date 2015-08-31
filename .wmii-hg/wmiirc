@@ -181,7 +181,7 @@ Key $MODKEY-e
 Key $MODKEY-Shift-w
     virtualbox --startvm "Windows 7" &
 Key $MODKEY-g
-	gvim &
+    urxvt -e vim &
 Key $MODKEY-r
     urxvt -e canto-curses &
 Key $MODKEY-w
@@ -196,7 +196,74 @@ Key $MODKEY-Shift-z
     ~/bin/volume off &
 Key $MODKEY-Shift-x
     ~/bin/volume on &
-
+Key $MODKEY-Shift-F1
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: Built-in")
+    volume=$(echo "$sink" | nawk '/Volume: / {print $5}' | tr -d '%')
+    if [ $volume -gt 0 ]; then
+        echo $volume > /dev/shm/akg.volume
+    fi
+    device=$(echo "$sink" | nawk '/Sink/ {print $2}' | tr -d '#')
+    pactl set-sink-volume $device 0
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: Built-in")
+    volume=$(echo "$sink" | nawk '/Volume: / {print $5}' | tr -d '%')
+    notify-send "AKG Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
+Key $MODKEY-F1
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: Built-in")
+    device=$(echo "$sink" | nawk '/Sink/ {print $2}' | tr -d '#')
+    pactl set-sink-volume $device -5%
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: Built-in")
+    volume=$(echo "$sink" | nawk '/Volume: / {print $5}' | tr -d '%')
+    notify-send "AKG Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
+Key $MODKEY-Shift-F2
+    if [ -f /dev/shm/akg.volume ]; then
+        sink=$(pactl list sinks | grep -B 3 -A 7 "Description: Built-in")
+        device=$(echo "$sink" | nawk '/Sink/ {print $2}' | tr -d '#')
+        pactl set-sink-volume $device $(cat /dev/shm/akg.volume)%
+        sink=$(pactl list sinks | grep -B 3 -A 7 "Description: Built-in")
+        volume=$(echo "$sink" | nawk '/Volume: / {print $5}' | tr -d '%')
+        notify-send "AKG Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
+    fi
+Key $MODKEY-F2
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: Built-in")
+    device=$(echo "$sink" | nawk '/Sink/ {print $2}' | tr -d '#')
+    pactl set-sink-volume $device +5%
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: Built-in")
+    volume=$(echo "$sink" | nawk '/Volume: / {print $5}' | tr -d '%')
+    notify-send "AKG Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
+Key $MODKEY-Shift-F7
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: ARCTIC")
+    volume=$(echo "$sink" | nawk '/Volume: / {print $5}' | tr -d '%')
+    if [ $volume -gt 0 ]; then
+        echo $volume > /dev/shm/usb.volume
+    fi
+    device=$(echo "$sink" | nawk '/Sink/ {print $2}' | tr -d '#')
+    pactl set-sink-volume $device 0
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: ARCTIC")
+    volume=$(echo "$sink" | nawk '/Volume: / {print $5}' | tr -d '%')
+    notify-send "USB Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
+Key $MODKEY-F7
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: ARCTIC")
+    device=$(echo "$sink" | nawk '/Sink/ {print $2}' | tr -d '#')
+    pactl set-sink-volume $device -5%
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: ARCTIC")
+    volume=$(echo "$sink" | nawk '/Volume: / {print $5}' | tr -d '%')
+    notify-send "USB Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
+Key $MODKEY-Shift-F8
+    if [ -f /dev/shm/usb.volume ]; then
+        sink=$(pactl list sinks | grep -B 3 -A 7 "Description: ARCTIC")
+        device=$(echo "$sink" | nawk '/Sink/ {print $2}' | tr -d '#')
+        pactl set-sink-volume $device $(cat /dev/shm/usb.volume)%
+        sink=$(pactl list sinks | grep -B 3 -A 7 "Description: ARCTIC")
+        volume=$(echo "$sink" | nawk '/Volume: / {print $5}' | tr -d '%')
+        notify-send "USB Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
+    fi
+Key $MODKEY-F8
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: ARCTIC")
+    device=$(echo "$sink" | nawk '/Sink/ {print $2}' | tr -d '#')
+    pactl set-sink-volume $device +5%
+    sink=$(pactl list sinks | grep -B 3 -A 7 "Description: ARCTIC")
+    volume=$(echo "$sink" | nawk '/Volume: / {print $5}' | tr -d '%')
+    notify-send "USB Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
 KeyGroup Keyboard layouts
 Key $MODKEY-i
     sed -i 's/ca(fr),ru/us,ru/g' ~/.config/gxkb/gxkb.cfg && killall gxkb && gxkb &
@@ -315,21 +382,26 @@ Key $MODKEY-Shift-KP_Begin
 
 KeyGroup Pulseaudio per-application volume control
 Key $MODKEY-KP_End
-    if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume `cat /tmp/cind.mypo` -5000
+    if [ ! -f /dev/shm/sink.input ]; then
+        pactl list sink-inputs | nawk '/Sink Input #/ {print $3}' | tr -d '#' | head -1 > /dev/shm/sink.input
     fi
+    pactl set-sink-input-volume $(cat /dev/shm/sink.input) -5%
 Key $MODKEY-KP_Down
-    if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume `cat /tmp/cind.mypo` 65536
+    if [ ! -f /dev/shm/sink.input ]; then
+        pactl list sink-inputs | nawk '/Sink Input #/ {print $3}' | tr -d '#' | head -1 > /dev/shm/sink.input
     fi
+    pactl set-sink-input-volume $(cat /dev/shm/sink.input) 100%
 Key $MODKEY-KP_Next
-    if [ -f /tmp/inds.mypo ]; then
-        pactl set-sink-input-volume `cat /tmp/cind.mypo` +5000
+    if [ ! -f /dev/shm/sink.input ]; then
+        pactl list sink-inputs | nawk '/Sink Input #/ {print $3}' | tr -d '#' | head -1 > /dev/shm/sink.input
     fi
+    pactl set-sink-input-volume $(cat /dev/shm/sink.input) +5%
 Key $MODKEY-KP_Left
-    ~/bin/mypo prev
+    pactl list sink-inputs | nawk '/Sink Input #/ {print $3}' | tr -d '#' | head -1 > /dev/shm/sink.input
 Key $MODKEY-KP_Right
-    ~/bin/mypo next
+    pactl list sink-inputs | nawk '/Sink Input #/ {print $3}' | tr -d '#' | sed -n 2p > /dev/shm/sink.input
+Key $MODKEY-KP_Begin
+    pactl list sink-inputs | nawk '/Sink Input #/ {print $3}' | tr -d '#' | sed -n 3p > /dev/shm/sink.input
 
 Key $MODKEY-KP_Home
     amixer -q sset Capture 5000-
