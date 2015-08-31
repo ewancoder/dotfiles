@@ -12,6 +12,7 @@ ln -fs ~/.dotfiles/.zshrc ~/
 ln -fs ~/.dotfiles/.zsh_aliases ~/
 ln -fs ~/.dotfiles/.tmux.conf ~/
 ln -fs ~/.dotfiles/.fetchmailrc ~/
+ln -fs ~/.dotfiles/.muttrc ~/
 ln -fs ~/.dotfiles/.oh-my-zsh/themes/ewancoder.zsh-theme ~/.oh-my-zsh/themes
 
 mkdir -p ~/.config
