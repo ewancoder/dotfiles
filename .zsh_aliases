@@ -2,6 +2,7 @@
 alias savecd='echo "$PWD" > ~/.cd'
 
 #=== GIT ===
+alias rmlock='rm .git/index.lock'
 alias ga='git add'
 alias gia='git add -A'
 alias gic!='git commit -v --amend'
