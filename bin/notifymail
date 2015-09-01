@@ -3,8 +3,11 @@ if [ -f /tmp/notifymail.lock ]; then
     exit
 fi
 touch /tmp/notifymail.lock
-fetchmail -v >> ~/Mail/fetchmail.log 2>>~/Mail/fetchmail.err
-if [ "$?" == "0" ]; then
-    /c/Program\ Files\ \(x86\)/Growl\ for\ Windows/growlnotify.com /s:true /i:"d:\Dropbox\email.png" /t:"New mail" "$(fetchmail)"
-fi
+while true; do
+    fetchmail -v >> ~/Mail/fetchmail.log 2>>~/Mail/fetchmail.err
+    if [ "$?" == "0" ]; then
+        /c/Program\ Files\ \(x86\)/Growl\ for\ Windows/growlnotify.com /s:true /i:"d:\Dropbox\email.png" /t:"New mail" "$(fetchmail)"
+    fi
+    sleep 30
+done
 rm /tmp/notifymail.lock

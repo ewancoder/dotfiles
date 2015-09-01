@@ -1,0 +1,8 @@
+#!/bin/bash
+SESSION=mail
+
+tmux -2 new-session -d -s $SESSION
+tmux rename-window 'Fetch'
+tmux send-keys "~/.dotfiles/bin/notifymail" C-m
+tmux new-window -t $SESSION:1 -n 'Mutt'
+tmux send-keys "mutt" C-m
