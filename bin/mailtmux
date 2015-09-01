@@ -1,6 +1,8 @@
 #!/bin/bash
+if tmux ls | grep "mail:"; then
+    exit
+fi
 SESSION=mail
-
 tmux -2 new-session -d -s $SESSION
 tmux rename-window 'Fetch'
 tmux send-keys "~/.dotfiles/bin/notifymail" C-m
