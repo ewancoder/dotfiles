@@ -1,8 +1,10 @@
 #!/bin/bash
 while true; do
     if [ -f /tmp/notifymail.lock ]; then
-        continue
+        sleep 10
+        rm /tmp/notifymail.lock
     fi
+    echo "Reading mail..."
     touch /tmp/notifymail.lock
     fetchmail -v >> ~/Mail/fetchmail.log 2>>~/Mail/fetchmail.err
     if [ "$?" == "0" ]; then
