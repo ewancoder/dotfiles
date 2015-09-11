@@ -33,3 +33,6 @@ xset -dpms s off
 
 #Language switcher
 gxkb &
+
+# Remap keys
+~/bin/keys

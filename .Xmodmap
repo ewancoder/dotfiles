@@ -1,0 +1,7 @@
+!keycode 9 = NoSymbol
+keycode 22 = NoSymbol
+keycode 37 = NoSymbol
+keycode 62 = NoSymbol
+keycode 94 = Shift_R
+add Shift = Shift_R
+keycode 51 = BackSpace
