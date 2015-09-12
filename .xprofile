@@ -35,4 +35,4 @@ xset -dpms s off
 gxkb &
 
 # Remap keys
-~/bin/keys
+~/bin/startkeys

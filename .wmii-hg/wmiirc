@@ -267,8 +267,10 @@ Key $MODKEY-F8
 KeyGroup Keyboard layouts
 Key $MODKEY-i
     sed -i 's/ca(fr),ru/us,ru/g' ~/.config/gxkb/gxkb.cfg && killall gxkb && gxkb &
+    ~/bin/startkeys
 Key $MODKEY-Shift-i
     sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb/gxkb.cfg && killall gxkb && gxkb &
+    ~/bin/startkeys
 
 KeyGroup Others
 Key $MODKEY-Control-Return

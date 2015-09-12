@@ -1,0 +1,10 @@
+#!/bin/bash
+while true; do
+    if ps aux | grep -v grep | grep -v defunct | grep gxkb; then
+        sleep 2
+        ./keys
+        exit
+    else
+        sleep .1
+    fi
+done
