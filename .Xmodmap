@@ -1,7 +1,15 @@
-!keycode 9 = NoSymbol
-keycode 22 = backslash bar
-keycode 37 = NoSymbol
-keycode 62 = NoSymbol
-keycode 94 = Shift_R
-add Shift = Shift_R
-keycode 51 = BackSpace
+! Preserver Return for xcape
+keycode 255 = Return
+
+! Swap Backspace and Backslash
+keycode  22 = backslash bar backslash bar
+keycode  51 = BackSpace NoSymbol BackSpace
+
+! Centered Control keys
+keycode  66 = Control_L Control_L Control_L Control_L
+keycode  36 = Control_R Control_R Control_R Control_R
+add Control = Control_L Control_R
+
+! Bigger Shift
+keycode  94 = Shift_R NoSymbol Shift_R
+add Shift = Shift_L Shift_R
