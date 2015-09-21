@@ -1,8 +1,10 @@
 #!/bin/bash
 while true; do
+    killall gxkb
+    gxkb &
     if ps aux | grep -v grep | grep -v defunct | grep gxkb; then
         sleep 2
-        ./keys
+        ~/bin/keys
         exit
     else
         sleep .1

@@ -138,7 +138,7 @@ Key $MODKEY-Shift-space   # Toggle selected client between floating and managed 
 KeyGroup Client actions
 Key $MODKEY-f # Toggle selected client's fullsceen state
 	wmiir xwrite /client/sel/ctl Fullscreen toggle
-Key $MODKEY-bracketright # Toggle urgent
+Key $MODKEY-apostrophe # Toggle urgent
     wmiir xwrite /client/sel/ctl urgent toggle
 Key $MODKEY-q # Close client
     sc=$(wmiir read /client/sel/label)
@@ -184,8 +184,6 @@ Key $MODKEY-g
     urxvt -e vim &
 Key $MODKEY-r
     urxvt -e canto-curses &
-Key $MODKEY-w
-    chromium --app-id=iiooodelglhkcpgbajoejffhijaclcdg
     
 KeyGroup Volume control   
 Key $MODKEY-x
@@ -266,7 +264,7 @@ Key $MODKEY-F8
     notify-send "USB Volume" -t 500 -h int:value:$volume -h string:fgcolor:#faaa00 -h string:bgcolor:#000000
 KeyGroup Keyboard layouts
 Key $MODKEY-i
-    sed -i 's/ca(fr),ru/us,ru/g' ~/.config/gxkb/gxkb.cfg && killall gxkb && gxkb &
+    sed -i 's/ca(fr),ru/us,ru/g' ~/.config/gxkb/gxkb.cfg
     ~/bin/startkeys
 Key $MODKEY-Shift-i
     sed -i 's/us,ru/ca(fr),ru/g' ~/.config/gxkb/gxkb.cfg && killall gxkb && gxkb &
@@ -302,7 +300,7 @@ Key $MODKEY-Shift-KP_Enter
     kill `ps aux | awk '/wmii.py/ {print $2}'`
 	wmiir xwrite /ctl quit
 #Remove 'New messages' notification
-Key $MODKEY-apostrophe
+Key $MODKEY-bracketright
     wmiir remove /rbar/ZNotify
 #System update
 Key $MODKEY-F10
@@ -351,6 +349,13 @@ Key $MODKEY-Delete
     devmon --unmount-removable &
 
 KeyGroup Pulseaudio switching devices
+Key $MODKEY-KP_Delete
+    sink=$(pactl list sinks | grep -B 3 "Description: Simultaneous output" | nawk '/Sink #/' | nawk -F '#' '{print $2}')
+    pacmd set-default-sink $sink
+    for word in $(pactl list sink-inputs | nawk '/Sink Input/' | nawk '{print $3}' | tr -d '#'); do
+        pacmd move-sink-input $word $sink
+    done
+
 Key $MODKEY-Shift-KP_Down
     cp ~/.asoundrc_pulse ~/.asoundrc
     ps -C pulseaudio > /dev/null 2>&1 || pulseaudio --start

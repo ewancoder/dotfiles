@@ -33,3 +33,5 @@ xset -dpms s off
 
 #Language switcher
 gxkb &
+
+startkeys &
