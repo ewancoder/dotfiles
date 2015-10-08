@@ -1,6 +1,127 @@
 # Save current folder for automatic CD
 alias savecd='echo "$PWD" > ~/.cd'
 
+#=== GitBlit ===
+
+function tiupdate {
+    ticket=`git branch -lvv | grep \* | grep origin/ticket | cut -d '[' -f2 | cut -d ']' -f1 | cut -d '/' -f2- | cut -d ':' -f1`
+    branch=`git branch | grep \* | awk '{print $2}'`
+
+    #===== GIT CONFIGURATION =====
+    remote=origin
+    ticket_topic="`echo $branch | awk -F '/' '{print $1}'`"
+    ticket_commit_message="NAME (ticket on $branch)" # This should be conventional.
+
+    #===== MESSAGE CONFIGURATION =====
+    msg_notracked="No tracked ticket"
+    msg_tracked="Tracked '$remote/$ticket'"
+
+    msg_linking="Linking (to $branch) ticket $remote/" # Format: "$msg_linking{ID}"
+    msg_pushing="Pushing (sending) '$branch' to '$remote/$ticket'"
+    msg_adding="Adding new ticket"
+
+    #Push
+    msg_push="Push (to $remote) ticket HEAD:$ticket"
+    msg_push_success="Successfully pushed '$branch' to '$remote/$ticket'"
+    msg_push_fail="Push to '$remote/$ticket' failed"
+
+    #Fetch
+    msg_fetch="Fetch $remote"
+    msg_fetch_success="Fetched remote '$remote'"
+    msg_fetch_fail="Failed to fetch '$remote' remote"
+
+    #Track ticket
+    msg_track="Track $remote/ticket/" #{ID}
+    msg_track_success="Successfully tracked ticket $remote/ticket/" #{ID}
+    msg_track_fail="Failed to track ticket $remote/ticket/" #{ID}
+
+    #Create
+    msg_create="Create new ticket on '$remote' and fetch changes"
+    msg_create_success="Successfully created ticket" #{ID}
+    msg_create_fail="Failed to create ticket"
+
+    msg_wrong_tit="You have to provide ticket {ID} (example: tit 13)"
+}
+
+#=== Tickets code ===
+
+function tis {
+    tiupdate
+    if [[ "$ticket" == "" ]]; then
+        mess "$msg_notracked"
+    else
+        mess "$msg_tracked"
+    fi
+}
+
+function tit {
+    tiupdate
+    if [[ "$ticket" == "" ]]; then
+        if [[ -z $1 ]]; then
+            mess -w "$msg_wrong_tit"
+        else
+            mess -t "$msg_linking$1"
+            mess "$msg_fetch"
+            if git fetch $remote; then
+                mess "$msg_fetch_success"
+                mess "$msg_track"
+                if git branch -u $remote/ticket/$1; then
+                    mess "$msg_track_success$1"
+                else
+                    mess -w "$msg_track_fail$1"
+                fi
+            else
+                mess -w "$msg_fetch_fail"
+            fi
+        fi
+    else
+        mess "$msg_tracked"
+    fi
+}
+
+function tip { 
+    tiupdate
+    if [[ "$ticket" == "" ]]; then
+        mess "$msg_notracked"
+    else
+        mess -t "$msg_pushing"
+        mess "$msg_push"
+        if git push $remote HEAD:$ticket; then
+            mess "$msg_push_success"
+        else
+            mess -w "$msg_push_fail"
+        fi
+    fi
+}
+
+function tia {
+    tiupdate
+    if [[ "$ticket" == "" ]]; then
+        mess -t "$msg_adding"
+        if git commit --allow-empty -m "$ticket_commit_message" -e; then
+            echo a
+        fi
+        mess "$msg_create"
+        if git push $remote HEAD:refs/for/new%t=$ticket_topic; then
+            if git fetch; then
+                mess "$msg_create_success"
+                ticket=`git log --oneline --decorate -1 | awk -F "origin/ticket/" '{print $2}' | cut -f1 -d "," | cut -f1 -d ")"`
+                if git branch -u origin/ticket/$ticket; then
+                    mess "$msg_track_success$ticket"
+                else
+                    mess "$msg_track_fail$ticket"
+                fi
+            else
+                mess "$msg_create_fail"
+            fi
+        else
+            mess "$msg_create_fail"
+        fi
+    else
+        mess "$msg_tracked"
+    fi
+}
+
 #=== GIT ===
 alias rmlock='rm .git/index.lock'
 alias ga='git add'
@@ -37,8 +158,15 @@ ta() {
 alias scr='xdotool mousemove - 1 mousemove restore; scrot -s `date +%d%H%M%S`.png'
 #Connect to RPI over ssh
 alias sshrpi='TERM=xterm ssh -t root@`cat ~/.rpi`'
+alias sshpi='TERM=xterm ssh -t pi@192.168.0.147'
+alias sshdu='TERM=xterm ssh -t adubinchin@192.168.0.136'
 #SSH background tunnel
 alias sshl='ssh -fNL 7070:127.0.0.1:7070 root@`cat ~/.rpi`'
+
+# Share link
+share() {
+    ssh adubinchin@192.168.0.136 "env DISPLAY=:0 XAUTHORITY=/home/adubinchin/.Xauthority chromium \"$1\""
+}
 
 #=== Software ===
 #Google calendar agenda
@@ -56,3 +184,39 @@ alias imp='impressive --darkness 60 -ff'
 alias terr='cd ~/Mega/GameSaves/Terraria && mono TerrariaServer.exe'
 #VLC with SYNCPLAY
 alias vl='syncplay --no-gui'
+
+#=== Messages code ===
+mess() {
+    # Styles.
+    Bold="\033[1m"
+    Def="\033[0m"
+    Red="\033[91m"
+    Green="\033[92m"
+
+    # Determine 'option' and 'message'.
+    if [ "${#1}" -gt "2" ]; then
+        o=$2
+        m=$1
+    else
+        o=$1
+        m=$2
+    fi
+
+    # Stylize message.
+    case $o in
+        "-w")
+            Style="\n$Bold$Red! $m$Def"
+            ;;
+        "-t")
+            Line="----------"
+            Style="\n$Line\n$Bold$Green [ $m ]$Def\n$Line"
+            ;;
+        *)
+            Style="$Bold$Green\n-> $Def$Bold$m$Def"
+            ;;
+    esac
+
+    # Print message.
+    echo -e "$Style"
+}
+
