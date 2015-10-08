@@ -7,8 +7,8 @@ for repo in\
     if [ -d "$repo/.git" ]; then
         cd $repo
         git status | nawk -v repo="`basename $repo`-`basename $(dirname $repo)`"\
-            '/not staged|untracked/ {print "Unstaged: "repo};
-            /ahead|different commit/ {print "Ahead: "repo};
-            /to be committed/ {print "Staged: "repo}'
+            '/not staged|untracked|Unmerged/ {print "Unstaged: "repo};
+             /ahead|different commit/ {print "Ahead: "repo};
+             /to be committed/ {print "Staged: "repo}'
     fi
 done
