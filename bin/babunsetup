@@ -5,6 +5,7 @@ git config --global core.editor vim
 git config --global merge.tool vimdiff
 git config --global push.default simple
 git config --global core.autocrlf input
+git config --global credential.helper cache
 
 git clone http://github.com/ewancoder/dotfiles.git ~/.dotfiles
 ln -fs ~/.dotfiles/.minttyrc ~/
