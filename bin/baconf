@@ -1,7 +1,7 @@
 #!/bin/bash
-#Lockfile section
+# Create lockfile
 while [ -f /tmp/baconf.lock ]; do
-    echo "Lock file is exists. Waiting for previous copy of baconf to shutdown [10 seconds]..."
+    echo "Lock file exists. Waiting for previous copy of baconf to shutdown [10 seconds]..."
     sleep 10
 done
 touch /tmp/baconf.lock
@@ -14,7 +14,7 @@ rsync -av --delete ~/.config/chromium/Default /mnt/backup/Arch/.config/chromium/
 rsync -av --delete ~/.config/deluge /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/libreoffice /mnt/backup/Arch/.config/
 rsync -av --delete ~/.config/mc /mnt/backup/Arch/.config/
-rsync -av --delete ~/.config/VirtualBox /mnt/backup/Arch/.config/
+rsync -av --delete --exclude '*.iso' ~/.config/Virtualbox/ /mnt/backup/Arch/.config/VirtualBox/
 #Dmenu + zsh + vim history :)
 rsync -av --delete ~/.dmenu_history /mnt/backup/Arch/
 rsync -av --delete ~/.zsh_history /mnt/backup/Arch/
@@ -22,7 +22,7 @@ rsync -av --delete ~/.vim_mru_files /mnt/backup/Arch/
 #SSH keys
 rsync -av --delete ~/.ssh /mnt/backup/Arch/
 #Canto-curses
-rsync -av --delete ~/.canto-ng /mnt/backup/Arch/
+#rsync -av --delete ~/.canto-ng /mnt/backup/Arch/
 #Spacechem saves
 rsync -av --delete ~/.local/share/Zachtronics\ Industries /mnt/backup/Arch/
 
@@ -37,8 +37,10 @@ if [ ! -f /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz ]; then
 fi
 
 #Backup CLOUD (Dropbox & Mega)
+# TODO: Add HDD backup (if mounted, make check) (now everything is on SSD)
 rsync -av --delete /mnt/cloud/ /mnt/backup/Cloud
-rsync -av /mnt/cloud/ /mnt/backup/CloudArchive
+#rsync -av --delete /mnt/cloud/ /mnt/backup/Cloud
+#rsync -av /mnt/cloud/ /mnt/backup/CloudArchive
 
 #Synchronize drives
 sync
