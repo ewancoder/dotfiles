@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# Sync AUR packages
+mv ~/.yaourt/*.tar.xz ~/Dropbox/ArchPackages
+
 # Create lockfile
 while [ -f /tmp/baconf.lock ]; do
     echo "Lock file exists. Waiting for previous copy of baconf to shutdown [10 seconds]..."
