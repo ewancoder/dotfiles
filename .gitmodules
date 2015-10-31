@@ -2,3 +2,6 @@
 	path = .vim/bundle/vundle
 	url = https://github.com/gmarik/Vundle.vim
     ignore = all
+[submodule ".oh-my-zsh"]
+	path = .oh-my-zsh
+	url = https://github.com/robbyrussell/oh-my-zsh.git
