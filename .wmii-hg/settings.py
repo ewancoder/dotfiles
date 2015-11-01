@@ -95,6 +95,8 @@ addColRule(".*", "62+38")
 #=== TAGGING RULES ===
 #For Skype to be at 0 :)
 addTagRule("Skype", 0)
+#For Slack to be at 0 :)
+addTagRule("Slack", 0)
 #For separate steam big-picture tag
 addTagRule("Steam", "Steam")
 #VLC
