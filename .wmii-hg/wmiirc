@@ -275,7 +275,7 @@ Key $MODKEY-Control-Return
     ~/.wmii-hg/lstags
 #Turn off mouse/touchpad
 Key $MODKEY-v
-    id=`xinput --list | grep -i "mouse" | awk '{print $7}' | cut -f2 -d "="`
+    id=`xinput --list | grep -i "optical mouse" | awk '{print $7}' | cut -f2 -d "="`
     if [ "`xinput --list-props $id | grep "Device Enabled" | awk '{print $4}'`" == "0" ]; then
         state=1
     else
