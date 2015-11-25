@@ -4,9 +4,10 @@ while true; do
         sleep 10
         rm /tmp/notifymail.lock
     fi
-    echo "$(date) - Reading mail..."
+    echo -e "\n$(date) - Reading mail...\n"
+    chmod 700 ~/.fetchmailrc
     touch /tmp/notifymail.lock
-    fetchmail -v >> ~/Mail/fetchmail.log 2>>~/Mail/fetchmail.err
+    fetchmail -v
     if [ "$?" == "0" ]; then
         /c/Program\ Files\ \(x86\)/Growl\ for\ Windows/growlnotify.com /s:true /i:"d:\Dropbox\email.png" /t:"New mail" "$(fetchmail)"
     fi
