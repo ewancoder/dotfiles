@@ -29,15 +29,18 @@ rsync -av --delete ~/.local/share/Zachtronics\ Industries /mnt/backup/Arch/
 if [ ! -f /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz ]; then
     mkdir -p /mnt/backup/Hourly/`date +%Y`/`date +%b`
     tar -cpzvf /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz /mnt/backup/Arch
-    if [ ! -f ~/Mega/Backup/$HOSTNAME/`date +%Y.%b.%d`.tgz ]; then
-        mkdir -p ~/Mega/Backup/$HOSTNAME
-        cp /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz ~/Mega/Backup/$HOSTNAME/`date +%Y.%b.%d`.tgz
+    if [ ! -f ~/Dropbox/Mega/Backup/$HOSTNAME/`date +%Y.%b.%d`.tgz ]; then
+        mkdir -p ~/Dropbox/Mega/Backup/$HOSTNAME
+        cp /mnt/backup/Hourly/`date +%Y`/`date +%b`/`date +%d.%H`.tgz ~/Dropbox/Mega/Backup/$HOSTNAME/`date +%Y.%b.%d`.tgz
     fi
 fi
 
 #Backup CLOUD (Dropbox & Mega)
 # TODO: Add HDD backup (if mounted, make check) (now everything is on SSD)
-rsync -av --delete /mnt/cloud/ /mnt/backup/Cloud
+
+# CORRECT LINE
+#rsync -av --delete /mnt/cloud/ /mnt/backup/Cloud
+
 #rsync -av --delete /mnt/cloud/ /mnt/backup/Cloud
 #rsync -av /mnt/cloud/ /mnt/backup/CloudArchive
 
