@@ -142,3 +142,5 @@ client.focused_inactive #75392133 #784f3e #eeeeee
 include /etc/sway/config.d/*
 
 for_window [app_id="org.telegram.desktop"] border pixel 2
+
+exec telegram-desktop -startintray
