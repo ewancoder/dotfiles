@@ -8,6 +8,10 @@ setopt correct
 PS1=$'%F{green}%m%f %F{yellow}%~%f
 %F{blue}>%f '
 
+# Turn on color output for useful commands
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
 export EDITOR=vi
 
 dotfiles() {
