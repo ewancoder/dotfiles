@@ -1,0 +1,15 @@
+[user]
+    name = Ivan Zyranau
+    email = ewancoder@gmail.com
+[core]
+    editor = vim
+[merge]
+    tool = vimdiff
+[rerere]
+    enabled = true
+[includeIf "gitdir:~/work/"]
+    path = .gitconfig-work
+[credential "https://github.com"]
+    helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+    helper = !/usr/bin/gh auth git-credential
