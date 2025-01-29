@@ -14,7 +14,7 @@ output DP-3 mode 3440x1440@144Hz
 input type:keyboard {
     xkb_layout us,ru
     xkb_variant dvorak,
-    xkb_options grp:ctrl_shift_toggle
+    xkb_options grp:rctrl_rshift_toggle
 }
 
 # Start a terminal
