@@ -1,3 +1,13 @@
+# Autocompletion for commands like git something
+autoload -U compinit; compinit
+
+# Command correction if you made a typo
+setopt correct
+
+# Custom prompt
+PS1=$'%F{green}%m%f %F{yellow}%~%f
+%F{blue}>%f '
+
 export EDITOR=vi
 
 dotfiles() {
