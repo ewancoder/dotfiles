@@ -150,5 +150,6 @@ assign [class="zoom"] 2:work
 assign [class="Skype"] 2:work
 assign [app_id="Slack"] 2:work
 
+exec wl-paste -t text --watch clipman store --no-persist
 exec telegram-desktop -startintray
 exec dropbox
