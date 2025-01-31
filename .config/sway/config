@@ -146,7 +146,6 @@ client.focused_inactive #75392133 #784f3e #eeeeee
 include /etc/sway/config.d/*
 
 for_window [app_id="org.telegram.desktop"] border pixel 2
-for_window [app_id="org.telegram.desktop"] resize set width 30 ppt
 assign [class="zoom"] 2:work
 assign [class="Skype"] 2:work
 assign [app_id="Slack"] 2:work
