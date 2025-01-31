@@ -6,7 +6,8 @@ set $up c
 set $right n
 
 set $term foot
-set $menu tofi-run | xargs swaymsg exec --
+#set $menu tofi-run | xargs swaymsg exec --
+set $menu fuzzel | xargs swaymsg exec --
 
 output *
 output DP-3 mode 3440x1440@144Hz
