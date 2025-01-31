@@ -48,3 +48,11 @@ alias didc='dotfiles diff --cached --color=always'
 alias dim='dotfiles merge --no-ff --log -e'
 alias dip='dotfiles push'
 alias dco='dotfiles checkout'
+
+rdp() {
+    xfreerdp3 /v:$1 /u:$2 +compression +clipboard +fonts +aero +window-drag +menu-anims /dynamic-resolution
+}
+
+rdpwin() {
+    rdp 192.168.1.185 "Ivan Zyranau"
+}
