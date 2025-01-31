@@ -7,6 +7,7 @@ setopt sharehistory
 
 # Autocompletion for commands like git something
 autoload -U compinit; compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # Command correction if you made a typo
 setopt correct
