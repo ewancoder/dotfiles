@@ -8,13 +8,37 @@ setopt sharehistory
 # Autocompletion for commands like git something
 autoload -U compinit; compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':vcs_info:git*' check-for-changes true
+zstyle ':vcs_info:git*' formats " %F{blue}(%b)%f %u%c"
+zstyle ':vcs_info:git*' actionformats "%F{blue}(%b%f %F{red}| %a%f%F{blue})%f"
+zstyle ':vcs_info:git*' stagedstr "%F{green}-%f"
+zstyle ':vcs_info:git*' unstagedstr "%F{red}x%f"
+zstyle ':vcs_info:git*+set-message:*' hooks untracked stashed
+
++vi-untracked() {
+    if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) == 'true'  ]] && \
+        [[ -n $(git ls-files --others --exclude-standard) ]] ; then
+        hook_com[staged]+='%F{magenta}★%f'
+    fi
+}
++vi-stashed() {
+    if git rev-parse --verify refs/stash &>/dev/null ; then
+        hook_com[staged]+=' %F{magenta}(stash)%f'
+    fi
+}
+
+# Load a module that gets info from GIT
+autoload -Uz vcs_info
 
 # Command correction if you made a typo
 setopt correct
 
-# Custom prompt
-PS1=$'%F{green}%m%f %F{yellow}%~%f
-%F{blue}>%f '
+# Set prompt
+precmd() {
+    vcs_info
+    PS1="%F{yellow}%~%f${vcs_info_msg_0_}
+%F{blue}>%f "
+}
 
 # Turn on color output for useful commands
 alias ls='ls --color=auto'
