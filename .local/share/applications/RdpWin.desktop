@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=rdpwin
+Comment=Connect to Windows over RDP
+Exec=/bin/bash /home/ewancoder/.local/bin/rdpwin.sh
+Icon=archlinux-logo
