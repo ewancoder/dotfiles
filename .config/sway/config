@@ -10,7 +10,7 @@ set $term foot
 set $menu fuzzel | xargs swaymsg exec --
 
 output *
-output DP-3 mode 3440x1440@144Hz
+output DP-3 mode 3440x1440@144Hz bg ~/Dropbox/Wallpapers/wp1.jpg fill
 
 input type:keyboard {
     xkb_layout us,ru
