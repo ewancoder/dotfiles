@@ -29,6 +29,9 @@ bindsym $mod+d exec $menu
 
 bindsym $mod+p exec grim -g "$(slurp)" - | wl-copy
 
+# Dismiss all notifications
+bindsym $mod+escape exec makoctl dismiss -a
+
 # Moving windows
 floating_modifier $mod normal
 
