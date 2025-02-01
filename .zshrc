@@ -94,6 +94,9 @@ alias dim='dotfiles merge --no-ff --log -e'
 alias dip='dotfiles push'
 alias dco='dotfiles checkout'
 
+alias iws='sudo iwctl station wlan0 connect skazlojop'
+alias iws24='sudo iwctl station wlan0 connect skazlojop24'
+
 rdp() {
     xfreerdp3 /v:$1 /u:$2 +compression +clipboard +fonts +aero +window-drag +menu-anims /dynamic-resolution
 }
