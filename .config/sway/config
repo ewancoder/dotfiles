@@ -1,5 +1,6 @@
 set $mod Mod4
 
+set $opacity 0.9
 set $left h
 set $down t
 set $up c
@@ -152,6 +153,7 @@ for_window [app_id="org.telegram.desktop"] border pixel 2
 assign [class="zoom"] 2:work
 assign [class="Skype"] 2:work
 assign [app_id="Slack"] 2:work
+for_window [app_id="foot"] opacity $opacity
 
 # Temporary disable it while I'm not working - try running pure wayland
 #xwayland disable
