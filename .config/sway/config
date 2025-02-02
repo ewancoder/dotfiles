@@ -136,7 +136,7 @@ bindsym Print exec grim
 bar {
     position top
 
-    status_command while date +'%m-%d %X    '; do sleep 1; done
+    status_command while true; do echo "$(sensors | grep 'Core 0' | awk '{print $3}')'    '$(date)'   '"; sleep 5; done
 
     colors {
         statusline #ffeeaa
@@ -144,6 +144,10 @@ bar {
         inactive_workspace #22222200 #22222200 #5c5c5c
         focused_workspace #22222200 #cc370baa #ffffff
     }
+
+    tray_padding 2
+    font pango:DejaVu Sans Mono 12
+    separator_symbol "  "
 }
 
 client.focused #75392133 #a3370baa #eeeeee
@@ -151,6 +155,9 @@ client.unfocused #75392133 #382118aa #eeeeee
 client.focused_inactive #75392133 #784f3e #eeeeee
 
 include /etc/sway/config.d/*
+
+gaps inner 2
+gaps outer 5
 
 for_window [app_id="org.telegram.desktop"] border pixel 2
 assign [class="zoom"] 2:work
