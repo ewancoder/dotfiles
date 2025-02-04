@@ -12,7 +12,13 @@ set $menu fuzzel | xargs swaymsg exec --
 
 output * pos 3440 0
 output DP-3 pos 0 0 mode 3440x1440@144Hz bg ~/Dropbox/Wallpapers/wp1.jpg fill
-output DP-2 pos 3440 0 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/wp1.jpg fill
+output DP-2 pos 3440 0 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/lemans.jpeg fill
+output DP-1 transform 270 pos -1080 -220 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/spa-vertical.jpg fill
+
+workspace 1:work output DP-3
+workspace 2:view output DP-2
+workspace 3:read output DP-1
+workspace 3 output DP-1
 
 input type:keyboard {
     xkb_layout us,ru
@@ -53,9 +59,9 @@ bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
 # Switch to workspace
-bindsym $mod+1 workspace 1:fun
-bindsym $mod+2 workspace 2:work
-bindsym $mod+3 workspace number 3
+bindsym $mod+1 workspace 1:work
+bindsym $mod+2 workspace 2:view
+bindsym $mod+3 workspace 3:read
 bindsym $mod+4 workspace number 4
 bindsym $mod+5 workspace number 5
 bindsym $mod+6 workspace number 6
@@ -65,9 +71,9 @@ bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
 
 # Move to workspace
-bindsym $mod+Shift+1 move container to workspace 1:fun
-bindsym $mod+Shift+2 move container to workspace 2:work
-bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+1 move container to workspace 1:work
+bindsym $mod+Shift+2 move container to workspace 2:view
+bindsym $mod+Shift+3 move container to workspace 3:read
 bindsym $mod+Shift+4 move container to workspace number 4
 bindsym $mod+Shift+5 move container to workspace number 5
 bindsym $mod+Shift+6 move container to workspace number 6
@@ -161,9 +167,9 @@ gaps inner 2
 gaps outer 5
 
 for_window [app_id="org.telegram.desktop"] border pixel 2
-assign [class="zoom"] 2:work
-assign [class="Skype"] 2:work
-assign [app_id="Slack"] 2:work
+assign [class="zoom"] 2:view
+assign [class="Skype"] 2:view
+assign [app_id="Slack"] 2:view
 for_window [app_id="foot"] opacity $opacity
 
 # Temporary disable it while I'm not working - try running pure wayland
