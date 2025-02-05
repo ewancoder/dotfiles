@@ -15,10 +15,15 @@ output DP-3 pos 0 0 mode 3440x1440@144Hz bg ~/Dropbox/Wallpapers/wp1.jpg fill
 output DP-2 pos 3440 0 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/lemans.jpeg fill
 output DP-1 transform 270 pos -1080 -220 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/spa-vertical.jpg fill
 
-workspace 1:work output DP-3
-workspace 2:view output DP-2
-workspace 3:read output DP-1
-workspace 3 output DP-1
+workspace personal output DP-3
+workspace work output DP-3
+workspace media output DP-3
+workspace personal-view output DP-2
+workspace work-view output DP-2
+workspace media-view output DP-2
+workspace personal-v output DP-1
+workspace work-v output DP-1
+workspace trash output DP-1
 
 input type:keyboard {
     xkb_layout us,ru
@@ -59,28 +64,26 @@ bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
 # Switch to workspace
-bindsym $mod+1 workspace 1:work
-bindsym $mod+2 workspace 2:view
-bindsym $mod+3 workspace 3:read
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
+bindsym $mod+1 workspace personal
+bindsym $mod+2 workspace work
+bindsym $mod+3 workspace media
+bindsym $mod+apostrophe workspace personal-view
+bindsym $mod+comma workspace work-view
+bindsym $mod+period workspace media-view
+bindsym $mod+a workspace personal-v
+bindsym $mod+o workspace work-v
+bindsym $mod+9 workspace trash
 
 # Move to workspace
-bindsym $mod+Shift+1 move container to workspace 1:work
-bindsym $mod+Shift+2 move container to workspace 2:view
-bindsym $mod+Shift+3 move container to workspace 3:read
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+Shift+1 move container to workspace personal
+bindsym $mod+Shift+2 move container to workspace work
+bindsym $mod+Shift+3 move container to workspace media
+bindsym $mod+Shift+apostrophe move container to workspace personal-view
+bindsym $mod+Shift+comma move container to workspace work-view
+bindsym $mod+Shift+period move container to workspace media-view
+bindsym $mod+Shift+a move container to workspace personal-v
+bindsym $mod+Shift+o move container to workspace work-v
+bindsym $mod+Shift+9 move container to workspace trash
 
 # Split vertically or horizontally
 bindsym $mod+b splith
@@ -101,7 +104,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # Move focus to the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # Move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -167,9 +170,9 @@ gaps inner 2
 gaps outer 5
 
 for_window [app_id="org.telegram.desktop"] border pixel 2
-assign [class="zoom"] 2:view
-assign [class="Skype"] 2:view
-assign [app_id="Slack"] 2:view
+assign [class="zoom"] work-view
+assign [class="Skype"] work-view
+assign [app_id="Slack"] work-view
 for_window [app_id="foot"] opacity $opacity
 
 # Temporary disable it while I'm not working - try running pure wayland
