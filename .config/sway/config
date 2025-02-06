@@ -150,13 +150,13 @@ bar {
 
     colors {
         statusline #ffeeaa
-        background #22222255
+        background #222222aa
         inactive_workspace #22222200 #22222200 #5c5c5c
         focused_workspace #22222200 #cc370baa #ffffff
     }
 
     tray_padding 2
-    font pango:DejaVu Sans Mono 12
+    font pango:DejaVu Sans Mono 14
     separator_symbol "  "
 }
 
