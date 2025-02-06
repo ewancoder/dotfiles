@@ -146,7 +146,7 @@ bindsym Print exec grim
 bar {
     position top
 
-    status_command while true; do echo "$(sensors | grep 'Core 0' | awk '{print $3}')'    '$(date)'   '"; sleep 5; done
+    status_command while true; do echo "$(cat /tmp/lyrics)'          '$(sensors | grep 'Core 0' | awk '{print $3}')'    '$(date)'   '"; sleep 1; done
 
     colors {
         statusline #ffeeaa
@@ -180,3 +180,4 @@ for_window [app_id="foot"] opacity $opacity
 exec wl-paste -t text --watch clipman store --no-persist
 exec telegram-desktop -startintray
 exec dropbox
+exec sptlrx pipe --player mpris | while read -r line; do echo "$line" > /tmp/lyrics; done
