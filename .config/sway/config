@@ -146,7 +146,7 @@ bindsym Print exec grim
 bar {
     position top
 
-    status_command while true; do echo "$(cat /tmp/lyrics)'          '$(sensors | grep 'Core 0' | awk '{print $3}')'    '$(date)'   '"; sleep 1; done
+    status_command ~/.local/bin/status.sh
 
     colors {
         statusline #ffeeaa
