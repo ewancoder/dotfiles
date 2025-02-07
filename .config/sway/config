@@ -145,8 +145,28 @@ bindsym Print exec grim
 # Status bar
 bar {
     position top
+    output DP-3
+    output DP-2
 
     status_command ~/.local/bin/status.sh
+
+    colors {
+        statusline #ffeeaa
+        background #222222aa
+        inactive_workspace #22222200 #22222200 #5c5c5c
+        focused_workspace #22222200 #cc370baa #ffffff
+    }
+
+    tray_padding 2
+    font pango:DejaVu Sans Mono 14
+    separator_symbol "  "
+}
+
+bar {
+    position top
+    output DP-1
+
+    status_command ~/.local/bin/status-music.sh
 
     colors {
         statusline #ffeeaa
