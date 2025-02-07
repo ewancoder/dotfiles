@@ -3,11 +3,12 @@ while true; do
     lyrics="$(cat /tmp/lyrics)"
     sensors="$(sensors | grep 'Core 0' | awk '{print $3}')"
     date="$(date)"
+    volume="$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}')"
     sleep=0.2
 
     total_width=120
     left_part="$lyrics"
-    right_part="$sensors    $date"
+    right_part="🔊 $volume   $sensors   $date"
 
     left_width="${#left_part}"
     right_width="${#right_part}"
