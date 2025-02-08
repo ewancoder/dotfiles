@@ -1,0 +1,3 @@
+alias iws='sudo iwctl station wlan0 connect skazlojop'
+alias iws24='sudo iwctl station wlan0 connect skazlojop24'
+

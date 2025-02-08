@@ -94,7 +94,6 @@ alias dim='dotfiles merge --no-ff --log -e'
 alias dip='dotfiles push'
 alias dco='dotfiles checkout'
 
-alias iws='sudo iwctl station wlan0 connect skazlojop'
-alias iws24='sudo iwctl station wlan0 connect skazlojop24'
+source ~/.wifi-networks-aliases
 
 alias lyrics="sptlrx --player mpris --current 'bold,#FF5555'"
