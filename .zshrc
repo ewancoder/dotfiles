@@ -97,3 +97,5 @@ alias dco='dotfiles checkout'
 source ~/.wifi-networks-aliases
 
 alias lyrics="sptlrx --player mpris --current 'bold,#FF5555'"
+
+eval $(thefuck --alias)
