@@ -196,7 +196,6 @@ for_window [app_id="foot"] opacity $opacity
 
 # Temporary disable it while I'm not working - try running pure wayland
 #xwayland disable
-exec wl-paste -t text --watch clipman store --no-persist
 exec telegram-desktop -startintray
 exec dropbox
 exec ~/.local/bin/lyrics-watcher.sh
