@@ -7,7 +7,6 @@ set $up c
 set $right n
 
 set $term foot
-#set $menu tofi-run | xargs swaymsg exec --
 set $menu fuzzel | xargs swaymsg exec --
 
 output * pos 3440 0
