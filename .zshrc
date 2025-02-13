@@ -69,6 +69,10 @@ dotfiles() {
     /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME "$@"
 }
 
+dis() {
+    dotfiles "$@"
+}
+
 alias gis='git status'
 alias gil='git stash list; git log --graph --all --pretty=format:"%C(yellow)%h%Creset %Cgreen(%cr)%Creset -%C(auto)%d%Creset %s" --decorate'
 alias gia='git add -A'
