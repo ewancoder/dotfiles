@@ -201,3 +201,4 @@ for_window [app_id="foot"] opacity $opacity
 exec telegram-desktop -startintray
 exec dropbox
 exec ~/.local/bin/lyrics-watcher.sh
+exec ~/.local/bin/netstats.sh
