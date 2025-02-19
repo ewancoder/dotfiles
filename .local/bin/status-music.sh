@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 while true; do
-    lyrics="$(cat /tmp/lyrics)"
+    if [[ -f /tmp/lyrics ]]; then
+        lyrics="$(cat /tmp/lyrics)"
+    fi
     sleep=0.2
 
     total_width=60

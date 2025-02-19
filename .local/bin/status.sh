@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 while true; do
-    lyrics="$(cat /tmp/lyrics)"
+    if [[ -f /tmp/lyrics ]]; then
+        lyrics="$(cat /tmp/lyrics)"
+    fi
     sensors="$(sensors | grep 'Core 0' | awk '{print $3}')"
     date="$(date)"
     netstats="$(cat /tmp/netstats)"
