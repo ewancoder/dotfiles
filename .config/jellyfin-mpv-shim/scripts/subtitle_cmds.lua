@@ -1,0 +1,1 @@
+/home/ewancoder/.config/mpv/scripts/subtitle_cmds.lua

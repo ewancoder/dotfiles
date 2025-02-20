@@ -1,0 +1,1 @@
+/home/ewancoder/.config/mpv/scripts/subs_to_clipboard.lua
