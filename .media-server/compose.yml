@@ -1,0 +1,150 @@
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${SONARR_FOLDER}:/config
+      - ${TV_SHOWS_FOLDER}:/tv
+      - ${DOWNLOADS_FOLDER}:/downloads
+    ports:
+      - ${SONARR_PORT}:8989
+    restart: unless-stopped
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${PROWLARR_FOLDER}:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_HTML=${LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - TZ=Europe/London
+    restart: unless-stopped
+
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - VERSION=docker
+      - PLEX_CLAIM=
+    volumes:
+      - ${PLEX_FOLDER}:/config
+      - ${TV_SHOWS_FOLDER}:/tv
+      - ${MOVIES_FOLDER}:/movies
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - WEBUI_PORT=${QBITTORRENT_WEBUI_PORT}
+      - TORRENTING_PORT=${QBITTORRENT_TORRENTING_PORT}
+    volumes:
+      - /mnt/data/media/configs/qbittorrent:/config
+      - /mnt/data/downloads:/downloads
+    ports:
+      - ${QBITTORRENT_WEBUI_PORT}:${QBITTORRENT_WEBUI_PORT}
+      - ${QBITTORRENT_TORRENTING_PORT}:${QBITTORRENT_TORRENTING_PORT}
+      - ${QBITTORRENT_TORRENTING_PORT}:${QBITTORRENT_TORRENTING_PORT}/udp
+    restart: unless-stopped
+
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      #- JELLYFIN_PublishedServerUrl=http://192.168.0.5
+    volumes:
+      - ${JELLYFIN_FOLDER}:/config
+      - ${TV_SHOWS_FOLDER}:/data/tvshows
+      - ${MOVIES_FOLDER}:/data/movies
+    ports:
+      - ${JELLYFIN_PORT}:8096
+      - 8920:8920 #optional
+      - 7359:7359/udp #optional
+      - 1900:1900/udp #optional
+    restart: unless-stopped
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${RADARR_FOLDER}:/config
+      - ${MOVIES_FOLDER}:/movies
+      - ${DOWNLOADS_FOLDER}:/downloads
+    ports:
+      - ${RADARR_PORT}:7878
+    restart: unless-stopped
+
+  mylar3:
+    image: lscr.io/linuxserver/mylar3:latest
+    container_name: mylar3
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${MYLARR_FOLDER}:/config
+      - ${COMICS_FOLDER}:/comics
+      - ${DOWNLOADS_FOLDER}:/downloads
+    ports:
+      - ${MYLARR_PORT}:8090
+    restart: unless-stopped
+
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ${READARR_FOLDER}:/config
+      - ${BOOKS_FOLDER}:/books
+      - ${DOWNLOADS_FOLDER}:/downloads
+    ports:
+      - ${READARR_PORT}:8787
+    restart: unless-stopped
+
+  kavita:
+    image: lscr.io/linuxserver/kavita:latest
+    container_name: kavita
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${KAVITA_FOLDER}:/config
+      - ${READS_FOLDER}:/data
+    ports:
+      - ${KAVITA_PORT}:5000
+    restart: unless-stopped
