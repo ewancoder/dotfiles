@@ -65,6 +65,7 @@ services:
     volumes:
       - /mnt/data/media/configs/qbittorrent:/config
       - /mnt/data/downloads:/downloads
+      - /mnt/data/downloads/tv:/downloads-tv
     ports:
       - ${QBITTORRENT_WEBUI_PORT}:${QBITTORRENT_WEBUI_PORT}
       - ${QBITTORRENT_TORRENTING_PORT}:${QBITTORRENT_TORRENTING_PORT}
@@ -83,6 +84,7 @@ services:
       - ${JELLYFIN_FOLDER}:/config
       - ${TV_SHOWS_FOLDER}:/data/tvshows
       - ${MOVIES_FOLDER}:/data/movies
+      - ${DOWNLOADS_FOLDER}/tv:/data/tvshows-downloads
     ports:
       - ${JELLYFIN_PORT}:8096
       - 8920:8920 #optional
