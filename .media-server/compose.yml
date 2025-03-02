@@ -63,9 +63,9 @@ services:
       - WEBUI_PORT=${QBITTORRENT_WEBUI_PORT}
       - TORRENTING_PORT=${QBITTORRENT_TORRENTING_PORT}
     volumes:
-      - /mnt/data/media/configs/qbittorrent:/config
-      - /mnt/data/downloads:/downloads
-      - /mnt/data/downloads/tv:/downloads-tv
+      - ${QBITTORRENT_FOLDER}:/config
+      - ${DOWNLOADS_FOLDER}:/downloads
+      - ${QBITTORRENT_FOLDER}/tv:/downloads-tv
     ports:
       - ${QBITTORRENT_WEBUI_PORT}:${QBITTORRENT_WEBUI_PORT}
       - ${QBITTORRENT_TORRENTING_PORT}:${QBITTORRENT_TORRENTING_PORT}
