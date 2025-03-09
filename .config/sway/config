@@ -75,6 +75,9 @@ bindsym $mod+a workspace personal-v
 bindsym $mod+o workspace work-v
 bindsym $mod+9 workspace trash
 
+bindsym $mod+Control+Left workspace personal
+bindsym $mod+Control+Right workspace work
+
 # Move to workspace
 bindsym $mod+Shift+1 move container to workspace personal
 bindsym $mod+Shift+2 move container to workspace work
