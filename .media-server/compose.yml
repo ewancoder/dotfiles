@@ -53,9 +53,9 @@ services:
       - ${MOVIES_FOLDER}:/movies
     restart: unless-stopped
 
-  qbittorrent:
+  qbittorrent-novpn:
     image: lscr.io/linuxserver/qbittorrent:latest
-    container_name: qbittorrent
+    container_name: qbittorrent-novpn
     environment:
       - PUID=1000
       - PGID=1000
@@ -65,12 +65,32 @@ services:
     volumes:
       - ${QBITTORRENT_FOLDER}:/config
       - ${DOWNLOADS_FOLDER}:/downloads
-      - ${QBITTORRENT_FOLDER}/tv:/downloads-tv
     ports:
       - ${QBITTORRENT_WEBUI_PORT}:${QBITTORRENT_WEBUI_PORT}
       - ${QBITTORRENT_TORRENTING_PORT}:${QBITTORRENT_TORRENTING_PORT}
       - ${QBITTORRENT_TORRENTING_PORT}:${QBITTORRENT_TORRENTING_PORT}/udp
     restart: unless-stopped
+
+  qbittorrent:
+    image: j4ym0/pia-qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - UID=1000
+      - GID=1000
+      - TZ=Etc/UTC
+      - WEBUI_PORT=${QBITTORRENT_VPN_WEBUI_PORT}
+      - PORT_FORWARDING=true
+      - REGION=Netherlands
+      - USER=${PIA_USER}
+      - PASSWORD=${PIA_PASSWORD}
+    volumes:
+      - ${QBITTORRENT_VPN_FOLDER}:/config
+      - ${DOWNLOADS_FOLDER}:/downloads
+    ports:
+      - ${QBITTORRENT_VPN_WEBUI_PORT}:${QBITTORRENT_VPN_WEBUI_PORT}
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest

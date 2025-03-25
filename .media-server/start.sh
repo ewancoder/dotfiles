@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker compose up -d
+docker compose --env-file .env --env-file .secrets up -d
