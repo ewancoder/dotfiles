@@ -44,6 +44,7 @@ bindsym $mod+q kill
 bindsym $mod+d exec $menu
 
 bindsym $mod+p exec grim -g "$(slurp)" - | wl-copy
+bindsym $mod+y exec grim -g "$(slurp)" - | swappy -f - | wl-copy
 
 # Dismiss all notifications
 bindsym $mod+escape exec makoctl dismiss -a
