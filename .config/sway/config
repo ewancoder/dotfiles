@@ -200,6 +200,7 @@ for_window [app_id="org.telegram.desktop"] border pixel 2
 assign [class="zoom"] work-view
 assign [class="Skype"] work-view
 assign [app_id="Slack"] work-view
+assign [app_id="teams-for-linux"] work-view
 for_window [app_id="foot"] opacity $opacity
 
 # Temporary disable it while I'm not working - try running pure wayland
