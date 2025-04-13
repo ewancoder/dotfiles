@@ -1,0 +1,8 @@
+source ~/.vimrc
+
+set incsearch
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
