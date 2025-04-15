@@ -6,3 +6,5 @@ set incsearch
 Plug 'machakann/vim-highlightedyank'
 " Commentary plugin
 Plug 'tpope/vim-commentary'
+
+nmap <Leader>n :action NewElement<CR>
