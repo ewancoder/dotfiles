@@ -106,3 +106,5 @@ eval $(thefuck --alias)
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
+
+alias workapps='~/.local/bin/work-apps.sh'
