@@ -8,3 +8,4 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 
 nmap <Leader>n :action NewElement<CR>
+nmap gi :action GotoImplementation<CR>
