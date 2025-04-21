@@ -1,4 +1,16 @@
 services:
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=Etc/UTC
+    ports:
+      - ${JELLYSEERR_PORT}:5055
+    volumes:
+      - ${JELLYSEERR_FOLDER}:/app/config
+    restart: unless-stopped
+
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
