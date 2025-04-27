@@ -41,7 +41,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+q kill
 
 # Start your launcher
-bindsym $mod+d exec $menu
+bindsym $mod+m exec $menu
 
 bindsym $mod+p exec grim -g "$(slurp)" - | wl-copy
 bindsym $mod+y exec grim -g "$(slurp)" - | swappy -f - | wl-copy
