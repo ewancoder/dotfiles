@@ -1,58 +1,49 @@
+networks:
+  internet:
+  tyr-media-internal:
+    name: tyr-media-internal
+    internal: true
+
 services:
-  homepage:
-    image: ghcr.io/gethomepage/homepage:latest
-    container_name: homepage
-    environment:
-      HOMEPAGE_ALLOWED_HOSTS: ivanpc.local
-      PUID: 1000
-      PGID: 1000
-    ports:
-      - 80:3000
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
     volumes:
-      - ${HOMEPAGE_FOLDER}:/app/config
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${GLUETUN_FOLDER}:/gluetun
+    environment:
+      - VPN_SERVICE_PROVIDER=private internet access
+      - OPENVPN_USER=${PIA_USER}
+      - OPENVPN_PASSWORD=${PIA_PASSWORD}
+      - SERVER_REGIONS=Netherlands
+      - VPN_PORT_FORWARDING=on
+      - VPN_PORT_FORWARDING_UP_COMMAND=/bin/sh -c 'wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:8080/api/v2/app/setPreferences 2>&1'
     restart: unless-stopped
-
-  jellyseerr:
-    image: fallenbagel/jellyseerr:latest
-    container_name: jellyseerr
-    environment:
-      - LOG_LEVEL=debug
-      - TZ=Etc/UTC
+    networks:
+      - tyr-media-internal
+      - internet
     ports:
-      - ${JELLYSEERR_PORT}:5055
-    volumes:
-      - ${JELLYSEERR_FOLDER}:/app/config
-    restart: unless-stopped
-
-  sonarr:
-    image: lscr.io/linuxserver/sonarr:latest
-    container_name: sonarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - ${SONARR_FOLDER}:/config
-      - ${TV_SHOWS_FOLDER}:/tv
-      - ${TV_SHOWS_OWN_FOLDER}:/tv-own
-      - ${DOWNLOADS_FOLDER}:/downloads
-    ports:
+      - ${PROWLARR_PORT}:9696
       - ${SONARR_PORT}:8989
-    restart: unless-stopped
+      - ${RADARR_PORT}:7878
+      - ${QBITTORRENT_WEBUI_PORT}:8080
+      - ${MYLARR_PORT}:8090
+      - ${READARR_PORT}:8787
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TIMEZONE}
     volumes:
       - ${PROWLARR_FOLDER}:/config
-    ports:
-      - 9696:9696
     restart: unless-stopped
+    network_mode: service:gluetun
 
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
@@ -61,57 +52,89 @@ services:
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - LOG_HTML=${LOG_HTML:-false}
       - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
-      - TZ=Europe/London
+      - TZ=${TIMEZONE}
     restart: unless-stopped
+    network_mode: service:gluetun
 
-  qbittorrent-novpn:
-    image: lscr.io/linuxserver/qbittorrent:latest
-    container_name: qbittorrent-novpn
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${SONARR_FOLDER}:/config
+      - ${TV_SHOWS_FOLDER}:/tv
+      - ${TV_SHOWS_OWN_FOLDER}:/tv-own
+      - ${DOWNLOADS_FOLDER}:/downloads
+    restart: unless-stopped
+    network_mode: service:gluetun
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${RADARR_FOLDER}:/config
+      - ${MOVIES_FOLDER}:/movies
+      - ${DOWNLOADS_FOLDER}:/downloads
+    restart: unless-stopped
+    network_mode: service:gluetun
+
+  mylar3:
+    image: lscr.io/linuxserver/mylar3:latest
+    container_name: mylar3
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${MYLARR_FOLDER}:/config
+      - ${COMICS_FOLDER}:/comics
+      - ${DOWNLOADS_FOLDER}:/downloads
+    restart: unless-stopped
+    network_mode: service:gluetun
+
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${READARR_FOLDER}:/config
+      - ${BOOKS_FOLDER}:/books
+      - ${DOWNLOADS_FOLDER}:/downloads
+    restart: unless-stopped
+    network_mode: service:gluetun
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TIMEZONE}
       - WEBUI_PORT=${QBITTORRENT_WEBUI_PORT}
-      - TORRENTING_PORT=${QBITTORRENT_TORRENTING_PORT}
     volumes:
       - ${QBITTORRENT_FOLDER}:/config
       - ${DOWNLOADS_FOLDER}:/downloads
-    ports:
-      - ${QBITTORRENT_WEBUI_PORT}:${QBITTORRENT_WEBUI_PORT}
-      - ${QBITTORRENT_TORRENTING_PORT}:${QBITTORRENT_TORRENTING_PORT}
-      - ${QBITTORRENT_TORRENTING_PORT}:${QBITTORRENT_TORRENTING_PORT}/udp
     restart: unless-stopped
-
-  qbittorrent:
-    image: j4ym0/pia-qbittorrent:latest
-    container_name: qbittorrent
-    environment:
-      - UID=1000
-      - GID=1000
-      - TZ=Etc/UTC
-      - WEBUI_PORT=${QBITTORRENT_VPN_WEBUI_PORT}
-      - PORT_FORWARDING=true
-      - REGION=Netherlands
-      - USER=${PIA_USER}
-      - PASSWORD=${PIA_PASSWORD}
-    volumes:
-      - ${QBITTORRENT_VPN_FOLDER}:/config
-      - ${DOWNLOADS_FOLDER}:/downloads
-    ports:
-      - ${QBITTORRENT_VPN_WEBUI_PORT}:${QBITTORRENT_VPN_WEBUI_PORT}
-    restart: unless-stopped
-    cap_add:
-      - NET_ADMIN
+    network_mode: service:gluetun
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TIMEZONE}
       - NVIDIA_VISIBLE_DEVICES=all
-      #- JELLYFIN_PublishedServerUrl=http://192.168.0.5
     volumes:
       - ${JELLYFIN_FOLDER}:/config
       - ${TV_SHOWS_FOLDER}:/data/tvshows
@@ -124,6 +147,9 @@ services:
       - 7359:7359/udp #optional
       - 1900:1900/udp #optional
     restart: unless-stopped
+    networks:
+      - tyr-media-internal
+      - internet # we need it for Trakt.tv integration & etc.
     deploy:
       resources:
         reservations:
@@ -132,76 +158,53 @@ services:
               count: 1
               capabilities: [gpu]
 
-  radarr:
-    image: lscr.io/linuxserver/radarr:latest
-    container_name: radarr
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - ${RADARR_FOLDER}:/config
-      - ${MOVIES_FOLDER}:/movies
-      - ${DOWNLOADS_FOLDER}:/downloads
+      - LOG_LEVEL=debug
+      - TZ=${TIMEZONE}
     ports:
-      - ${RADARR_PORT}:7878
+      - ${JELLYSEERR_PORT}:5055
+    volumes:
+      - ${JELLYSEERR_FOLDER}:/app/config
     restart: unless-stopped
+    networks:
+      - tyr-media-internal
+      - internet # Needed for host access.
 
-  mylar3:
-    image: lscr.io/linuxserver/mylar3:latest
-    container_name: mylar3
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-    volumes:
-      - ${MYLARR_FOLDER}:/config
-      - ${COMICS_FOLDER}:/comics
-      - ${DOWNLOADS_FOLDER}:/downloads
+      HOMEPAGE_ALLOWED_HOSTS: ${HOSTNAME}
+      PUID: ${USER_ID}
+      PGID: ${GROUP_ID}
     ports:
-      - ${MYLARR_PORT}:8090
-    restart: unless-stopped
-
-  readarr:
-    image: lscr.io/linuxserver/readarr:develop
-    container_name: readarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
+      - 80:3000
     volumes:
-      - ${READARR_FOLDER}:/config
-      - ${BOOKS_FOLDER}:/books
-      - ${DOWNLOADS_FOLDER}:/downloads
-    ports:
-      - ${READARR_PORT}:8787
+      - ${HOMEPAGE_FOLDER}:/app/config
     restart: unless-stopped
+    networks:
+      - tyr-media-internal
+      - internet # Needed for host access.
 
   kavita:
     image: lscr.io/linuxserver/kavita:latest
     container_name: kavita
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=${TIMEZONE}
     volumes:
       - ${KAVITA_FOLDER}:/config
       - ${READS_FOLDER}:/data
     ports:
       - ${KAVITA_PORT}:5000
     restart: unless-stopped
-
-  seq:
-    image: datalust/seq:latest
-    container_name: seq
-    environment:
-      - ACCEPT_EULA=Y
-    volumes:
-      - ${SEQ_FOLDER}:/data
-    ports:
-      - ${SEQ_UI_PORT}:80
-      - ${SEQ_INGEST_PORT}:5341
-    restart: unless-stopped
+    networks:
+      - tyr-media-internal
+      - internet # Needed for host access.
 
   #nginx:
   #  image: lscr.io/linuxserver/nginx:latest
