@@ -1,0 +1,36 @@
+networks:
+  tyr-administration-internal:
+    name: tyr-administration-internal
+    external: true
+  tyr-infrastructure-internal:
+    name: tyr-infrastructure-internal
+    external: true
+  tyr-proxy-internal:
+    name: tyr-proxy-internal
+    external: true
+
+services:
+  typingrealm-pgadmin:
+    image: dpage/pgadmin4
+    container_name: typingrealm-pgadmin
+    env_file: /mnt/data/pet/pgadmin/secrets.env
+    volumes:
+      - /mnt/data/pet/pgadmin/data:/var/lib/pgadmin
+    restart: unless-stopped
+    networks:
+      - tyr-administration-internal
+      - tyr-proxy-internal
+
+  seq:
+    image: datalust/seq
+    container_name: seq
+    environment:
+      - ACCEPT_EULA=Y
+      - SEQ_API_CANONICALURI=https://seq.typingrealm.com
+    volumes:
+      - /mnt/data/seq:/data
+    restart: unless-stopped
+    networks:
+      - tyr-infrastructure-internal
+      - tyr-proxy-internal
+
