@@ -10,6 +10,14 @@ networks:
     external: true
 
 services:
+  doneman:
+    image: ewancoder/doneman:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    mem_limit: 100m
+    mem_reservation: 75m
+
   typingrealm-pgadmin:
     image: dpage/pgadmin4
     container_name: typingrealm-pgadmin
@@ -32,5 +40,15 @@ services:
     restart: unless-stopped
     networks:
       - tyr-infrastructure-internal
+      - tyr-proxy-internal
+
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: redisinsight
+    volumes:
+      - /mnt/data/pet/redisinsight:/data
+    restart: unless-stopped
+    networks:
+      - tyr-administration-internal
       - tyr-proxy-internal
 
