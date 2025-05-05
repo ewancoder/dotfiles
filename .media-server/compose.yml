@@ -1,3 +1,5 @@
+name: tyr-media
+
 networks:
   internet:
   tyr-media-internal:

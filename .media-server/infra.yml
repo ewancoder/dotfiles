@@ -1,3 +1,5 @@
+name: typingrealm-infra
+
 networks:
   tyr-administration-internal:
     name: tyr-administration-internal
