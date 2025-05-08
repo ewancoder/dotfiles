@@ -33,4 +33,6 @@ services:
     networks:
       - typingrealm
       - tyr-proxy-internal
+    healthcheck:
+      test: wget --spider http://localhost/health || exit 1
 
