@@ -1,4 +1,5 @@
 # Save history
+eval $(dircolors ~/.dircolors)
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
@@ -73,6 +74,22 @@ dis() {
     dotfiles "$@"
 }
 
+userchmod() {
+    if [ -z "$1" ]; then
+        echo "Folder not specified"
+        return
+    fi
+    sudo chmod -R 644 "$1" && sudo chmod -R u+rwX,go+rX,go-w "$1"
+}
+
+strictchmod() {
+    if [ -z "$1" ]; then
+        echo "Folder not specified"
+        return
+    fi
+    sudo chmod -R 600 "$1" && sudo chmod -R u+rwX,go+X,go-rw "$1"
+}
+
 alias gis='git status'
 alias gil='git stash list; git log --graph --all --pretty=format:"%C(yellow)%h%Creset %Cgreen(%cr)%Creset -%C(auto)%d%Creset %s" --decorate'
 alias gia='git add -A'
@@ -108,3 +125,5 @@ eval $(thefuck --alias)
 source <(ng completion script)
 
 alias workapps='~/.local/bin/work-apps.sh'
+
+alias ctop='docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest'
