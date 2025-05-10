@@ -1,6 +1,7 @@
 name: typingrealm-infra
 
 networks:
+  internet:
   tyr-administration-internal:
     name: tyr-administration-internal
     external: true
@@ -41,9 +42,12 @@ services:
     volumes:
       - /mnt/data/seq:/data
     restart: unless-stopped
+    ports:
+      - 5341:5341
     networks:
       - tyr-infrastructure-internal
       - tyr-proxy-internal
+      - internet # For exposing ports to host.
 
   redisinsight:
     image: redis/redisinsight:latest
