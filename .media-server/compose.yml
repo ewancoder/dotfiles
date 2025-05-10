@@ -43,6 +43,8 @@ services:
       - ${MYLARR_PORT}:8090
       - ${READARR_PORT}:8787
       - 8888:8888/tcp # HTTP proxy
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider http://localhost:8888 2>&1 | grep -q '400 Bad Request' || exit 1"]
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
@@ -55,6 +57,8 @@ services:
       - ${PROWLARR_FOLDER}:/config
     restart: unless-stopped
     network_mode: service:gluetun
+    healthcheck:
+      test: ["CMD-SHELL", "curl http://localhost:9696 || exit 1"]
 
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
@@ -66,6 +70,8 @@ services:
       - TZ=${TIMEZONE}
     restart: unless-stopped
     network_mode: service:gluetun
+    healthcheck:
+      test: ["CMD-SHELL", "curl http://localhost:8191 || exit 1"]
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -81,6 +87,8 @@ services:
       - ${DOWNLOADS_FOLDER}:/downloads
     restart: unless-stopped
     network_mode: service:gluetun
+    healthcheck:
+      test: ["CMD-SHELL", "curl http://localhost:8989 || exit 1"]
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -95,6 +103,8 @@ services:
       - ${DOWNLOADS_FOLDER}:/downloads
     restart: unless-stopped
     network_mode: service:gluetun
+    healthcheck:
+      test: ["CMD-SHELL", "curl http://localhost:7878 || exit 1"]
 
   mylar3:
     image: lscr.io/linuxserver/mylar3:latest
@@ -109,6 +119,8 @@ services:
       - ${DOWNLOADS_FOLDER}:/downloads
     restart: unless-stopped
     network_mode: service:gluetun
+    healthcheck:
+      test: ["CMD-SHELL", "curl http://localhost:8090 || exit 1"]
 
   readarr:
     image: lscr.io/linuxserver/readarr:develop
@@ -123,6 +135,8 @@ services:
       - ${DOWNLOADS_FOLDER}:/downloads
     restart: unless-stopped
     network_mode: service:gluetun
+    healthcheck:
+      test: ["CMD-SHELL", "curl http://localhost:7878 || exit 1"]
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
@@ -131,12 +145,13 @@ services:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
       - TZ=${TIMEZONE}
-      - WEBUI_PORT=${QBITTORRENT_WEBUI_PORT}
     volumes:
       - ${QBITTORRENT_FOLDER}:/config
       - ${DOWNLOADS_FOLDER}:/downloads
     restart: unless-stopped
     network_mode: service:gluetun
+    healthcheck:
+      test: ["CMD-SHELL", "curl http://localhost:8080 || exit 1"]
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
@@ -169,6 +184,8 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+    healthcheck:
+      test: ["CMD-SHELL", "curl http://localhost:8096 || exit 1"]
 
   jellyseerr:
     image: fallenbagel/jellyseerr:latest
@@ -184,6 +201,8 @@ services:
     networks:
       - tyr-media-internal
       - internet # Needed for host access.
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider http://localhost:5055 || exit 1"]
 
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
@@ -200,6 +219,8 @@ services:
     networks:
       - tyr-media-internal
       - internet # Needed for host access.
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider http://127.0.0.1:3000 || exit 1"]
 
   kavita:
     image: lscr.io/linuxserver/kavita:latest
@@ -217,6 +238,8 @@ services:
     networks:
       - tyr-media-internal
       - internet # Needed for host access.
+    healthcheck:
+      test: ["CMD-SHELL", "curl http://localhost:5000 || exit 1"]
 
   #nginx:
   #  image: lscr.io/linuxserver/nginx:latest
