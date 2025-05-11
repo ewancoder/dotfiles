@@ -13,7 +13,7 @@ networks:
     external: true
 
 services:
-  doneman:
+  tyr-infra-doneman:
     image: ewancoder/doneman:latest
     container_name: tyr-infra-doneman
     volumes:
@@ -22,7 +22,7 @@ services:
     mem_limit: 100m
     mem_reservation: 75m
 
-  pgadmin:
+  tyr-infra-pgadmin:
     image: dpage/pgadmin4
     container_name: tyr-infra-pgadmin
     env_file: /mnt/data/pet/pgadmin/secrets.env
@@ -35,7 +35,7 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "wget --spider http://localhost || exit 1"]
 
-  seq:
+  tyr-infra-seq:
     image: datalust/seq
     container_name: tyr-infra-seq
     environment:
@@ -53,7 +53,7 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "ps aux | grep /seqsvr/Seq | grep -v grep || exit 1"]
 
-  redisinsight:
+  tyr-infra-redisinsight:
     image: redis/redisinsight:latest
     container_name: tyr-infra-redisinsight
     volumes:
