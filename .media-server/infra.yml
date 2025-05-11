@@ -32,6 +32,8 @@ services:
     networks:
       - tyr-administration-internal
       - tyr-proxy-internal
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider http://localhost || exit 1"]
 
   seq:
     image: datalust/seq
@@ -48,6 +50,8 @@ services:
       - tyr-infrastructure-internal
       - tyr-proxy-internal
       - internet # For exposing ports to host.
+    healthcheck:
+      test: ["CMD-SHELL", "ps aux | grep /seqsvr/Seq | grep -v grep || exit 1"]
 
   redisinsight:
     image: redis/redisinsight:latest
@@ -58,4 +62,6 @@ services:
     networks:
       - tyr-administration-internal
       - tyr-proxy-internal
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider http://127.0.0.1:5540 || exit 1"]
 
