@@ -7,9 +7,9 @@ networks:
     internal: true
 
 services:
-  gluetun:
+  tyr-media-gluetun:
     image: qmcgaw/gluetun
-    container_name: gluetun
+    container_name: tyr-media-gluetun
     cap_add:
       - NET_ADMIN
     devices:
@@ -46,9 +46,9 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "wget --spider http://localhost:8888 2>&1 | grep -q '400 Bad Request' || exit 1"]
 
-  prowlarr:
+  tyr-media-prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
-    container_name: prowlarr
+    container_name: tyr-media-prowlarr
     environment:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
@@ -56,26 +56,26 @@ services:
     volumes:
       - ${PROWLARR_FOLDER}:/config
     restart: unless-stopped
-    network_mode: service:gluetun
+    network_mode: service:tyr-media-gluetun
     healthcheck:
       test: ["CMD-SHELL", "curl http://localhost:9696 || exit 1"]
 
-  flaresolverr:
+  tyr-media-flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
-    container_name: flaresolverr
+    container_name: tyr-media-flaresolverr
     environment:
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - LOG_HTML=${LOG_HTML:-false}
       - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
       - TZ=${TIMEZONE}
     restart: unless-stopped
-    network_mode: service:gluetun
+    network_mode: service:tyr-media-gluetun
     healthcheck:
       test: ["CMD-SHELL", "curl http://localhost:8191 || exit 1"]
 
-  sonarr:
+  tyr-media-sonarr:
     image: lscr.io/linuxserver/sonarr:latest
-    container_name: sonarr
+    container_name: tyr-media-sonarr
     environment:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
@@ -86,13 +86,13 @@ services:
       - ${TV_SHOWS_OWN_FOLDER}:/tv-own
       - ${DOWNLOADS_FOLDER}:/downloads
     restart: unless-stopped
-    network_mode: service:gluetun
+    network_mode: service:tyr-media-gluetun
     healthcheck:
       test: ["CMD-SHELL", "curl http://localhost:8989 || exit 1"]
 
-  radarr:
+  tyr-media-radarr:
     image: lscr.io/linuxserver/radarr:latest
-    container_name: radarr
+    container_name: tyr-media-radarr
     environment:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
@@ -102,13 +102,13 @@ services:
       - ${MOVIES_FOLDER}:/movies
       - ${DOWNLOADS_FOLDER}:/downloads
     restart: unless-stopped
-    network_mode: service:gluetun
+    network_mode: service:tyr-media-gluetun
     healthcheck:
       test: ["CMD-SHELL", "curl http://localhost:7878 || exit 1"]
 
-  mylar3:
+  tyr-media-mylar3:
     image: lscr.io/linuxserver/mylar3:latest
-    container_name: mylar3
+    container_name: tyr-media-mylar3
     environment:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
@@ -118,13 +118,13 @@ services:
       - ${COMICS_FOLDER}:/comics
       - ${DOWNLOADS_FOLDER}:/downloads
     restart: unless-stopped
-    network_mode: service:gluetun
+    network_mode: service:tyr-media-gluetun
     healthcheck:
       test: ["CMD-SHELL", "curl http://localhost:8090 || exit 1"]
 
-  readarr:
+  tyr-media-readarr:
     image: lscr.io/linuxserver/readarr:develop
-    container_name: readarr
+    container_name: tyr-media-readarr
     environment:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
@@ -134,13 +134,13 @@ services:
       - ${BOOKS_FOLDER}:/books
       - ${DOWNLOADS_FOLDER}:/downloads
     restart: unless-stopped
-    network_mode: service:gluetun
+    network_mode: service:tyr-media-gluetun
     healthcheck:
       test: ["CMD-SHELL", "curl http://localhost:7878 || exit 1"]
 
-  qbittorrent:
+  tyr-media-qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
-    container_name: qbittorrent
+    container_name: tyr-media-qbittorrent
     environment:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
@@ -149,13 +149,13 @@ services:
       - ${QBITTORRENT_FOLDER}:/config
       - ${DOWNLOADS_FOLDER}:/downloads
     restart: unless-stopped
-    network_mode: service:gluetun
+    network_mode: service:tyr-media-gluetun
     healthcheck:
       test: ["CMD-SHELL", "curl http://localhost:8080 || exit 1"]
 
-  jellyfin:
+  tyr-media-jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
-    container_name: jellyfin
+    container_name: tyr-media-jellyfin
     environment:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}
@@ -187,9 +187,9 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "curl http://localhost:8096 || exit 1"]
 
-  jellyseerr:
+  tyr-media-jellyseerr:
     image: fallenbagel/jellyseerr:latest
-    container_name: jellyseerr
+    container_name: tyr-media-jellyseerr
     environment:
       - LOG_LEVEL=debug
       - TZ=${TIMEZONE}
@@ -204,9 +204,9 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "wget --spider http://localhost:5055 || exit 1"]
 
-  homepage:
+  tyr-media-homepage:
     image: ghcr.io/gethomepage/homepage:latest
-    container_name: homepage
+    container_name: tyr-media-homepage
     environment:
       HOMEPAGE_ALLOWED_HOSTS: ${HOSTNAME}
       PUID: ${USER_ID}
@@ -222,9 +222,9 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "wget --spider http://127.0.0.1:3000 || exit 1"]
 
-  kavita:
+  tyr-media-kavita:
     image: lscr.io/linuxserver/kavita:latest
-    container_name: kavita
+    container_name: tyr-media-kavita
     environment:
       - PUID=${USER_ID}
       - PGID=${GROUP_ID}

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sleep 10
-CONTAINER_NAME="jellyfin"
+CONTAINER_NAME="tyr-media-jellyfin"
 
 while true; do
     STATUS=$(docker inspect -f '{{.State.Running}}' "$CONTAINER_NAME" 2>/dev/null)
