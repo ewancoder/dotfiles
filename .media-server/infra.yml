@@ -1,4 +1,4 @@
-name: typingrealm-infra
+name: tyr-infra
 
 networks:
   internet:
@@ -22,9 +22,9 @@ services:
     mem_limit: 100m
     mem_reservation: 75m
 
-  typingrealm-pgadmin:
+  pgadmin:
     image: dpage/pgadmin4
-    container_name: typingrealm-pgadmin
+    container_name: tyr-infra-pgadmin
     env_file: /mnt/data/pet/pgadmin/secrets.env
     volumes:
       - /mnt/data/pet/pgadmin/data:/var/lib/pgadmin
@@ -37,7 +37,7 @@ services:
 
   seq:
     image: datalust/seq
-    container_name: seq
+    container_name: tyr-infra-seq
     environment:
       - ACCEPT_EULA=Y
       - SEQ_API_CANONICALURI=https://seq.typingrealm.com
@@ -55,7 +55,7 @@ services:
 
   redisinsight:
     image: redis/redisinsight:latest
-    container_name: redisinsight
+    container_name: tyr-infra-redisinsight
     volumes:
       - /mnt/data/pet/redisinsight:/data
     restart: unless-stopped
