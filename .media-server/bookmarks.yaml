@@ -1,0 +1,83 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/bookmarks
+
+- My Pet Projects:
+    - NitroType Tracker:
+        - abbr: TNT
+          href: https://github.com/ewancoder/nitrotype-tracker
+          description: My latest project with the best deployment & technhologies
+
+    - Dotfiles:
+        - abbr: .d
+          href: https://github.com/ewancoder/dotfiles
+          description: My latest attempt to use Arch Linux
+
+    - Real:
+        - abbr: real
+          href: https://github.com/ewancoder/real
+          description: Latest attempt for an Arch Linux script, not universal for now
+
+    - TyR Authen:
+        - abbr: auth
+          href: https://github.com/ewancoder/tyr-authen
+          description: Service to service token issuer based on IdentityServer, for TyR apps
+
+    - FoulTalk:
+        - abbr: FT
+          href: https://github.com/ewancoder/foultalk
+          description: New iteration of FoulBot - splitting AI talking logic into microservice
+
+    - FoulBot:
+        - abbr: FB
+          href: https://github.com/ewancoder/foulbot
+          description: Current AI bots implementation for Telegram & Discord
+
+    - TO BE CONTINUED:
+        - abbr: ...
+          href: https://github.com/ewancoder
+          description: Work in Progress...
+
+- Social:
+    - My website:
+        - abbr: WEB
+          href: https://ewancoder.github.io
+
+    - My LinkedIn profile:
+        - abbr: LN
+          icon: linkedin.png
+          href: https://www.linkedin.com/in/ivan-zyranau
+
+    - My public GitHub profile:
+        - abbr: GH
+          icon: github.png
+          href: https://github.com/ewancoder
+
+    - My youtube channel:
+        - abbr: Y
+          icon: youtube.png
+          href: https://www.youtube.com/channel/UCQzd85vUhiVJ_5TJ0JcvCLw
+
+    - My Discord contact:
+        - abbr: D
+          icon: discord.png
+          href: https://discordapp.com/users/669515089920917504
+
+    - My NitroType profile:
+        - abbr: NT
+          href: https://www.nitrotype.com/racer/ivanzyranau
+
+    - My knowledge:
+        - abbr: K
+          href: https://coggle.it/diagram/VMqVMtnNZwUlUfV6/t/development/2110b4221ea85822abdcd28b87075f2140faea3ec6bfa4c1c5cc5618ebc8689e
+
+    - My stackoverflow:
+        - abbr: ST
+          href: https://stackoverflow.com/users/3270191/ivan-zyranau
+
+- Archived projects:
+    - NitroType Projects:
+        - abbr: x
+          href: https://github.com/ewancoder/nitrotype-projects
+          description: Failed attempt of initial NitroType Tracker
+
