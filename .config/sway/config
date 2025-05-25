@@ -200,7 +200,8 @@ gaps outer 5
 
 for_window [app_id="org.telegram.desktop"] border pixel 2
 assign [app_id="org.telegram.desktop"] personal-v
-assign [class="steam"] personal-v
+assign [instance="steamwebhelper"] personal-v
+assign [app_id="discord"] personal-v
 assign [class="zoom"] work-view
 assign [class="Skype"] work-view
 assign [app_id="Slack"] work-view
