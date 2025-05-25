@@ -1,5 +1,13 @@
 # TyR Media Server
 
+
+folder setup:
+mkdir /mnt/data/tyrm
+mkdir /mnt/hdd/data/tyrm/downloads
+ln -s /mnt/hdd/data/tyrm/downloads /mnt/data/tyrm/downloads
+mkdir /mnt/hdd/data/tyrm/media
+ln -s /mnt/hdd/data/tyrm/media /mnt/data/tyrm/media
+
 This is a media server for media library management.
 
 ## How to start
@@ -31,6 +39,7 @@ Then check out the wg0.conf file and set up the same region for `gluetun` region
 
 0. Test that VPN is working: Use HTTP proxy from browser to check your IP address.
 
+(unnecessary - we have bind mounts now)
 1. Copy yaml files (services.yaml, bookmarks.yaml) to your HOMEPAGE config folder. Then you can use your HOSTNAME to open Homepage and set everything up using the links there.
 
 2. Set up qBitTorrent (initial password is in logs).
@@ -59,15 +68,15 @@ Advanced:
 - RAM limit: 12288 (12 Gb)
 - Recheck torrents on completion (better integrity)
 
-3. Set up: Sonarr, Radarr, Readarr
+3. Set up: Sonarr, Radarr
 - Authentication method: basic (admin, qwerty)
 - Authentication required: Disable for localhost
 
 Media Management:
 - Add root folder
 
-Profiles: (for books leave everything default)
-- Add everything to Any except BlueRays, just remuxes; upgrades allowed, until Bluray2160p Remux
+Profiles:
+- Add everything to Any except BlueRays and top Raw-HD for movies and no br-disk too, just remuxes; upgrades allowed, until Bluray2160p Remux
 - Add/edit BadTv quality: all except 4k (and also no Bluray-1080p Remux, and no Raw-HD or BR-DISK), upgrade until web 1080p
 - Remove all other profiles
 - Edit Delay profile: prefer Torrent
@@ -96,19 +105,9 @@ General:
 
 UI: dark theme
 
-(todo - need to revisit readarr settings, I left most of them as default, and also possibly review additional settings of radarr over sonarr)
-4. Mylar3 (todo: better review all settings)
-- Sign in to ComicVine with google, grab api key, set it up
-  - check Enable API, generate Mylar API key
-- Download client: qbittorrent, setup, label mylar, erase folder
-- Enable RSS feed searches, Experimental Search, DLL, Enable GetComics & prefer HD, Torrents
-- (consider enabling entigrations telegram/pushbullet)
-
-- !!! HUGE TODO: Mylar doesn't work with qbittorrent for some reason. Need to figure this out, until then - I have deficient setup for comics
-
-5. Set up indexers: open Prowlarr, set up authentication (and do NOT require authentication for Localhost).
+4. Set up indexers: open Prowlarr, set up authentication (and do NOT require authentication for Localhost).
 - Indexer proxy: flaresolverr: tags - flaresolverr
-- Applications: Mylar, Radarr, Readarr, Sonarr
+- Applications: Radarr, Sonarr
 - (consider telegram/pushbullet notifications)
 - ui: dark theme
 - indexers: (make sure everything has priority 25, rutracker 20)
@@ -123,23 +122,25 @@ UI: dark theme
 6. Set up Jellyfin
 
 - Create MY account
-- Library: /data/movies, /data/tvshows
+- Library: /data/movies + /data/downloads/manual-movies, /data/tvshows + /data/downloads/manual/shows
 ALSO:
-  - downloads/custom - home videos and photos
-  - downloads/manual-shows - add folder to shows ^
-  - downloads/manual-movies - add folder to movies ^
+  - downloads/custom-media - home videos and photos
 
   - Preferred language: english
   - Country: USA
   - Automatically refresh metadata = 30 days
   - Metadata savers: Nfo
   - Save artwork
-  - Enable trickplay - all checkboxes
-  - Enable chapter image extraction + extract chapter images
+  - !! leave trickplay off for now - less cpu/gpu load when importing and i don't really need it.
+  - !! And leave chapter images off too - lets see how it goes
   - automerge series from different folders
 
 - English/United States
 - Uncheck allow remote connections
+
+go to dashboard - general - login disclaimer :) and styles
+
+(THE REST OF SETTINGS CAN WAIT TILL I SET UP JELLYSEERR)
 
 Manage:
 Settings:
@@ -181,5 +182,11 @@ add 2 more users: family, nataliya (configure them the same as above for user on
 -- do this on tv as well
 
 6. Jellyseer (connect to sonarr/radarr and jellyfin)
-- import users from jellyfin
+- Configure jellyfin & Radarr & Sonarr, check Enable Scan too, and check default server
+- Any (best) quality profile by default
+- import users from jellyfin (AFTER setting up jellyfin users) ?? maybe not necessary now, some feature might allow sign in of jellyfin users
 - todo: set up, lazy for now
+- !. request something (movie & tv show) and see that it works
+
+todo: set up kavita
+- sign up / sign in with my account
