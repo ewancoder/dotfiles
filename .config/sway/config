@@ -217,3 +217,4 @@ exec dropbox
 exec ~/.local/bin/lyrics-watcher.sh
 exec ~/.local/bin/netstats.sh
 exec ~/.local/bin/start-jellyfin-mpv.sh
+exec steam
