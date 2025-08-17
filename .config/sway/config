@@ -12,8 +12,8 @@ set $menu fuzzel --no-icons | xargs swaymsg exec --
 output * pos 3440 0
 output DP-3 pos 1080 22 mode 3440x1440@144Hz bg ~/Dropbox/Wallpapers/wp1.jpg fill
 #output DP-2 pos 4520 220 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/lemans.jpeg fill
-output DP-2 pos 4520 220 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/wolf.jpg fill
-output DP-1 transform 270 pos 0 0 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/spa-vertical.jpg fill
+output DP-1 pos 4520 220 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/wolf.jpg fill
+output DP-2 transform 270 pos 0 0 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/spa-vertical.jpg fill
 
 
 
@@ -22,12 +22,12 @@ output DP-1 transform 270 pos 0 0 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/s
 workspace personal output DP-3
 workspace work output DP-3
 workspace media output DP-3
-workspace personal-view output DP-2
-workspace work-view output DP-2
-workspace media-view output DP-2
-workspace personal-v output DP-1
-workspace work-v output DP-1
-workspace trash output DP-1
+workspace personal-view output DP-1
+workspace work-view output DP-1
+workspace media-view output DP-1
+workspace personal-v output DP-2
+workspace work-v output DP-2
+workspace trash output DP-2
 
 input type:keyboard {
     xkb_layout us,ru
@@ -123,6 +123,9 @@ bindsym $mod+minus scratchpad show
 
 bindsym $mod+l exec curl -X POST http://localhost:8080/api/v2/transfer/toggleSpeedLimitsMode
 
+bindsym $mod+grave exec swaymsg "[con_id=$(swaymsg -t get_tree | jq -r '.. | select(.focused? == true) | .id')]" opacity 0.8
+bindsym $mod+shift+grave exec swaymsg "[con_id=$(swaymsg -t get_tree | jq -r '.. | select(.focused? == true) | .id')]" opacity 1
+
 # Resizing (mod+r)
 bindsym $mod+r mode "resize"
 mode "resize" {
@@ -156,7 +159,7 @@ bindsym Print exec grim
 bar {
     position top
     output DP-3
-    output DP-2
+    output DP-1
 
     status_command ~/.local/bin/status.sh
 
@@ -174,7 +177,7 @@ bar {
 
 bar {
     position top
-    output DP-1
+    output DP-2
 
     status_command ~/.local/bin/status-music.sh
 
