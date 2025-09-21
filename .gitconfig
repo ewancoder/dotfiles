@@ -1,6 +1,7 @@
 [user]
     name = Ivan Zyranau
     email = ewancoder@gmail.com
+	signingkey = A57116EE67BF8798!
 [core]
     editor = vim
 [merge]
@@ -13,3 +14,7 @@
     helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
     helper = !/usr/bin/gh auth git-credential
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
