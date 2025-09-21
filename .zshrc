@@ -91,7 +91,7 @@ strictchmod() {
 }
 
 alias gis='git status'
-alias gil='git stash list; git log --graph --all --pretty=format:"%C(yellow)%h%Creset %Cgreen(%cr)%Creset %C(red)%G?%Creset %C(cyan)%GK%Creset -%C(auto)%d%Creset %s" --decorate'
+alias gil='git stash list; git log --graph --all --pretty=format:"%C(yellow)%h%Creset %Cgreen(%cr)%Creset %Cblue%an%Creset %C(red)%G?%Creset %C(cyan)%GK%Creset -%C(auto)%d%Creset %s" --decorate'
 alias gia='git add -A'
 alias giap='git add --patch'
 alias gic='git commit -v'
