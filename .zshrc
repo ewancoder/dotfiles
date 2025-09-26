@@ -100,6 +100,7 @@ alias gid='git diff --color=always'
 alias gidc='git diff --cached --color=always'
 alias gim='git merge --no-ff --log -e'
 alias gip='git push'
+alias gip!='git push --force-with-lease'
 alias gco='git checkout'
 
 alias dotfiles='dotfiles'
@@ -113,6 +114,7 @@ alias did='dotfiles diff --color=always'
 alias didc='dotfiles diff --cached --color=always'
 alias dim='dotfiles merge --no-ff --log -e'
 alias dip='dotfiles push'
+alias dip!='dotfiles push --force-with-lease'
 alias dco='dotfiles checkout'
 
 source ~/.wifi-networks-aliases
