@@ -104,7 +104,7 @@ alias gco='git checkout'
 
 alias dotfiles='dotfiles'
 alias dis='dotfiles status'
-alias dil='dotfiles stash list; dotfiles log --graph --all --pretty=format:"%C(yellow)%h%Creset %Cgreen(%cr)%Creset -%C(auto)%d%Creset %s" --decorate'
+alias dil='dotfiles stash list; dotfiles log --graph --all --pretty=format:"%C(yellow)%h%Creset %Cgreen(%cr)%Creset %Cblue%an%Creset %C(red)%G?%Creset %C(cyan)%GK%Creset -%C(auto)%d%Creset %s" --decorate'
 alias dia='dotfiles add -A'
 alias diap='dotfiles add --patch'
 alias dic='dotfiles commit -v'
