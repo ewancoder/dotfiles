@@ -1,5 +1,4 @@
 # Save history
-export GPG_TTY=$(tty) # We need this for console GPG.
 bindkey -e
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -132,3 +131,5 @@ alias workapps='~/.local/bin/work-apps.sh'
 alias ctop='docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest'
 
 alias sudo='run0'
+
+export GPG_TTY=$(tty) # We need this for console GPG.
