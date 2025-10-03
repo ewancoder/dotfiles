@@ -1,4 +1,5 @@
 # Save history
+export GPG_TTY=$(tty) # We need this for console GPG.
 bindkey -e
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
