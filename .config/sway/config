@@ -220,7 +220,7 @@ for_window [app_id="foot"] opacity $opacity
 
 # Temporary disable it while I'm not working - try running pure wayland
 #xwayland disable
-exec telegram-desktop -startintray
+exec Telegram -startintray
 exec dropbox
 exec ~/.local/bin/lyrics-watcher.sh
 exec ~/.local/bin/netstats.sh
