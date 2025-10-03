@@ -12,5 +12,5 @@ while true; do
     sleep 1
 done
 sleep 1
-jellyfin-mpv-shim --no-http &
+jellyfin-mpv-shim --no-http > /tmp/jms.log &
 
