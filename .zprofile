@@ -1,5 +1,6 @@
 export ELECTRON_OZONE_PLATFORM_HINT=auto
 source ~/.secrets
+export GPG_TTY=$(tty) # We need this for console GPG.
 
 # Start ssh-agent
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
