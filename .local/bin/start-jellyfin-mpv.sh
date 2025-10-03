@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sleep 10
+sleep 1
 CONTAINER_NAME="tyr-media-jellyfin"
 
 while true; do
@@ -11,6 +11,6 @@ while true; do
     fi
     sleep 1
 done
-sleep 10
+sleep 1
 jellyfin-mpv-shim --no-http &
 
