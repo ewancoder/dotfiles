@@ -20,12 +20,13 @@ output DP-2 transform 270 pos 0 0 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/s
 #bindsym $mod+tab output 'DP-2' toggle; output 'DP-1' toggle
 
 workspace personal output DP-3
-workspace work output DP-3
 workspace media output DP-3
+workspace work output DP-3
 workspace personal-view output DP-1
-workspace work-view output DP-1
 workspace media-view output DP-1
+workspace work-view output DP-1
 workspace personal-v output DP-2
+workspace media-v output DP-2
 workspace work-v output DP-2
 workspace trash output DP-2
 
@@ -70,27 +71,29 @@ bindsym $mod+Shift+$right move right
 
 # Switch to workspace
 bindsym $mod+1 workspace personal
-bindsym $mod+2 workspace work
-bindsym $mod+3 workspace media
+bindsym $mod+2 workspace media
+bindsym $mod+3 workspace work
 bindsym $mod+apostrophe workspace personal-view
-bindsym $mod+comma workspace work-view
-bindsym $mod+period workspace media-view
+bindsym $mod+comma workspace media-view
+bindsym $mod+period workspace work-view
 bindsym $mod+a workspace personal-v
-bindsym $mod+o workspace work-v
+bindsym $mod+o workspace media-v
+bindsym $mod+semicolon workspace work-v
 bindsym $mod+9 workspace trash
 
 bindsym $mod+Control+Left workspace personal
-bindsym $mod+Control+Right workspace work
+bindsym $mod+Control+Right workspace media
 
 # Move to workspace
 bindsym $mod+Shift+1 move container to workspace personal
-bindsym $mod+Shift+2 move container to workspace work
-bindsym $mod+Shift+3 move container to workspace media
+bindsym $mod+Shift+2 move container to workspace media
+bindsym $mod+Shift+3 move container to workspace work
 bindsym $mod+Shift+apostrophe move container to workspace personal-view
-bindsym $mod+Shift+comma move container to workspace work-view
-bindsym $mod+Shift+period move container to workspace media-view
+bindsym $mod+Shift+comma move container to workspace media-view
+bindsym $mod+Shift+period move container to workspace work-view
 bindsym $mod+Shift+a move container to workspace personal-v
-bindsym $mod+Shift+o move container to workspace work-v
+bindsym $mod+Shift+o move container to workspace media-v
+bindsym $mod+Shift+semicolon move container to workspace work-v
 bindsym $mod+Shift+9 move container to workspace trash
 
 # Split vertically or horizontally
