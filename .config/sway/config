@@ -125,6 +125,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 bindsym $mod+l exec curl -X POST http://localhost:8080/api/v2/transfer/toggleSpeedLimitsMode
+bindsym $mod+shift+l exec swaylock
 
 bindsym $mod+grave exec swaymsg "[con_id=$(swaymsg -t get_tree | jq -r '.. | select(.focused? == true) | .id')]" opacity 0.8
 bindsym $mod+shift+grave exec swaymsg "[con_id=$(swaymsg -t get_tree | jq -r '.. | select(.focused? == true) | .id')]" opacity 1
