@@ -225,6 +225,11 @@ exec dropbox
 exec ~/.local/bin/lyrics-watcher.sh
 exec ~/.local/bin/netstats.sh
 exec ~/.local/bin/start-jellyfin-mpv.sh
-# Swaylock after reboot
-exec swaylock
 #exec steam
+
+# Use 6500 to disable.
+# Batumi: 41.65 41.65.
+exec wlsunset -l 41.65 -L 41.65 -t 5000 -T 6000
+
+# Swaylock after boot
+exec swaylock
