@@ -101,6 +101,8 @@ alias gidc='git diff --cached --color=always'
 alias gim='git merge --no-ff --log -e'
 alias gip='git push'
 alias gip!='git push --force-with-lease'
+alias gipa='git remote | xargs -L1 git push --all && git remote | xargs -L1 git push --tags'
+alias gipa!='git remote | xargs -L1 git push --all --force-with-lease'
 alias gco='git checkout'
 
 alias dotfiles='dotfiles'
