@@ -236,7 +236,7 @@ exec swaylock
 
 seat seat0 hide_cursor 3000
 
-for_window [app_id="foot_tilda"] mark tilda, move scratchpad
+for_window [app_id="foot_tilda"] mark tilda, move scratchpad, border none
 bindsym $mod+F12 [con_mark="tilda"] scratchpad show
 exec ~/.local/bin/foot-tilda.sh
 
