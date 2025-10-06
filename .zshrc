@@ -132,5 +132,6 @@ alias workapps='~/.local/bin/work-apps.sh'
 alias ctop='docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest'
 alias sudo='run0'
 alias temp='pkill -USR1 -f wlsunset'
+alias l='ls -la'
 
 export GPG_TTY=$(tty) # We need this for console GPG.
