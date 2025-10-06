@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=nitrotype
+Comment=Run NitroType for typing
+Exec=firefox --kiosk https://nitrotype.com/race
+Icon=firefox
