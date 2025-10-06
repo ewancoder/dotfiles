@@ -237,5 +237,11 @@ exec swaylock
 seat seat0 hide_cursor 3000
 
 for_window [app_id="foot_tilda"] mark tilda, move scratchpad
-bindsym $mod+F12 [con_mark="tilda"] scratchpad show
+bindsym $mod+F12F12 [con_mark="tilda"] scratchpad show
 exec ~/.local/bin/foot-tilda.sh
+
+# For NitroType typing.
+for_window [app_id="firefox"] mark nitrotype, floating enable, move scratchpad, border none
+# 100% zoom - 750 260
+exec swaymsg '[con_mark="nitrotype"]' resize set 750 260
+bindsym $mod+F11 [con_mark="nitrotype"] scratchpad show
