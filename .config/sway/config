@@ -233,3 +233,5 @@ exec wlsunset -l 41.65 -L 41.65 -t 5000 -T 6000
 
 # Swaylock after boot
 exec swaylock
+
+seat seat0 hide_cursor 3000
