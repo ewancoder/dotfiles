@@ -14,5 +14,5 @@ GRUB_DISABLE_OS_PROBER=false
 
 #GRUB_COLOR_NORMAL="light-blue/black"
 #GRUB_COLOR_HIGHLIGHT="light-cyan/blue"
-#GRUB_THEME="/path/to/gfxtheme"
-GRUB_BACKGROUND="/mnt/data/Dropbox/Wallpapers/grub.jpg"
+GRUB_THEME="/boot/grub/themes/bsol/theme.txt"
+#GRUB_BACKGROUND="/mnt/data/Dropbox/Wallpapers/grub.jpg"
