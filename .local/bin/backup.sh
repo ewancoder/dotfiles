@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Run this from root only always.
 # HOSTNAMES should be unique to use this script.
+export $(cat /root/.secrets)
 
 rsync -av --delete /mnt/data/unique/ /mnt/backup/backups/unique
 rsync -av --delete /mnt/data/tyrm/configs/ /mnt/backup/backups/tyrm-configs
