@@ -245,3 +245,6 @@ for_window [app_id="firefox"] mark nitrotype, floating enable, move scratchpad, 
 # 100% zoom - 750 260
 exec swaymsg '[con_mark="nitrotype"]' resize set 750 260
 bindsym $mod+F11 [con_mark="nitrotype"] scratchpad show
+
+# Pavucontrol
+for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
