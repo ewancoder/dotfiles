@@ -1,3 +1,6 @@
+# Load machine-specific config
+include machine
+
 set $mod Mod4
 
 set $opacity 0.9
@@ -9,26 +12,7 @@ set $right n
 set $term foot
 set $menu fuzzel --no-icons | xargs swaymsg exec --
 
-output * pos 3440 0
-output DP-3 pos 1080 22 mode 3440x1440@144Hz bg ~/Dropbox/Wallpapers/wp1.jpg fill
-#output DP-2 pos 4520 220 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/lemans.jpeg fill
-output DP-1 pos 4520 220 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/wolf.jpg fill
-output DP-2 transform 270 pos 0 0 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/spa-vertical.jpg fill
-
-
-
 #bindsym $mod+tab output 'DP-2' toggle; output 'DP-1' toggle
-
-workspace personal output DP-3
-workspace media output DP-3
-workspace work output DP-3
-workspace personal-view output DP-1
-workspace media-view output DP-1
-workspace work-view output DP-1
-workspace personal-v output DP-2
-workspace media-v output DP-2
-workspace work-v output DP-2
-workspace trash output DP-2
 
 input type:keyboard {
     xkb_layout us,ru
@@ -208,9 +192,6 @@ gaps inner 2
 gaps outer 5
 
 for_window [app_id="org.telegram.desktop"] border pixel 2
-assign [app_id="org.telegram.desktop"] personal-v
-assign [instance="steamwebhelper"] personal-v
-assign [app_id="discord"] personal-v
 assign [class="zoom"] work-view
 assign [class="Skype"] work-view
 assign [app_id="Slack"] work-view
