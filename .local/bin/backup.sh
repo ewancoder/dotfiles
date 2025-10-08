@@ -34,4 +34,5 @@ source /home/ewancoder/.secrets
 mkdir -p /tmp/crypt
 echo $CRYPT_PASSWORD | gocryptfs /mnt/data/Dropbox/backups /tmp/crypt
 cp *.tar.gz /tmp/crypt
+chown -R ewancoder:ewancoder /tmp/crypt
 fusermount -u /tmp/crypt
