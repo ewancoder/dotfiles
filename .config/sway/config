@@ -194,15 +194,17 @@ gaps outer 5
 for_window [app_id="org.telegram.desktop"] border pixel 2
 assign [class="zoom"] work-view
 assign [class="Skype"] work-view
-assign [app_id="Slack"] work-view
-assign [app_id="teams-for-linux"] work-view
+#assign [app_id="Slack"] work-view
+assign [class="Slack"] work-view
+#assign [app_id="teams-for-linux"] work-view
+assign [app_id="com.github.IsmaelMartinez.teams_for_linux"] work-view
 assign [class="outlook-for-linux"] work-view
 for_window [app_id="foot"] opacity $opacity
 
 # Temporary disable it while I'm not working - try running pure wayland
 #xwayland disable
 exec Telegram -startintray
-exec dropbox
+exec ~/.dropbox-dist/dropboxd
 exec ~/.local/bin/lyrics-watcher.sh
 exec ~/.local/bin/netstats.sh
 exec ~/.local/bin/start-jellyfin-mpv.sh
