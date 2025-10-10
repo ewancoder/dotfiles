@@ -1,5 +1,4 @@
 export ELECTRON_OZONE_PLATFORM_HINT=auto
-source ~/.secrets
 
 # Start ssh-agent
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
