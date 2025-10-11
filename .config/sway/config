@@ -208,7 +208,8 @@ exec Telegram -startintray
 exec ~/.dropbox-dist/dropboxd
 exec ~/.local/bin/lyrics-watcher.sh
 exec ~/.local/bin/netstats.sh
-exec ~/.local/bin/start-jellyfin-mpv.sh
+#exec ~/.local/bin/start-jellyfin-mpv.sh
+exec jellyfin-mpv-shim --no-http > /tmp/jms.log
 #exec steam
 
 # Use 6500 to disable.
