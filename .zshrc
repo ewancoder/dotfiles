@@ -123,7 +123,7 @@ source ~/.wifi-networks-aliases
 
 alias lyrics="sptlrx --player mpris --current 'bold,#FF5555'"
 
-eval $(thefuck --alias)
+#eval $(thefuck --alias)
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
