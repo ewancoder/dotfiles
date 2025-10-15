@@ -15,6 +15,11 @@ rsync -av --delete /mnt/data/tyr/ /mnt/backup/backups/tyr
 rsync -av --delete /mnt/data/security/ /mnt/backup/backups/security
 rsync -av --delete /mnt/data/security/ /mnt/hdd/backups/security
 
+# Nitrox server
+rsync -av --delete /home/ewancoder/.config/Nitrox/ /mnt/backup/backups/nitrox
+rsync -av --delete /home/ewancoder/.config/Nitrox/ /mnt/hdd/backups/nitrox
+
+
 # Backup tyrm configs
 cd /mnt/backup/backups
 rsync -av --delete /mnt/data/tyrm/configs/ /mnt/backup/backups/tyrm-configs-archive
@@ -33,6 +38,11 @@ chown ewancoder:ewancoder *.tar.gz
 source /home/ewancoder/.secrets
 mkdir -p /tmp/crypt
 echo $CRYPT_PASSWORD | gocryptfs /mnt/data/Dropbox/backups /tmp/crypt
-cp *.tar.gz /tmp/crypt
+mv *.tar.gz /tmp/crypt
 chown -R ewancoder:ewancoder /tmp/crypt
 fusermount -u /tmp/crypt
+
+# Backup Nitrox to Dropbox
+tar -czpf "nitrox-$(hostname).tar.gz" nitrox
+mv *.tar.gz /mnt/data/Dropbox/nitrox/
+chown -R ewancoder:ewancoder /mnt/data/Dropbox/nitrox
