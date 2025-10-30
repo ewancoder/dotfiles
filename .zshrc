@@ -56,7 +56,7 @@ setopt correct
 # Set prompt
 precmd() {
     vcs_info
-    PS1="%F{yellow}%~%f${vcs_info_msg_0_}
+    PS1="%F{yellow}%n%f%F{blue}@%f%F{red}%m%f%f %F{yellow}%~%f${vcs_info_msg_0_}
 %F{blue}>%f "
 }
 
