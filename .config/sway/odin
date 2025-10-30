@@ -1,0 +1,2 @@
+output HDMI-A-1 pos 0 0 mode 2560x1440@60Hz bg ~/Dropbox/Wallpapers/wp1.jpg fill
+output HDMI-A-3 pos 0 0 mode 3840x2160@120Hz scale 2 bg ~/Dropbox/Wallpapers/wp1.jpg fill
