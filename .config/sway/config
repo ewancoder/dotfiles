@@ -150,6 +150,8 @@ bar {
     output DP-3
     output DP-1
     output eDP-1
+    output HDMI-A-1
+    output HDMI-A-3
 
     status_command ~/.local/bin/status.sh
 
