@@ -4,6 +4,7 @@ while true; do
         lyrics="$(cat /tmp/lyrics)"
     fi
     sensors="$(sensors | grep 'Core 0' | awk '{print $3}')"
+    sensorsAmd="$(sensors | grep 'Tctl' | awk '{print $2}')"
     date="$(date)"
     netstats="$(cat /tmp/netstats)"
     volume="$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}')"
@@ -17,7 +18,7 @@ while true; do
 
     total_width=150
     left_part="$lyrics"
-    right_part="$speedLimits $netstats    🔊 $volume   $sensors   $date"
+    right_part="$speedLimits $netstats    🔊 $volume   $sensors$sensorsAmd   $date"
 
     left_width="${#left_part}"
     right_width="${#right_part}"
