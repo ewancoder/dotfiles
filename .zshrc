@@ -134,4 +134,7 @@ alias sudo='run0'
 alias temp='pkill -USR1 -f wlsunset'
 alias l='ls -la'
 
+alias onda='sudo cryptsetup open /dev/disk/by-label/nda nda && sudo mount /dev/mapper/nda /mnt/nda'
+alias cnda='sudo umount -R /mnt/nda && sudo cryptsetup close nda'
+
 export GPG_TTY=$(tty) # We need this for console GPG.
