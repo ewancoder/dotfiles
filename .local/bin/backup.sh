@@ -3,46 +3,29 @@
 # HOSTNAMES should be unique to use this script.
 export $(cat /root/.secrets)
 
+# TODO: Also backup to /mnt/hdd when it's present.
+
+# Unique data: media, photos, notes, everything that never should be lost
 rsync -av --delete /mnt/data/unique/ /mnt/backup/backups/unique
-rsync -av --delete /mnt/data/tyrm/configs/ /mnt/backup/backups/tyrm-configs
-rsync -av --delete /mnt/data/tyr/ /mnt/backup/backups/tyr
 
-rsync -av --delete /mnt/data/unique/ /mnt/hdd/backups/unique
-rsync -av --delete /mnt/data/tyrm/configs/ /mnt/hdd/backups/tyrm-configs
-rsync -av --delete /mnt/data/tyr/ /mnt/backup/backups/tyr
-
-# ~/.gnupg and ~/.ssh folders, plus security keys
+# ~/.gnupg and ~/.ssh folders, plus important security keys
 rsync -av --delete /mnt/data/security/ /mnt/backup/backups/security
-rsync -av --delete /mnt/data/security/ /mnt/hdd/backups/security
 
-# Nitrox server
-rsync -av --delete /home/ewancoder/.config/Nitrox/ /mnt/backup/backups/nitrox
-rsync -av --delete /home/ewancoder/.config/Nitrox/ /mnt/hdd/backups/nitrox
+# Development environment project data for TyR projects
+rsync -av --delete /mnt/data/tyr/ /mnt/backup/backups/tyr
 
+# Media server configuration (TyR Media)
+rsync -av --delete /mnt/data/tyrm/configs/ /mnt/backup/backups/tyrm-configs --exclude='**/logs/**' --exclude '**/log/**' --exclude 'jellyfin/data/data/subtitles/**'
+# tyrm/downloads - should be mounted to HDD / big storage
+# tyrm/media - should also be mounted to the SAME HDD (for hardlinks)
 
-# Backup tyrm configs
+# Backup tyrm and security to shared storage
 cd /mnt/backup/backups
-rsync -av --delete /mnt/data/tyrm/configs/ /mnt/backup/backups/tyrm-configs-archive
-find tyrm-configs-archive -type d -name "logs" | xargs rm -r
-find tyrm-configs-archive -type d -name "log" | xargs rm -r
-rm -r "tyrm-configs-archive/jellyfin/data/data/subtitles"
-tar -czpf "tyrm-configs-$(hostname).tar.gz" tyrm-configs-archive
+tar -czpf "tyrm-configs-$(hostname).tar.gz" tyrm-configs
+tar -czpf "security-$(hostname).tar.gz" security
 
-# Backup security
-cd /mnt/backup/backups
-rsync -av --delete /mnt/data/security/ /mnt/backup/backups/security-archive
-tar -czpf "security-$(hostname).tar.gz" security-archive
-
-# Backup to shared storage
-chown ewancoder:ewancoder *.tar.gz
-source /home/ewancoder/.secrets
 mkdir -p /tmp/crypt
 echo $CRYPT_PASSWORD | gocryptfs /mnt/data/Dropbox/backups /tmp/crypt
 mv *.tar.gz /tmp/crypt
 chown -R ewancoder:ewancoder /tmp/crypt
 fusermount -u /tmp/crypt
-
-# Backup Nitrox to Dropbox
-tar -czpf "nitrox-$(hostname).tar.gz" nitrox
-mv *.tar.gz /mnt/data/Dropbox/nitrox/
-chown -R ewancoder:ewancoder /mnt/data/Dropbox/nitrox
