@@ -17,7 +17,7 @@ set $menu fuzzel --no-icons | xargs swaymsg exec --
 input type:keyboard {
     xkb_layout us,ru
     xkb_variant dvorak,
-    xkb_options grp:rctrl_rshift_toggle
+    xkb_options grp:win_space_toggle
 }
 
 # Start a terminal
@@ -96,7 +96,7 @@ bindsym $mod+f fullscreen
 bindsym $mod+Shift+space floating toggle
 
 # Swap focus between the tiling area and the floating area
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 
 # Move focus to the parent container
 #bindsym $mod+a focus parent
