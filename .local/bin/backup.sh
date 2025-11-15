@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 # Run this from root only always.
 # HOSTNAMES should be unique to use this script.
+
+if [ ! -d /mnt/backup/backups ]; then
+    echo 'Skipping backup, /mnt/backup/backups is missing.'
+    exit
+fi
+
 export $(cat /root/.secrets)
 
 # TODO: Also backup to /mnt/hdd when it's present.
