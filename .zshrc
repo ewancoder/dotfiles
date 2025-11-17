@@ -60,81 +60,13 @@ precmd() {
 %F{blue}>%f "
 }
 
-# Turn on color output for useful commands
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
+# Export shared parts between shells.
+source .shellrc
 
-export EDITOR=vi
-
-dotfiles() {
-    /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME "$@"
-}
-
-dis() {
-    dotfiles "$@"
-}
-
-userchmod() {
-    if [ -z "$1" ]; then
-        echo "Folder not specified"
-        return
-    fi
-    sudo chmod -R 644 "$1" && sudo chmod -R u+rwX,go+rX,go-w "$1"
-}
-
-strictchmod() {
-    if [ -z "$1" ]; then
-        echo "Folder not specified"
-        return
-    fi
-    sudo chmod -R 600 "$1" && sudo chmod -R u+rwX,go+X,go-rw "$1"
-}
-
-alias gis='git status'
-alias gil='git stash list; git log --graph --all --pretty=format:"%C(yellow)%h%Creset %Cgreen(%cr)%Creset %Cblue%an%Creset %C(red)%G?%Creset %C(cyan)%GK%Creset -%C(auto)%d%Creset %s" --decorate'
-alias gia='git add -A'
-alias giap='git add --patch'
-alias gic='git commit -v'
-alias gic!='git commit -v --amend'
-alias gid='git diff --color=always'
-alias gidc='git diff --cached --color=always'
-alias gim='git merge --no-ff --log -e'
-alias gip='git push'
-alias gip!='git push --force-with-lease'
-alias gipa='git remote | xargs -L1 git push --all && git remote | xargs -L1 git push --tags'
-alias gipa!='git remote | xargs -L1 git push --all --force-with-lease'
-alias gco='git checkout'
-
-alias dotfiles='dotfiles'
-alias dis='dotfiles status'
-alias dil='dotfiles stash list; dotfiles log --graph --all --pretty=format:"%C(yellow)%h%Creset %Cgreen(%cr)%Creset %Cblue%an%Creset %C(red)%G?%Creset %C(cyan)%GK%Creset -%C(auto)%d%Creset %s" --decorate'
-alias dia='dotfiles add -A'
-alias diap='dotfiles add --patch'
-alias dic='dotfiles commit -v'
-alias dic!='dotfiles commit -v --amend'
-alias did='dotfiles diff --color=always'
-alias didc='dotfiles diff --cached --color=always'
-alias dim='dotfiles merge --no-ff --log -e'
-alias dip='dotfiles push'
-alias dip!='dotfiles push --force-with-lease'
-alias dco='dotfiles checkout'
-
-source ~/.wifi-networks-aliases
-
-alias lyrics="sptlrx --player mpris --current 'bold,#FF5555'"
-
+# Experimentation (only zsh for now)
 #eval $(thefuck --alias)
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
-
-alias workapps='~/.local/bin/work-apps.sh'
-alias ctop='docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest'
-alias sudo='run0'
-alias temp='pkill -USR1 -f wlsunset'
-alias l='ls -la'
-
-alias onda='sudo cryptsetup open /dev/disk/by-label/nda nda && sudo mount /dev/mapper/nda /mnt/nda'
-alias cnda='sudo umount -R /mnt/nda && sudo cryptsetup close nda'
 
 export GPG_TTY=$(tty) # We need this for console GPG.
