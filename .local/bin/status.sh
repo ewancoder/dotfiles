@@ -16,9 +16,11 @@ while true; do
     fi
     sleep=0.2
 
+    battery="$(cat /sys/class/power_supply/BAT0/capacity)%"
+
     total_width=150
     left_part="$lyrics"
-    right_part="$speedLimits $netstats    🔊 $volume   $sensors$sensorsAmd   $date"
+    right_part="$battery $speedLimits $netstats    🔊 $volume   $sensors$sensorsAmd   $date"
 
     left_width="${#left_part}"
     right_width="${#right_part}"
