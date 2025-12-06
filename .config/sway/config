@@ -208,6 +208,7 @@ for_window [app_id="foot"] opacity $opacity
 #xwayland disable
 exec Telegram -startintray
 exec ~/.dropbox-dist/dropboxd
+exec megasync
 exec ~/.local/bin/lyrics-watcher.sh
 exec ~/.local/bin/netstats.sh
 #exec ~/.local/bin/start-jellyfin-mpv.sh
