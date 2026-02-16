@@ -1,4 +1,7 @@
 # Save history
+
+export LS_COLORS="$LS_COLORS:ow=1;33:tw=1;34"
+
 bindkey -e
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
