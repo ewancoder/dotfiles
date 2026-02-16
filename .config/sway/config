@@ -229,6 +229,9 @@ for_window [app_id="foot_tilda"] mark tilda, move scratchpad, border none
 bindsym $mod+F12 [con_mark="tilda"] scratchpad show
 exec ~/.local/bin/foot-tilda.sh
 
+# Slideshow wallpapers.
+exec ~/.local/bin/slideshow.sh
+
 # For NitroType typing.
 for_window [app_id="firefox"] mark nitrotype, floating enable, move scratchpad, border none
 # 100% zoom - 750 260
