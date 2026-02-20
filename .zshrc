@@ -73,3 +73,4 @@ source .shellrc
 source <(ng completion script)
 
 export GPG_TTY=$(tty) # We need this for console GPG.
+export PATH="$HOME/.local/bin:$PATH"
