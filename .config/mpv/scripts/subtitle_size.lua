@@ -1,0 +1,5 @@
+mp.register_event("file-loaded", function()
+    mp.add_timeout(1, function()
+        mp.set_property_number("sub-scale", 0.3)
+    end)
+end)
