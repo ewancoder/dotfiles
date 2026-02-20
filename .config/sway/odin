@@ -1,6 +1,18 @@
-#output HDMI-A-1 pos 0 0 mode 2560x1440@60Hz bg ~/Dropbox/Wallpapers/wp1.jpg fill
-#output HDMI-A-3 pos 0 0 mode 3840x2160@120Hz scale 1.5 bg ~/Dropbox/Wallpapers/wp1.jpg fill
+output DP-4 pos -1080 0 mode 1920x1080@144Hz transform 270 bg ~/Dropbox/Wallpapers/wp1.jpg fill
 output DP-5 pos 0 0 mode 3440x1440@144Hz bg ~/Dropbox/Wallpapers/wp1.jpg fill
 output DP-3 pos 3440 0 mode 1920x1080@144Hz bg ~/Dropbox/Wallpapers/wp1.jpg fill
-output DP-4 pos -1080 0 mode 1920x1080@144Hz transform 270 bg ~/Dropbox/Wallpapers/wp1.jpg fill
-#output HDMI-A-3 pos 2560 0 mode 1920x1080@75Hz bg ~/Dropbox/Wallpapers/wp1.jpg fill
+
+workspace personal output DP-5
+workspace media output DP-5
+workspace work output DP-5
+workspace personal-view output DP-3
+workspace media-view output DP-3
+workspace work-view output DP-3
+workspace personal-v output DP-4
+workspace media-v output DP-4
+workspace work-v output DP-4
+workspace trash output DP-4
+
+assign [app_id="org.telegram.desktop"] personal-v
+assign [instance="steamwebhelper"] personal-v
+assign [app_id="discord"] personal-v
