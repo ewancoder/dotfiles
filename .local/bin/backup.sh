@@ -27,7 +27,7 @@ rsync -av --delete /mnt/data/security/ /mnt/backup/backups/security-online --exc
 rsync -av --delete /mnt/data/tyr/ /mnt/backup/backups/tyr
 
 # Media server configuration (TyR Media)
-rsync -av --delete /mnt/data/tyrm/configs/ /mnt/backup/backups/tyrm-configs --exclude='**/logs/**' --exclude '**/log/**' --exclude 'jellyfin/data/data/subtitles/**'
+rsync -av --delete /mnt/data/tyrm/configs/ /mnt/backup/backups/tyrm-configs --exclude='**/logs/**' --exclude '**/log/**' --exclude 'jellyfin/data/data/subtitles/**' --exclude 'jellyfin/cache'
 # tyrm/downloads - should be mounted to HDD / big storage
 # tyrm/media - should also be mounted to the SAME HDD (for hardlinks)
 
