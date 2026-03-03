@@ -72,5 +72,4 @@ source .shellrc
 # Load Angular CLI autocompletion.
 source <(ng completion script)
 
-export GPG_TTY=$(tty) # We need this for console GPG.
 export PATH="$HOME/.local/bin:$PATH"

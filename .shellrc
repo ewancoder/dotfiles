@@ -1,5 +1,6 @@
 # Shared parts between .zshrc and .bashrc
 
+export GPG_TTY=$(tty) # We need this for console GPG.
 export EDITOR=vi
 
 # Turn on color output for useful commands
