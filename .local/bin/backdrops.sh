@@ -22,3 +22,6 @@ curl -s "$API_URL/Items?api_key=$API_KEY&Recursive=true&IncludeItemTypes=Series,
   done
 
 echo "Done. Downloaded to $OUTPUT_DIR/"
+
+random=$(find $OUTPUT_DIR -type f | grep -v current | shuf | head -1)
+cp "$random" "$OUTPUT_DIR/current.jpg"
