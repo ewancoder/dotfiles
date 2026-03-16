@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-WALLPAPER_DIR="/mnt/data/tyrm/screensaver"
+WALLPAPER_DIR="/mnt/data/backdrops"
 INTERVAL=600 # 10 minutes
 
 while true; do
