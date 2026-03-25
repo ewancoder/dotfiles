@@ -1,0 +1,12 @@
+[Unit]
+Description=Socat Jellyfin forward to asgard
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/socat TCP-LISTEN:8096,fork,reuseaddr TCP:192.168.137.10:8096
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
