@@ -1,1 +1,0 @@
-/home/ewancoder/.config/mpv/scripts/sub-replay.lua
