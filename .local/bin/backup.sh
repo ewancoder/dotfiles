@@ -31,6 +31,13 @@ rsync -av --delete /mnt/data/tyrm/configs/ /mnt/backup/backups/tyrm-configs --ex
 # tyrm/downloads - should be mounted to HDD / big storage
 # tyrm/media - should also be mounted to the SAME HDD (for hardlinks)
 
+# Claude config backup (local only, not encrypted/uploaded)
+rsync -av --delete /home/ewancoder/.config/Claude/ /home/ewancoder/projects/claude-backup/config-Claude
+rsync -av --delete /home/ewancoder/.claude/ /home/ewancoder/projects/claude-backup/dot-claude
+
+# T.Y.R.V.I.S. data files
+rsync -av --delete /home/ewancoder/tyrvis/ /home/ewancoder/projects/claude-backup/tyrvis
+
 # Backup tyrm and security to shared storage
 cd /mnt/backup/backups
 tar -czpf "tyrm-configs-$(hostname).tar.gz" tyrm-configs
