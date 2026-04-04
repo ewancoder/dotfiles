@@ -231,6 +231,10 @@ for_window [app_id="foot_tilda"] mark tilda, move scratchpad, border none
 bindsym $mod+F12 [con_mark="tilda"] scratchpad show
 exec ~/.local/bin/foot-tilda.sh
 
+for_window [class="Claude"] mark claude, move scratchpad
+bindsym $mod+F11 [con_mark="claude"] scratchpad show
+exec claude-desktop
+
 # Slideshow wallpapers.
 exec ~/.local/bin/slideshow.sh
 
@@ -238,7 +242,7 @@ exec ~/.local/bin/slideshow.sh
 for_window [app_id="firefox"] mark nitrotype, floating enable, move scratchpad, border none
 # 100% zoom - 750 260
 exec swaymsg '[con_mark="nitrotype"]' resize set 750 260
-bindsym $mod+F11 [con_mark="nitrotype"] scratchpad show
+bindsym $mod+F10 [con_mark="nitrotype"] scratchpad show
 
 # Pavucontrol
 for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
