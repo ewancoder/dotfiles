@@ -1,6 +1,11 @@
 # Load machine-specific config
 include machine
 
+font pango:monospace 8
+titlebar_padding 5 1
+gaps inner 0
+gaps outer 0
+
 set $mod Mod4
 
 set $opacity 0.9
@@ -191,9 +196,6 @@ client.unfocused #75392133 #382118aa #eeeeee
 client.focused_inactive #75392133 #784f3e #eeeeee
 
 include /etc/sway/config.d/*
-
-gaps inner 2
-gaps outer 5
 
 for_window [app_id="org.telegram.desktop"] border pixel 2
 assign [class="zoom"] work-view
