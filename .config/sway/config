@@ -162,14 +162,14 @@ bar {
     status_command ~/.local/bin/status.sh
 
     colors {
-        statusline #ffeeaa
-        background #222222aa
-        inactive_workspace #22222200 #22222200 #5c5c5c
-        focused_workspace #22222200 #cc370baa #ffffff
+        statusline #ffe680
+        background #282828ee
+        inactive_workspace #28282800 #28282800 #7c6f64
+        focused_workspace #28282800 #d65d0eaa #fbf1c7
     }
 
     tray_padding 2
-    font pango:DejaVu Sans Mono 14
+    font pango:DejaVu Sans Mono 10
     separator_symbol "  "
 }
 
@@ -180,20 +180,20 @@ bar {
     status_command ~/.local/bin/status-music.sh
 
     colors {
-        statusline #ffeeaa
-        background #222222aa
-        inactive_workspace #22222200 #22222200 #5c5c5c
-        focused_workspace #22222200 #cc370baa #ffffff
+        statusline #ffe680
+        background #282828ee
+        inactive_workspace #28282800 #28282800 #7c6f64
+        focused_workspace #28282800 #d65d0eaa #fbf1c7
     }
 
     tray_padding 2
-    font pango:DejaVu Sans Mono 14
+    font pango:DejaVu Sans Mono 10
     separator_symbol "  "
 }
 
-client.focused #75392133 #a3370baa #eeeeee
-client.unfocused #75392133 #382118aa #eeeeee
-client.focused_inactive #75392133 #784f3e #eeeeee
+client.focused #3c383633 #d65d0eaa #fbf1c7
+client.unfocused #3c383633 #282828aa #a89984
+client.focused_inactive #3c383633 #504945aa #a89984
 
 include /etc/sway/config.d/*
 
