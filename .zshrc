@@ -64,7 +64,7 @@ precmd() {
 }
 
 # Export shared parts between shells.
-source .shellrc
+source ~/.shellrc
 
 # Experimentation (only zsh for now)
 #eval $(thefuck --alias)
