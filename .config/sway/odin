@@ -14,6 +14,6 @@ workspace media-v output DP-4
 workspace work-v output DP-4
 workspace trash output DP-4
 
-assign [app_id="org.telegram.desktop"] personal-v
-assign [instance="steamwebhelper"] personal-v
-assign [app_id="discord"] personal-v
+#assign [app_id="org.telegram.desktop"] personal-v
+#assign [instance="steamwebhelper"] personal-v
+#assign [app_id="discord"] personal-v
