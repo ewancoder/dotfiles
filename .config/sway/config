@@ -231,7 +231,7 @@ for_window [app_id="foot_tilda"] mark tilda, move scratchpad, border none
 bindsym $mod+F12 [con_mark="tilda"] scratchpad show
 exec ~/.local/bin/foot-tilda.sh
 
-for_window [class="Claude"] mark claude, move scratchpad
+for_window [class="io.github.aaddrick.claude-desktop-debian"] mark claude, move scratchpad
 bindsym $mod+F11 [con_mark="claude"] scratchpad show
 exec claude-desktop
 
