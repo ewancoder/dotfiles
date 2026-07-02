@@ -235,7 +235,7 @@ exec ~/.local/bin/foot-tilda.sh
 
 for_window [class="io.github.aaddrick.claude-desktop-debian"] mark claude, move scratchpad
 bindsym $mod+F11 [con_mark="claude"] scratchpad show
-exec claude-desktop
+#exec claude-desktop
 
 # Slideshow wallpapers.
 exec ~/.local/bin/slideshow.sh
