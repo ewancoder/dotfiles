@@ -180,6 +180,24 @@ bar {
     position top
     output DP-4
 
+    status_command ~/.local/bin/status.sh
+
+    colors {
+        statusline #ffe680
+        background #282828ee
+        inactive_workspace #28282800 #28282800 #7c6f64
+        focused_workspace #28282800 #d65d0eaa #fbf1c7
+    }
+
+    tray_padding 2
+    font pango:DejaVu Sans Mono 10
+    separator_symbol "  "
+}
+
+bar {
+    position top
+    output DP-8
+
     status_command ~/.local/bin/status-music.sh
 
     colors {
