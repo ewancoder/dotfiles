@@ -24,3 +24,8 @@ workspace trash output DP-4
 
 # Turn on/off LG tv on idle/lock.
 exec swayidle -w timeout 300 'swaylock -f' timeout 420 'bscpylgtvcommand -p /home/ewancoder/.config/bscpylgtv-keys.sqlite 192.168.1.152 power_off' resume 'wol -i 192.168.1.152 30:34:DB:C7:D7:7A'
+
+set $tv HDMI-A-3
+set $mod Mod4
+bindsym $mod+ctrl+l exec sh -c 'bscpylgtvcommand -p /home/ewancoder/.config/bscpylgtv-keys.sqlite 192.168.1.152 power_off; swaymsg output $tv disable'
+bindsym $mod+ctrl+slash exec sh -c 'swaymsg output $tv enable; wol -i 192.168.1.152 30:34:DB:C7:D7:7A'
