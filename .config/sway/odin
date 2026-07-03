@@ -7,16 +7,15 @@ output DP-5 pos 0 0 mode 1920x1080@120Hz transform 270 bg ~/Dropbox/Wallpapers/w
 output HDMI-A-3 pos 1080 0 mode 3840x2160@120Hz scale 1.0 transform 0 bg ~/Dropbox/Wallpapers/wp1.jpg fill
 output DP-4 pos 4920 1080 mode 1920x1080@120Hz transform 180 bg ~/Dropbox/Wallpapers/wp1.jpg fill
 
-workspace personal output DP-5
-workspace media output DP-5
-workspace work output DP-5
-workspace personal-view output DP-3
-workspace media-view output DP-3
-workspace work-view output DP-3
-workspace personal-v output DP-4
-workspace media-v output DP-4
-workspace work-v output DP-4
-workspace trash output DP-4
+workspace 1:left-fun output DP-5
+workspace 2:left-work output DP-5
+workspace 3:left-med output DP-5
+workspace 4:fun output HDMI-A-3
+workspace 5:work output HDMI-A-3
+workspace 6:med output HDMI-A-3
+workspace 7:right-fun output DP-4
+workspace 8:right-work output DP-4
+workspace 9:right-med output DP-4
 
 #assign [app_id="org.telegram.desktop"] personal-v
 #assign [instance="steamwebhelper"] personal-v

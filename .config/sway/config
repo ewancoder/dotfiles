@@ -60,31 +60,33 @@ bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
 # Switch to workspace
-bindsym $mod+1 workspace personal
-bindsym $mod+2 workspace media
-bindsym $mod+3 workspace work
-bindsym $mod+apostrophe workspace personal-view
-bindsym $mod+comma workspace media-view
-bindsym $mod+period workspace work-view
-bindsym $mod+a workspace personal-v
-bindsym $mod+o workspace media-v
-bindsym $mod+semicolon workspace work-v
+bindsym $mod+1 workspace 4:fun
+bindsym $mod+2 workspace 5:work
+bindsym $mod+3 workspace 6:med
+bindsym $mod+apostrophe workspace 1:left-fun
+bindsym $mod+comma workspace 2:left-work
+bindsym $mod+period workspace 3:left-med
+bindsym $mod+a workspace 7:right-fun
+bindsym $mod+o workspace 8:right-work
+bindsym $mod+semicolon workspace 9:right-med
 bindsym $mod+9 workspace trash
 
-bindsym $mod+Control+Left workspace personal
-bindsym $mod+Control+Right workspace media
+bindsym $mod+Control+Left workspace 4:fun
+bindsym $mod+Control+Right workspace 5:work
 
 # Move to workspace
-bindsym $mod+Shift+1 move container to workspace personal
-bindsym $mod+Shift+2 move container to workspace media
-bindsym $mod+Shift+3 move container to workspace work
-bindsym $mod+Shift+apostrophe move container to workspace personal-view
-bindsym $mod+Shift+comma move container to workspace media-view
-bindsym $mod+Shift+period move container to workspace work-view
-bindsym $mod+Shift+a move container to workspace personal-v
-bindsym $mod+Shift+o move container to workspace media-v
-bindsym $mod+Shift+semicolon move container to workspace work-v
+bindsym $mod+Shift+1 move container to workspace 4:fun
+bindsym $mod+Shift+2 move container to workspace 5:work
+bindsym $mod+Shift+3 move container to workspace 6:med
+bindsym $mod+Shift+apostrophe move container to workspace 1:left-fun
+bindsym $mod+Shift+comma move container to workspace 2:left-work
+bindsym $mod+Shift+period move container to workspace 3:left-med
+bindsym $mod+Shift+a move container to workspace 7:right-fun
+bindsym $mod+Shift+o move container to workspace 8:right-work
+bindsym $mod+Shift+semicolon move container to workspace 9:right-med
 bindsym $mod+Shift+9 move container to workspace trash
+
+
 
 # Split vertically or horizontally
 bindsym $mod+b splith
@@ -157,7 +159,6 @@ bar {
     position top
     output DP-3
     output DP-1
-    output DP-5
     output eDP-1
     output HDMI-A-1
     output HDMI-A-3
@@ -196,7 +197,8 @@ bar {
 
 bar {
     position top
-    output DP-8
+    mode dock
+    output DP-5
 
     status_command ~/.local/bin/status-music.sh
 
