@@ -22,8 +22,10 @@ set $menu fuzzel --no-icons --no-exit-on-keyboard-focus-loss | xargs swaymsg exe
 input type:keyboard {
     xkb_layout us,ru
     xkb_variant dvorak,
-    xkb_options grp:win_space_toggle
+    #xkb_options grp:win_space_toggle
 }
+
+bindsym $mod+space input type:keyboard xkb_switch_layout next
 
 # Start a terminal
 bindsym $mod+Return exec $term
@@ -102,6 +104,7 @@ bindsym $mod+f fullscreen
 
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+Shift+space floating toggle
+bindsym $mod+BackSpace floating toggle
 
 # Swap focus between the tiling area and the floating area
 #bindsym $mod+space focus mode_toggle
