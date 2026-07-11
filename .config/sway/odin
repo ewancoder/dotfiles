@@ -25,7 +25,7 @@ workspace 9:right-med output DP-4
 #assign [app_id="discord"] personal-v
 
 # Turn on/off LG tv on idle/lock.
-exec swayidle -w timeout 300 'swaylock -f' timeout 420 'bscpylgtvcommand -p /home/ewancoder/.config/bscpylgtv-keys.sqlite 192.168.1.152 power_off' resume 'wol -i 192.168.1.152 30:34:DB:C7:D7:7A'
+exec swayidle -w timeout 300 'swaylock -f' timeout 420 '/home/ewancoder/.local/bin/tv-idle-off.sh' resume 'wol -i 192.168.1.152 30:34:DB:C7:D7:7A'
 
 set $tv HDMI-A-3
 set $mod Mod4
