@@ -7,6 +7,9 @@ output DP-5 pos 0 0 mode 1920x1080@120Hz transform 270 bg ~/Dropbox/Wallpapers/w
 output HDMI-A-3 pos 1080 0 mode 3840x2160@120Hz scale 1.0 transform 0 bg ~/Dropbox/Wallpapers/wp1.jpg fill
 output DP-4 pos 4920 1080 mode 1920x1080@120Hz transform 180 bg ~/Dropbox/Wallpapers/wp1.jpg fill
 
+#output DP-5 pos 0 0 mode 1920x1080@120Hz transform 180 bg ~/Dropbox/Wallpapers/wp1.jpg fill
+#output DP-4 pos 1920 0 mode 1920x1080@120Hz transform 180 bg ~/Dropbox/Wallpapers/wp1.jpg fill
+
 workspace 1:left-fun output DP-5
 workspace 2:left-work output DP-5
 workspace 3:left-med output DP-5
