@@ -1,6 +1,9 @@
 # Load machine-specific config
 include machine
 
+default_border pixel 0
+default_floating_border pixel 0
+
 font pango:monospace 8
 titlebar_padding 5 1
 gaps inner 0
