@@ -273,5 +273,7 @@ for_window [app_id="firefox"] mark nitrotype, floating enable, move scratchpad, 
 exec swaymsg '[con_mark="nitrotype"]' resize set 750 260
 bindsym $mod+F10 [con_mark="nitrotype"] scratchpad show
 
+exec ~/.local/bin/claude-renew.sh
+
 # Pavucontrol
 for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
