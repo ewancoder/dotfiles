@@ -18,7 +18,7 @@ set $up c
 set $right n
 
 set $term foot
-set $menu fuzzel --no-icons --no-exit-on-keyboard-focus-loss | xargs swaymsg exec --
+set $menu fuzzel --no-exit-on-keyboard-focus-loss | xargs swaymsg exec --
 
 #bindsym $mod+tab output 'DP-2' toggle; output 'DP-1' toggle
 
