@@ -8,7 +8,7 @@
     tool = vimdiff
 [rerere]
     enabled = true
-[includeIf "gitdir:~/work/"]
+[includeIf "gitdir:~/projects/work/"]
     path = .gitconfig-work
 [commit]
     gpgsign = true
