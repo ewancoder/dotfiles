@@ -73,3 +73,5 @@ source ~/.shellrc
 source <(ng completion script)
 
 export PATH="$HOME/.local/bin:$PATH"
+
+eval "$(fzf --zsh)"
