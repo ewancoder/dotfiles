@@ -283,3 +283,5 @@ exec wl-paste --type text --watch cliphist store
 exec wl-paste --type image --watch cliphist store
 
 bindsym $mod+z exec ~/.local/bin/clipmenu.sh
+bindsym $mod+d exec ~/.local/bin/winmenu.sh
+bindsym alt+tab exec ~/.local/bin/winmenu.sh
