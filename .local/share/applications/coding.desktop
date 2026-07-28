@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=work
+Comment=Set up coding workspace
+Exec=/home/ewancoder/.local/bin/coding.sh
+Icon=foot
