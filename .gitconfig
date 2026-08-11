@@ -6,6 +6,7 @@
     editor = vim
 [merge]
     tool = vimdiff
+    conflictStyle = zdiff3
 [rerere]
     enabled = true
 [includeIf "gitdir:~/work/"]
