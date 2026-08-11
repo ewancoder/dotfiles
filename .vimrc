@@ -35,3 +35,21 @@ vmap <Leader>p "*p
 set hls
 
 syntax on
+
+filetype plugin indent on
+set termguicolors
+set number
+set nofoldenable
+
+colorscheme habamax
+
+set fillchars+=diff:╱
+set diffopt=internal,filler,closeoff,algorithm:histogram,indent-heuristic,vertical
+if has('nvim-0.9')
+  set diffopt+=linematch:60
+endif
+
+highlight DiffAdd    guibg=#26332c guifg=NONE
+highlight DiffChange guibg=#273644 guifg=NONE
+highlight DiffText   guibg=#365a6e guifg=NONE gui=NONE
+highlight DiffDelete guibg=NONE    guifg=#463838 gui=NONE
