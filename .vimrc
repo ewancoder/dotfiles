@@ -53,3 +53,5 @@ highlight DiffAdd    guibg=#26332c guifg=NONE
 highlight DiffChange guibg=#273644 guifg=NONE
 highlight DiffText   guibg=#365a6e guifg=NONE gui=NONE
 highlight DiffDelete guibg=NONE    guifg=#463838 gui=NONE
+
+autocmd FileType markdown setlocal ts=2 sw=2 sts=2 et
