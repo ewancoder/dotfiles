@@ -28,7 +28,7 @@ input type:keyboard {
     #xkb_options grp:win_space_toggle
 }
 
-bindsym $mod+space input type:keyboard xkb_switch_layout next
+bindsym --locked $mod+space input type:keyboard xkb_switch_layout next
 
 # Start a terminal
 bindsym $mod+Return exec $term
