@@ -1,6 +1,8 @@
 # Load machine-specific config
 include machine
 
+focus_on_window_activation none
+
 default_border pixel 0
 default_floating_border pixel 0
 
@@ -160,14 +162,26 @@ bindsym Print exec grim
 
 # Status bar
 bar {
+    id tyrbar
+    swaybar_command true
     mode hide
+    hidden_state hide
     modifier alt
     position top
-    output DP-3
-    output DP-1
-    output eDP-1
-    output HDMI-A-1
-    output HDMI-A-3
+}
+
+bar {
+    tray_output none
+    mode hide
+    # Previously there wasn't this line, and all outputs below were listed.
+    output DP-9
+    modifier alt
+    position top
+    #output DP-3
+    #output DP-1
+    #output eDP-1
+    #output HDMI-A-1
+    #output HDMI-A-3
 
     status_command ~/.local/bin/status.sh
 
@@ -184,6 +198,7 @@ bar {
 }
 
 bar {
+    tray_output none
     position top
     output DP-4
 
@@ -202,9 +217,11 @@ bar {
 }
 
 bar {
+    tray_output none
     position top
     mode dock
-    output DP-5
+    #output DP-5
+    output DP-7
 
     status_command ~/.local/bin/status-music.sh
 
@@ -238,13 +255,18 @@ for_window [app_id="foot"] opacity $opacity
 
 # Temporary disable it while I'm not working - try running pure wayland
 #xwayland disable
-exec Telegram -startintray
-exec ~/.dropbox-dist/dropboxd
-exec megasync
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY SWAYSOCK DISPLAY XDG_CURRENT_DESKTOP=sway
+exec waybar
+
+exec sh -c 'sleep 2; exec Telegram -startintray'
+exec sh -c 'sleep 2; exec ~/.dropbox-dist/dropboxd'
+exec sh -c 'sleep 2; exec megasync'
+exec sh -c 'sleep 2; exec hushmic'
+
 exec ~/.local/bin/lyrics-watcher.sh
 exec ~/.local/bin/netstats.sh
 #exec ~/.local/bin/start-jellyfin-mpv.sh
-exec jellyfin-mpv-shim > /tmp/jms.log
+exec sh -c 'sleep 2; exec jellyfin-mpv-shim > /tmp/jms.log'
 #exec steam
 
 # Use 6500 to disable.
@@ -258,7 +280,7 @@ seat seat0 hide_cursor 3000
 
 for_window [app_id="foot_tilda"] mark tilda, move scratchpad, border none
 bindsym $mod+F12 [con_mark="tilda"] scratchpad show
-exec ~/.local/bin/foot-tilda.sh
+#exec ~/.local/bin/foot-tilda.sh
 
 for_window [class="io.github.aaddrick.claude-desktop-debian"] mark claude, move scratchpad
 bindsym $mod+F11 [con_mark="claude"] scratchpad show
@@ -284,12 +306,14 @@ exec wl-paste --type image --watch cliphist store
 
 bindsym $mod+z exec ~/.local/bin/clipmenu.sh
 bindsym $mod+d exec ~/.local/bin/winmenu.sh
-bindsym alt+tab exec ~/.local/bin/winmenu.sh
+#bindsym alt+tab exec ~/.local/bin/winmenu.sh
 
 #bindsym $mod+f13 exec ~/.local/bin/lgtv.sh jellyfin
 bindsym --locked $mod+F7 exec ~/.local/bin/lgtv.sh pc
 bindsym --locked $mod+F8 exec ~/.local/bin/lgtv.sh jellyfin
 bindsym --locked $mod+F9 exec ~/.local/bin/lgtv.sh pause
 bindsym --locked $mod+F10 exec ~/.local/bin/lgtv.sh play
+
+bindsym --release Alt_L exec ~/.local/bin/bar-peek
 
 for_window [class="zoom"] floating enable, border none, no_focus

@@ -1,0 +1,39 @@
+{
+  "id": "tyrbar",
+  "ipc": true,
+  "output": ["DP-3", "DP-1", "eDP-1", "HDMI-A-1", "HDMI-A-3"],
+  "position": "top",
+  "height": 56,
+  "spacing": 0,
+  "reload_style_on_change": true,
+
+  "modes": {
+    "overlay": { "layer": "top", "exclusive": false, "passthrough": false, "visible": true }
+  },
+
+  "modules-left":   ["sway/workspaces", "sway/mode"],
+  "modules-center": ["clock"],
+  "modules-right":  ["cpu", "memory", "network", "wireplumber", "tray"],
+
+  "sway/workspaces": { "disable-scroll": true, "format": "{name}" },
+  "sway/mode":       { "format": "-- {} --" },
+  "clock": {
+    "format": "{:%a %d %b  %H:%M}",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "interval": 30
+  },
+  "cpu":    { "format": "cpu {usage}%", "interval": 2 },
+  "memory": { "format": "mem {percentage}%", "interval": 5 },
+  "network": {
+    "format-ethernet": "eth {ipaddr}",
+    "format-wifi": "wlan {essid}",
+    "format-disconnected": "net down",
+    "tooltip-format": "{ifname} {ipaddr}/{cidr}"
+  },
+  "wireplumber": {
+    "format": "vol {volume}%",
+    "format-muted": "vol --",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+  },
+  "tray": { "icon-size": 30, "spacing": 16, "show-passive-items": true }
+}
