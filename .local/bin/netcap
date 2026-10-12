@@ -1,0 +1,38 @@
+#!/bin/bash
+set -euo pipefail
+
+[[ $EUID -eq 0 ]] || { echo "run as root" >&2; exit 1; }
+
+IFACE=${IFACE:-$(ip route get 1.1.1.1 | awk '{for (i=1;i<NF;i++) if ($i=="dev") {print $(i+1); exit}}')}
+[[ -n $IFACE ]] || { echo "could not detect interface; set IFACE=" >&2; exit 1; }
+
+case "${1:-}" in
+    off)
+        tc qdisc del dev "$IFACE" ingress 2>/dev/null || true
+        ip link del ifb0 2>/dev/null || true
+        echo "download cap removed on $IFACE"
+        exit 0
+        ;;
+    ''|*[!0-9]*)
+        echo "usage: $0 <mbit> | off" >&2
+        exit 1
+        ;;
+esac
+
+RATE="${1}mbit"
+
+modprobe ifb
+ip link show ifb0 &>/dev/null || ip link add ifb0 type ifb
+ip link set ifb0 up
+
+# Shaper first, so traffic never hits ifb0 unshaped.
+# 'replace' creates CAKE on first run and changes it in place afterwards.
+tc qdisc replace dev ifb0 root cake bandwidth "$RATE" ingress
+
+# Hook + redirect only if not already present (avoids duplicate filters).
+if ! tc qdisc show dev "$IFACE" | grep -q '^qdisc ingress ffff:'; then
+    tc qdisc add dev "$IFACE" handle ffff: ingress
+    tc filter add dev "$IFACE" parent ffff: matchall action mirred egress redirect dev ifb0
+fi
+
+echo "download cap on $IFACE: $RATE"
