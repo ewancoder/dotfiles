@@ -26,10 +26,12 @@ window#waybar {
 #mode  { background: #e0af68; color: #000; padding: 0 16px; font-weight: bold; }
 #clock { color: #e6e6e6; font-weight: bold; }
 
-#cpu, #memory, #network, #wireplumber, #tray {
+#cpu, #temperature, #custom-netstats, #custom-qbit, #memory, #network, #wireplumber, #tray {
   padding: 0 18px;
   border-left: 1px solid #161616;
 }
+#custom-lyrics { padding: 0 18px; color: #ffe680; }
+#temperature.critical { color: #f7768e; }
 #wireplumber.muted { color: #3a3a3a; }
 
 #tray > .needs-attention { background: #2a0f14; }

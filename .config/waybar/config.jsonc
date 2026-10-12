@@ -11,9 +11,9 @@
     "overlay": { "layer": "top", "exclusive": false, "passthrough": false, "visible": true }
   },
 
-  "modules-left":   ["sway/workspaces", "sway/mode"],
+  "modules-left":   ["sway/workspaces", "sway/mode", "custom/lyrics"],
   "modules-center": ["clock"],
-  "modules-right":  ["cpu", "memory", "network", "wireplumber", "tray"],
+  "modules-right":  ["custom/qbit", "custom/netstats", "cpu", "temperature", "memory", "network", "wireplumber", "tray"],
 
   "sway/workspaces": { "disable-scroll": true, "format": "{name}" },
   "sway/mode":       { "format": "-- {} --" },
@@ -23,6 +23,19 @@
     "interval": 30
   },
   "cpu":    { "format": "cpu {usage}%", "interval": 2 },
+  "temperature": {
+    "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:18.3/hwmon",
+    "input-filename": "temp1_input",
+    "critical-threshold": 85,
+    "format": "{temperatureC}°C",
+    "interval": 2
+  },
+  "custom/netstats": { "exec": "cat /tmp/netstats", "interval": 5 },
+  "custom/lyrics":   { "exec": "cat /tmp/lyrics", "interval": 1, "max-length": 80 },
+  "custom/qbit": {
+    "exec": "[ \"$(curl -s -m1 localhost:8080/api/v2/transfer/speedLimitsMode)\" = 1 ] && echo 🐢 || true",
+    "interval": 5
+  },
   "memory": { "format": "mem {percentage}%", "interval": 5 },
   "network": {
     "format-ethernet": "eth {ipaddr}",
