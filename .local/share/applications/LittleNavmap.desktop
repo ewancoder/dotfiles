@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=sh -c '/opt/littlenavmap-bin/littlenavmap >/dev/null 2>&1'
+Path=/opt/littlenavmap-bin/
+Name=Little Navmap
+GenericName=Flight Planner
+Icon=/opt/littlenavmap-bin/littlenavmap.svg
+Terminal=false
+Categories=Application;Game;
