@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=xplane
+StartupWMClass=xplane
+Comment=XPlane
+GenericName=XPlane
+Exec=/mnt/games/start-xplane.sh
+Icon=game
+Type=Application
+Categories=Game;
+Path=/usr/bin
