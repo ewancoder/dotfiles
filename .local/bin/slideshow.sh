@@ -5,7 +5,7 @@ WALLPAPER_DIR="/mnt/data/backdrops"
 INTERVAL=600 # 10 minutes
 
 while true; do
-    outputs=($(swaymsg -t get_outputs | jq -r '.[].name'))
+    outputs=($(swaymsg -t get_outputs | jq -r '.[].name' | grep -v 'HEADLESS' ))
     for output in "${outputs[@]}"; do
         wallpaper=$(find "$WALLPAPER_DIR/" -type f -name '*.jpg' -o -name '*.png' -o -name '*.webp' | shuf -n 1)
         link="/tmp/wallpaper_$output"
