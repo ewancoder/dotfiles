@@ -76,7 +76,7 @@ bindsym $mod+period workspace 3:left-med
 bindsym $mod+a workspace 7:right-fun
 bindsym $mod+o workspace 8:right-work
 bindsym $mod+semicolon workspace 9:right-med
-bindsym $mod+9 workspace trash
+bindsym $mod+9 workspace 10:trash
 
 bindsym $mod+Control+Left workspace 4:fun
 bindsym $mod+Control+Right workspace 5:work
@@ -91,7 +91,7 @@ bindsym $mod+Shift+period move container to workspace 3:left-med
 bindsym $mod+Shift+a move container to workspace 7:right-fun
 bindsym $mod+Shift+o move container to workspace 8:right-work
 bindsym $mod+Shift+semicolon move container to workspace 9:right-med
-bindsym $mod+Shift+9 move container to workspace trash
+bindsym $mod+Shift+9 move container to workspace 10:trash
 
 
 
