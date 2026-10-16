@@ -319,6 +319,34 @@ bindsym --release Alt_L exec ~/.local/bin/bar-peek
 
 for_window [class="zoom"] floating enable, border none, no_focus
 
+exec steam -silent
 exec /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 
-exec steam -silent
+
+#exec swaymsg create_output
+#output HEADLESS-1 resolution 3840x2160@120Hz position 20000 0
+#workspace headless output HEADLESS-1
+#bindsym $mod+F5 exec ~/.config/sway/swap-headless
+
+exec sh -c 'swaymsg create_output; swaymsg create_output; swaymsg create_output'
+output HEADLESS-1 mode 1340x800@60Hz scale 1 pos 20000 0 bg #000000 solid_color
+output HEADLESS-2 mode 1340x800@60Hz scale 1 pos 23000 0 bg #000000 solid_color
+output HEADLESS-3 mode 1340x800@60Hz scale 1 pos 26000 0 bg #000000 solid_color
+workspace xp-pfd output HEADLESS-1 gaps horizontal 55
+workspace xp-mfd output HEADLESS-2 gaps horizontal 55
+workspace xp-aux output HEADLESS-3 gaps horizontal 55
+for_window [class="^X-Plane" title="^pilot-1000$"]  move container to workspace xp-pfd
+for_window [class="^X-Plane" title="^center-1000$"] move container to workspace xp-mfd
+# for_window [class="^X-Plane" title="^<aux-title>$"] move container to workspace xp-aux
+exec systemctl --user start sunshine@xp-pfd sunshine@xp-mfd sunshine@xp-aux
+#bindsym $mod+Shift+p exec /mnt/games/xp-sort-popouts
+
+input 4617:4:libvirtualhid_Touchscreen map_to_output HEADLESS-1
+
+
+
+assign [app_id="^opentrack$"]               workspace 10:trash
+assign [app_id="^xplane-map-enhancement$"]  workspace 10:trash
+assign [class="^FfbBridge\.Desktop$"]       workspace 10:trash
+assign [app_id="^Volanta$"] workspace 7:right-work
+>>>>>>> 3e674d4 (Add Headless Sway outputs for XPlane peripherals, sort flight windows)
