@@ -9,6 +9,7 @@ if [ ! -f "$SSH_AUTH_SOCK" ]; then
 fi
 
 if [[ -z "$WAYLAND_DISPLAY" ]] && [[ "$(tty)" = "/dev/tty1" ]]; then
-    export WLR_RENDERER=vulkan
+    #export WLR_RENDERER=vulkan
+    export WLR_RENDERER=gles2
     exec sway --unsupported-gpu
 fi
