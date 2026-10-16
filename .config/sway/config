@@ -319,7 +319,6 @@ bindsym --release Alt_L exec ~/.local/bin/bar-peek
 
 for_window [class="zoom"] floating enable, border none, no_focus
 
-exec steam -silent
 exec /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 
 
@@ -349,4 +348,4 @@ assign [app_id="^opentrack$"]               workspace 10:trash
 assign [app_id="^xplane-map-enhancement$"]  workspace 10:trash
 assign [class="^FfbBridge\.Desktop$"]       workspace 10:trash
 assign [app_id="^Volanta$"] workspace 7:right-work
->>>>>>> 3e674d4 (Add Headless Sway outputs for XPlane peripherals, sort flight windows)
+exec steam -silent -nobootstrapupdate -skipinitialbootstrap -noverifyfiles
