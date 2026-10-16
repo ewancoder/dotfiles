@@ -346,3 +346,5 @@ assign [app_id="^opentrack$"]               workspace 10:trash
 assign [app_id="^xplane-map-enhancement$"]  workspace 10:trash
 assign [class="^FfbBridge\.Desktop$"]       workspace 10:trash
 assign [app_id="^Volanta$"] workspace 7:right-work
+
+exec steam -silent -nobootstrapupdate -skipinitialbootstrap -noverifyfiles
