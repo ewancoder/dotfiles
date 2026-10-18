@@ -325,26 +325,40 @@ for_window [class="zoom"] floating enable, border none, no_focus
 #workspace headless output HEADLESS-1
 #bindsym $mod+F5 exec ~/.config/sway/swap-headless
 
-exec sh -c 'swaymsg create_output; swaymsg create_output; swaymsg create_output'
+exec sh -c 'swaymsg create_output; swaymsg create_output; swaymsg create_output; swaymsg create_output'
 output HEADLESS-1 mode 1340x800@60Hz scale 1 pos 20000 0 bg #000000 solid_color
 output HEADLESS-2 mode 1340x800@60Hz scale 1 pos 23000 0 bg #000000 solid_color
 output HEADLESS-3 mode 1340x800@60Hz scale 1 pos 26000 0 bg #000000 solid_color
-workspace xp-pfd output HEADLESS-1 gaps horizontal 55
-workspace xp-mfd output HEADLESS-2 gaps horizontal 55
-workspace xp-aux output HEADLESS-3 gaps horizontal 55
+output HEADLESS-4 mode 3840x2160@120Hz scale 1 pos 28000 0 bg #000000 solid_color
+workspace xp-pfd output HEADLESS-1 gaps horizontal 20
+workspace xp-mfd output HEADLESS-2 gaps horizontal 20
+workspace xp-aux output HEADLESS-3 gaps horizontal 20
+
+workspace 4:fun output HEADLESS-4
+workspace xp-park output HEADLESS-4
+exec ~/.local/bin/xp-park
+mouse_warping none
+
 for_window [class="^X-Plane" title="^pilot-1000$"]  move container to workspace xp-pfd
 for_window [class="^X-Plane" title="^center-1000$"] move container to workspace xp-mfd
 # for_window [class="^X-Plane" title="^<aux-title>$"] move container to workspace xp-aux
-exec systemctl --user start sunshine@xp-pfd sunshine@xp-mfd sunshine@xp-aux
+#exec systemctl --user start sunshine@xp-pfd sunshine@xp-mfd sunshine@xp-aux
 #bindsym $mod+Shift+p exec /mnt/games/xp-sort-popouts
 
 input 4617:4:libvirtualhid_Touchscreen map_to_output HEADLESS-1
 
-
+assign [class="^X-Plane$" title="^X-Plane"] workspace 4:fun
 
 assign [app_id="^opentrack$"]               workspace 10:trash
 assign [app_id="^xplane-map-enhancement$"]  workspace 10:trash
 assign [class="^FfbBridge\.Desktop$"]       workspace 10:trash
-assign [app_id="^Volanta$"] workspace 7:right-work
+
+assign [class="^Volanta$"]                   workspace 7:right-fun
+assign [app_id="^Volanta$"]                  workspace 7:right-fun
+assign [class="^xplane-map-enhancement$"]    workspace 7:right-fun
+assign [app_id="^xplane-map-enhancement$"]   workspace 7:right-fun
 
 exec steam -silent -nobootstrapupdate -skipinitialbootstrap -noverifyfiles
+
+for_window [shell="xwayland" title="^Demo panel$"] move container to workspace xp-pfd, resize set 1340x800, move position 0 0
+#for_window [shell="xwayland" title="^Demo panel$"] move container to workspace xp-pfd, fullscreen enable
