@@ -261,7 +261,7 @@ exec waybar
 exec sh -c 'sleep 2; exec Telegram -startintray'
 exec sh -c 'sleep 2; exec ~/.dropbox-dist/dropboxd'
 exec sh -c 'sleep 2; exec megasync'
-exec sh -c 'sleep 2; exec hushmic'
+exec sh -c 'sleep 2; exec hushmic --tray'
 
 exec ~/.local/bin/lyrics-watcher.sh
 exec ~/.local/bin/netstats.sh
