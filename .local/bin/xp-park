@@ -1,0 +1,28 @@
+#!/bin/sh
+XP='4:fun'
+HL=HEADLESS-4
+home=HDMI-A-3
+
+swaymsg -t get_outputs | jq -e --arg o "$home" 'any(.[]; .name==$o)' >/dev/null \
+  || { echo "xp-park: output $home doesn't exist" >&2; exit 1; }
+
+check() {
+  set -- $(swaymsg -t get_workspaces | jq -r --arg n "$XP" '
+    (.[] | select(.focused) | .output) as $f
+    | .[] | select(.name==$n) | "\(.output) \(.visible) \(.focused) \($f)"')
+  [ $# -eq 4 ] || return
+  out=$1 vis=$2 foc=$3 fout=$4
+  [ "$fout" = "$HL" ] && fout=$home
+
+  if [ "$out" = "$HL" ] && [ "$foc" = true ]; then
+    swaymsg -q "move workspace to output $home"                    # you switched to X-Plane → show it
+  elif [ "$out" != "$HL" ] && [ "$vis" = false ]; then
+    home=$out                                                      # hidden on a real output → park it
+    swaymsg -q "[workspace=\"^$XP\$\"] move workspace to output $HL; workspace \"$XP\"; focus output $fout"
+  elif [ "$out" = "$HL" ] && [ "$vis" = false ]; then
+    swaymsg -q "workspace \"$XP\"; focus output $fout"             # on headless but not visible → make it visible
+  fi
+}
+
+check
+swaymsg -t subscribe -m '["workspace"]' | while read -r _; do check; done
