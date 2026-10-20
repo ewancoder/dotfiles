@@ -266,7 +266,7 @@ exec sh -c 'sleep 2; exec hushmic'
 exec ~/.local/bin/lyrics-watcher.sh
 exec ~/.local/bin/netstats.sh
 #exec ~/.local/bin/start-jellyfin-mpv.sh
-exec sh -c 'sleep 2; exec jellyfin-mpv-shim > /tmp/jms.log'
+#exec sh -c 'sleep 2; exec jellyfin-mpv-shim > /tmp/jms.log'
 #exec steam
 
 # Use 6500 to disable.
