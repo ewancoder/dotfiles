@@ -318,3 +318,5 @@ bindsym --locked $mod+F10 exec ~/.local/bin/lgtv.sh play
 bindsym --release Alt_L exec ~/.local/bin/bar-peek
 
 for_window [class="zoom"] floating enable, border none, no_focus
+
+exec /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
