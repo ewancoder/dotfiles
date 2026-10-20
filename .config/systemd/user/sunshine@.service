@@ -1,0 +1,7 @@
+[Unit]
+Description=Sunshine (%i)
+
+[Service]
+ExecStart=/usr/bin/sunshine %h/.config/sunshine/%i.config
+Restart=on-failure
+RestartSec=2
