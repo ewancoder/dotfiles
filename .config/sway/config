@@ -330,22 +330,27 @@ output HEADLESS-1 mode 1340x800@60Hz scale 1 pos 20000 0 bg #000000 solid_color
 output HEADLESS-2 mode 1340x800@60Hz scale 1 pos 23000 0 bg #000000 solid_color
 output HEADLESS-3 mode 1340x800@60Hz scale 1 pos 26000 0 bg #000000 solid_color
 output HEADLESS-4 mode 3840x2160@120Hz scale 1 pos 28000 0 bg #000000 solid_color
+output HEADLESS-5 mode 100x100@30Hz scale 1 pos 22000 10000 bg #000000 solid_color
 workspace xp-pfd output HEADLESS-1 gaps horizontal 20
 workspace xp-mfd output HEADLESS-2 gaps horizontal 20
 workspace xp-aux output HEADLESS-3 gaps horizontal 20
+workspace xp-pfd-park output HEADLESS-5
 
 workspace 4:fun output HEADLESS-4
 workspace xp-park output HEADLESS-4
 exec ~/.local/bin/xp-park
-mouse_warping none
+#mouse_warping none
 
-for_window [class="^X-Plane" title="^pilot-1000$"]  move container to workspace xp-pfd
+#for_window [class="^X-Plane" title="^pilot-1000$"]  move container to workspace xp-pfd
 for_window [class="^X-Plane" title="^center-1000$"] move container to workspace xp-mfd
+for_window [class="^X-Plane" title="^pilot-530$"]   move container to workspace xp-mfd, floating enable, border none, resize set 1340 800, move position 0 0
 # for_window [class="^X-Plane" title="^<aux-title>$"] move container to workspace xp-aux
 #exec systemctl --user start sunshine@xp-pfd sunshine@xp-mfd sunshine@xp-aux
 #bindsym $mod+Shift+p exec /mnt/games/xp-sort-popouts
 
-input 4617:4:libvirtualhid_Touchscreen map_to_output HEADLESS-1
+#input 4617:4:libvirtualhid_Touchscreen map_to_output HEADLESS-1
+input 4617:4:libvirtualhid_Touchscreen map_to_output HEADLESS-2
+input 4617:6:libvirtualhid_Pen_Tablet map_to_output HEADLESS-2
 
 assign [class="^X-Plane$" title="^X-Plane"] workspace 4:fun
 
@@ -357,8 +362,26 @@ assign [class="^Volanta$"]                   workspace 7:right-fun
 assign [app_id="^Volanta$"]                  workspace 7:right-fun
 assign [class="^xplane-map-enhancement$"]    workspace 7:right-fun
 assign [app_id="^xplane-map-enhancement$"]   workspace 7:right-fun
+assign [class="^xPilot$"] workspace 7:right-fun
+
+for_window [class="^xplane-map-enhancement$"] floating enable
 
 exec steam -silent -nobootstrapupdate -skipinitialbootstrap -noverifyfiles
 
-for_window [shell="xwayland" title="^Demo panel$"] move container to workspace xp-pfd, resize set 1340x800, move position 0 0
-#for_window [shell="xwayland" title="^Demo panel$"] move container to workspace xp-pfd, fullscreen enable
+#for_window [shell="xwayland" title="^C172Panel$"] move container to workspace xp-pfd, resize set 1340x800, move position 0 0
+#for_window [shell="xwayland" title="^C172Panel$"] move container to workspace xp-pfd, fullscreen enable
+
+# xp-pfd output: one fullscreen window at a time, cycled with xp-cycle
+for_window [shell="xwayland" title="^C172Panel$"] mark xp-6pack, move container to workspace xp-pfd, floating enable, border none
+for_window [class="^X-Plane" title="^pilot-1000$"] mark xp-g1000, move container to workspace xp-pfd, floating enable, border none
+for_window [app_id="^chrome-127\.0\.0\.1__gauges\.html-Default$"] mark xp-gauges, move container to workspace xp-pfd, floating enable, border none, resize set 1340 800, move position 0 0
+for_window [app_id="^chrome-127\.0\.0\.1__-Default$"] mark xp-avionics, move container to workspace xp-mfd, floating enable, border none, resize set 1340 800, move position 0 0
+
+bindsym $mod+F5 exec ~/projects/xp-avionics/tools/xp-cycle xp-mfd
+#bindsym $mod+F3 exec ~/projects/xp-avionics/tools/xp-cycle xp-pfd --mark xp-g1000
+#bindsym $mod+F4 exec ~/projects/xp-avionics/tools/xp-cycle xp-pfd --mark xp-avionics
+
+assign [class="^com\.siminnovations\.airmanager\.AirManager$" title="^Air Manager"] workspace 10:trash
+
+# Do not let lockscreen to lock while XPlane is running.
+for_window [class="^X-Plane$"] inhibit_idle open
