@@ -1,0 +1,66 @@
+set $wPrimaryScreen xp-pfd
+set $wSecondaryScreen xp-mfd
+set $wAuxScreen xp-aux
+set $wPark xp-pfd-park
+set $wImportant xp-park
+
+set $tabletMode 1340x800@30Hz
+set $tabletWidth 1340
+set $tabletHeight 800
+set $tabletPosX 20000
+
+exec sh -c 'swaymsg create_output; swaymsg create_output; swaymsg create_output; swaymsg create_output'
+output HEADLESS-1 mode $tabletMode pos $tabletPosX 0 bg #000000 solid_color
+output HEADLESS-2 mode $tabletMode pos $tabletPosX 2000 bg #000000 solid_color
+output HEADLESS-3 mode $tabletMode pos $tabletPosX 4000 bg #000000 solid_color
+output HEADLESS-4 mode $centerMode pos $tabletPosX 8000 bg #000000 solid_color
+output HEADLESS-5 mode 100x100@30Hz pos $tabletPosX 15000 bg #000000 solid_color
+
+workspace $wPrimaryScreen output HEADLESS-1
+workspace $wSecondaryScreen output HEADLESS-2
+workspace $wAuxScreen output HEADLESS-3
+workspace $wPark output HEADLESS-5
+
+workspace $mainWorkspace output HEADLESS-4
+workspace $wImportant output HEADLESS-4
+
+# This script depends on exact outputs & names. If anything is refactored/changed - review and adjust it.
+# TODO: Rewrite the script to accept these as variables.
+exec ~/.local/bin/xp-park
+
+# Map touches to secondary screen.
+# For now touches on primary screen won't work. They are sent from any devices to secondary screen.
+input 4617:4:libvirtualhid_Touchscreen map_to_output HEADLESS-2
+input 4617:6:libvirtualhid_Pen_Tablet map_to_output HEADLESS-2
+
+# TODO: Remove duplicated entries.
+# Window arrangement.
+assign [class="^X-Plane$" title="^X-Plane"] workspace $mainWorkspace
+assign [app_id="^opentrack$"]               workspace $trashWorkspace
+assign [class="^xplane-map-enhancement$"]   workspace $trashWorkspace
+assign [app_id="^xplane-map-enhancement$"]  workspace $trashWorkspace
+assign [class="^FfbBridge\.Desktop$"]       workspace $trashWorkspace
+assign [class="^com\.siminnovations\.airmanager\.AirManager$" title="^Air Manager"] workspace $trashWorkspace
+
+# Apps that are visible.
+# Zen browser (manually opened or by script).
+assign [class="Little Navmap"]              workspace $rightMainWorkspace
+assign [app_id="^Volanta$"]                 workspace $rightMainWorkspace
+assign [class="^Volanta$"]                  workspace $rightMainWorkspace
+assign [class="^xPilot$"]                   workspace $rightMainWorkspace
+
+# Tablet windows.
+for_window [class="^X-Plane" title="^center-1000$"] move container to workspace $wPrimaryScreen, floating enable, border none, resize set $tabletWidth $tabletHeight, move position 0 0
+for_window [class="^X-Plane" title="^pilot-1000$"] move container to workspace $wPrimaryScreen, floating enable, border none, resize set $tabletWidth tabletHeight, move position 0 0
+for_window [shell="xwayland" title="^C172Panel$"] move container to workspace $wPrimaryScreen, floating enable, border none, resize set $tabletWidth tabletHeight, move position 0 0
+for_window [class="^X-Plane" title="^pilot-530$"] move container to workspace $wSecondaryScreen, floating enable, border none, resize set $tabletWidth $tabletHeight, move position 0 0
+for_window [app_id="^chrome-127\.0\.0\.1__-Default$"] move container to workspace $wSecondaryScreen, floating enable, border none, resize set $tabletWidth $tabletHeight, move position 0 0
+
+# Do not let lockscreen to lock PC while XPlane is running.
+for_window [class="^X-Plane$"] inhibit_idle open
+
+# Bind a shortcut to cycle between MFD windows. Mapped to controller.
+# We can also map shortcuts to select SPECIFIC view if needed.
+bindsym $mod+F5 exec ~/projects/xp-avionics/tools/xp-cycle xp-mfd
+
+

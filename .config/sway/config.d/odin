@@ -1,0 +1,29 @@
+set $center "LG Electronics LG TV SSCR2 0x01010101"
+set $right  "Microstep MSI MAG401QR EA5H023B00346"
+set $left   "Samsung Electric Company LS27AG32x H9JX400017   "
+set $tvIp "192.168.1.152"
+set $tvMac "30:34:DB:C7:D7:7A"
+set $centerMode 3840x2160@120Hz
+set $mainWorkspace 4:fun
+
+output $left pos 0 1000 mode 1080x1920@120Hz transform 270 bg $bg fill adaptive_sync on
+output $center pos 1080 0 mode $centerMode bg $bg fill
+output $right pos 4920 1300 mode 3440x1440@120Hz bg $bg fill adaptive_sync on
+
+workspace 1:left-fun output $left
+workspace 2:left-work output $left
+workspace 3:left-med output $left
+workspace $mainWorkspace output $center
+workspace 5:work output $center
+workspace 6:med output $center
+workspace 7:right-fun output $right
+workspace 8:right-work output $right
+workspace 9:right-med output $right
+
+# Turn on/off LG tv on idle/lock.
+exec swayidle -w timeout 300 'swaylock -f' timeout 420 '/home/ewancoder/.local/bin/tv-idle-off.sh' resume 'wol -i $tvIp $tvMac'
+
+bindsym $mod+ctrl+l exec /home/ewancoder/.local/bin/lgtvcmd -p /home/ewancoder/.config/bscpylgtv-keys.sqlite $tvIp power_off; output $center disable
+bindsym $mod+ctrl+slash output $center enable; exec wol -i $tvIp $tvMac
+
+include odin-xplane
