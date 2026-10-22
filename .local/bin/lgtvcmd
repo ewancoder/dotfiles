@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+# bscpylgtvcommand with an unsigned registration manifest.
+# Newer LG firmware rejects the old shared signed manifest (com.lge.test, 2014) with
+# "403 Pairing rejected: blacklisted certificate detected". Dropping the signature makes
+# the TV show a normal pairing prompt instead. Some calls (e.g. software_info) may then
+# return 401 insufficient permissions.
+# Usage: same as bscpylgtvcommand, e.g. lgtvcmd -p KEYS 192.168.1.152 power_off
+import sys
+
+import bscpylgtv.webos_client as webos_client
+from bscpylgtv.manifest import MANIFEST
+from bscpylgtv.utils import bscpylgtvcommand
+
+webos_client.MANIFEST = {k: v for k, v in MANIFEST.items() if k not in ("signed", "signatures")}
+
+sys.exit(bscpylgtvcommand())
