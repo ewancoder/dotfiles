@@ -1,7 +1,13 @@
 #!/bin/sh
-# show bar as overlay (no window reflow), hide 10s after the LAST tap
+# tap alt: show bar as overlay (no window reflow), hide 10s after the LAST tap.
+# tap again while shown: hide immediately.
 pidf="$XDG_RUNTIME_DIR/bar-peek.pid"
 [ -f "$pidf" ] && kill "$(cat "$pidf")" 2>/dev/null
+if swaymsg -t get_bar_config tyrbar | grep -q '"mode": "overlay"'; then
+    swaymsg -q bar tyrbar mode hide
+    rm -f "$pidf"
+    exit
+fi
 swaymsg -q bar tyrbar mode overlay
 sh -c 'sleep 10; exec swaymsg -q bar tyrbar mode hide' &
 echo $! > "$pidf"
