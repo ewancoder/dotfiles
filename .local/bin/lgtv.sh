@@ -22,7 +22,7 @@ TV_MAC="${LGC5_MAC:-30:34:DB:C7:D7:7A}"    # C5 MAC for WoL
 KEYS="${LGC5_KEYS:-$HOME/.config/bscpylgtv-keys.sqlite}"  # client-key store
 JELLYFIN_APP_ID="${LGC5_JELLYFIN_APP:-org.jellyfin.webos}"
 
-BIN="bscpylgtvcommand"
+BIN="/home/ewancoder/.local/bin/lgtvcmd"
 
 # --- helpers ------------------------------------------------------------------
 tv() { "$BIN" -p "$KEYS" "$TV_IP" "$@"; }
