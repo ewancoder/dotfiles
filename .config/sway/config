@@ -3,6 +3,8 @@ set $mod Mod4
 set $bg "~/Dropbox/Wallpapers/wp1.jpg"
 set $trashWorkspace 10:trash
 set $rightMainWorkspace 7:right-fun
+gaps inner 0
+gaps outer 0
 include machine
 
 focus_on_window_activation none
@@ -12,9 +14,6 @@ default_floating_border pixel 0
 
 font pango:monospace 8
 titlebar_padding 5 1
-gaps inner 0
-gaps outer 0
-
 set $opacity 0.9
 set $left h
 set $down t
