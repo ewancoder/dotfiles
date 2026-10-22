@@ -1,4 +1,47 @@
 #!/bin/bash
-pass=$(zenity --password)
+# RDP to the Windows box. Launched from RdpWin.desktop.
+set -u
+
+host="192.168.1.185"
 user="izyranau"
-xfreerdp3 /audio-mode:0 /cert:ignore /auth-pkg-list:'!kerberos' /v:192.168.1.185 /u:"$user" /d:'' /p:"$pass" +compression +clipboard +fonts /dynamic-resolution +async-channels +async-update +auto-reconnect /bpp:16 /gfx:progressive /gfx /drive:linux,/mnt/data/rdp
+share="/mnt/data/rdp"
+title="rdpwin"
+log="${XDG_STATE_HOME:-$HOME/.local/state}/rdpwin.log"
+
+fail() { notify-send -u critical -a rdpwin "RDP" "$1"; exit 1; }
+
+# One instance only: a second launch focuses the running session.
+exec 9>"${XDG_RUNTIME_DIR:-/tmp}/rdpwin.lock"
+if ! flock -n 9; then
+    swaymsg "[title=\"^$title\"] focus" >/dev/null 2>&1
+    exit 0
+fi
+
+# Fail fast before asking for the password if the host is down.
+timeout 3 bash -c "</dev/tcp/$host/3389" 2>/dev/null \
+    || fail "$host:3389 is unreachable (Windows asleep or off?)"
+
+pass=$(zenity --password --title="RDP $user@$host") || exit 0  # cancelled
+[[ -n $pass ]] || exit 0
+
+mkdir -p "$share" "${log%/*}"
+
+# Defaults left out on purpose: compression, clipboard and fonts are on already; GFX implies 32 bpp.
+# FreeRDP masks /p: in the process cmdline right after parsing.
+start=$SECONDS
+sdl-freerdp3 \
+    /v:"$host" /u:"$user" /d:'' /p:"$pass" \
+    /cert:ignore /auth-pkg-list:'!kerberos' \
+    /t:"$title" \
+    /gfx:progressive /dynamic-resolution \
+    /audio-mode:0 \
+    /drive:linux,"$share" \
+    +auto-reconnect \
+    >"$log" 2>&1
+rc=$?
+unset pass
+
+# A quick exit means the connection never came up (bad password, NLA, ...). Closing a session normally isn't an error.
+if (( rc != 0 && SECONDS - start < 15 )); then
+    fail "Connection failed (exit $rc). Log: $log"
+fi
