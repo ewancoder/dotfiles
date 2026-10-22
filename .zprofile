@@ -13,6 +13,7 @@ if [[ -z "$WAYLAND_DISPLAY" ]] && [[ "$(tty)" = "/dev/tty1" ]]; then
     #export WLR_RENDERER=gles2 # Waits for each frame, more robust - less performant.
     #export __GL_YIELD=USLEEP # Do not spin CPU when GPU is waiting for it. Only makes sense for gles2 renderer, XPlane uses native Vulkan. Other apps are better responsive over CPU use.
     #export WLR_NO_HARDWARE_CURSORS=1 # Hardware cursors make vulkan sunshine stream flicker a lot when Game is in focus.
-    export WLR_SCENE_DISABLE_DIRECT_SCANOUT=1 # Fixes xfreerdp scrambling.
+    # We also might need direct scanout (not disabled) for XPlane to NOT stutter Sway, when it uses ALL of GPU (with lsfg-vk off).
+    #export WLR_SCENE_DISABLE_DIRECT_SCANOUT=1 # Fixes xfreerdp scrambling. BUT causes each frame to be copied to Sway before sending to monitor.
     exec sway --unsupported-gpu
 fi
