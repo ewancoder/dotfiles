@@ -1,0 +1,8 @@
+#!/bin/bash
+# nightlight on|off — wlsunset. Started via sway (swaymsg exec) so it isn't tied to the
+# caller's process/systemd unit and survives it exiting.
+case ${1-} in
+    on)  pgrep -x wlsunset >/dev/null || swaymsg -q exec 'wlsunset -l 41.65 -L 41.65 -t 5000 -T 6000' ;;
+    off) pkill -x wlsunset || true ;;
+    *)   echo "usage: nightlight on|off" >&2; exit 2 ;;
+esac
