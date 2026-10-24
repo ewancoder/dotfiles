@@ -1,4 +1,5 @@
-export ELECTRON_OZONE_PLATFORM_HINT=auto
+# Same env as systemd user units get (see the file for details).
+set -a; source ~/.config/environment.d/10-session.conf; set +a
 
 # Start ssh-agent
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then

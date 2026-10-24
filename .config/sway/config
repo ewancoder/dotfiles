@@ -256,7 +256,7 @@ for_window [app_id="foot"] opacity $opacity
 
 # Temporary disable it while I'm not working - try running pure wayland
 #xwayland disable
-exec "dbus-update-activation-environment --systemd WAYLAND_DISPLAY SWAYSOCK DISPLAY XDG_CURRENT_DESKTOP=sway && systemctl --user start sway-session.target"
+exec "dbus-update-activation-environment --systemd WAYLAND_DISPLAY SWAYSOCK DISPLAY XDG_SESSION_TYPE XDG_CURRENT_DESKTOP=sway && systemctl --user start sway-session.target"
 exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
 exec waybar
 
