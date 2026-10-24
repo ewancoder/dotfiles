@@ -1,15 +1,13 @@
 set $wPrimaryScreen xp-pfd
 set $wSecondaryScreen xp-mfd
 set $wAuxScreen xp-aux
-set $wPark xp-pfd-park
+set $wPark xp-mfd-park
 set $wImportant xp-park
 
 set $tabletMode 1340x800@30Hz
-set $tabletWidth 1340
-set $tabletHeight 800
 set $tabletPosX 20000
 
-exec sh -c 'swaymsg create_output; swaymsg create_output; swaymsg create_output; swaymsg create_output'
+exec sh -c 'swaymsg create_output; swaymsg create_output; swaymsg create_output; swaymsg create_output; swaymsg create_output'
 output HEADLESS-1 mode $tabletMode pos $tabletPosX 0 bg #000000 solid_color
 output HEADLESS-2 mode $tabletMode pos $tabletPosX 2000 bg #000000 solid_color
 output HEADLESS-3 mode $tabletMode pos $tabletPosX 4000 bg #000000 solid_color
@@ -49,12 +47,27 @@ assign [app_id="^Volanta$"]                 workspace $rightMainWorkspace
 assign [class="^Volanta$"]                  workspace $rightMainWorkspace
 assign [class="^xPilot$"]                   workspace $rightMainWorkspace
 
-# Tablet windows.
-for_window [class="^X-Plane" title="^center-1000$"] move container to workspace $wPrimaryScreen, floating enable, border none, resize set $tabletWidth $tabletHeight, move position 0 0
-for_window [class="^X-Plane" title="^pilot-1000$"] move container to workspace $wPrimaryScreen, floating enable, border none, resize set $tabletWidth tabletHeight, move position 0 0
-for_window [shell="xwayland" title="^C172Panel$"] move container to workspace $wPrimaryScreen, floating enable, border none, resize set $tabletWidth tabletHeight, move position 0 0
-for_window [class="^X-Plane" title="^pilot-530$"] move container to workspace $wSecondaryScreen, floating enable, border none, resize set $tabletWidth $tabletHeight, move position 0 0
-for_window [app_id="^chrome-127\.0\.0\.1__-Default$"] move container to workspace $wSecondaryScreen, floating enable, border none, resize set $tabletWidth $tabletHeight, move position 0 0
+# Tablet windows. Sized in ppt of the workspace so they fit either orientation (see /mnt/games/xp-orient).
+set $tabletFit floating enable, border none, resize set width 100 ppt height 100 ppt, move position 0 0
+set $tabletFitShort floating enable, border none, resize set width 100 ppt height 80 ppt, move position 0 0
+for_window [class="^X-Plane" title="^center-1000$"] move container to workspace $wPrimaryScreen, $tabletFit
+for_window [class="^X-Plane" title="^pilot-1000$"] move container to workspace $wPrimaryScreen, $tabletFit
+for_window [shell="xwayland" title="^C172Panel$"] move container to workspace $wPrimaryScreen, $tabletFit
+for_window [class="^X-Plane" title="^pilot-530$"] move container to workspace $wSecondaryScreen, $tabletFit
+for_window [app_id="^chrome-127\.0\.0\.1__-Default$"] move container to workspace $wSecondaryScreen, $tabletFit
+# Citation X (portrait, 80% height): PFD on the PFD tablet, the rest cycle on the MFD tablet.
+# The cx-* marks set the cycle order and the short height (xp-avionics/lib/sway.js, xp-orient).
+for_window [class="^X-Plane" title="^PFD-1$"]      mark cx-pfd,   move container to workspace $wPrimaryScreen, $tabletFitShort
+for_window [class="^X-Plane" title="^MFD-1$"]      mark cx-mfd,   move container to workspace $wSecondaryScreen, $tabletFitShort
+for_window [class="^X-Plane" title="^MFD-3$"]      mark cx-eicas, move container to workspace $wSecondaryScreen, $tabletFitShort
+for_window [class="^X-Plane" title="^pilot-2000$"] mark cx-fms,   move container to workspace $wSecondaryScreen, $tabletFitShort
+for_window [class="^X-Plane" title="^RMU-1$"]      mark cx-rmu,   move container to workspace $wSecondaryScreen, $tabletFitShort
+
+# Nothing but the tablet windows above may open on the tablets: anything else that lands there
+# (e.g. a browser launched while a tablet workspace had focus) goes to the main workspace.
+# Keep after the tablet rules and keep their apps excluded here.
+for_window [shell="xdg_shell" workspace="^xp-(pfd|mfd|aux)$" app_id="^(?!chrome-127\.0\.0\.1__-Default$)"] move container to workspace $mainWorkspace
+for_window [shell="xwayland" workspace="^xp-(pfd|mfd|aux)$" class="^(?!X-Plane)" title="^(?!C172Panel$)"] move container to workspace $mainWorkspace
 
 # Do not let lockscreen to lock PC while XPlane is running.
 for_window [class="^X-Plane$"] inhibit_idle open
