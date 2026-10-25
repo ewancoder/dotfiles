@@ -1,0 +1,32 @@
+#!/bin/bash
+# zen-gpu igpu|off — Zen on the AMD iGPU while X-Plane runs (frees NVIDIA VRAM).
+#   igpu: close Zen if it's running on NVIDIA, then open it once on the iGPU (flight start, start-xplane.sh).
+#   off:  close Zen if it's running on the iGPU, don't reopen (flight end, xp-tvmode restore);
+#         the next manual start is a normal NVIDIA one.
+# A running app can't switch GPUs, so Zen is closed gracefully (SIGTERM saves the session).
+# Opened via swaymsg exec so it isn't tied to the caller's systemd unit.
+set -u
+igpu_env='__EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json DRI_PRIME=pci-0000_7a_00_0 MOZ_DRM_DEVICE=/dev/dri/by-path/pci-0000:7a:00.0-render'
+
+main_pid() { pgrep -x zen-bin -a | grep -v -- -contentproc | awk 'NR==1{print $1}'; }
+on_igpu() { tr '\0' '\n' < /proc/$1/environ 2>/dev/null | grep -q '^DRI_PRIME='; }
+close() {
+    kill -TERM "$1"
+    for _ in {1..40}; do kill -0 "$1" 2>/dev/null || return 0; sleep 0.5; done
+    notify-send -u critical "zen-gpu" "Zen didn't close within 20 s" 2>/dev/null
+    return 1
+}
+
+pid=$(main_pid)
+case ${1-} in
+    igpu)
+        if [[ -n $pid ]]; then
+            on_igpu "$pid" && exit 0
+            close "$pid" || exit 1
+        fi
+        swaymsg -q exec "env $igpu_env /opt/zen-browser-bin/zen-bin" ;;
+    off)
+        [[ -n $pid ]] && on_igpu "$pid" && close "$pid" ;;
+    *)  echo "usage: zen-gpu igpu|off" >&2; exit 2 ;;
+esac
+exit 0
