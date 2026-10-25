@@ -1,0 +1,22 @@
+#!/bin/bash
+# wallpapers off: stop slideshow.sh and paint every real output solid black (frees ~50 MiB of sway's NVIDIA VRAM).
+# wallpapers on:  start slideshow.sh again (via sway, so it isn't tied to the caller); it sets new wallpapers right away.
+# Used by /mnt/games/start-xplane.sh (off) and stop-xplane.sh (on).
+set -u
+slideshow=/home/ewancoder/.local/bin/slideshow.sh
+
+case ${1:-} in
+off)
+    pkill -f "^bash $slideshow\$"
+    for o in $(swaymsg -t get_outputs | jq -r '.[] | select(.active and (.name | startswith("HEADLESS") | not)) | .name'); do
+        swaymsg -q "output $o bg #000000 solid_color"
+    done
+    ;;
+on)
+    pgrep -f "^bash $slideshow\$" >/dev/null || swaymsg -q "exec $slideshow"
+    ;;
+*)
+    echo "usage: wallpapers off|on" >&2
+    exit 2
+    ;;
+esac
