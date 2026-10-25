@@ -10,7 +10,10 @@ set $tabletPosX 20000
 exec sh -c 'swaymsg create_output; swaymsg create_output; swaymsg create_output; swaymsg create_output; swaymsg create_output'
 output HEADLESS-1 mode $tabletMode pos $tabletPosX 0 bg #000000 solid_color
 output HEADLESS-2 mode $tabletMode pos $tabletPosX 2000 bg #000000 solid_color
-output HEADLESS-3 mode $tabletMode pos $tabletPosX 4000 bg #000000 solid_color
+# Aux tablet, unused for now: still created (keeps HEADLESS-4/5 names stable) but disabled, so it holds no VRAM.
+# To bring it back: swap the two lines below (and enable sunshine@xp-aux in start-xplane.sh).
+#output HEADLESS-3 mode $tabletMode pos $tabletPosX 4000 bg #000000 solid_color
+output HEADLESS-3 disable
 output HEADLESS-4 mode $centerMode pos $tabletPosX 8000 bg #000000 solid_color
 output HEADLESS-5 mode 100x100@30Hz pos $tabletPosX 15000 bg #000000 solid_color
 
