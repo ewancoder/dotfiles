@@ -52,6 +52,8 @@ assign [class="^com\.siminnovations\.airmanager\.AirManager$" title="^Air Manage
 # Apps that are visible.
 # Zen browser (manually opened or by script).
 assign [class="Little Navmap"]              workspace $rightMainWorkspace
+# Opacity <1 = not opaque, so wlroots never direct-scans it out (scrambles after scanout on NVIDIA+Xwayland).
+for_window [class="Little Navmap"]          opacity 0.999
 assign [app_id="^Volanta$"]                 workspace $rightMainWorkspace
 assign [class="^Volanta$"]                  workspace $rightMainWorkspace
 assign [class="^xPilot$"]                   workspace $rightMainWorkspace
