@@ -8,6 +8,9 @@ gaps outer 0
 include machine
 
 focus_on_window_activation none
+# Mod+direction never leaves the workspace (wraps at its edge instead). Otherwise it jumps to the
+# output in that direction, e.g. HEADLESS-4 below, where xp-park then pulls 4:fun onto the TV.
+focus_wrapping workspace
 
 default_border pixel 0
 default_floating_border pixel 0
