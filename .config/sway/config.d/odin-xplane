@@ -16,6 +16,12 @@ output HEADLESS-2 mode $tabletMode pos $tabletPosX 2000 bg #000000 solid_color
 output HEADLESS-3 disable
 output HEADLESS-4 mode $centerMode pos $tabletPosX 8000 bg #000000 solid_color
 output HEADLESS-5 mode 100x100@30Hz pos $tabletPosX 15000 bg #000000 solid_color
+# Tablets + panel park exist only during flights: start-xplane.sh enables them, stop-xplane.sh disables them.
+# Disabled outputs leave the layout, so Mod+direction can't land on them. HEADLESS-4 (4:fun parking) always stays on.
+# A sway reload mid-flight disables them again: re-run `swaymsg 'output HEADLESS-1 enable; ...'` (and xp-orient).
+output HEADLESS-1 disable
+output HEADLESS-2 disable
+output HEADLESS-5 disable
 
 workspace $wPrimaryScreen output HEADLESS-1
 workspace $wSecondaryScreen output HEADLESS-2
