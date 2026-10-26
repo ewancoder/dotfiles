@@ -3,6 +3,7 @@
 set -u
 
 host="192.168.1.185"
+mac="c8:cb:9e:90:77:75"
 user="izyranau"
 share="/mnt/data/rdp"
 title="rdpwin"
@@ -17,14 +18,13 @@ if ! flock -n 9; then
     exit 0
 fi
 
-# Fail fast before asking for the password if the host is down.
-timeout 3 bash -c "</dev/tcp/$host/3389" 2>/dev/null \
-    || fail "$host:3389 is unreachable (Windows asleep or off?)"
-
 pass=$(zenity --password --title="RDP $user@$host") || exit 0  # cancelled
 [[ -n $pass ]] || exit 0
 
 mkdir -p "$share" "${log%/*}"
+
+# Wake the box in case it sleeps; freerdp's 15 s connect timeout covers the wake-up.
+wol "$mac" >/dev/null 2>&1
 
 # Defaults left out on purpose: compression, clipboard and fonts are on already; GFX implies 32 bpp.
 # FreeRDP masks /p: in the process cmdline right after parsing.
