@@ -6,7 +6,7 @@ set $tvMac "30:34:DB:C7:D7:7A"
 set $centerMode 3840x2160@120Hz
 set $mainWorkspace 4:fun
 
-output $left pos 0 1000 mode 1080x1920@120Hz transform 270 bg $bg fill adaptive_sync on
+output $left pos 0 1000 mode 1920x1080@120Hz transform 270 bg $bg fill adaptive_sync on
 output $center pos 1080 0 mode $centerMode bg $bg fill
 output $right pos 4920 1300 mode 3440x1440@120Hz bg $bg fill adaptive_sync on
 
@@ -27,3 +27,4 @@ bindsym $mod+ctrl+l exec /home/ewancoder/.local/bin/lgtvcmd -p /home/ewancoder/.
 bindsym $mod+ctrl+slash output $center enable; exec wol -i $tvIp $tvMac
 
 include odin-xplane
+include odin-ats

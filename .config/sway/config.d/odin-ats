@@ -1,0 +1,7 @@
+# ATS/ETS2 under Proton: one window across all monitors; the game splits it into views (multimon_config.sii).
+# Run /mnt/games/ats-on first, or HEADLESS-4 stretches the window to ~23000x10000.
+for_window [class="^steam_app_(270880|227300)$"] fullscreen enable global
+# Keep swayidle from locking and turning off the TV mid-drive (wheel/pedal input doesn't count as activity).
+for_window [class="^steam_app_(270880|227300)$"] inhibit_idle open
+# Leave or re-enter the global window, e.g. to use the other monitors.
+bindsym $mod+Shift+f fullscreen toggle global
