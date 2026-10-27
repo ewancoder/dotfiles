@@ -18,8 +18,13 @@ if ! flock -n 9; then
     exit 0
 fi
 
-pass=$(zenity --password --title="RDP $user@$host") || exit 0  # cancelled
-[[ -n $pass ]] || exit 0
+# Saved password next to the script; prompt only when it's missing or empty.
+secret="$(dirname "$(readlink -f "$0")")/.rdpsecret"
+pass=$(cat "$secret" 2>/dev/null)
+if [[ -z $pass ]]; then
+    pass=$(zenity --password --title="RDP $user@$host") || exit 0  # cancelled
+    [[ -n $pass ]] || exit 0
+fi
 
 mkdir -p "$share" "${log%/*}"
 
