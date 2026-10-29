@@ -331,3 +331,6 @@ exec /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 
 exec steam -silent -nobootstrapupdate -skipinitialbootstrap -noverifyfiles
 
+# Shuffle windows for oled.
+exec while sleep 600; do ~/.local/bin/lg-shuffle; done
+

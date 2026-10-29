@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+# lg-shuffle — randomly nudge the split lines between tiled windows on the
+# LG output so borders and title bars don't sit on the same pixels for
+# hours (OLED wear levelling). One-shot; run it periodically.
+#
+# Every split line is owned by exactly one container (the one on its
+# left/top) and moved with a directional resize, so each line has its own
+# offset and neighbours never cancel or stack each other's moves.
+#
+# Requires: swaymsg, jq
+#
+# Env config:
+#   LG_OUTPUT    output name, e.g. HDMI-A-1 (default: first active output whose make contains "LG")
+#   LG_MAX_MOVE  max +/- px a split line strays from where you left it (default 50)
+#   LG_MIN_MOVE  min px a split line moves per run                     (default 10)
+set -euo pipefail
+
+MAX_MOVE=${LG_MAX_MOVE:-50}
+MIN_MOVE=${LG_MIN_MOVE:-10}
+STATE="${XDG_RUNTIME_DIR:-/tmp}/lg-shuffle.state"
+
+out=${LG_OUTPUT:-$(swaymsg -t get_outputs -r | jq -r '
+  first(.[] | select(.active and ((.make // "") | ascii_upcase | contains("LG"))) | .name) // empty')}
+[[ -n $out ]] || { echo "lg-shuffle: no LG output found; set LG_OUTPUT" >&2; exit 1; }
+
+rand() { echo $(( RANDOM % ($2 - $1 + 1) + $1 )); }  # rand MIN MAX
+
+# Per-split-line offsets from the previous run: "con_id dir offset"
+declare -A old=() new=()
+if [[ -r $STATE ]]; then
+  while read -r id dir off; do old["$id $dir"]=$off; done < "$STATE"
+fi
+
+# Move a split line's offset to a new random target in [-MAX, MAX] at least
+# MIN away from the current one, so it never drifts more than MAX_MOVE from
+# where you left it.
+nudge() {  # nudge CON_ID DIR CURRENT -> prints new offset
+  local id=$1 dir=$2 cur=$3 target delta verb
+  while
+    target=$(rand "-$MAX_MOVE" "$MAX_MOVE")
+    delta=$(( target - cur ))
+    (( ${delta#-} < MIN_MOVE ))
+  do :; done
+  if (( delta > 0 )); then verb=grow; else verb=shrink; fi
+  if swaymsg -q "[con_id=$id] resize $verb $dir ${delta#-} px" 2>/dev/null; then
+    echo "$target"
+  else
+    echo "$cur"
+  fi
+}
+
+# "con_id dir" for every split line on the output: each child of a
+# splith/splitv container except the last owns the line on its right/bottom.
+# Workspaces with a fullscreen window (games, video) are skipped. Only
+# windows are checked: sway reports fullscreen_mode 1 on workspace nodes.
+lines=$(swaymsg -t get_tree -r | jq -r --arg out "$out" '
+  .nodes[] | select(.name == $out) | .nodes[] | select(.type == "workspace")
+  | select([.. | objects | select((.type == "con" or .type == "floating_con")
+                                  and (.fullscreen_mode // 0) > 0)] | length == 0)
+  | recurse(.nodes[]?) | select(.layout == "splith" or .layout == "splitv")
+  | (if .layout == "splith" then "right" else "down" end) as $dir
+  | .nodes[:-1][] | "\(.id) \($dir)"')
+
+while read -r id dir; do
+  [[ -n $id ]] || continue
+  new["$id $dir"]=$(nudge "$id" "$dir" "${old["$id $dir"]:-0}")
+done <<< "$lines"
+
+# Closed windows and merged splits drop out automatically.
+for key in "${!new[@]}"; do echo "$key ${new[$key]}"; done > "$STATE"
