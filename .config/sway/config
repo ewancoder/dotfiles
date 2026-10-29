@@ -274,9 +274,8 @@ exec ~/.local/bin/netstats.sh
 #exec sh -c 'sleep 2; exec jellyfin-mpv-shim > /tmp/jms.log'
 #exec steam
 
-# Use 6500 to disable.
-# Batumi: 41.65 41.65.
-exec ~/.local/bin/nightlight auto
+# So that the TV enters proper mode before we run this.
+exec sh -c 'sleep 5; exec ~/.local/bin/nightlight auto'
 
 # Swaylock after boot
 exec swaylock
