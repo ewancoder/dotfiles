@@ -1,7 +1,10 @@
-# ATS/ETS2 under Proton: one window across all monitors; the game splits it into views (multimon_config.sii).
-# Run /mnt/games/ats-on first, or HEADLESS-4 stretches the window to ~23000x10000.
-for_window [class="^steam_app_(270880|227300)$"] fullscreen enable global
+# ATS/ETS2 under Proton. The Wine virtual desktop is one 8360x2160 window; the game splits it into views
+# (multimon_config.sii). It floats borderless over all three monitors, alone on the "ats" workspace on the TV.
+# Hiding it just shows another workspace on the TV: the window is never resized, so the game never notices.
+# Run /mnt/games/ats-on first (monitor layout, HEADLESS-4 off, docked bars hidden).
+workspace ats output $center
+for_window [class="^steam_app_(270880|227300)$"] move container to workspace ats, floating enable, border none, resize set 8360 2160, move absolute position 0 0, workspace ats
 # Keep swayidle from locking and turning off the TV mid-drive (wheel/pedal input doesn't count as activity).
 for_window [class="^steam_app_(270880|227300)$"] inhibit_idle open
-# Leave or re-enter the global window, e.g. to use the other monitors.
-bindsym $mod+Shift+f fullscreen toggle global
+# Hide/show the game to use the desktop.
+bindsym $mod+Shift+f exec /mnt/games/ats-toggle
