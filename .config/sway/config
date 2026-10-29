@@ -305,7 +305,8 @@ exec ~/.local/bin/claude-renew.sh
 for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
 
 # OAuth / sign-in popups: floating, centered, sized relative to the output.
-for_window [title="(?i)^(sign in|log in|login|choose an account|authorize|oauth).*(google|microsoft|github|account)"] floating enable, border pixel 6, resize set width 30 ppt height 70 ppt, move position center
+# Excludes Microsoft's "Sign in to your account" (full-page redirect in the main window, not a popup).
+for_window [title="(?i)^(?!sign in to your account)(sign in|log in|login|choose an account|authorize|oauth).*(google|microsoft|github|account)"] floating enable, border pixel 6, resize set width 30 ppt height 70 ppt, move position center
 
 # Clipboard manager for going back in time
 exec wl-paste --type text --watch cliphist store
