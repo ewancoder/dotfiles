@@ -25,6 +25,7 @@ exec swayidle -w timeout 300 'swaylock -f' timeout 420 '/home/ewancoder/.local/b
 
 bindsym $mod+ctrl+l exec /home/ewancoder/.local/bin/lgtvcmd -p /home/ewancoder/.config/bscpylgtv-keys.sqlite $tvIp power_off; output $center disable
 bindsym $mod+ctrl+slash output $center enable; exec wol -i $tvIp $tvMac
+bindsym $mod+F6 exec /home/ewancoder/.local/bin/hdr-toggle
 
 include odin-xplane
 include odin-ats

@@ -1,0 +1,15 @@
+#!/bin/bash
+# hdr-toggle — toggle HDR on the LG TV output and switch wlsunset to the matching
+# profile (nightlight hdr / on) at the same time. Leaves wlsunset alone if it isn't running.
+tv='LG Electronics LG TV SSCR2 0x01010101'
+state=$(swaymsg -t get_outputs | jq -r --arg id "$tv" \
+    '.[] | select(.active and (.make+" "+.model+" "+.serial) == $id) | .hdr')
+case $state in
+    true)  new=off; nl=on ;;
+    false) new=on;  nl=hdr ;;
+    *)     notify-send -t 3000 HDR "LG TV output not active"; exit 1 ;;
+esac
+pgrep -x wlsunset >/dev/null && ~/.local/bin/nightlight "$nl" &
+swaymsg -q "output \"$tv\" hdr $new"
+notify-send -t 2000 HDR "$new"
+wait
