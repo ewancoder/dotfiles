@@ -1,8 +1,23 @@
 #!/bin/bash
-# nightlight on|off — wlsunset. Started via sway (swaymsg exec) so it isn't tied to the
-# caller's process/systemd unit and survives it exiting.
+# nightlight on|hdr|auto|off — wlsunset. Started via sway (swaymsg exec) so it isn't tied to the
+# caller's process/systemd unit and survives it exiting. Switching between on and hdr
+# replaces the running instance; re-running the current mode is a no-op. auto picks hdr
+# if the LG TV's picture mode is an HDR one (hdr*/dolbyHdr*), else on (also if unreachable).
+loc='-l 41.65 -L 41.65'
+start() {
+    local cmd="wlsunset $loc $1"
+    pgrep -xf "$cmd" >/dev/null && return
+    pkill -x wlsunset
+    for _ in {1..20}; do pgrep -x wlsunset >/dev/null || break; sleep 0.1; done
+    swaymsg -q exec "$cmd"
+}
 case ${1-} in
-    on)  pgrep -x wlsunset >/dev/null || swaymsg -q exec 'wlsunset -l 41.65 -L 41.65 -t 5000 -T 6000' ;;
+    on)  start '-t 5000 -T 6000' ;;
+    hdr) start '-t 5700 -T 6200' ;;
+    auto)
+        mode=$(timeout 10 ~/.local/bin/lgtvcmd -p ~/.config/bscpylgtv-keys.sqlite 192.168.1.152 \
+            get_picture_settings '["pictureMode"]' 2>/dev/null)
+        if [[ $mode == *"'hdr"* || $mode == *"'dolbyHdr"* ]]; then exec "$0" hdr; else exec "$0" on; fi ;;
     off) pkill -x wlsunset || true ;;
-    *)   echo "usage: nightlight on|off" >&2; exit 2 ;;
+    *)   echo "usage: nightlight on|hdr|auto|off" >&2; exit 2 ;;
 esac

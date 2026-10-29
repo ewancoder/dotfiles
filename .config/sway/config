@@ -276,7 +276,7 @@ exec ~/.local/bin/netstats.sh
 
 # Use 6500 to disable.
 # Batumi: 41.65 41.65.
-exec wlsunset -l 41.65 -L 41.65 -t 5000 -T 6000
+exec ~/.local/bin/nightlight auto
 
 # Swaylock after boot
 exec swaylock
