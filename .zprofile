@@ -19,5 +19,6 @@ if [[ -z "$WAYLAND_DISPLAY" ]] && [[ "$(tty)" = "/dev/tty1" ]]; then
     # Log sway (errors only at the default level) to a per-session file instead of tty1; keep the last 10.
     swaylogs=~/.local/state/sway; mkdir -p $swaylogs
     rm -f -- $swaylogs/sway-*.log(Nom[10,-1]) # N: no error if none; om: newest first
+    export WLR_HDR_SDR_LUMINANCE=50 # SDR white in nits when an output is in HDR mode (patched wlroots, default 203).
     exec sway --unsupported-gpu > $swaylogs/sway-$(date +%Y%m%d-%H%M%S).log 2>&1
 fi
