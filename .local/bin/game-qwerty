@@ -1,0 +1,24 @@
+#!/bin/bash
+# game-qwerty: plain US QWERTY while a listed game window is focused, Dvorak otherwise.
+# For games that bind by Windows virtual-key (layout-dependent), e.g. No Rest for the Wicked.
+# Add games to the regex (matched against app_id and X11 class, case-insensitive).
+re=${GAME_QWERTY_RE:-'steam_app_1371980|norestforthewicked'}
+
+dvorak() { swaymsg -q 'input type:keyboard xkb_variant "dvorak,"'; }
+qwerty() { swaymsg -q 'input type:keyboard xkb_variant ","'; }
+
+exec 9>"${XDG_RUNTIME_DIR:-/tmp}/game-qwerty.lock"
+flock -n 9 || exit 0
+trap 'dvorak' EXIT
+
+state=dvorak
+swaymsg -t subscribe -m '["window","workspace"]' |
+jq --unbuffered -r 'select(.change=="focus" or .change=="close") | .change' |
+while read -r _; do
+    ids=$(swaymsg -t get_tree | jq -r '.. | select(.focused? == true) |
+        "\(.app_id // "") \(.window_properties.class // "")"')
+    if grep -qiE "$re" <<<"$ids"; then want=qwerty; else want=dvorak; fi
+    [[ $want == "$state" ]] && continue
+    $want
+    state=$want
+done
