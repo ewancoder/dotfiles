@@ -1,0 +1,12 @@
+#!/bin/bash
+# Pin Steam shader compilation (fossilize_replay) to half the CPU cores to keep temps down.
+# CPUS: 4 physical cores + their SMT siblings (lscpu: CPU n and n+8 share a core).
+CPUS=${FOSSILIZE_CPUS:-0-3,8-11}
+declare -A done
+while sleep 2; do
+  for p in $(pgrep -x fossilize_repla); do
+    [[ -n ${done[$p]} ]] && continue
+    taskset -a -cp "$CPUS" "$p" >/dev/null 2>&1 && renice -n 10 -p "$p" >/dev/null 2>&1 && done[$p]=1
+  done
+  for p in "${!done[@]}"; do [[ -d /proc/$p ]] || unset "done[$p]"; done
+done

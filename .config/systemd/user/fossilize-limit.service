@@ -1,0 +1,9 @@
+[Unit]
+Description=Pin Steam shader compilation to half the CPU cores
+
+[Service]
+ExecStart=%h/.local/bin/fossilize-limit
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
